@@ -1,0 +1,67 @@
+
+<div>
+    <h2><span data-translate="pteMagicApp.question.detail.title">Question</span> {{vm.question.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="pteMagicApp.question.type">Type</span></dt>
+        <dd>
+            <span data-translate="{{'pteMagicApp.QuestionType.' + vm.question.type}}">{{vm.question.type}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.text">Text</span></dt>
+        <dd>
+            <span>{{vm.question.text}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.audioLink">Audio Link</span></dt>
+        <dd>
+            <span>{{vm.question.audioLink}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.description">Description</span></dt>
+        <dd>
+            <span>{{vm.question.description}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.answerA">Answer A</span></dt>
+        <dd>
+            <span>{{vm.question.answerA}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.answerB">Answer B</span></dt>
+        <dd>
+            <span>{{vm.question.answerB}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.answerC">Answer C</span></dt>
+        <dd>
+            <span>{{vm.question.answerC}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.answerD">Answer D</span></dt>
+        <dd>
+            <span>{{vm.question.answerD}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.answerE">Answer E</span></dt>
+        <dd>
+            <span>{{vm.question.answerE}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.expectAnswer">Expect Answer</span></dt>
+        <dd>
+            <span>{{vm.question.expectAnswer}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.active">Active</span></dt>
+        <dd>
+            <span>{{vm.question.active}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.question.exam">Exam</span></dt>
+        <dd>
+            <a ui-sref="exam-detail({id:vm.question.examId})">{{vm.question.examId}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="question-detail.edit({id:vm.question.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

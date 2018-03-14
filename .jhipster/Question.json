@@ -1,0 +1,64 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "exam",
+            "otherEntityName": "exam",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "type",
+            "fieldType": "QuestionType",
+            "fieldValues": "SINGLE_CHOICE,MULTI_CHOICE,LISTENING,READING"
+        },
+        {
+            "fieldName": "text",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "audioLink",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "answerA",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "answerB",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "answerC",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "answerD",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "answerE",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "expectAnswer",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180314024105",
+    "entityTableName": "question",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

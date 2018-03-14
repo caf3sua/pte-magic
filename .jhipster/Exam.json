@@ -1,0 +1,62 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "examType",
+            "otherEntityName": "examType",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "exam"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "questions",
+            "otherEntityName": "question",
+            "otherEntityRelationshipName": "exam"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "answes",
+            "otherEntityName": "answer",
+            "otherEntityRelationshipName": "exam"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "userId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "examTypeId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "result",
+            "fieldType": "ProgressType",
+            "fieldValues": "INPROGRESS,PENDING,FAIL,PASS"
+        },
+        {
+            "fieldName": "scoreWriting",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "scoreListening",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "scoreReading",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "scoreSpeaking",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180314024107",
+    "entityTableName": "exam",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

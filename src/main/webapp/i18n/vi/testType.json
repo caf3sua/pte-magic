@@ -1,0 +1,10 @@
+{
+    "pteMagicApp": {
+        "TestType" : {
+            "null": "",
+            "FULL": "FULL",
+            "PARTA": "PARTA",
+            "PARTB": "PARTB"
+        }
+    }
+}

@@ -1,0 +1,47 @@
+
+<div>
+    <h2><span data-translate="pteMagicApp.examType.detail.title">Exam Type</span> {{vm.examType.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="pteMagicApp.examType.name">Name</span></dt>
+        <dd>
+            <span>{{vm.examType.name}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.examType.type">Type</span></dt>
+        <dd>
+            <span data-translate="{{'pteMagicApp.TestType.' + vm.examType.type}}">{{vm.examType.type}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.examType.numberQuestionWriting">Number Question Writing</span></dt>
+        <dd>
+            <span>{{vm.examType.numberQuestionWriting}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.examType.numberQuestionReading">Number Question Reading</span></dt>
+        <dd>
+            <span>{{vm.examType.numberQuestionReading}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.examType.numberQuestionListening">Number Question Listening</span></dt>
+        <dd>
+            <span>{{vm.examType.numberQuestionListening}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.examType.numberQuestionSpeaking">Number Question Speaking</span></dt>
+        <dd>
+            <span>{{vm.examType.numberQuestionSpeaking}}</span>
+        </dd>
+        <dt><span data-translate="pteMagicApp.examType.description">Description</span></dt>
+        <dd>
+            <span>{{vm.examType.description}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="exam-type-detail.edit({id:vm.examType.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

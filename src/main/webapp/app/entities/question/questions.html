@@ -1,0 +1,84 @@
+<div>
+    <h2 data-translate="pteMagicApp.question.home.title">Questions</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="question.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span  data-translate="pteMagicApp.question.home.createLabel">
+                        Create new Question
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="type"><span data-translate="pteMagicApp.question.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="text"><span data-translate="pteMagicApp.question.text">Text</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="audioLink"><span data-translate="pteMagicApp.question.audioLink">Audio Link</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span data-translate="pteMagicApp.question.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="answerA"><span data-translate="pteMagicApp.question.answerA">Answer A</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="answerB"><span data-translate="pteMagicApp.question.answerB">Answer B</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="answerC"><span data-translate="pteMagicApp.question.answerC">Answer C</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="answerD"><span data-translate="pteMagicApp.question.answerD">Answer D</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="answerE"><span data-translate="pteMagicApp.question.answerE">Answer E</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="expectAnswer"><span data-translate="pteMagicApp.question.expectAnswer">Expect Answer</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="active"><span data-translate="pteMagicApp.question.active">Active</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="examId"><span data-translate="pteMagicApp.question.exam">Exam</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="question in vm.questions track by question.id">
+                    <td><a ui-sref="question-detail({id:question.id})">{{question.id}}</a></td>
+                    <td data-translate="{{'pteMagicApp.QuestionType.' + question.type}}">{{question.type}}</td>
+                    <td>{{question.text}}</td>
+                    <td>{{question.audioLink}}</td>
+                    <td>{{question.description}}</td>
+                    <td>{{question.answerA}}</td>
+                    <td>{{question.answerB}}</td>
+                    <td>{{question.answerC}}</td>
+                    <td>{{question.answerD}}</td>
+                    <td>{{question.answerE}}</td>
+                    <td>{{question.expectAnswer}}</td>
+                    <td>{{question.active}}</td>
+                    <td>
+                        <a ui-sref="exam-detail({id:question.examId})">{{question.examId}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="question-detail({id:question.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="question.edit({id:question.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="question.delete({id:question.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

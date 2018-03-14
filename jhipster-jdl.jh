@@ -1,0 +1,76 @@
+
+
+enum TestType {
+    FULL, PARTA, PARTB
+}
+
+enum QuestionType {
+    SINGLE_CHOICE, MULTI_CHOICE, LISTENING, READING
+}
+
+/**
+ * The Employee entity.
+ */
+entity ExamType {
+	name String required,
+    type TestType,
+    numberQuestionWriting Integer,
+    numberQuestionReading Integer,
+    numberQuestionListening Integer,
+    numberQuestionSpeaking Integer,
+    description String    
+}
+
+entity Question {
+	 type QuestionType,
+     text String,
+     audioLink String,
+     description String,
+     answerA String,
+     answerB String,
+     answerC String,
+     answerD String,
+     answerE String,
+     expectAnswer String,
+     active Boolean
+}
+
+entity Answer {
+	  examId Long ,
+      questionId Long ,
+      answer String,
+      audioLink String,
+      description String
+}
+
+enum ProgressType {
+    INPROGRESS, PENDING, FAIL, PASS
+}
+
+entity Exam {
+	userId Long,
+    examTypeId Long,
+    result ProgressType,
+    scoreWriting Integer,
+    scoreListening Integer,
+    scoreReading Integer,
+    scoreSpeaking Integer
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Exam{questions} to Question,
+    Exam{answes} to Answer
+}
+
+relationship OneToOne {
+	Exam{examType} to ExamType
+}
+
+// Set pagination options
+paginate * with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

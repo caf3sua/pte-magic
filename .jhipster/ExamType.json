@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "TestType",
+            "fieldValues": "FULL,PARTA,PARTB"
+        },
+        {
+            "fieldName": "numberQuestionWriting",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numberQuestionReading",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numberQuestionListening",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numberQuestionSpeaking",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180314024104",
+    "javadoc": "The Employee entity.",
+    "entityTableName": "exam_type",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

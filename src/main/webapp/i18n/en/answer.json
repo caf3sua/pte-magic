@@ -1,0 +1,26 @@
+{
+    "pteMagicApp": {
+        "answer" : {
+            "home": {
+                "title": "Answers",
+                "createLabel": "Create a new Answer",
+                "createOrEditLabel": "Create or edit a Answer"
+            },
+            "created": "A new Answer is created with identifier {{ param }}",
+            "updated": "A Answer is updated with identifier {{ param }}",
+            "deleted": "A Answer is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Answer {{ id }}?"
+            },
+            "detail": {
+                "title": "Answer"
+            },
+            "examId": "Exam Id",
+            "questionId": "Question Id",
+            "answer": "Answer",
+            "audioLink": "Audio Link",
+            "description": "Description",
+            "exam": "Exam"
+        }
+    }
+}

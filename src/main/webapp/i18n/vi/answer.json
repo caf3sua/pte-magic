@@ -1,0 +1,26 @@
+{
+    "pteMagicApp": {
+        "answer" : {
+            "home": {
+                "title": "Answers",
+                "createLabel": "Thêm mới một Answer",
+                "createOrEditLabel": "Thêm mới hoặc cập nhật Answer"
+            },
+            "created": "Một Answer mới được tạo với định danh {{ param }}",
+            "updated": "Một Answer cập nhật với định danh {{ param }}",
+            "deleted": "Một Answer đã xóa với định danh {{ param }}",
+            "delete": {
+                "question": "Bạn có chắc là muốn xóa Answer {{ id }}?"
+            },
+            "detail": {
+                "title": "Answer"
+            },
+            "examId": "Exam Id",
+            "questionId": "Question Id",
+            "answer": "Answer",
+            "audioLink": "Audio Link",
+            "description": "Description",
+            "exam": "Exam"
+        }
+    }
+}

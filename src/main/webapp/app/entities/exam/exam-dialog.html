@@ -1,0 +1,77 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myExamLabel" data-translate="pteMagicApp.exam.home.createOrEditLabel">Create or edit a Exam</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.exam.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.exam.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pteMagicApp.exam.userId" for="field_userId">User Id</label>
+            <input type="number" class="form-control" name="userId" id="field_userId"
+                    ng-model="vm.exam.userId"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pteMagicApp.exam.examTypeId" for="field_examTypeId">Exam Type Id</label>
+            <input type="number" class="form-control" name="examTypeId" id="field_examTypeId"
+                    ng-model="vm.exam.examTypeId"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pteMagicApp.exam.result" for="field_result">Result</label>
+            <select class="form-control" name="result" ng-model="vm.exam.result" id="field_result">
+                <option value="INPROGRESS" data-translate="pteMagicApp.ProgressType.INPROGRESS">INPROGRESS</option>
+                <option value="PENDING" data-translate="pteMagicApp.ProgressType.PENDING">PENDING</option>
+                <option value="FAIL" data-translate="pteMagicApp.ProgressType.FAIL">FAIL</option>
+                <option value="PASS" data-translate="pteMagicApp.ProgressType.PASS">PASS</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pteMagicApp.exam.scoreWriting" for="field_scoreWriting">Score Writing</label>
+            <input type="number" class="form-control" name="scoreWriting" id="field_scoreWriting"
+                    ng-model="vm.exam.scoreWriting"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pteMagicApp.exam.scoreListening" for="field_scoreListening">Score Listening</label>
+            <input type="number" class="form-control" name="scoreListening" id="field_scoreListening"
+                    ng-model="vm.exam.scoreListening"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pteMagicApp.exam.scoreReading" for="field_scoreReading">Score Reading</label>
+            <input type="number" class="form-control" name="scoreReading" id="field_scoreReading"
+                    ng-model="vm.exam.scoreReading"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="pteMagicApp.exam.scoreSpeaking" for="field_scoreSpeaking">Score Speaking</label>
+            <input type="number" class="form-control" name="scoreSpeaking" id="field_scoreSpeaking"
+                    ng-model="vm.exam.scoreSpeaking"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="pteMagicApp.exam.examType" for="field_examType">Exam Type</label>
+            <select class="form-control" id="field_examType" name="examType" ng-model="vm.exam.examTypeId" ng-options="examType.id as examType.id for examType in vm.examtypes | orderBy:'id'">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

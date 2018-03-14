@@ -1,0 +1,11 @@
+{
+    "pteMagicApp": {
+        "QuestionType" : {
+            "null": "",
+            "SINGLE_CHOICE": "SINGLE_CHOICE",
+            "MULTI_CHOICE": "MULTI_CHOICE",
+            "LISTENING": "LISTENING",
+            "READING": "READING"
+        }
+    }
+}

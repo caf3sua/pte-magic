@@ -1,0 +1,30 @@
+{
+    "pteMagicApp": {
+        "exam" : {
+            "home": {
+                "title": "Exams",
+                "createLabel": "Create a new Exam",
+                "createOrEditLabel": "Create or edit a Exam"
+            },
+            "created": "A new Exam is created with identifier {{ param }}",
+            "updated": "A Exam is updated with identifier {{ param }}",
+            "deleted": "A Exam is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Exam {{ id }}?"
+            },
+            "detail": {
+                "title": "Exam"
+            },
+            "userId": "User Id",
+            "examTypeId": "Exam Type Id",
+            "result": "Result",
+            "scoreWriting": "Score Writing",
+            "scoreListening": "Score Listening",
+            "scoreReading": "Score Reading",
+            "scoreSpeaking": "Score Speaking",
+            "examType": "Exam Type",
+            "questions": "Questions",
+            "answes": "Answes"
+        }
+    }
+}
