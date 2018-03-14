@@ -5,9 +5,9 @@
         .module('pteMagicApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state', '$rootScope'];
 
-    function HomeController ($scope, Principal, LoginService, $state) {
+    function HomeController ($scope, Principal, LoginService, $state, $rootScope) {
         var vm = this;
 
         vm.account = null;
@@ -24,6 +24,7 @@
             Principal.identity().then(function(account) {
                 vm.account = account;
                 vm.isAuthenticated = Principal.isAuthenticated;
+                $rootScope.$broadcast('nameAccount',{data: vm.account});
             });
         }
         function register () {

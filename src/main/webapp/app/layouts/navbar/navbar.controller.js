@@ -5,9 +5,9 @@
         .module('pteMagicApp')
         .controller('NavbarController', NavbarController);
 
-    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService'];
+    NavbarController.$inject = ['$state', 'Auth', 'Principal', 'ProfileService', 'LoginService', '$scope'];
 
-    function NavbarController ($state, Auth, Principal, ProfileService, LoginService) {
+    function NavbarController ($state, Auth, Principal, ProfileService, LoginService, $scope) {
         var vm = this;
 
         vm.isNavbarCollapsed = true;
@@ -17,12 +17,23 @@
             vm.inProduction = response.inProduction;
             vm.swaggerEnabled = response.swaggerEnabled;
         });
-
+        vm.user = [];
         vm.login = login;
         vm.logout = logout;
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
+        vm.loggedIn = false;
+        vm.notloggedIn = false;
         vm.$state = $state;
+        $scope.$on('nameAccount', function(event, des) {
+            vm.data = des.data.lastName;
+            if(vm.data != null){
+                vm.loggedIn = true;
+                vm.user.lastName = vm.data;
+            }else {
+                vm.notloggedIn = false;
+            }
+        });
 
         function login() {
             collapseNavbar();

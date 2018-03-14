@@ -530,6 +530,13 @@ ui bootstrap tweaks
     height: 100vh;
     width: auto;
     background-size: cover;
+    min-height: 850px;
+}
+.pte-body-content{
+    background: url(../images/bodyContent.png) no-repeat left top;
+    background-size: cover;
+    height: 295px;
+    width: auto;
 }
 .navbar-default {
     background-color: transparent;
@@ -564,7 +571,7 @@ ui bootstrap tweaks
 }
 .footer{
     background-color: #000;
-    padding: 14px 15px;
+    padding: 15px 15px;
 }
 .pte-footer-com{
     font-family: 'Roboto';
@@ -710,6 +717,54 @@ ui bootstrap tweaks
 .navbar-default .navbar-nav > li > a>span:hover, .navbar-default .navbar-nav > li > a>span:focus {
     color: #f9db01;;
     background-color: transparent;
+}
+.colorf9db01{
+    color: #f9db01;
+}
+.pte-freeSample-block{
+    background: #393939;
+    border-top: 4px solid #f9db01;
+
+}
+.pte-freeSample-block>div>span{
+    color: #f9db01;
+    font-size: 35px;
+    padding: 15px 22px;
+}
+.pte-freeSample-block>div{
+    display: flex;
+}
+.pte-freeSample-block-text{
+    margin: 12px 0 0 0;
+}
+.pte-border-block-freeSample{
+    border-bottom: 2px solid #000;
+    box-shadow: 0 3px 2px -2px grey;
+}
+.pte-freeSample-block-text-child{
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 13px;
+    color: #fff;
+}
+.pte-freeSample-block-sum-questions{
+    color: #f9db01;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    margin: 0 auto;
+    padding: 18px 0;
+}
+.pte-freeSample-block-text-header{
+    color: #f9db01;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
 }
 /* jhipster-needle-css-add-main JHipster will add new css style */
 @media (min-width:992px) and (max-width:1200px) {

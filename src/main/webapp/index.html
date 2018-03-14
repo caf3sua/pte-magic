@@ -27,11 +27,13 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div ui-view="navbar" ng-cloak></div>
-    <div class="" ui-view="content">
+    <div class="" ui-view="content" ng-style="style()" resize>
         <!-- Angular views -->
     </div>
 
-    <div class="footer" ng-cloak>
+    <div class="footer" ng-cloak style="line-height: 5px;
+            vertical-align: bottom;
+           ">
         <div class="container">
             <span class="pte-footer-com">© 2017 Trung tâm luyện thi PTE MAGIC |  All rights reserved.</span>
             <div class="pte-connect">
@@ -125,8 +127,11 @@
     <script src="app/components/util/base64.service.js"></script>
     <script src="app/components/login/login.service.js"></script>
     <script src="app/components/login/login.controller.js"></script>
+    <script src="app/components/util/resize.directive.js"></script>
     <script src="app/components/createAccount/createAccount.controller.js"></script>
     <script src="app/components/createAccount/createAccount.service.js"></script>
+    <script src="app/freeSample/freeSample.controller.js"></script>
+    <script src="app/freeSample/freeSample.state.js"></script>
     <script src="app/components/language/language.service.js"></script>
     <script src="app/components/language/language.filter.js"></script>
     <script src="app/components/language/language.controller.js"></script>

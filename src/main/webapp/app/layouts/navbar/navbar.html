@@ -43,17 +43,17 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
-                            <li ui-sref-active="active" ng-switch-when="true">
-                                <a ui-sref="settings" ng-click="vm.collapseNavbar()">
+                            <li>
+                                <a ui-sref="preesample">
                                     <span >Free Samples</span>
                                 </a>
                             </li>
-                            <li ui-sref-active="active" ng-switch-when="false">
+                            <li >
                                 <a ui-sref="register" ng-click="vm.collapseNavbar()">
                                     <span>Member Questions</span>
                                 </a>
                             </li>
-                            <li ui-sref-active="active" ng-switch-when="false">
+                            <li >
                                 <a ui-sref="register" ng-click="vm.collapseNavbar()">
                                     <span> Mock Test</span>
                                 </a>
@@ -62,7 +62,23 @@
                         </ul>
                     </li>
 
-                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
+                    <li ng-show="vm.loggedIn" ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
+                        <a  class="dropdown-toggle" uib-dropdown-toggle >
+                            <span>
+                                 <span class="icon-user"></span>
+                                <span class="colorf9db01" >{{vm.user.lastName}}</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li ng-show="vm.loggedIn" ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
+                        <a ng-click="vm.login()" class="dropdown-toggle" uib-dropdown-toggle >
+                            <span>
+                                <span class="pte-icon-sign icon-sign_out"></span>
+                                <span class="" >SIGN OUT</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li ng-show="vm.notloggedIn" ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
                         <a ng-click="vm.login()" class="dropdown-toggle" uib-dropdown-toggle >
                             <span>
                                 <span class="pte-icon-sign icon-sign_out"></span>
@@ -70,7 +86,7 @@
                             </span>
                         </a>
                     </li>
-                    <li class="pte-join-free">
+                    <li class="pte-join-free" ng-show="vm.notloggedIn">
                         <a class="dropdown-toggle padding0" uib-dropdown-toggle >
                             <span>
                                 <span class="pte-text-join">Join</span>

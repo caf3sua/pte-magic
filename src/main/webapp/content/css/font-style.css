@@ -1,47 +1,50 @@
 @font-face {
-  font-family: 'icomoon';
-  src:  url('../font/icomoon.eot?qavwky');
-  src:  url('../font/icomoon.eot?qavwky#iefix') format('embedded-opentype'),
-    url('../font/icomoon.ttf?qavwky') format('truetype'),
-    url('../font/icomoon.woff?qavwky') format('woff'),
-    url('../font/icomoon.svg?qavwky#icomoon') format('svg');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'icomoon';
+    src:  url('../font/icomoon.eot?sul2gm');
+    src:  url('../font/icomoon.eot?sul2gm#iefix') format('embedded-opentype'),
+    url('../font/icomoon.ttf?sul2gm') format('truetype'),
+    url('../font/icomoon.woff?sul2gm') format('woff'),
+    url('../font/icomoon.svg?sul2gm#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
-  /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'icomoon' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
 
-  /* Better Font Rendering =========== */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-open-book:before {
+    content: "\e907";
+}
 .icon-checkbox-pen-outline2:before {
-  content: "\e900";
+    content: "\e900";
 }
 .icon-icon:before {
-  content: "\e901";
+    content: "\e901";
 }
 .icon-checkbox-pen-outline:before {
-  content: "\e902";
+    content: "\e902";
 }
 .icon-sign_out:before {
-  content: "\e903";
+    content: "\e903";
 }
 .icon-user:before {
-  content: "\e904";
+    content: "\e904";
 }
 .icon-close:before {
-  content: "\e905";
+    content: "\e905";
 }
 .icon-headset:before {
-  content: "\e906";
+    content: "\e906";
 }
