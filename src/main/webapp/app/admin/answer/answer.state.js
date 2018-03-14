@@ -9,17 +9,17 @@
 
     function stateConfig($stateProvider) {
         $stateProvider
-        .state('exam-type', {
-            parent: 'entity',
-            url: '/exam-type?page&sort&search',
+        .state('answer', {
+            parent: 'admin',
+            url: '/answer?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'pteMagicApp.examType.home.title'
+                pageTitle: 'pteMagicApp.answer.home.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/exam-type/exam-types.html',
-                    controller: 'ExamTypeController',
+                    templateUrl: 'app/entities/answer/answers.html',
+                    controller: 'AnswerController',
                     controllerAs: 'vm'
                 }
             },
@@ -45,39 +45,37 @@
                     };
                 }],
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('examType');
-                    $translatePartialLoader.addPart('testType');
+                    $translatePartialLoader.addPart('answer');
                     $translatePartialLoader.addPart('global');
                     return $translate.refresh();
                 }]
             }
         })
-        .state('exam-type-detail', {
-            parent: 'exam-type',
-            url: '/exam-type/{id}',
+        .state('answer-detail', {
+            parent: 'answer',
+            url: '/answer/{id}',
             data: {
                 authorities: ['ROLE_USER'],
-                pageTitle: 'pteMagicApp.examType.detail.title'
+                pageTitle: 'pteMagicApp.answer.detail.title'
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/exam-type/exam-type-detail.html',
-                    controller: 'ExamTypeDetailController',
+                    templateUrl: 'app/entities/answer/answer-detail.html',
+                    controller: 'AnswerDetailController',
                     controllerAs: 'vm'
                 }
             },
             resolve: {
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                    $translatePartialLoader.addPart('examType');
-                    $translatePartialLoader.addPart('testType');
+                    $translatePartialLoader.addPart('answer');
                     return $translate.refresh();
                 }],
-                entity: ['$stateParams', 'ExamType', function($stateParams, ExamType) {
-                    return ExamType.get({id : $stateParams.id}).$promise;
+                entity: ['$stateParams', 'Answer', function($stateParams, Answer) {
+                    return Answer.get({id : $stateParams.id}).$promise;
                 }],
                 previousState: ["$state", function ($state) {
                     var currentStateData = {
-                        name: $state.current.name || 'exam-type',
+                        name: $state.current.name || 'answer',
                         params: $state.params,
                         url: $state.href($state.current.name, $state.params)
                     };
@@ -85,22 +83,22 @@
                 }]
             }
         })
-        .state('exam-type-detail.edit', {
-            parent: 'exam-type-detail',
+        .state('answer-detail.edit', {
+            parent: 'answer-detail',
             url: '/detail/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-dialog.html',
-                    controller: 'ExamTypeDialogController',
+                    templateUrl: 'app/entities/answer/answer-dialog.html',
+                    controller: 'AnswerDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['ExamType', function(ExamType) {
-                            return ExamType.get({id : $stateParams.id}).$promise;
+                        entity: ['Answer', function(Answer) {
+                            return Answer.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
@@ -110,84 +108,82 @@
                 });
             }]
         })
-        .state('exam-type.new', {
-            parent: 'exam-type',
+        .state('answer.new', {
+            parent: 'answer',
             url: '/new',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-dialog.html',
-                    controller: 'ExamTypeDialogController',
+                    templateUrl: 'app/entities/answer/answer-dialog.html',
+                    controller: 'AnswerDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
                         entity: function () {
                             return {
-                                name: null,
-                                type: null,
-                                numberQuestionWriting: null,
-                                numberQuestionReading: null,
-                                numberQuestionListening: null,
-                                numberQuestionSpeaking: null,
+                                examId: null,
+                                questionId: null,
+                                answer: null,
+                                audioLink: null,
                                 description: null,
                                 id: null
                             };
                         }
                     }
                 }).result.then(function() {
-                    $state.go('exam-type', null, { reload: 'exam-type' });
+                    $state.go('answer', null, { reload: 'answer' });
                 }, function() {
-                    $state.go('exam-type');
+                    $state.go('answer');
                 });
             }]
         })
-        .state('exam-type.edit', {
-            parent: 'exam-type',
+        .state('answer.edit', {
+            parent: 'answer',
             url: '/{id}/edit',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-dialog.html',
-                    controller: 'ExamTypeDialogController',
+                    templateUrl: 'app/entities/answer/answer-dialog.html',
+                    controller: 'AnswerDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',
                     resolve: {
-                        entity: ['ExamType', function(ExamType) {
-                            return ExamType.get({id : $stateParams.id}).$promise;
+                        entity: ['Answer', function(Answer) {
+                            return Answer.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('exam-type', null, { reload: 'exam-type' });
+                    $state.go('answer', null, { reload: 'answer' });
                 }, function() {
                     $state.go('^');
                 });
             }]
         })
-        .state('exam-type.delete', {
-            parent: 'exam-type',
+        .state('answer.delete', {
+            parent: 'answer',
             url: '/{id}/delete',
             data: {
                 authorities: ['ROLE_USER']
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-delete-dialog.html',
-                    controller: 'ExamTypeDeleteController',
+                    templateUrl: 'app/entities/answer/answer-delete-dialog.html',
+                    controller: 'AnswerDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
                     resolve: {
-                        entity: ['ExamType', function(ExamType) {
-                            return ExamType.get({id : $stateParams.id}).$promise;
+                        entity: ['Answer', function(Answer) {
+                            return Answer.get({id : $stateParams.id}).$promise;
                         }]
                     }
                 }).result.then(function() {
-                    $state.go('exam-type', null, { reload: 'exam-type' });
+                    $state.go('answer', null, { reload: 'answer' });
                 }, function() {
                     $state.go('^');
                 });

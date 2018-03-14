@@ -47,6 +47,7 @@ public class CacheConfiguration {
             cm.createCache(com.vmcomms.ptemagic.domain.Exam.class.getName(), jcacheConfiguration);
             cm.createCache(com.vmcomms.ptemagic.domain.Exam.class.getName() + ".questions", jcacheConfiguration);
             cm.createCache(com.vmcomms.ptemagic.domain.Exam.class.getName() + ".answes", jcacheConfiguration);
+            cm.createCache(com.vmcomms.ptemagic.domain.ExamQuestion.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }
