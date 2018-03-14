@@ -1,6 +1,104 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-BlackItalic.woff2') format('woff2'),
+    url('../font/Roboto-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-MediumItalic.woff2') format('woff2'),
+    url('../font/Roboto-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Medium.woff2') format('woff2'),
+    url('../font/Roboto-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Bold.woff2') format('woff2'),
+    url('../font/Roboto-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Light.woff2') format('woff2'),
+    url('../font/Roboto-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Regular.woff2') format('woff2'),
+    url('../font/Roboto-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-ThinItalic.woff2') format('woff2'),
+    url('../font/Roboto-ThinItalic.woff') format('woff');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-BoldItalic.woff2') format('woff2'),
+    url('../font/Roboto-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-LightItalic.woff2') format('woff2'),
+    url('../font/Roboto-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Black.woff2') format('woff2'),
+    url('../font/Roboto-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Thin.woff2') format('woff2'),
+    url('../font/Roboto-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../font/Roboto-Italic.woff2') format('woff2'),
+    url('../font/Roboto-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}
+
 body {
     background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-style: normal;
     color: #333;
 }
 
@@ -336,7 +434,499 @@ ui bootstrap tweaks
     outline: none;
 }
 
+.pte-text-email-header{
+    font-family: 'Roboto';
+    font-weight: 300;
+    font-style: normal;
+    color: #7e7e7e;
+    font-size: 13px;
+}
+.pte-text-numberPhone-header{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 13px;
+    color: #939393;
+}
+.pte-header-one{
+    text-align: right;
+    padding-top: 16px;
+    padding-bottom: 13px;
+    background: #2d2d2d;
+}
+.pte-header-two{
+    background: #2a2622;
+    opacity: 0.8;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+    color: #f9db01;
+    background-color: transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    border-bottom: 3px solid #f9db01;
+}
+.navbar-default .navbar-nav > .active > a>span{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.navbar-nav > li > a {
+    padding-top: 23px;
+    padding-bottom: 23px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.navbar-default .navbar-nav > li > a {
+    color: #9a9a9a;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.navbar-nav > li {
+    float: left;
+    margin-left: 25px;
+}
+.pte-logo-desktop{
+    position: absolute;
+    top: 0;
+    left: 103.5px;
+    z-index: 99;
+}
+.position-relative{
+    position: relative;
+}
+.pte-join-free{
+    padding: 9px 25px;
+    border: 1px solid #727272;
+    background: #000000;
+    margin: 13px 0 0 0;
+}
+.pte-join-free:hover{
+    background: #727272;
+}
+.pte-text-join{
+    font-size: 15px;
+    color: #9a9a9a;
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-style: normal;
+}
+.pte-text-free{
+    font-size: 15px;
+    color: #f9db01;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+}
+.padding0{
+    padding: 0 !important;
+}
+.pte-body{
+    background: url(../images/body.png) no-repeat left top;
+    height: 100vh;
+    width: auto;
+    background-size: cover;
+}
+.navbar-default {
+    background-color: transparent;
+    border-color: transparent;
+}
+.pte-pree-question{
+    background-color: #393939;
+    color: #fff;
+    width: auto;
+    height: 120px;
+}
+.pte-pree-question:hover{
+    background-color: #f9db01;
+    color:#181818;
+}
+.pte-pree-question-text{
+    text-align: right;
+    font-size: 18px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    text-transform: uppercase;
+    position: relative;
+    top: 45px;
+    right: 30px;
+}
+.pte-block-content{
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    right: 0;
+}
+.footer{
+    background-color: #000;
+    padding: 14px 15px;
+}
+.pte-footer-com{
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-style: normal;
+    color: #939393;
+    font-size: 13px;
+}
+.pte-icon-footer{
+    margin-left: 40px;
+    margin-right: 30px;
+    color: #fff;
+}
+.pte-color-fff{
+    color: #fff;
+}
+.pte-connect{
+    float: right;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #555;
+    background-color: transparent;
+    border-bottom: 3px solid #f9db01;
+    color: #f9db01;
+}
+.dropdown-menu > li:hover, .dropdown-menu > li:focus {
+    color: #262626;
+    text-decoration: none;
+    color: #f9db01;
+    background-color: transparent;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+    color: #f9db01;
+    text-decoration: none;
+    background-color: transparent;
+}
+.dropdown-menu{
+    padding: 0px 25px;
+    background: #2a2622;
+    opacity: 0.8;
+}
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #8f8f8f;
+    white-space: nowrap;
+}
+.dropdown-menu>li{
+    list-style: circle;
+    padding: 10px 0;
+    color: #8f8f8f;
+}
+.navbar-right .dropdown-menu {
+    right: auto;
+    left: -21px;
+}
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    background: #f9db01;
+}
+.modal-title{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    text-transform: uppercase;
+}
+.pte-icon-close-dialog{
+    position: absolute;
+    right: -8px;
+    top: -10px;
+    font-size: 23px;
+    color: #fff;
+}
+.pte-text-header-login{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 13px;
+}
+.pte-text-sign-up{
+    color: #f99901;
+}
+.pte-input-login{
+    width: 100%;
+    background: #e6e6e6;
+    border: 1px solid #c0c0c1;
+    height: 35px;
+    padding-left: 10px;
+}
+.pte-padding-login{
 
-
-
+}
+.pte-margin-top15{
+    margin-top: 15px;
+}
+.pte-margin-top30{
+    margin-top: 30px;
+}
+.pte-btn-login{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 13px;
+    color: #f9db01;
+    background: #222222;
+    padding: 10px 53px;
+    border: 1px solid #222222;
+}
+.pte-btn-login:hover{
+    color: #222222;
+    background: #f9db01;
+    border: 1px solid #f9db01;
+}
+.pte-pree-question-text-only{
+    font-size: 13px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    position: relative;
+    top: 40px;
+    right: 90px;
+}
+.pte-pree-question>img{
+    height: 120px;
+    width: auto;
+    position: relative;
+    left: -1px;
+}
+.pte-icon-sign{
+    position: relative;
+    font-size: 15px;
+    color: #9a9a9a;
+    top: 1px;
+}
+.pte-icon-sign:hover{
+    color: #f9db01;
+}
+.navbar-default .navbar-nav > li > a>span:hover, .navbar-default .navbar-nav > li > a>span:focus {
+    color: #f9db01;;
+    background-color: transparent;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
+@media (min-width:992px) and (max-width:1200px) {
+    .pte-pree-question-text-only{
+        font-size: 11px;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+        position: relative;
+        top: 40px;
+        right: 55px;
+    }
+    .pte-pree-question-text {
+        text-align: right;
+        font-size: 14px;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+        text-transform: uppercase;
+        position: relative;
+        top: 45px;
+        right: 15px;
+    }
+
+    .footer {
+        background-color: #000;
+        padding: 14px 0;
+        text-align: left;
+    }
+    .pte-connect{
+        float: right;
+    }
+    .pte-logo-desktop {
+        position: absolute;
+        top: 0;
+        left: 30.5px;
+        z-index: 99;
+    }
+    .navbar-nav > li > a {
+        padding-top: 23px;
+        padding-bottom: 23px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .navbar-nav > li {
+        float: left;
+        margin-left: 5px;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: #9a9a9a;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 14px;
+        text-transform: uppercase;
+    }
+    .pte-logo-desktop>img{
+        height: 119px;
+    }
+    .pte-text-free {
+        font-size: 13px;
+        color: #f9db01;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+    }
+    .pte-text-join {
+        font-size: 13px;
+        color: #9a9a9a;
+        font-family: 'Roboto';
+        font-weight: normal;
+        font-style: normal;
+    }
+    .pte-join-free {
+        padding: 5px 20px;
+        border: 1px solid #727272;
+        background: #000000;
+        margin: 15px 0 0 0;
+    }
+}
+@media (min-width:768px) and (max-width:992px) {
+    .pte-width-block-question{
+        margin-top: 10px;
+    }
+    .footer {
+        background-color: #000;
+        padding: 14px 0;
+        text-align: left;
+    }
+    .pte-connect{
+        float: right;
+    }
+    .container {
+        width: 100%;
+    }
+    .pte-logo-desktop {
+        position: absolute;
+        top: 0;
+        left: 20.5px;
+        z-index: 99;
+    }
+    .navbar-nav > li > a {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .pte-logo-desktop>img{
+        height: 102px;
+    }
+    .navbar-nav > li {
+        float: left;
+        margin-left: 5px;
+    }
+    .pte-join-free {
+        padding: 5px 15px;
+        border: 1px solid #727272;
+        background: #000000;
+        margin: 9px 0 0 0;
+    }
+    .navbar-default .navbar-nav > li > a {
+        color: #9a9a9a;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+    .navbar-default .navbar-nav > .active > a>span {
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+        font-size: 13px;
+        text-transform: uppercase;
+    }
+    .pte-text-join {
+        font-size: 12px;
+        color: #9a9a9a;
+        font-family: 'Roboto';
+        font-weight: normal;
+        font-style: normal;
+    }
+    .pte-text-free {
+        font-size: 12px;
+        color: #f9db01;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+    }
+}
+@media (min-width:480px) and (max-width:768px) {
+    .pte-width-block-question{
+        margin-top: 10px;
+    }
+    .footer {
+        background-color: #000;
+        padding: 14px 0;
+        text-align: center;
+    }
+    .pte-connect{
+        float: none;
+        text-align: center;
+    }
+    .navbar-nav > li {
+        float: none;
+        margin-left: 0;
+    }
+    .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-brand.logo {
+        padding: 3px 15px;
+    }
+}
+@media (max-width:480px){
+    .pte-pree-question-text {
+        text-align: right;
+        font-size: 15px;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+        text-transform: uppercase;
+        position: relative;
+        top: 45px;
+        right: 9px;
+    }
+    .pte-pree-question-text-only {
+        font-size: 10px;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+        position: relative;
+        top: 40px;
+        right: 68px;
+    }
+    .pte-width-block-question{
+        margin-top: 10px;
+    }
+    .footer {
+        background-color: #000;
+        padding: 14px 0;
+        text-align: center;
+    }
+    .pte-connect{
+        float: none;
+        text-align: center;
+    }
+    .navbar-brand.logo {
+        padding: 2px 15px;
+    }
+    .navbar-nav > li {
+        float: none;
+        margin-left: 0;
+    }
+    .navbar-nav > li > a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}

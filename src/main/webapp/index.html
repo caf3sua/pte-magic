@@ -16,6 +16,7 @@
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
+    <link rel="stylesheet" href="content/css/font-style.css">
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
     <link rel="shortcut icon" href="favicon.ico" />
@@ -25,15 +26,19 @@
     <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
-    <div class="container">
-        <div class="well" ui-view="content">
-            <!-- Angular views -->
-        </div>
+    <div class="" ui-view="content">
+        <!-- Angular views -->
+    </div>
 
-        <div class="footer" ng-cloak>
-            <p data-translate="footer">This is your footer</p>
+    <div class="footer" ng-cloak>
+        <div class="container">
+            <span class="pte-footer-com">© 2017 Trung tâm luyện thi PTE MAGIC |  All rights reserved.</span>
+            <div class="pte-connect">
+                <span class="pte-footer-com">Connect with Us:</span>
+                <i class="pte-icon-footer pte-color-fff fab fa-facebook-f"></i>
+                <i class="pte-color-fff fab fa-youtube"></i>
+            </div>
         </div>
     </div>
     <noscript>
@@ -120,6 +125,8 @@
     <script src="app/components/util/base64.service.js"></script>
     <script src="app/components/login/login.service.js"></script>
     <script src="app/components/login/login.controller.js"></script>
+    <script src="app/components/createAccount/createAccount.controller.js"></script>
+    <script src="app/components/createAccount/createAccount.service.js"></script>
     <script src="app/components/language/language.service.js"></script>
     <script src="app/components/language/language.filter.js"></script>
     <script src="app/components/language/language.controller.js"></script>
@@ -170,7 +177,7 @@
     <script src="app/admin/exam/exam.state.js"></script>
     <script src="app/admin/exam/exam.service.js"></script>
     <script src="app/admin/exam/exam.controller.js"></script>
-    <script src="app/admin/entity.state.js"></script>
+    <script src="app/entities/entity.state.js"></script>
     <script src="app/admin/answer/answer-dialog.controller.js"></script>
     <script src="app/admin/answer/answer-detail.controller.js"></script>
     <script src="app/admin/answer/answer-delete-dialog.controller.js"></script>

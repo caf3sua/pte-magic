@@ -1,138 +1,85 @@
-<nav class="navbar navbar-default" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand logo" href="#/" ng-click="vm.collapseNavbar()">
-                <img class="logo-img" src="content/images/logo-jhipster.png" alt="logo"/>
-                <span data-translate="global.title">PteMagic</span> <span class="navbar-version">v{{VERSION}}</span>
-            </a>
+<nav class="navbar navbar-fixed-top  navbar-default " role="navigation">
+    <div class="pte-header-one">
+        <div class="container">
+            <span class="pte-text-email-header">Emai: ptemagic@gmail.com </span>
+            <span class="pte-text-numberPhone-header">|   Hotline: +61 466 253 357 - 0869 608 673</span>
         </div>
-        <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
-            <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active">
-                    <a ui-sref="home" ng-click="vm.collapseNavbar()">
-                        <span class="glyphicon glyphicon-home"></span>
-                        <span class="hidden-sm" data-translate="global.menu.home">Home</span>
-                    </a>
-                </li>
-                <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here-->
-                <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
+    </div>
+    <a class="pte-logo-desktop  hidden-xs" href="#/" ng-click="vm.collapseNavbar()">
+        <img class="logo-img" src="content/images/logo.png" alt="logo"/>
+    </a>
+    <div class="pte-header-two">
+        <div class="container">
+            <div class="navbar-header hidden-lg hidden-md hidden-sm">
+                <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand logo " href="#/" ng-click="vm.collapseNavbar()">
+                    <img class="logo-img" src="content/images/logo.png" alt="logo"/>
+                </a>
+            </div>
+            <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
+                <ul class="nav navbar-nav navbar-right">
+                    <li ui-sref-active="active">
+                        <a ui-sref="home" ng-click="vm.collapseNavbar()">
+                            <span class="" data-translate="global.menu.home">Home</span>
+                        </a>
+                    </li>
+                    <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+                    <li uib-dropdown class="dropdown pointer">
+                        <a ui-sref="about" ng-click="vm.collapseNavbar()">
+                            <span class="" >About us</span>
+                        </a>
+                    </li>
+                    <li  uib-dropdown class="dropdown pointer">
+                        <a class="dropdown-toggle" uib-dropdown-toggle>
                         <span>
-                            <span class="glyphicon glyphicon-th-list"></span>
-                            <span class="hidden-sm" data-translate="global.menu.entities.main">
-                                Entities
+                            <span class="" >
+                                PRACTICE TEST
                             </span>
-                            <b class="caret"></b>
                         </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                    </ul>
-                </li>
-                <li ng-class="{active: vm.$state.includes('account')}" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="account-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-user"></span>
-                            <span class="hidden-sm" data-translate="global.menu.account.main">
-                                Account
+                        </a>
+                        <ul class="dropdown-menu" uib-dropdown-menu>
+                            <li ui-sref-active="active" ng-switch-when="true">
+                                <a ui-sref="settings" ng-click="vm.collapseNavbar()">
+                                    <span >Free Samples</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active" ng-switch-when="false">
+                                <a ui-sref="register" ng-click="vm.collapseNavbar()">
+                                    <span>Member Questions</span>
+                                </a>
+                            </li>
+                            <li ui-sref-active="active" ng-switch-when="false">
+                                <a ui-sref="register" ng-click="vm.collapseNavbar()">
+                                    <span> Mock Test</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
+                        <a ng-click="vm.login()" class="dropdown-toggle" uib-dropdown-toggle >
+                            <span>
+                                <span class="pte-icon-sign icon-sign_out"></span>
+                                <span class="" >SIGN IN</span>
                             </span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="settings" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-wrench"></span>&nbsp;
-                                <span data-translate="global.menu.account.settings">Settings</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a ui-sref="password" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-lock"></span>&nbsp;
-                                <span data-translate="global.menu.account.password">Password</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="true">
-                            <a href="" ng-click="vm.logout()" id="logout">
-                                <span class="glyphicon glyphicon-log-out"></span>&nbsp;
-                                <span data-translate="global.menu.account.logout">Sign out</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a href="" ng-click="vm.login()" id="login">
-                                <span class="glyphicon glyphicon-log-in"></span>&nbsp;
-                                <span data-translate="global.menu.account.login">Sign in</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
-                            <a ui-sref="register" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
-                                <span data-translate="global.menu.account.register">Register</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown class="dropdown pointer">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
-                        <span>
-                            <span class="glyphicon glyphicon-tower"></span>
-                            <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu>
-                        <li ui-sref-active="active">
-                            <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
-                                <span class="glyphicon glyphicon-user"></span>&nbsp;
-                                <span data-translate="global.menu.admin.userManagement">User management</span>
-                            </a>
-                        </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="exam-type" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.examType">Exam Type</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="question" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.question">Question</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="answer" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.answer">Answer</span>
-                                </a>
-                            </li>
-                        <li ui-sref-active="active">
-                                <a ui-sref="exam" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="global.menu.entities.exam">Exam</span>
-                                </a>
-                        </li>
-                    </ul>
-                </li>
-                <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
-                    <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
-                        <span>
-                            <span class="glyphicon glyphicon-flag"></span>
-                            <span class="hidden-sm" data-translate="global.menu.language">Language</span>
-                            <b class="caret"></b>
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu" uib-dropdown-menu ng-if="languageVm.languages.length > 1">
-                        <li active-menu="{{language}}" ng-repeat="language in languageVm.languages">
-                            <a href="" ng-click="languageVm.changeLanguage(language);vm.collapseNavbar();">{{language | findLanguageFromKey}}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                        </a>
+                    </li>
+                    <li class="pte-join-free">
+                        <a class="dropdown-toggle padding0" uib-dropdown-toggle >
+                            <span>
+                                <span class="pte-text-join">Join</span>
+                                <span class="pte-text-free">Free</span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 </nav>
