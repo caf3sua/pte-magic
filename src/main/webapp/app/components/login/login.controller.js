@@ -5,9 +5,9 @@
         .module('pteMagicApp')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance'];
+    LoginController.$inject = ['$rootScope', '$state', '$timeout', 'Auth', '$uibModalInstance', '$uibModal'];
 
-    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance) {
+    function LoginController ($rootScope, $state, $timeout, Auth, $uibModalInstance, $uibModal) {
         var vm = this;
 
         vm.authenticationError = false;
@@ -18,6 +18,7 @@
         vm.register = register;
         vm.rememberMe = true;
         vm.requestResetPassword = requestResetPassword;
+        vm.createAccountDialog = createAccountDialog;
         vm.username = null;
 
         $timeout(function (){angular.element('#username').focus();});
@@ -31,7 +32,20 @@
             vm.authenticationError = false;
             $uibModalInstance.dismiss('cancel');
         }
-
+        function createAccountDialog() {
+            $uibModal.open({
+                templateUrl: 'app/components/createAccount/createAccount.html',
+                controller: 'CreateAccountController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                }
+            })
+                .result
+                .then(function () {
+                });
+        }
         function login (event) {
             event.preventDefault();
             Auth.login({

@@ -26,12 +26,14 @@
         vm.notloggedIn = false;
         vm.$state = $state;
         $scope.$on('nameAccount', function(event, des) {
-            vm.data = des.data.lastName;
-            if(vm.data != null){
+            vm.data = des.data;
+            if(vm.data  != null){
                 vm.loggedIn = true;
-                vm.user.lastName = vm.data;
-            }else {
+                vm.user.lastName = vm.data.lastName;
                 vm.notloggedIn = false;
+            }else {
+                vm.notloggedIn = true;
+                vm.loggedIn = false;
             }
         });
 

@@ -1,3 +1,4 @@
+
 (function() {
     'use strict';
 
@@ -5,38 +6,39 @@
         .module('testOnlineApp')
         .factory('createAccountService', createAccountService);
 
-    createAccountService.$inject = ['$uibModal'];
+    createAccountService.$inject = ['$resource'];
 
-    function createAccountService ($uibModal) {
-        var service = {
-            open: open
-        };
+    function createAccountService ($resource) {
 
-        var modalInstance = null;
-        var resetModal = function () {
-            modalInstance = null;
-        };
+        var service = $resource('api/step/:botId', {}, {
+            'get': {
+                method: 'GET',
+                isArray: true
+            },
+            'update':{
+                url:'api/step',
+                method:'PUT'
+            },
+            'deleteStep': {
+                url: 'api/step/:botId/:stepId',
+                method: 'DELETE'
+            },
+            'updateLocationStep':{
+                url:'api/step/updateLocationStep',
+                method:'PUT'
+            },
+            'getListExpression':{
+                url:'api/dictionary/listExpression',
+                method:'GET',
+                isArray: true
+            },
+            'getListVariable':{
+                url:'api/dictionary/listVariable',
+                method:'GET',
+                isArray: true
+            }
+        });
 
         return service;
-
-        function open () {
-            if (modalInstance !== null) return;
-            modalInstance = $uibModal.open({
-                animation: true,
-                templateUrl: 'app/components/createAccount/createAccount.html',
-                controller: 'createAccountController',
-                controllerAs: 'vm',
-                resolve: {
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('createAccount');
-                        return $translate.refresh();
-                    }]
-                }
-            });
-            modalInstance.result.then(
-                resetModal,
-                resetModal
-            );
-        }
     }
 })();

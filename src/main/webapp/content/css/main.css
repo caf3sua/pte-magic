@@ -731,6 +731,17 @@ ui bootstrap tweaks
     font-size: 35px;
     padding: 15px 22px;
 }
+.pte-free-sample-mobile{
+    text-align: center;
+    background: #393939;
+    padding: 10px;
+}
+.pte-free-sample-mobile>span{
+    color: #f9db01;
+    font-size: 35px;
+    padding: 15px 22px;
+}
+
 .pte-freeSample-block>div{
     display: flex;
 }
@@ -766,8 +777,100 @@ ui bootstrap tweaks
     font-style: normal;
     font-size: 15px;
 }
+.pte-pre-sample-listQuestion{
+    background: #f0f0f0;
+    border-top: 3px solid #474747;
+    padding: 0px 30px 30px 30px;
+}
+.pte-free-sample-item{
+    border: 1px solid #b0b0b0;
+    background: #fff;
+    padding: 0;
+    border-radius: 5px;
+}
+.pte-free-sample-item>div{
+    padding: 30px 15px 40px 0px;
+    max-height: 93px;
+    position: relative;
+}
+.pte-free-sample-item-text>li{
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+}
+.pte-free-sample-item-footer{
+    padding: 10px 20px !important;
+    background: #d6d6d6;
+    display: flex;
+}
+.pte-free-sample-item-footer-text{
+    font-weight: normal;
+    font-style: normal;
+    font-size: 13px;
+    color: #757575;
+    margin: 10px 0;
+    display: inline-block;
+    white-space: nowrap;
+}
+.pte-free-sample-item-footer-btn{
+    background: #393939;
+    color: #f9db01;
+    border: 1px solid #393939;
+    padding: 2px 45px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-left: 53px;
+    line-height: 30px;
+    float: none;
+}
+.pte-free-sample-item-footer-btn:hover{
+    background: #f9db01;
+    color: #393939;
+    border: 1px solid #f9db01;
+}
+.active>div>.pte-freeSample-block-sum-questions{
+    padding: 25px 0;
+    animation: zoomin 10s ease-in infinite;
+    transition: all .5s ease-in-out;
+}
+.margin-top30{
+    margin-top: 30px;
+}
+.pte-free-listquestion-mobile{
+    margin-top: 0;
+}
+.activeMobile>.pte-free-sample-mobile{
+    padding: 16px 10px;
+    animation: zoomin 10s ease-in infinite;
+    transition: all .5s ease-in-out;
+}
+.pte-icon-sign>span{
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    position: relative;
+    top: -1px;
+    text-transform: uppercase;
+}
+.margin-bottom90{
+    margin-bottom: 90px;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
 @media (min-width:992px) and (max-width:1200px) {
+    .pte-free-sample-item-footer-btn {
+        background: #393939;
+        color: #f9db01;
+        border: 1px solid #393939;
+        padding: 1px 25px;
+        border-radius: 5px;
+        display: inline-block;
+        margin-left: 25px;
+        line-height: 30px;
+        float: none;
+    }
+    .pte-free-listquestion-mobile{
+        margin-top: 0;
+    }
     .pte-pree-question-text-only{
         font-size: 11px;
         font-family: 'Roboto';
@@ -846,6 +949,21 @@ ui bootstrap tweaks
     }
 }
 @media (min-width:768px) and (max-width:992px) {
+    .pte-free-sample-item-footer-btn {
+        background: #393939;
+        color: #f9db01;
+        border: 1px solid #393939;
+        padding: 2px 45px;
+        border-radius: 5px;
+        display: inline-block;
+        /* margin-left: 53px; */
+        line-height: 30px;
+        position: absolute;
+        right: 30px;
+    }
+    .pte-free-listquestion-mobile{
+        margin-top: 70px;
+    }
     .pte-width-block-question{
         margin-top: 10px;
     }
@@ -916,6 +1034,21 @@ ui bootstrap tweaks
     }
 }
 @media (min-width:480px) and (max-width:768px) {
+    .pte-free-sample-item-footer-btn {
+        background: #393939;
+        color: #f9db01;
+        border: 1px solid #393939;
+        padding: 1px 25px;
+        border-radius: 5px;
+        display: inline-block;
+        margin-left: 25px;
+        line-height: 30px;
+        position: absolute;
+        right: 30px;
+    }
+    .pte-free-listquestion-mobile{
+        margin-top: 70px;
+    }
     .pte-width-block-question{
         margin-top: 10px;
     }
@@ -941,6 +1074,25 @@ ui bootstrap tweaks
     }
 }
 @media (max-width:480px){
+    .pte-free-sample-item-footer-btn {
+        background: #393939;
+        color: #f9db01;
+        border: 1px solid #393939;
+        padding: 2px 25px;
+        border-radius: 5px;
+        display: inline-block;
+        line-height: 30px;
+        position: absolute;
+        right: 20px;
+    }
+    .pte-free-sample-mobile>span {
+        color: #f9db01;
+        font-size: 35px;
+        padding: 0;
+    }
+    .pte-free-listquestion-mobile{
+        margin-top: 70px;
+    }
     .pte-pree-question-text {
         text-align: right;
         font-size: 15px;
