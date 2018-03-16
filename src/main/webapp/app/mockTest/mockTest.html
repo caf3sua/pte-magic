@@ -1,123 +1,72 @@
 <div ng-cloak >
     <div class="pte-body-content"></div>
     <div class="container margin-bottom90">
-        <div class="col-md-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block" id="listening" ng-click="vm.listeningList()">
-                <div class="pte-border-block-freeSample" >
-                    <div class="pte-freeSample-block-text">
-                        <p class="pte-freeSample-block-text-header">Listening</p>
+        <div class="col-md-4 col-xs-4 col-sm-4">
+            <div class="pte-mockTest-block" id="pastA" ng-click="vm.pastA()">
+                <div class="pte-border-block-mockTest" >
+                    <div class="pte-mockTest-block-text">
+                        <p class="pte-mockTest-block-text-header">Past a</p>
                     </div>
                 </div>
-                <div>
-                    <p class="pte-freeSample-block-sum-questions">
+                <div class="text-center">
+                    <p class="pte-mockTest-block-sum-questions">
                         Specking/Writing
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block">
-                <div class="pte-border-block-freeSample">
-                    <span class="icon-open-book"></span>
-                    <div class="pte-freeSample-block-text">
-                        <p class="pte-freeSample-block-text-header">READING</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">8</span></p>
+        <div class="col-md-4 col-xs-4 col-sm-4">
+            <div class="pte-mockTest-block">
+                <div class="pte-border-block-mockTest" >
+                    <div class="pte-mockTest-block-text">
+                        <p class="pte-mockTest-block-text-header">Past b</p>
                     </div>
                 </div>
-                <div>
-                    <p class="pte-freeSample-block-sum-questions">
-                        58 QUESTIONS
+                <div class="text-center">
+                    <p class="pte-mockTest-block-sum-questions">
+                        Reading/Listening
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block">
-                <div class="pte-border-block-freeSample">
-                    <span class="icon-icon"></span>
-                    <div class="pte-freeSample-block-text">
-                        <p class="pte-freeSample-block-text-header">Speaking</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">8</span></p>
+        <div class="col-md-4 col-xs-4 col-sm-4">
+            <div class="pte-mockTest-block" ng-click="vm.listeningList()">
+                <div class="pte-border-block-mockTest" >
+                    <div class="pte-mockTest-block-text">
+                        <p class="pte-mockTest-block-text-header">Mock test FULL</p>
                     </div>
                 </div>
-                <div>
-                    <p class="pte-freeSample-block-sum-questions">
-                        158 QUESTIONS
+                <div class="text-center">
+                    <p class="pte-mockTest-block-sum-questions">
+                        Speaking/Writing/Reading/Listening
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block">
-                <div class="pte-border-block-freeSample">
-                    <span class="icon-checkbox-pen-outline2"></span>
-                    <div class="pte-freeSample-block-text">
-                        <p class="pte-freeSample-block-text-header">WRITING</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">8</span></p>
-                    </div>
-                </div>
-                <div>
-                    <p class="pte-freeSample-block-sum-questions">
-                        158 QUESTIONS
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg" id="listeningMobile" ng-click="vm.listeningList()">
-            <div class="pte-free-sample-mobile">
-                <span class="icon-headset"></span>
-            </div>
-        </div>
-        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg">
-            <div class="pte-free-sample-mobile">
-                <span class="icon-open-book"></span>
-            </div>
-        </div>
-        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg">
-            <div class="pte-free-sample-mobile">
-                <span class="icon-icon"></span>
-            </div>
-        </div>
-        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg">
-            <div class="pte-free-sample-mobile">
-                <span class="icon-checkbox-pen-outline2"></span>
-            </div>
-        </div>
+        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg"  id="pastAMobile" ng-click="vm.pastA()">-->
+            <!--<div class="pte-free-sample-mobile">-->
+                <!--<span class="icon-headset"></span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg">-->
+            <!--<div class="pte-free-sample-mobile">-->
+                <!--<span class="icon-open-book"></span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg">-->
+            <!--<div class="pte-free-sample-mobile">-->
+                <!--<span class="icon-icon"></span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg">-->
+            <!--<div class="pte-free-sample-mobile">-->
+                <!--<span class="icon-checkbox-pen-outline2"></span>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="col-md-12 pte-free-listquestion-mobile" ng-show="vm.listQuestionShow">
             <div class="col-md-12 pte-pre-sample-listQuestion">
                 <div class="col-md-4 margin-top30">
-                    <div class="pte-free-sample-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Summarise spoken text
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-free-sample-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Summarise spoken text
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-free-sample-item">
+                    <div class="pte-mock-test-item">
                         <div >
                             <ul class="pte-free-sample-item-text">
                                 <li >
@@ -125,26 +74,81 @@
                                     answers
                                 </li>
                             </ul>
+                            <ul class="pte-block-item-mocktest-content">
+                                <li><a>Question amuont: <span>24</span></a></li>
+                                <li><a>Test Durication: <span>00:25:22</span></a></li>
+                                <li><a>Unsubscribe</a></li>
+                            </ul>
                         </div>
-                        <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
+                        <div class="pte-mock-test-item-footer">
+                            <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
+                            <button class="pte-mock-test-item-footer-btn">Start</button>
                         </div>
                     </div>
 
                 </div>
                 <div class="col-md-4 margin-top30">
-                    <div class="pte-free-sample-item">
+                    <div class="pte-mock-test-item">
                         <div >
                             <ul class="pte-free-sample-item-text">
                                 <li >
-                                    Summarise spoken text
+                                    Multiple choice, choose multiple
+                                    answers
                                 </li>
                             </ul>
+                            <ul class="pte-block-item-mocktest-content">
+                                <li><a>Question amuont: <span>24</span></a></li>
+                                <li><a>Test Durication: <span>00:25:22</span></a></li>
+                                <li><a>Unsubscribe</a></li>
+                            </ul>
                         </div>
-                        <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
+                        <div class="pte-mock-test-item-footer">
+                            <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
+                            <button class="pte-mock-test-item-footer-btn">Start</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 margin-top30">
+                    <div class="pte-mock-test-item">
+                        <div >
+                            <ul class="pte-free-sample-item-text">
+                                <li >
+                                    Multiple choice, choose multiple
+                                    answers
+                                </li>
+                            </ul>
+                            <ul class="pte-block-item-mocktest-content">
+                                <li><a>Question amuont: <span>24</span></a></li>
+                                <li><a>Test Durication: <span>00:25:22</span></a></li>
+                                <li><a>Unsubscribe</a></li>
+                            </ul>
+                        </div>
+                        <div class="pte-mock-test-item-footer">
+                            <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
+                            <button class="pte-mock-test-item-footer-btn">Start</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4 margin-top30">
+                    <div class="pte-mock-test-item">
+                        <div >
+                            <ul class="pte-free-sample-item-text">
+                                <li >
+                                    Multiple choice, choose multiple
+                                    answers
+                                </li>
+                            </ul>
+                            <ul class="pte-block-item-mocktest-content">
+                                <li><a>Question amuont: <span>24</span></a></li>
+                                <li><a>Test Durication: <span>00:25:22</span></a></li>
+                                <li><a>Unsubscribe</a></li>
+                            </ul>
+                        </div>
+                        <div class="pte-mock-test-item-footer">
+                            <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
+                            <button class="pte-mock-test-item-footer-btn">Start</button>
                         </div>
                     </div>
 
