@@ -84,7 +84,15 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Column(name = "reset_date")
     private Instant resetDate = null;
+    
+    @Size(max = 50)
+    @Column(name = "full_name", length = 50)
+    private String fullName;
 
+    @Size(max = 50)
+    @Column(name = "phonenumber", length = 50)
+    private String phonenumber;
+    
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -95,7 +103,23 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
 
-    public Long getId() {
+    public String getFullName() {
+		return fullName;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public String getPhonenumber() {
+		return phonenumber;
+	}
+
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
+	}
+
+	public Long getId() {
         return id;
     }
 

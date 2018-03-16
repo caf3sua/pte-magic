@@ -9,7 +9,8 @@
 
     function LoginService ($uibModal) {
         var service = {
-            open: open
+            open: open,
+            openRegisterForm: openRegisterForm,
         };
 
         var modalInstance = null;
@@ -18,6 +19,27 @@
         };
 
         return service;
+        
+        function openRegisterForm () {
+            if (modalInstance !== null) return;
+            modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'app/components/register/register.html',
+                controller: 'RegisterController',
+                controllerAs: 'vm',
+                size: 'sm',
+                resolve: {
+                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
+                        $translatePartialLoader.addPart('register');
+                        return $translate.refresh();
+                    }]
+                }
+            });
+            modalInstance.result.then(
+                resetModal,
+                resetModal
+            );
+        }
 
         function open () {
             if (modalInstance !== null) return;

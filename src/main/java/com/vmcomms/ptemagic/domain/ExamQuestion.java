@@ -16,6 +16,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "exam_question")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Getter
+@Setter
 public class ExamQuestion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -31,28 +33,6 @@ public class ExamQuestion implements Serializable {
     @Column(name = "question_id")
     private Long questionId;
     
-    public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getExamId() {
-		return examId;
-	}
-
-	public void setExamId(Long examId) {
-		this.examId = examId;
-	}
-
-	public Long getQuestionId() {
-		return questionId;
-	}
-
-	public void setQuestionId(Long questionId) {
-		this.questionId = questionId;
-	}
-
+    @Column(name = "order")
+    private Integer order;
 }

@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/exam-type/exam-types.html',
+                    templateUrl: 'app/admin/exam-type/exam-types.html',
                     controller: 'ExamTypeController',
                     controllerAs: 'vm'
                 }
@@ -61,7 +61,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/exam-type/exam-type-detail.html',
+                    templateUrl: 'app/admin/exam-type/exam-type-detail.html',
                     controller: 'ExamTypeDetailController',
                     controllerAs: 'vm'
                 }
@@ -93,7 +93,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-dialog.html',
+                    templateUrl: 'app/admin/exam-type/exam-type-dialog.html',
                     controller: 'ExamTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -118,7 +118,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-dialog.html',
+                    templateUrl: 'app/admin/exam-type/exam-type-dialog.html',
                     controller: 'ExamTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -152,7 +152,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-dialog.html',
+                    templateUrl: 'app/admin/exam-type/exam-type-dialog.html',
                     controller: 'ExamTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -177,7 +177,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam-type/exam-type-delete-dialog.html',
+                    templateUrl: 'app/admin/exam-type/exam-type-delete-dialog.html',
                     controller: 'ExamTypeDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

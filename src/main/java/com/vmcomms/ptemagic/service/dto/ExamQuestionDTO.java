@@ -20,4 +20,6 @@ public class ExamQuestionDTO implements Serializable {
     private Long examId;
 
     private Long questionId;
+    
+    private Integer order;
 }

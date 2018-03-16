@@ -64,16 +64,49 @@
                         </ul>
                     </li>
 
-                    <li ng-show="vm.loggedIn" ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
+					<!-- NOT LOGGED -->
+                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-switch-when="true">
                         <a  class="dropdown-toggle" uib-dropdown-toggle >
                             <span>
                                  <span class="icon-user"></span>
-                                <span class="colorf9db01" >{{vm.user.lastName}}</span>
+                                <span class="colorf9db01" >{{vm.user.fullName}}</span>
                             </span>
                         </a>
+                        <ul class="dropdown-menu" uib-dropdown-menu has-authority="ROLE_ADMIN" >
+                            <li ui-sref-active="active">
+	                            <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
+	                                <span class="glyphicon glyphicon-user"></span>&nbsp;
+	                                <span data-translate="global.menu.admin.userManagement">User management</span>
+	                            </a>
+	                        </li>
+	                        <li ui-sref-active="active">
+	                                <a ui-sref="exam-type" ng-click="vm.collapseNavbar()">
+	                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+	                                    <span data-translate="global.menu.entities.examType">Exam Type</span>
+	                                </a>
+	                            </li>
+	                        <li ui-sref-active="active">
+	                                <a ui-sref="question" ng-click="vm.collapseNavbar()">
+	                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+	                                    <span data-translate="global.menu.entities.question">Question</span>
+	                                </a>
+	                            </li>
+	                        <li ui-sref-active="active">
+	                                <a ui-sref="answer" ng-click="vm.collapseNavbar()">
+	                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+	                                    <span data-translate="global.menu.entities.answer">Answer</span>
+	                                </a>
+	                            </li>
+	                        <li ui-sref-active="active">
+	                                <a ui-sref="exam" ng-click="vm.collapseNavbar()">
+	                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+	                                    <span data-translate="global.menu.entities.exam">Exam</span>
+	                                </a>
+	                        </li>
+                        </ul>
                     </li>
-                    <li ng-show="vm.loggedIn" ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
-                        <a ng-click="vm.login()" class="dropdown-toggle" uib-dropdown-toggle >
+                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-switch-when="true">
+                        <a ng-click="vm.logout()" class="dropdown-toggle" uib-dropdown-toggle >
                             <span>
                                 <span class="pte-icon-sign icon-sign_out">
                                      <span class="">SIGN OUT</span>
@@ -81,7 +114,9 @@
                             </span>
                         </a>
                     </li>
-                    <li ng-show="vm.notloggedIn" ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-controller="JhiLanguageController as languageVm">
+                    
+                    <!-- NOT LOGIN -->
+                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-switch-when="false">
                         <a ng-click="vm.login()" class="dropdown-toggle" uib-dropdown-toggle >
                             <span>
                                 <span class="pte-icon-sign icon-sign_out"></span>
@@ -89,8 +124,8 @@
                             </span>
                         </a>
                     </li>
-                    <li class="pte-join-free" ng-show="vm.notloggedIn">
-                        <a class="dropdown-toggle padding0" uib-dropdown-toggle >
+                    <li class="pte-join-free" ng-switch-when="false">
+                        <a ng-click="vm.register()" class="dropdown-toggle padding0" uib-dropdown-toggle>
                             <span>
                                 <span class="pte-text-join">Join</span>
                                 <span class="pte-text-free">Free</span>

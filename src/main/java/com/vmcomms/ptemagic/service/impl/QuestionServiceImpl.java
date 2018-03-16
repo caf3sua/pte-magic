@@ -5,6 +5,9 @@ import com.vmcomms.ptemagic.domain.Question;
 import com.vmcomms.ptemagic.repository.QuestionRepository;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 import com.vmcomms.ptemagic.service.mapper.QuestionMapper;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -83,4 +86,16 @@ public class QuestionServiceImpl implements QuestionService{
         log.debug("Request to delete Question : {}", id);
         questionRepository.delete(id);
     }
+
+	@Override
+	public List<QuestionDTO> randomQuestion(int numberQuestion) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<QuestionDTO> findAll() {
+		List<Question> data =questionRepository.findAll();
+		return questionMapper.toDto(data);
+	}
 }

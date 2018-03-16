@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/exam/exams.html',
+                    templateUrl: 'app/admin/exam/exams.html',
                     controller: 'ExamController',
                     controllerAs: 'vm'
                 }
@@ -61,7 +61,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/exam/exam-detail.html',
+                    templateUrl: 'app/admin/exam/exam-detail.html',
                     controller: 'ExamDetailController',
                     controllerAs: 'vm'
                 }
@@ -93,7 +93,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam/exam-dialog.html',
+                    templateUrl: 'app/admin/exam/exam-dialog.html',
                     controller: 'ExamDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -118,7 +118,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam/exam-dialog.html',
+                    templateUrl: 'app/admin/exam/exam-dialog.html',
                     controller: 'ExamDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -152,7 +152,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam/exam-dialog.html',
+                    templateUrl: 'app/admin/exam/exam-dialog.html',
                     controller: 'ExamDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -177,7 +177,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/exam/exam-delete-dialog.html',
+                    templateUrl: 'app/admin/exam/exam-delete-dialog.html',
                     controller: 'ExamDeleteController',
                     controllerAs: 'vm',
                     size: 'md',
