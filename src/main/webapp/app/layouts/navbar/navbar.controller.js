@@ -17,26 +17,34 @@
             vm.inProduction = response.inProduction;
             vm.swaggerEnabled = response.swaggerEnabled;
         });
-        vm.user = [];
+        vm.user;
         vm.login = login;
         vm.logout = logout;
+        vm.register = register;
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
         vm.loggedIn = false;
         vm.notloggedIn = false;
         vm.$state = $state;
-        $scope.$on('nameAccount', function(event, des) {
-            vm.data = des.data;
-            if(vm.data  != null){
-                vm.loggedIn = true;
-                vm.user.lastName = vm.data.lastName;
-                vm.notloggedIn = false;
-            }else {
-                vm.notloggedIn = true;
-                vm.loggedIn = false;
-            }
+        
+        $scope.$on('authenticationSuccess', function() {
+            getAccount();
         });
 
+        getAccount();
+
+        function getAccount() {
+            Principal.identity().then(function(account) {
+                vm.user = account;
+                vm.isAuthenticated = Principal.isAuthenticated;
+            });
+        }
+
+        function register() {
+            collapseNavbar();
+            LoginService.openRegisterForm();
+        }
+        
         function login() {
             collapseNavbar();
             LoginService.open();

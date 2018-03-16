@@ -27,7 +27,7 @@ public class ExamDTO implements Serializable {
     private Integer scoreSpeaking;
 
     private Long examTypeId;
-
+    
     public Long getId() {
         return id;
     }

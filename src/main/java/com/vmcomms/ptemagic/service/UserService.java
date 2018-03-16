@@ -10,6 +10,7 @@ import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.util.RandomUtil;
 import com.vmcomms.ptemagic.service.dto.UserDTO;
 import com.vmcomms.ptemagic.web.rest.vm.ManagedUserVM;
+import com.vmcomms.ptemagic.web.rest.vm.RegisterUserVM;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,6 +109,26 @@ public class UserService {
         newUser.setActivated(false);
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
+        authorities.add(authority);
+        newUser.setAuthorities(authorities);
+        userRepository.save(newUser);
+        log.debug("Created Information for User: {}", newUser);
+        return newUser;
+    }
+    
+    public User creatPteAccount(RegisterUserVM userDTO) {
+
+        User newUser = new User();
+        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        Set<Authority> authorities = new HashSet<>();
+        String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
+        newUser.setLogin(userDTO.getEmail());
+        // new user gets initially a generated password
+        newUser.setPassword(encryptedPassword);
+        newUser.setFullName(userDTO.getFullName());
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setActivated(true);
+        newUser.setPhonenumber(userDTO.getPhonenumber());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
@@ -227,7 +248,8 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User getUserWithAuthorities() {
-        return userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
+        //return userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
+    	return userRepository.findOneWithAuthoritiesByEmail(SecurityUtils.getCurrentUserLogin()).orElse(null);
     }
 
     /**

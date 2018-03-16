@@ -11,6 +11,7 @@ import com.vmcomms.ptemagic.service.dto.UserDTO;
 import com.vmcomms.ptemagic.web.rest.errors.*;
 import com.vmcomms.ptemagic.web.rest.vm.KeyAndPasswordVM;
 import com.vmcomms.ptemagic.web.rest.vm.ManagedUserVM;
+import com.vmcomms.ptemagic.web.rest.vm.RegisterUserVM;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -55,14 +56,14 @@ public class AccountResource {
     @PostMapping("/register")
     @Timed
     @ResponseStatus(HttpStatus.CREATED)
-    public void registerAccount(@Valid @RequestBody ManagedUserVM managedUserVM) {
+    public void registerAccount(@Valid @RequestBody RegisterUserVM managedUserVM) {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             throw new InvalidPasswordException();
         }
-        userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).ifPresent(u -> {throw new LoginAlreadyUsedException();});
+        userRepository.findOneByPhonenumber(managedUserVM.getPhonenumber().toLowerCase()).ifPresent(u -> {throw new PhonenumberAlreadyUsedException();});
         userRepository.findOneByEmailIgnoreCase(managedUserVM.getEmail()).ifPresent(u -> {throw new EmailAlreadyUsedException();});
-        User user = userService.registerUser(managedUserVM);
-        mailService.sendActivationEmail(user);
+        User user = userService.creatPteAccount(managedUserVM);
+        //mailService.sendActivationEmail(user);
     }
 
     /**

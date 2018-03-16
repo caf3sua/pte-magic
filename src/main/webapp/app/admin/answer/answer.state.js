@@ -18,7 +18,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/answer/answers.html',
+                    templateUrl: 'app/admin/answer/answers.html',
                     controller: 'AnswerController',
                     controllerAs: 'vm'
                 }
@@ -60,7 +60,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/entities/answer/answer-detail.html',
+                    templateUrl: 'app/admin/answer/answer-detail.html',
                     controller: 'AnswerDetailController',
                     controllerAs: 'vm'
                 }
@@ -91,7 +91,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/answer/answer-dialog.html',
+                    templateUrl: 'app/admin/answer/answer-dialog.html',
                     controller: 'AnswerDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -116,7 +116,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/answer/answer-dialog.html',
+                    templateUrl: 'app/admin/answer/answer-dialog.html',
                     controller: 'AnswerDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -148,7 +148,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/answer/answer-dialog.html',
+                    templateUrl: 'app/admin/answer/answer-dialog.html',
                     controller: 'AnswerDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
@@ -173,7 +173,7 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/answer/answer-delete-dialog.html',
+                    templateUrl: 'app/admin/answer/answer-delete-dialog.html',
                     controller: 'AnswerDeleteController',
                     controllerAs: 'vm',
                     size: 'md',

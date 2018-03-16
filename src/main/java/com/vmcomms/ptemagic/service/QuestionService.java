@@ -1,6 +1,9 @@
 package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -9,6 +12,8 @@ import org.springframework.data.domain.Pageable;
  */
 public interface QuestionService {
 
+	List<QuestionDTO> randomQuestion(int numberQuestion);
+	
     /**
      * Save a question.
      *
@@ -24,6 +29,8 @@ public interface QuestionService {
      *  @return the list of entities
      */
     Page<QuestionDTO> findAll(Pageable pageable);
+    
+    List<QuestionDTO> findAll();
 
     /**
      *  Get the "id" question.

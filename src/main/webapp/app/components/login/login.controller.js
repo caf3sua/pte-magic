@@ -25,7 +25,7 @@
 
         function cancel () {
             vm.credentials = {
-                username: null,
+                email: null,
                 password: null,
                 rememberMe: true
             };
