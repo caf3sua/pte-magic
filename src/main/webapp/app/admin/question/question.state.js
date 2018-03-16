@@ -97,7 +97,7 @@
                     controller: 'QuestionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: ['Question', function(Question) {
                             return Question.get({id : $stateParams.id}).$promise;
@@ -122,7 +122,7 @@
                     controller: 'QuestionDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: function () {
                             return {

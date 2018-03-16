@@ -9,8 +9,7 @@ import lombok.Setter;
 /**
  * A DTO for the ExamQuestion entity.
  */
-@Getter
-@Setter
+
 public class ExamQuestionDTO implements Serializable {
 
 	private static final long serialVersionUID = 4886549106982034411L;
@@ -20,6 +19,42 @@ public class ExamQuestionDTO implements Serializable {
     private Long examId;
 
     private Long questionId;
-    
+
     private Integer order;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getExamId() {
+        return examId;
+    }
+
+    public void setExamId(Long examId) {
+        this.examId = examId;
+    }
+
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
 }

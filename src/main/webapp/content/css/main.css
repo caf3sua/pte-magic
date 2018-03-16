@@ -955,8 +955,85 @@ ui bootstrap tweaks
     line-height: 30px;
     float: none;
 }
+.pte-table-user{
+    padding: 10px 30px;
+    background-color: #fff;
+}
+.pte-table-user>table{
+    background-color: #fff;
+}
+table>thead>tr{
+    background-color: #47749C;
+    color: #000;
+}
+.dl-horizontal.jh-entity-details > dd {
+    border-bottom: 1px solid #eee;
+    padding-left: 180px;
+    margin-left: 0;
+}
+
+.dl-horizontal.jh-entity-details > dd {
+    margin-bottom: 15px;
+}
+.pte-detail-user{
+    padding-top: 133px;
+    width: 400px;
+    margin: 0 auto;
+}
+.pte-detail-user-content{
+    border: 1px solid #ccc;
+}
+.dl-horizontal dt {
+    float: left;
+    width: 160px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.dl-horizontal.jh-entity-details > dt {
+    margin-bottom: 15px;
+}
+.dropdown-menu > .active > a, .dropdown-menu > .active > a:hover, .dropdown-menu > .active > a:focus {
+    color: #f9db01;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0;
+}
+.dropdown-menu > .active, .dropdown-menu> .active:hover, .dropdown-menu> .active:focus {
+    color: #f9db01;
+    text-decoration: none;
+    background-color: transparent;
+    outline: 0;
+}
+.pte-body-content-text{
+    position: absolute;
+    top: 263px;
+    left: 40px;
+    right: 0;
+}
+.pte-body-content-text-title{
+    font-size: 33px;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-style: normal;
+}
+.pte-body-content-text-title>span{
+    color: #f9db01;
+    margin-left: 10px;
+}
+.pte-body-content-text-des{
+    font-size: 16px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
 @media (min-width:992px) and (max-width:1200px) {
+
+
     .pte-mock-test-item-footer-btn {
         background: #393939;
         color: #f9db01;
@@ -1061,6 +1138,12 @@ ui bootstrap tweaks
     }
 }
 @media (min-width:768px) and (max-width:992px) {
+    .pte-body-content-text {
+        position: absolute;
+        top: 220px;
+        left: 15px;
+        right: 0;
+    }
     .footer {
         background-color: #000;
         padding: 15px 15px;
@@ -1186,6 +1269,25 @@ ui bootstrap tweaks
     }
 }
 @media (min-width:480px) and (max-width:768px) {
+    .pte-body-content-text {
+        position: absolute;
+        top: 200px;
+        left: 15px;
+        right: 0;
+    }
+    .pte-body-content-text-title {
+        font-size: 25px;
+        text-transform: uppercase;
+        font-family: 'Roboto';
+        font-weight: normal;
+        font-style: normal;
+    }
+    .pte-body-content-text-des {
+        font-size: 12px;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+    }
     .footer {
         background-color: #000;
         padding: 15px 15px;
@@ -1266,6 +1368,44 @@ ui bootstrap tweaks
     }
 }
 @media (max-width:480px){
+    .pte-body-content-text-title {
+        font-size: 21px;
+        text-transform: uppercase;
+        font-family: 'Roboto';
+        font-weight: normal;
+        font-style: normal;
+    }
+    .pte-body-content-text-des {
+        font-size: 10px;
+        font-family: 'Roboto';
+        font-weight: bold;
+        font-style: normal;
+    }
+    .pte-body-content-text {
+        position: absolute;
+        top: 263px;
+        left: 15px;
+        right: 0;
+    }
+    .pte-detail-user {
+        padding-top: 133px;
+        width: 260px;
+        margin: 0px auto;
+    }
+    .dl-horizontal dt {
+        float: left;
+        width: 97px;
+        overflow: hidden;
+        clear: left;
+        text-align: right;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .dl-horizontal.jh-entity-details > dd {
+        border-bottom: 1px solid #eee;
+        padding-left: 120px;
+        margin-left: 0;
+    }
     .pte-pre-sample-listQuestion {
         background: #f0f0f0;
         border-top: 3px solid #474747;

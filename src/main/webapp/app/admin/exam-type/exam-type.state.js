@@ -97,7 +97,7 @@
                     controller: 'ExamTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: ['ExamType', function(ExamType) {
                             return ExamType.get({id : $stateParams.id}).$promise;
@@ -122,7 +122,7 @@
                     controller: 'ExamTypeDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: function () {
                             return {

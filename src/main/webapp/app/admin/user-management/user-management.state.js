@@ -58,7 +58,7 @@
                     controller: 'UserManagementDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: function () {
                             return {
@@ -87,7 +87,7 @@
                     controller: 'UserManagementDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
-                    size: 'lg',
+                    size: 'md',
                     resolve: {
                         entity: ['User', function(User) {
                             return User.get({login : $stateParams.login}).$promise;

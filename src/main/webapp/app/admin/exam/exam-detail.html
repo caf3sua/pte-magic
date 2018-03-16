@@ -1,9 +1,8 @@
-
-<div>
-    <h2><span data-translate="pteMagicApp.exam.detail.title">Exam</span> {{vm.exam.id}}</h2>
+<div class="pte-detail-user">
+    <h2 class="text-center"><span data-translate="pteMagicApp.exam.detail.title">Exam</span> {{vm.exam.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
+    <dl class="dl-horizontal jh-entity-details pte-detail-user-content">
         <dt><span data-translate="pteMagicApp.exam.userId">User Id</span></dt>
         <dd>
             <span>{{vm.exam.userId}}</span>
@@ -44,8 +43,8 @@
         <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button" ui-sref="exam-detail.edit({id:vm.exam.id})" class="btn btn-primary">
-        <span class="glyphicon glyphicon-pencil"></span>
-        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-    </button>
+    <!--<button type="button" ui-sref="exam-detail.edit({id:vm.exam.id})" class="btn btn-primary">-->
+        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+        <!--<span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>-->
+    <!--</button>-->
 </div>

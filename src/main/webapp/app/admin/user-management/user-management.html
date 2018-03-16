@@ -1,23 +1,23 @@
-<div style="margin-top:120px">
-    <h2 data-translate="userManagement.home.title">Users</h2>
+<div style="margin-top:120px" class="pte-table-user">
+    <div  class="col-md-12">
+        <h2 data-translate="userManagement.home.title">Users</h2>
+    </div>
     <jhi-alert></jhi-alert>
-    <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-12 text-right no-padding-left" >
           <button class="btn btn-primary" ui-sref="user-management.new">
               <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createLabel">Create a new User</span>
           </button>
       </div>
-    </div>
-    <div class="table-responsive">
-        <table class="jh-table table table-striped">
+    <div class="col-md-12 table-responsive ">
+        <table class="jh-table table table-striped  table-bordered table-hover">
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                 <th jh-sort-by="id"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
                 <!-- <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                 <th jh-sort-by="email"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <th></th>
-                <!-- <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>   -->              
-                <th><span data-translate="userManagement.profiles">Profiles</span></th>                
+                <!-- <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>   -->
+                <th><span data-translate="userManagement.profiles">Profiles</span></th>
                 <th jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <!-- <th jh-sort-by="lastModifiedBy"><span data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                 <!-- <th jh-sort-by="lastModifiedDate"><span data-translate="userManagement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th> -->

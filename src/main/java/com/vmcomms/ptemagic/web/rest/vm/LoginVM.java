@@ -9,21 +9,44 @@ import lombok.Setter;
 /**
  * View Model object for storing a user's credentials.
  */
-@Getter
-@Setter
+
 public class LoginVM {
 
 //    @Pattern(regexp = Constants.LOGIN_REGEX)
 //    @NotNull
 //    @Size(min = 1, max = 50)
 //    private String username;
-	
+
 	@NotNull
     private String username;
-	
+
     @NotNull
     @Size(min = ManagedUserVM.PASSWORD_MIN_LENGTH, max = ManagedUserVM.PASSWORD_MAX_LENGTH)
     private String password;
 
     private Boolean rememberMe;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Boolean getRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(Boolean rememberMe) {
+        this.rememberMe = rememberMe;
+    }
 }
