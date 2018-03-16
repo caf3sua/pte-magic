@@ -3,40 +3,18 @@
     'use strict';
 
     angular
-        .module('testOnlineApp')
+        .module('pteMagicApp')
         .factory('createAccountService', createAccountService);
 
     createAccountService.$inject = ['$resource'];
 
     function createAccountService ($resource) {
 
-        var service = $resource('api/step/:botId', {}, {
-            'get': {
-                method: 'GET',
-                isArray: true
+        var service = $resource('/api/users', {}, {
+            'save': {
+                method: 'POST',
+                isArray: false
             },
-            'update':{
-                url:'api/step',
-                method:'PUT'
-            },
-            'deleteStep': {
-                url: 'api/step/:botId/:stepId',
-                method: 'DELETE'
-            },
-            'updateLocationStep':{
-                url:'api/step/updateLocationStep',
-                method:'PUT'
-            },
-            'getListExpression':{
-                url:'api/dictionary/listExpression',
-                method:'GET',
-                isArray: true
-            },
-            'getListVariable':{
-                url:'api/dictionary/listVariable',
-                method:'GET',
-                isArray: true
-            }
         });
 
         return service;

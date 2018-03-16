@@ -38,7 +38,7 @@
                 controller: 'CreateAccountController',
                 controllerAs: 'vm',
                 backdrop: 'static',
-                size: 'lg',
+                size: 'sm',
                 resolve: {
                 }
             })

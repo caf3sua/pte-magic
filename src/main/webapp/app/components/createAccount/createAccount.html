@@ -61,22 +61,28 @@
     <div class=" text-center pte-padding-login">
         <span class="pte-text-header-login">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer or <span><a class="pte-text-sign-up" ng-click="vm.createAccount()">Sign Up</a></span></span>
         <div class="pte-margin-top30">
-            <input class="pte-input-login" placeholder="-- Your E-mail Address --"/>
+            <input class="pte-input-login" ng-model="vm.user.email" placeholder="-- Your E-mail Address --"/>
         </div>
         <div class="pte-margin-top15">
-            <input class="pte-input-login" placeholder="-- Your Password --"/>
+            <input class="pte-input-login" ng-model="vm.user.firstName" placeholder="-- Your First Name --"/>
         </div>
         <div class="pte-margin-top15">
-            <input class="pte-input-login" placeholder="-- Confrim Password --"/>
+            <input class="pte-input-login" ng-model="vm.user.lastName" placeholder="-- Your Last Name --"/>
         </div>
         <div class="pte-margin-top15">
-            <input class="pte-input-login" placeholder="-- Full Password --"/>
+            <input class="pte-input-login" ng-model="vm.user.login" placeholder="-- Your User Name --"/>
         </div>
         <div class="pte-margin-top15">
-            <input class="pte-input-login" placeholder="-- Phone Number --"/>
+            <input class="pte-input-login" ng-model="vm.user.password" placeholder="-- Your Password --"/>
         </div>
+        <div class="pte-margin-top15">
+            <input class="pte-input-login" ng-model="vm.checkPassword" placeholder="-- Confrim Password --"/>
+        </div>
+        <!--<div class="pte-margin-top15">-->
+            <!--<input class="pte-input-login" placeholder="&#45;&#45; Phone Number &#45;&#45;"/>-->
+        <!--</div>-->
         <div class="pte-margin-top30">
-            <button class="pte-btn-login">
+            <button class="pte-btn-login" ng-click="vm.createUser()">
                 REGISTER
             </button>
         </div>
