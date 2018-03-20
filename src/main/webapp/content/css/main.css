@@ -1129,6 +1129,26 @@ table>thead>tr{
 .pte-content-question{
     padding-left: 80px;
 }
+.block-user{
+    cursor: no-drop;
+    opacity: 0.8;
+}
+.pte-test-answer{
+    padding: 10px 50px;
+    border-radius: 0;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    background: #393939;
+    color: #f9db01;
+    border: 1px solid #393939;
+}
+.pte-test-answer:hover{
+    background: #f9db01;
+    color: #393939;
+    border: 1px solid #f9db01;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
 @media (min-width:992px) and (max-width:1200px) {
 
@@ -1277,7 +1297,7 @@ table>thead>tr{
         right: 30px;
     }
     .pte-free-listquestion-mobile {
-        margin-top: 132px;
+        margin-top: 70px;
     }
     .pte-free-mock-mobile {
         margin-top: 132px;
@@ -1439,7 +1459,7 @@ table>thead>tr{
         right: 30px;
     }
     .pte-free-listquestion-mobile {
-        margin-top: 120px;
+        margin-top: 70px;
     }
     .pte-free-mock-mobile {
         margin-top: 120px;
