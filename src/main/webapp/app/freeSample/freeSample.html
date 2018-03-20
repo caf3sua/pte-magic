@@ -102,7 +102,7 @@
                         </div>
                         <div class="pte-free-sample-item-footer">
                             <p class="pte-free-sample-item-footer-text">Total {{exam.numberQuestion | number}} questions</p>
-                            <button class="pte-free-sample-item-footer-btn" ui-sref="test({type: exam.id})">Test</button>
+                            <button class="pte-free-sample-item-footer-btn" ng-click="vm.startTest(exam.id)">Test</button>
                         </div>
                     </div>
                 </div>

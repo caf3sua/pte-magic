@@ -5,11 +5,12 @@
         .module('pteMagicApp')
         .controller('FreeSampleController', FreeSampleController);
 
-    FreeSampleController.$inject = ['$scope', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType'];
+    FreeSampleController.$inject = ['$scope', '$window', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType'];
 
-    function FreeSampleController ($scope, Principal, LoginService, $state, $rootScope, $timeout, ExamType) {
+    function FreeSampleController ($scope, $window, Principal, LoginService, $state, $rootScope, $timeout, ExamType) {
         var vm = this;
         vm.showExamList = showExamList;
+        vm.startTest = startTest;
         vm.examShowFlag = false;
         vm.exams = [];
         vm.selectedType;
@@ -40,6 +41,11 @@
                 	vm.filterExams.push(value);
                 }
             });
+        }
+        
+        function startTest(examId) {
+        	var url = '/#/test?type=' + examId;
+        	$window.open(url,"_blank", "toolbar=no,scrollbars=no, resizable=no, width=1200, height=700");
         }
         
 //        $scope.$watch('vm.exams', function(newVal, oldVal){

@@ -15,6 +15,11 @@
                 authorities: []
             },
             views: {
+            	'navbar@': {
+                    templateUrl: 'app/layouts/navbar/navbar_blank.html',
+                    controller: 'NavbarController',
+                    controllerAs: 'vm'
+                },
                 'content@': {
                     templateUrl: 'app/test/test.html',
                     controller: 'TestController',
