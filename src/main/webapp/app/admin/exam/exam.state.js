@@ -13,7 +13,7 @@
             parent: 'admin',
             url: '/exam?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: [],
                 pageTitle: 'pteMagicApp.exam.home.title'
             },
             views: {

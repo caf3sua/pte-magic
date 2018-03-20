@@ -14,10 +14,10 @@
         </div>
         <form class="form" role="form" ng-submit="vm.login($event)">
             <div class="pte-margin-top30">
-                <input class="pte-input-login" type="email" ng-model="vm.username" placeholder="-- Your E-mail Address --"/>
+                <input class="pte-input-login" type="email" ng-model="vm.username" placeholder="-- Your E-mail Address --" required/>
             </div>
             <div class="pte-margin-top15">
-                <input class="pte-input-login" type="password" ng-model="vm.password" placeholder="-- Your Password --"/>
+                <input class="pte-input-login" type="password" ng-model="vm.password" placeholder="-- Your Password --" required/>
             </div>
             <div class="pte-margin-top30">
                 <button class="pte-btn-login" type="submit">

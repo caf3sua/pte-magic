@@ -4,7 +4,12 @@
             "null": "",
             "FULL": "FULL",
             "PARTA": "PARTA",
-            "PARTB": "PARTB"
+            "PARTB": "PARTB",
+            "FREE_EXAM": "FREE EXAM",
+            "PART_A": "PART A",
+            "PART_B": "PART B",
+            "FULL": "FULL",
+            "MOCK_TEST": "MOCK TEST"
         }
     }
 }

@@ -97,6 +97,14 @@ public class ExamTypeResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/exam-types");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    @GetMapping("/get-exam-by-types/{type}")
+    @Timed
+    public ResponseEntity<List<ExamTypeDTO>> getAllExamTypesByType(@PathVariable String type) {
+        log.debug("REST request to getAllExamTypesByType");
+        List<ExamTypeDTO> data = examTypeService.findAllByType(type);
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
 
     /**
      * GET  /exam-types/:id : get the "id" examType.

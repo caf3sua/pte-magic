@@ -27,9 +27,12 @@
         <div class="form-group">
             <label class="control-label" data-translate="pteMagicApp.examType.type" for="field_type">Type</label>
             <select class="form-control" name="type" ng-model="vm.examType.type" id="field_type">
+            	<!-- FREE_EXAM, PART_A, PART_B, FULL, MOCK_TEST -->
+                <option value="FREE_EXAM" data-translate="pteMagicApp.TestType.FREE_EXAM">FREE SAMPLE</option>
+                <option value="PART_A" data-translate="pteMagicApp.TestType.PART_A">PART A</option>
+                <option value="PART_B" data-translate="pteMagicApp.TestType.PART_B">PART B</option>
                 <option value="FULL" data-translate="pteMagicApp.TestType.FULL">FULL</option>
-                <option value="PARTA" data-translate="pteMagicApp.TestType.PARTA">PARTA</option>
-                <option value="PARTB" data-translate="pteMagicApp.TestType.PARTB">PARTB</option>
+                <option value="MOCK_TEST" data-translate="pteMagicApp.TestType.MOCK_TEST">MOCK TEST</option>
             </select>
         </div>
         <div class="form-group">

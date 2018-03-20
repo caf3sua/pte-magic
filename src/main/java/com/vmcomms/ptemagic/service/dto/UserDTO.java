@@ -4,10 +4,12 @@ import com.vmcomms.ptemagic.config.Constants;
 
 import com.vmcomms.ptemagic.domain.Authority;
 import com.vmcomms.ptemagic.domain.User;
+import com.vmcomms.ptemagic.domain.enumeration.UserType;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import javax.persistence.Column;
 import javax.validation.constraints.*;
 import java.time.Instant;
 import java.util.Set;
@@ -25,18 +27,9 @@ public class UserDTO {
     @Size(min = 1, max = 50)
     private String login;
 
-    @Size(max = 50)
-    private String firstName;
-
-    @Size(max = 50)
-    private String lastName;
-
     @Email
     @Size(min = 5, max = 100)
     private String email;
-
-    @Size(max = 256)
-    private String imageUrl;
 
     private boolean activated = false;
 
@@ -56,31 +49,30 @@ public class UserDTO {
     private Instant lastModifiedDate;
 
     private Set<String> authorities;
-
+    
+    private Integer remainDays;
+    
     public UserDTO() {
         // Empty constructor needed for Jackson.
     }
 
     public UserDTO(User user) {
-        this(user.getId(), user.getLogin(), user.getFirstName(), user.getLastName(),
-            user.getEmail(), user.getActivated(), user.getImageUrl(), user.getLangKey(),
+        this(user.getId(), user.getLogin(), 
+            user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
                 .collect(Collectors.toSet()), user.getFullName(), user.getPhonenumber());
     }
 
-    public UserDTO(Long id, String login, String firstName, String lastName,
-        String email, boolean activated, String imageUrl, String langKey,
+    public UserDTO(Long id, String login, 
+        String email, boolean activated, String langKey,
         String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
         Set<String> authorities, String fullName, String phonenumber) {
 
         this.id = id;
         this.login = login;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
         this.activated = activated;
-        this.imageUrl = imageUrl;
         this.langKey = langKey;
         this.createdBy = createdBy;
         this.createdDate = createdDate;
@@ -91,7 +83,23 @@ public class UserDTO {
         this.phonenumber = phonenumber;
     }
     
-    public String getFullName() {
+//    public UserType getUserType() {
+//		return userType;
+//	}
+//
+//	public void setUserType(UserType userType) {
+//		this.userType = userType;
+//	}
+
+	public Integer getRemainDays() {
+		return remainDays;
+	}
+
+	public void setRemainDays(Integer remainDays) {
+		this.remainDays = remainDays;
+	}
+
+	public String getFullName() {
 		return fullName;
 	}
 
@@ -123,20 +131,8 @@ public class UserDTO {
         this.login = login;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
     }
 
     public boolean isActivated() {
@@ -175,10 +171,7 @@ public class UserDTO {
     public String toString() {
         return "UserDTO{" +
             "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
             ", activated=" + activated +
             ", langKey='" + langKey + '\'' +
             ", createdBy=" + createdBy +

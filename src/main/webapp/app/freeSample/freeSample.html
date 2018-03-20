@@ -1,34 +1,36 @@
 <div ng-cloak >
     <div class="pte-body-content"></div>
     <div class="container margin-bottom90">
+    	<!-- LISTENING -->
         <div class="col-md-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block" id="listening" ng-click="vm.listeningList()">
+            <div class="pte-freeSample-block" id="listening" ng-click="vm.showExamList('LISTENING')">
                 <div class="pte-border-block-freeSample" >
                     <span class="icon-headset"></span>
                     <div class="pte-freeSample-block-text">
                         <p class="pte-freeSample-block-text-header">Listening</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">8</span></p>
+                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">{{vm.totalExamListening}}</span></p>
                     </div>
                 </div>
                 <div>
                     <p class="pte-freeSample-block-sum-questions">
-                        158 QUESTIONS
+                        {{vm.totalExamQuestionReading}} QUESTIONS
                     </p>
                 </div>
             </div>
         </div>
+        <!-- READING -->
         <div class="col-sm-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block">
+            <div class="pte-freeSample-block" id="listening" ng-click="vm.showExamList('READING')">
                 <div class="pte-border-block-freeSample">
                     <span class="icon-open-book"></span>
                     <div class="pte-freeSample-block-text">
                         <p class="pte-freeSample-block-text-header">READING</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">8</span></p>
+                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">{{vm.totalExamReading}}</span></p>
                     </div>
                 </div>
                 <div>
                     <p class="pte-freeSample-block-sum-questions">
-                        58 QUESTIONS
+                        {{vm.totalExamQuestionListening}} QUESTIONS
                     </p>
                 </div>
             </div>
@@ -39,12 +41,12 @@
                     <span class="icon-icon"></span>
                     <div class="pte-freeSample-block-text">
                         <p class="pte-freeSample-block-text-header">Speaking</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">8</span></p>
+                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">0</span></p>
                     </div>
                 </div>
                 <div>
                     <p class="pte-freeSample-block-sum-questions">
-                        158 QUESTIONS
+                        0 QUESTIONS
                     </p>
                 </div>
             </div>
@@ -55,17 +57,17 @@
                     <span class="icon-checkbox-pen-outline2"></span>
                     <div class="pte-freeSample-block-text">
                         <p class="pte-freeSample-block-text-header">WRITING</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">8</span></p>
+                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">0</span></p>
                     </div>
                 </div>
                 <div>
                     <p class="pte-freeSample-block-sum-questions">
-                        158 QUESTIONS
+                        0 QUESTIONS
                     </p>
                 </div>
             </div>
         </div>
-        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg" id="listeningMobile" ng-click="vm.listeningList()">
+        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg" id="listeningMobile" ng-click="vm.showExamList('LISTENING')">
             <div class="pte-free-sample-mobile">
                 <span class="icon-headset"></span>
             </div>
@@ -85,71 +87,24 @@
                 <span class="icon-checkbox-pen-outline2"></span>
             </div>
         </div>
-        <div class="col-md-12 pte-free-listquestion-mobile" ng-show="vm.listQuestionShow">
+        
+        <!-- Show list exam -->
+        <div class="col-md-12 pte-free-listquestion-mobile" ng-show="vm.examShowFlag">
             <div class="col-md-12 pte-pre-sample-listQuestion">
-                <div class="col-md-4 margin-top30">
+                <div class="col-md-4 margin-top30" ng-repeat="exam in vm.filterExams">
                     <div class="pte-free-sample-item">
                         <div >
                             <ul class="pte-free-sample-item-text">
                                 <li >
-                                    Summarise spoken text
+                                    {{exam.name}}
                                 </li>
                             </ul>
                         </div>
                         <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
+                            <p class="pte-free-sample-item-footer-text">Total {{exam.numberQuestion | number}} questions</p>
+                            <button class="pte-free-sample-item-footer-btn" ui-sref="test({type: exam.id})">Test</button>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-free-sample-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Summarise spoken text
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-free-sample-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Multiple choice, choose multiple
-                                    answers
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-free-sample-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Summarise spoken text
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total 22 questions</p>
-                            <button class="pte-free-sample-item-footer-btn">Test</button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

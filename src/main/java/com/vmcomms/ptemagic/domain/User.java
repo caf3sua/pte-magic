@@ -1,7 +1,7 @@
 package com.vmcomms.ptemagic.domain;
 
 import com.vmcomms.ptemagic.config.Constants;
-
+import com.vmcomms.ptemagic.domain.enumeration.UserType;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.annotations.BatchSize;
@@ -47,13 +47,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "password_hash",length = 60)
     private String password;
 
-    @Size(max = 50)
-    @Column(name = "first_name", length = 50)
-    private String firstName;
-
-    @Size(max = 50)
-    @Column(name = "last_name", length = 50)
-    private String lastName;
+//    @Size(max = 50)
+//    @Column(name = "first_name", length = 50)
+//    private String firstName;
+//
+//    @Size(max = 50)
+//    @Column(name = "last_name", length = 50)
+//    private String lastName;
 
     @Email
     @Size(min = 5, max = 100)
@@ -68,9 +68,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "lang_key", length = 6)
     private String langKey;
 
-    @Size(max = 256)
-    @Column(name = "image_url", length = 256)
-    private String imageUrl;
+//    @Size(max = 256)
+//    @Column(name = "image_url", length = 256)
+//    private String imageUrl;
 
     @Size(max = 20)
     @Column(name = "activation_key", length = 20)
@@ -93,6 +93,12 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "phonenumber", length = 50)
     private String phonenumber;
     
+//    @Column(name = "user_type")
+//    private UserType userType;
+    
+    @Column(name = "remain_days")
+    private Integer remainDays;
+    
     @JsonIgnore
     @ManyToMany
     @JoinTable(
@@ -102,8 +108,24 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @BatchSize(size = 20)
     private Set<Authority> authorities = new HashSet<>();
+    
+//    public UserType getUserType() {
+//		return userType;
+//	}
+//
+//	public void setUserType(UserType userType) {
+//		this.userType = userType;
+//	}
 
-    public String getFullName() {
+	public Integer getRemainDays() {
+		return remainDays;
+	}
+
+	public void setRemainDays(Integer remainDays) {
+		this.remainDays = remainDays;
+	}
+
+	public String getFullName() {
 		return fullName;
 	}
 
@@ -144,21 +166,21 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+//    public String getFirstName() {
+//        return firstName;
+//    }
+//
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
+//
+//    public String getLastName() {
+//        return lastName;
+//    }
+//
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
 
     public String getEmail() {
         return email;
@@ -168,13 +190,13 @@ public class User extends AbstractAuditingEntity implements Serializable {
         this.email = email;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
+//    public String getImageUrl() {
+//        return imageUrl;
+//    }
+//
+//    public void setImageUrl(String imageUrl) {
+//        this.imageUrl = imageUrl;
+//    }
 
     public boolean getActivated() {
         return activated;
@@ -246,10 +268,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     public String toString() {
         return "User{" +
             "login='" + login + '\'' +
-            ", firstName='" + firstName + '\'' +
-            ", lastName='" + lastName + '\'' +
             ", email='" + email + '\'' +
-            ", imageUrl='" + imageUrl + '\'' +
             ", activated='" + activated + '\'' +
             ", langKey='" + langKey + '\'' +
             ", activationKey='" + activationKey + '\'' +

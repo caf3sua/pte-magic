@@ -2,9 +2,13 @@ package com.vmcomms.ptemagic.service.impl;
 
 import com.vmcomms.ptemagic.service.ExamTypeService;
 import com.vmcomms.ptemagic.domain.ExamType;
+import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.repository.ExamTypeRepository;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.mapper.ExamTypeMapper;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -82,5 +86,11 @@ public class ExamTypeServiceImpl implements ExamTypeService{
     public void delete(Long id) {
         log.debug("Request to delete ExamType : {}", id);
         examTypeRepository.delete(id);
+    }
+    
+    public List<ExamTypeDTO> findAllByType(String type) {
+    	log.debug("Request to findAllByType : {}", type);
+        List<ExamType> data = examTypeRepository.findAllByType(TestType.valueOf(type));
+        return examTypeMapper.toDto(data);
     }
 }

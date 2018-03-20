@@ -1,6 +1,9 @@
 package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -39,4 +42,6 @@ public interface ExamTypeService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+    
+    List<ExamTypeDTO> findAllByType(String type);
 }
