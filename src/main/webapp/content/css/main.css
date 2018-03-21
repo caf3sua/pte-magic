@@ -1149,6 +1149,21 @@ table>thead>tr{
     color: #393939;
     border: 1px solid #f9db01;
 }
+
+.pte-table-result-test>tbody>tr>td{
+    padding: 5px 15px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+}
+
+.pte-table-result:nth-of-type(odd){
+    background-color: #f8d463c4;
+}
+
+.pte-table-result:nth-of-type(even){
+    background-color: #ffffff;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
 @media (min-width:992px) and (max-width:1200px) {
 
