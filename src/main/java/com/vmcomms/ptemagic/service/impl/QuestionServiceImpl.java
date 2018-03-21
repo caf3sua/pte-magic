@@ -2,6 +2,8 @@ package com.vmcomms.ptemagic.service.impl;
 
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.domain.Question;
+import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
+import com.vmcomms.ptemagic.domain.enumeration.SkillType;
 import com.vmcomms.ptemagic.repository.QuestionRepository;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 import com.vmcomms.ptemagic.service.mapper.QuestionMapper;
@@ -95,7 +97,14 @@ public class QuestionServiceImpl implements QuestionService{
 
 	@Override
 	public List<QuestionDTO> findAll() {
-		List<Question> data =questionRepository.findAll();
+		List<Question> data = questionRepository.findAll();
+		return questionMapper.toDto(data);
+	}
+
+	@Override
+	public List<QuestionDTO> findAllBySkill(SkillType skill) {
+		List<QuestionType> lstQuestionEnum = QuestionType.getBySkill(skill.toString());
+		List<Question> data = questionRepository.findByTypeIn(lstQuestionEnum);
 		return questionMapper.toDto(data);
 	}
 }

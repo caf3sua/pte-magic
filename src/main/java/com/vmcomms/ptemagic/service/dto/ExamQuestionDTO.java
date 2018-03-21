@@ -20,7 +20,7 @@ public class ExamQuestionDTO implements Serializable {
 
     private Long questionId;
 
-    private Integer order;
+    private Integer orderId;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -50,11 +50,12 @@ public class ExamQuestionDTO implements Serializable {
         this.questionId = questionId;
     }
 
-    public Integer getOrder() {
-        return order;
-    }
+	public Integer getOrderId() {
+		return orderId;
+	}
 
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+
 }

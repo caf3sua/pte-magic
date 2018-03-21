@@ -32,8 +32,8 @@ public class ExamQuestion implements Serializable {
     @Column(name = "question_id")
     private Long questionId;
 
-    @Column(name = "order")
-    private Integer order;
+    @Column(name = "order_id")
+    private Integer orderId;
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -63,11 +63,12 @@ public class ExamQuestion implements Serializable {
         this.questionId = questionId;
     }
 
-    public Integer getOrder() {
-        return order;
-    }
+	public Integer getOrderId() {
+		return orderId;
+	}
 
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+
 }

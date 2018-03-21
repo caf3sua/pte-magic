@@ -1,5 +1,6 @@
 package com.vmcomms.ptemagic.service;
 
+import com.vmcomms.ptemagic.domain.enumeration.SkillType;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 
 import java.util.List;
@@ -32,6 +33,8 @@ public interface QuestionService {
     
     List<QuestionDTO> findAll();
 
+    List<QuestionDTO> findAllBySkill(SkillType skill);
+    
     /**
      *  Get the "id" question.
      *

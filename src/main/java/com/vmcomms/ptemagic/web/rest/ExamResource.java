@@ -2,6 +2,8 @@ package com.vmcomms.ptemagic.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
+import com.vmcomms.ptemagic.domain.enumeration.SkillType;
 import com.vmcomms.ptemagic.dto.ExamInfoDTO;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.ExamService;
@@ -32,6 +35,7 @@ import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.service.UserService;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
+import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 import com.vmcomms.ptemagic.service.dto.UserDTO;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
@@ -77,17 +81,18 @@ public class ExamResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new examDTO, or with status 400 (Bad Request) if the exam has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/exams")
+    @PostMapping("/start-exam")
     @Timed
     public ResponseEntity<ExamInfoDTO> startExam(@RequestBody ExamVM examVM) throws URISyntaxException {
         log.debug("REST request to start Exam : {}", examVM);
         
+        // User info
         UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
                 .map(UserDTO::new)
                 .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
         
-        if (examVM.getExamTypeId() != null) {
-            throw new BadRequestAlertException("A new exam cannot already have an ID", ENTITY_NAME, "idexists");
+        if (examVM.getExamTypeId() == null) {
+            throw new BadRequestAlertException("A new exam cannot start by exam type null", ENTITY_NAME, "idexists");
         }
         
         ExamDTO examDTO = new ExamDTO();
@@ -98,11 +103,11 @@ public class ExamResource {
         ExamDTO result = examService.save(examDTO);
         
         // Random to create/choice question for exam
-        List<QuestionDTO> question = generateQuestionExam(examDTO);
+        List<QuestionDTO> question = generateQuestionExam(result);
         
         
         ExamInfoDTO examInfoDTO = new ExamInfoDTO();
-        examInfoDTO.setExamDTO(examDTO);
+        examInfoDTO.setExamDTO(result);
         examInfoDTO.setQuestions(question);
         
         return ResponseEntity.created(new URI("/api/exams/" + result.getId()))
@@ -112,44 +117,60 @@ public class ExamResource {
 
     
     private List<QuestionDTO> generateQuestionExam(ExamDTO examDTO) {
-    	// TODO
-//    	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getId());
-//    	Integer numReading = examTypeDTO.getNumberQuestionReading();
-//    	Integer numListening = examTypeDTO.getNumberQuestionListening();
-//    	Integer numWriting = examTypeDTO.getNumberQuestionWriting();
-//    	Integer numSpeaking = examTypeDTO.getNumberQuestionSpeaking();
-//    	
-//    	// Reading
-//    	if (numReading != null && numReading > 0) {
-//    		
-//    	}
-//    	
-//    	// Listening
-//    	if (numListening != null && numListening > 0) {
-//    		
-//    	}
-//
-//    	// Writing
-//    	if (numWriting != null && numWriting > 0) {
-    		List<QuestionDTO> questions = questionService.findAll();
-    		
-    		int order = 0;
-    		for (QuestionDTO questionDTO : questions) {
-    			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
-    			eqDTO.setExamId(examDTO.getId());
-    			eqDTO.setQuestionId(questionDTO.getId());
-    			eqDTO.setOrder(order);
-				examQuestionService.save(eqDTO);
-				order++;
-			}
-    		
-    		return questions;
-//    	}
-//    	
-//    	// Speaking
-//    	if (numSpeaking != null && numSpeaking > 0) {
-//    		
-//    	}
+    	/** 3 - READING **/
+        /** 4 - LISTENING **/
+    	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+    	Integer numReading = examTypeDTO.getNumberQuestionReading();
+    	Integer numListening = examTypeDTO.getNumberQuestionListening();
+    	Integer numWriting = examTypeDTO.getNumberQuestionWriting();
+    	Integer numSpeaking = examTypeDTO.getNumberQuestionSpeaking();
+    	
+    	List<QuestionDTO> questions = new ArrayList<>();
+    	
+    	// Reading
+    	if (numReading != null && numReading > 0) {
+    		selectQuestionBySkill(questions, numReading, SkillType.READING);
+    	}
+
+    	// Listening
+    	if (numListening != null && numListening > 0) {
+    		selectQuestionBySkill(questions, numListening, SkillType.LISTENING);
+    	}
+    	
+    	// Writing
+    	if (numWriting != null && numWriting > 0) {
+    		selectQuestionBySkill(questions, numWriting, SkillType.WRITING);
+    	}
+    	
+    	// Speaking
+    	if (numSpeaking != null && numSpeaking > 0) {
+    		selectQuestionBySkill(questions, numSpeaking, SkillType.SPEAKING);
+    	}
+    	
+    	int order = 0;
+		for (QuestionDTO questionDTO : questions) {
+			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
+			eqDTO.setExamId(examDTO.getId());
+			eqDTO.setQuestionId(questionDTO.getId());
+			eqDTO.setOrderId(order);
+			examQuestionService.save(eqDTO);
+			order++;
+		}
+		
+		return questions;
+    }
+    
+    private void selectQuestionBySkill(List<QuestionDTO> questions, int number, SkillType skill) {
+    	List<QuestionDTO> questionDTOs = questionService.findAllBySkill(skill);
+    	// sub 
+    	if (questionDTOs != null && questionDTOs.size() > number) {
+    		Collections.shuffle(questionDTOs);
+    		 List<QuestionDTO> data = questionDTOs.subList(0, number);
+    		 questions.addAll(data);
+    		 return;
+    	}
+    	
+    	questions.addAll(questionDTOs);
     }
     
     @PostMapping("/exams/resume")

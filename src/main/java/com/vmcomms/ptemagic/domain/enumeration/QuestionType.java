@@ -1,10 +1,13 @@
 package com.vmcomms.ptemagic.domain.enumeration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The QuestionType enumeration.
  */
 public enum QuestionType {
-    // SINGLE_CHOICE, MULTI_CHOICE, LISTENING, READING
+	// SINGLE_CHOICE, MULTI_CHOICE, LISTENING, READING
     
     /** 1 - SPEAKING : cham diem **/
     SPEAKING_READ_ALOUD
@@ -29,5 +32,15 @@ public enum QuestionType {
     , LISTENING_HIGHLIGHT_CORRECT_SUMMARY
     , LISTENING_SELECT_MISSING_WORD
     , LISTENING_HIGHLIGHT_INCORRECT_WORD
-    , LISTENING_DICTATION
+    , LISTENING_DICTATION;
+    
+    public static List<QuestionType> getBySkill(String skill) {
+    	List<QuestionType> lstQuestionType = new ArrayList<>();
+        for (QuestionType b : QuestionType.values()) {
+        	if (b.name().contains(skill)) {
+        		lstQuestionType.add(b);
+        	}
+        }
+        return lstQuestionType;
+      }
 }
