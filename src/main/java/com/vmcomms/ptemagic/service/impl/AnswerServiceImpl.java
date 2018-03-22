@@ -83,4 +83,11 @@ public class AnswerServiceImpl implements AnswerService{
         log.debug("Request to delete Answer : {}", id);
         answerRepository.delete(id);
     }
+
+	@Override
+	public AnswerDTO findOneByExamIdAndQuestionId(Long examId, Long questionId) {
+		log.debug("Request to delete findOneByExamIdAndQuestionId : examId {} questionId {}", examId, questionId);
+		Answer answer = answerRepository.findOneByExamIdAndQuestionId(examId, questionId);
+		return answerMapper.toDto(answer);
+	}
 }

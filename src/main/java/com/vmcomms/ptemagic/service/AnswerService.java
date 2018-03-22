@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface AnswerService {
 
+    AnswerDTO findOneByExamIdAndQuestionId(Long examId, Long questionId);
     /**
      * Save a answer.
      *

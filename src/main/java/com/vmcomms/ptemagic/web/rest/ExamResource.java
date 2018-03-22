@@ -31,6 +31,7 @@ import com.vmcomms.ptemagic.dto.ExamInfoDTO;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.ExamService;
 import com.vmcomms.ptemagic.service.ExamTypeService;
+import com.vmcomms.ptemagic.service.MarkScoreService;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.service.UserService;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
@@ -73,6 +74,24 @@ public class ExamResource {
     @Autowired
     private UserService userService;
     
+    @Autowired
+    private MarkScoreService markScoreService;
+    
+    @PostMapping("/finish-exam")
+    @Timed
+    public ResponseEntity<Void> finishExam(@RequestBody ExamVM examVM) throws URISyntaxException {
+        log.debug("REST request to finish Exam : {}", examVM);
+        
+        // Check input
+        if (examVM.getId() == null) {
+            throw new BadRequestAlertException("A exam cannot null ID", ENTITY_NAME, "idexists");
+        }
+        
+        // Call service
+        markScoreService.markScore(examVM.getId());
+        
+        return ResponseEntity.ok().headers(HeaderUtil. createEntityUpdateAlert(ENTITY_NAME, examVM.getId().toString())).build();
+    }
     
     /**
      * POST  /exams : Create a new exam.

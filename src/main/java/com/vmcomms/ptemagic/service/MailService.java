@@ -1,6 +1,7 @@
 package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.domain.User;
+import com.vmcomms.ptemagic.dto.ScoreInfoDTO;
 
 import io.github.jhipster.config.JHipsterProperties;
 
@@ -31,6 +32,8 @@ public class MailService {
     private static final String USER = "user";
 
     private static final String BASE_URL = "baseUrl";
+    
+    private static final String SCORE = "score";
 
     private final JHipsterProperties jHipsterProperties;
 
@@ -86,11 +89,30 @@ public class MailService {
     }
 
     @Async
+    public void sendEmailFromTemplate(ScoreInfoDTO scoreDTO, String templateName, String titleKey) {
+        Locale locale = Locale.forLanguageTag("en");
+        Context context = new Context(locale);
+        context.setVariable(USER, scoreDTO.getUser());
+        context.setVariable(SCORE, scoreDTO);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        String content = templateEngine.process(templateName, context);
+        String subject = messageSource.getMessage(titleKey, null, locale);
+        sendEmail(scoreDTO.getUser().getEmail(), subject, content, false, true);
+
+    }
+    
+    @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "activationEmail", "email.activation.title");
     }
 
+    @Async
+    public void sendScoreEmail(ScoreInfoDTO score) {
+        log.debug("Sending score email to '{}'", score.getUser().getEmail());
+        sendEmailFromTemplate(score, "scoreEmail", "email.score.title");
+    }
+    
     @Async
     public void sendCreationEmail(User user) {
         log.debug("Sending creation email to '{}'", user.getEmail());

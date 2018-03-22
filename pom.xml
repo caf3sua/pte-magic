@@ -99,6 +99,12 @@
 
 
     <dependencies>
+    	<dependency>
+			<groupId>com.google.cloud</groupId>
+  			<artifactId>google-cloud-storage</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		
     	<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
 		<dependency>
 		    <groupId>org.projectlombok</groupId>
@@ -683,7 +689,7 @@
                 <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-devtools</artifactId>
-                    <optional>true</optional>
+                    <optional>false</optional>
                 </dependency>
             </dependencies>
             <build>

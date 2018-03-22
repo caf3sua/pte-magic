@@ -124,4 +124,58 @@ public class QuestionResource {
         questionService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+    
+//    private void processUploadToCloud(FeedItemDTO feedItemDTO) throws IOException {
+//    	Long currentTime = System.currentTimeMillis();
+//    	Storage storage;
+//		Resource resource = new ClassPathResource("config/blast-api.json");
+//		
+//		storage = StorageOptions.newBuilder()
+//				.setProjectId("blast-api")
+//			    .setCredentials(ServiceAccountCredentials.fromStream(resource.getInputStream()))
+//			    .build()
+//			    .getService();
+//		
+//		// Create a bucket
+//		String bucketName = "itsol-blast";
+//		
+//		String filename = currentTime + "_" + feedItemDTO.getFilename();
+//		BlobId blobId = BlobId.of(bucketName, filename);
+//		
+//		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(feedItemDTO.getContentType()).build();
+//		
+//		byte[] content = Base64.decodeBase64(feedItemDTO.getData());
+//		storage.create(blobInfo, content);
+//		storage.createAcl(blobId, Acl.of(User.ofAllUsers(), Role.READER));
+//		
+//		// Process resize to create thumb
+//		String thumbData = null;
+//		BufferedImage originBufImage = decodeToImage(feedItemDTO.getData());
+//		
+//		String imageUrl = "https://storage.googleapis.com/" + bucketName + "/" + filename;
+//		String imageThumbUrl = null; //"https://storage.googleapis.com/" + bucketName + "/" + thumbFilename;
+//		// Check size image
+//		if (originBufImage.getWidth() > BlastConstant.IMAGE_RESIZE_WIDTH 
+//				&& originBufImage.getHeight() > BlastConstant.IMAGE_RESIZE_HEIGHT) {
+//			thumbData = createThumbnailImage(originBufImage
+//					, BlastConstant.IMAGE_RESIZE_WIDTH, BlastConstant.IMAGE_RESIZE_HEIGHT, getFormatName(feedItemDTO.getContentType()));
+//			// Create thumb
+//			byte[] contentThumb = Base64.decodeBase64(thumbData);
+//			
+//			// Create thumb and upload
+//			String thumbFilename = currentTime + "_thumb_" + feedItemDTO.getFilename();
+//			BlobId blobIdThumb = BlobId.of(bucketName, thumbFilename);
+//			
+//			BlobInfo blobInfoThumb = BlobInfo.newBuilder(blobIdThumb).setContentType(feedItemDTO.getContentType()).build();
+//			
+//			storage.create(blobInfoThumb, contentThumb);
+//			storage.createAcl(blobIdThumb, Acl.of(User.ofAllUsers(), Role.READER));
+//			imageThumbUrl = "https://storage.googleapis.com/" + bucketName + "/" + thumbFilename;
+//		} else {
+//			imageThumbUrl = imageUrl;
+//		}
+//		
+//		feedItemDTO.setImageUrl(imageUrl);
+//		feedItemDTO.setImageThumbUrl(imageThumbUrl);
+//    }
 }

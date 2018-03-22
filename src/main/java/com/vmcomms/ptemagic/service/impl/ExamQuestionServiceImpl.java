@@ -11,6 +11,8 @@ import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
 import com.vmcomms.ptemagic.service.mapper.AnswerMapper;
 import com.vmcomms.ptemagic.service.mapper.ExamQuestionMapper;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,4 +90,11 @@ public class ExamQuestionServiceImpl implements ExamQuestionService{
         log.debug("Request to delete Answer : {}", id);
         examQuestionRepository.delete(id);
     }
+
+	@Override
+	public List<ExamQuestionDTO> findAllByExamId(Long examId) {
+		log.debug("Request to findAllByExamId : {}", examId);
+        List<ExamQuestion> data = examQuestionRepository.findAllByExamId(examId);
+        return examQuestionMapper.toDto(data);
+	}
 }

@@ -3,6 +3,8 @@ package com.vmcomms.ptemagic.repository;
 import com.vmcomms.ptemagic.domain.Answer;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Column;
+
 import org.springframework.data.jpa.repository.*;
 
 
@@ -13,4 +15,5 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
+	Answer findOneByExamIdAndQuestionId(Long examId, Long questionId);
 }
