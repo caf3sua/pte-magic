@@ -1175,6 +1175,7 @@ table>thead>tr{
     color: #444;
     margin: 20px auto;
     overflow: hidden;
+    position: relative;
 }
 audio {
     width:100%;
@@ -1194,7 +1195,15 @@ audio::-webkit-media-controls-enclosure {
 audio::-webkit-media-controls-panel {
     width: calc(100% + 30px); /* Adjust as needed */
 }
-
+#override{
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    position: absolute;
+    z-index: 99;
+    top: 25px;
+    left: 26px;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
 @media (min-width:992px) and (max-width:1200px) {
 
