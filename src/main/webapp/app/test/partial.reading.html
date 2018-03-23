@@ -1,20 +1,21 @@
 <div class="col-md-6 ">
     <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
-    
+
     <div ng-show="vm.selectedQuestion.audioLink">
     	<!-- Audio -->
-    	<button ng-click='vm.audio.paused ? vm.audio.play() : vm.audio.pause()'>{{vm.audio.paused ? "Play" : "Pause" }}</button>
-		 <button ng-click='vm.audio.restart()'>Stop</button>
-		 <button ng-click='vm.audio.muting = !vm.audio.muting'>{{vm.audio.muting ? "Unmute" : "Mute" }}</button>
-		
+        <i ng-click="vm.audio.play()" ng-show='vm.audio.paused ? true : false' class="pte-font-size-icon-test fa fa-play-circle"></i>
+        <i ng-click="vm.audio.pause()" ng-show='vm.audio.paused ? false : true' class="pte-font-size-icon-test fa fa-pause-circle"></i>
+        <i ng-click='vm.audio.restart()' class="pte-font-size-icon-test fa fa-sync"></i>
+        <i ng-click='vm.audio.muting' class="pte-font-size-icon-test fa fa-volume-up" ng-show="vm.audio.muting ? false : true"></i>
+        <i ng-click='vm.audio.muting = !vm.audio.muting' ng-show="vm.audio.muting ? true : false" class="pte-font-size-icon-test fa fa-volume-off"></i>
 		 <label>Current Time</label>
 		 <input class='form-control' type=text ng-model='vm.audio.currentTime'>
-		 
+
 		 <div class="form-group">
 			 <label>Volume</label>
 			 <input class='form-control' type=range min=0 max=1 step=0.01 ng-model='vm.audio.volume'>
 		 </div>
-		 
+
 		 <div class="form-group">
 			 <label>Progress</label>
 			 <input class='form-control' type=range min=0 max=1 step=0.01 ng-model='vm.audio.progress' readonly="true" disabled>
