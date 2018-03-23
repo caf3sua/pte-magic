@@ -3,10 +3,17 @@
 
     angular
         .module('pteMagicApp')
+        .filter('secondsToDateTime', secondsToDateTime)
         .controller('TestController', TestController);
 
     TestController.$inject = ['$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'ngAudio'];
 
+    function secondsToDateTime() {
+    	return function(seconds) {
+            return new Date(1970, 0, 1).setSeconds(seconds);
+        };
+    }
+    
     function TestController ($scope, $window, $stateParams, Principal, LoginService, $state, $rootScope, $timeout, ExamType, Exam, Answer, ngAudio) {
         
     	var vm = this;
