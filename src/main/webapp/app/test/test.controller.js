@@ -45,7 +45,13 @@
             	
             	// Next question
             	vm.selectedQuestion = vm.questions.shift();
-            	vm.audio = ngAudio.load(vm.selectedQuestion.audioLink);
+            	//vm.audio = ngAudio.load(vm.selectedQuestion.audioLink);
+            	
+            	// "https://storage.googleapis.com/pte-magic/CHINA_1.mp3"
+            	var audio = $("#player");      
+                $("#mp3_src").attr("src", vm.selectedQuestion.audioLink);
+                audio[0].pause();
+                audio[0].load();
             }
             function onError(error) {
             }
@@ -104,7 +110,10 @@
   	            }
   			} else {
   				$scope.$broadcast('timer-start');
-  				vm.audio = ngAudio.load(vm.selectedQuestion.audioLink);
+  				var audio = $("#player");      
+                $("#mp3_src").attr("src", vm.selectedQuestion.audioLink);
+                audio[0].pause();
+                audio[0].load();
   			}
   		}
   		

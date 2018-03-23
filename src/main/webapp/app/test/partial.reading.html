@@ -2,29 +2,14 @@
     <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
 
     <div ng-show="vm.selectedQuestion.audioLink">
-    	<!-- Audio -->
-        <i ng-click="vm.audio.play()" ng-show='vm.audio.paused ? true : false' class="pte-font-size-icon-test fa fa-play-circle"></i>
-        <i ng-click="vm.audio.pause()" ng-show='vm.audio.paused ? false : true' class="pte-font-size-icon-test fa fa-pause-circle"></i>
-        <i ng-click='vm.audio.restart()' class="pte-font-size-icon-test fa fa-sync"></i>
-        <i ng-click='vm.audio.muting' class="pte-font-size-icon-test fa fa-volume-up" ng-show="vm.audio.muting ? false : true"></i>
-        <i ng-click='vm.audio.muting = !vm.audio.muting' ng-show="vm.audio.muting ? true : false" class="pte-font-size-icon-test fa fa-volume-off"></i>
-		 <div>Current Time: {{vm.audio.currentTime | trackTime}}</div>    
-
+		<!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
         <div class="container-audio">
-            <audio controls autoplay loop>
-                <source src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/9473/new_year_dubstep_minimix.ogg" type="audio/ogg">
+        	<div id="override"></div>
+            <audio id="player" controls autoplay>
+                <source id="mp3_src" src="" type="audio/mp3"  />
                 Your browser dose not Support the audio Tag
             </audio>
         </div>
-		 <div class="form-group">
-			 <label>Volume</label>
-			 <input class='form-control' type=range min=0 max=1 step=0.01 ng-model='vm.audio.volume'>
-		 </div>
-
-		 <div class="form-group">
-			 <label>Progress</label>
-			 <input class='form-control' type=range min=0 max=1 step=0.01 ng-model='vm.audio.progress' readonly="true" disabled>
-		 </div>
     </div>
 </div>
     <div class="col-md-6 pte-content-question">
