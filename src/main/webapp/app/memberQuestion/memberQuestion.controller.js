@@ -48,7 +48,7 @@
                     angular.element('#writing').addClass("active");
                     angular.element('#writingMobile').addClass("activeMobile");
                 });
-
+                vm.selectedExams = vm.writingExams;
             }
             if(type == 'SPEAKING'){
                 $timeout(function (){
@@ -57,7 +57,7 @@
                     angular.element('#speaking').addClass("active");
                     angular.element('#speakingMobile').addClass("activeMobile");
                 });
-
+                vm.selectedExams = vm.speakingExams;
             }
             vm.examShowFlag = true;
             vm.selectedType = type;
