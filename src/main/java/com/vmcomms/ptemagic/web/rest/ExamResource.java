@@ -139,32 +139,12 @@ public class ExamResource {
     	/** 3 - READING **/
         /** 4 - LISTENING **/
     	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
-    	Integer numReading = examTypeDTO.getNumberQuestionReading();
-    	Integer numListening = examTypeDTO.getNumberQuestionListening();
-    	Integer numWriting = examTypeDTO.getNumberQuestionWriting();
-    	Integer numSpeaking = examTypeDTO.getNumberQuestionSpeaking();
+    	Integer numQuestion = examTypeDTO.getTotalQuestion();
     	
     	List<QuestionDTO> questions = new ArrayList<>();
     	
     	// Reading
-    	if (numReading != null && numReading > 0) {
-    		selectQuestionBySkill(questions, numReading, SkillType.READING);
-    	}
-
-    	// Listening
-    	if (numListening != null && numListening > 0) {
-    		selectQuestionBySkill(questions, numListening, SkillType.LISTENING);
-    	}
-    	
-    	// Writing
-    	if (numWriting != null && numWriting > 0) {
-    		selectQuestionBySkill(questions, numWriting, SkillType.WRITING);
-    	}
-    	
-    	// Speaking
-    	if (numSpeaking != null && numSpeaking > 0) {
-    		selectQuestionBySkill(questions, numSpeaking, SkillType.SPEAKING);
-    	}
+		selectQuestionBySkill(questions, numQuestion, getSkillTypeByExamType(examTypeDTO));
     	
     	int order = 0;
 		for (QuestionDTO questionDTO : questions) {
@@ -177,6 +157,13 @@ public class ExamResource {
 		}
 		
 		return questions;
+    }
+    
+    private SkillType getSkillTypeByExamType(ExamTypeDTO examTypeDTO) {
+    	String testType = examTypeDTO.getType().toString();
+    	
+    	String skillTypeStr = testType.substring(testType.lastIndexOf("_") + 1);
+    	return SkillType.valueOf(skillTypeStr);
     }
     
     private void selectQuestionBySkill(List<QuestionDTO> questions, int number, SkillType skill) {
@@ -266,7 +253,7 @@ public class ExamResource {
     @Timed
     public ResponseEntity<List<ExamDTO>> getAllExams(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Exams");
-        Page<ExamDTO> page = examService.findAll(pageable);
+        Page<ExamDTO> page = examService.findAllByResult(pageable, ProgressType.MARKING);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/exams");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

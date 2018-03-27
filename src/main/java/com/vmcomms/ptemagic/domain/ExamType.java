@@ -35,27 +35,40 @@ public class ExamType implements Serializable {
     @Column(name = "jhi_type")
     private TestType type;
 
-    @Column(name = "number_question_writing")
-    private Integer numberQuestionWriting;
+//    @Column(name = "number_question_writing")
+//    private Integer numberQuestionWriting;
+//
+//    @Column(name = "number_question_reading")
+//    private Integer numberQuestionReading;
+//
+//    @Column(name = "number_question_listening")
+//    private Integer numberQuestionListening;
+//
+//    @Column(name = "number_question_speaking")
+//    private Integer numberQuestionSpeaking;
 
-    @Column(name = "number_question_reading")
-    private Integer numberQuestionReading;
-
-    @Column(name = "number_question_listening")
-    private Integer numberQuestionListening;
-
-    @Column(name = "number_question_speaking")
-    private Integer numberQuestionSpeaking;
-
+    @Column(name = "total_question")
+    private Integer totalQuestion;
+    
     @Column(name = "description")
     private String description;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    
+    
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Integer getTotalQuestion() {
+		return totalQuestion;
+	}
+
+	public void setTotalQuestion(Integer totalQuestion) {
+		this.totalQuestion = totalQuestion;
+	}
+
+	public void setId(Long id) {
         this.id = id;
     }
 
@@ -85,57 +98,57 @@ public class ExamType implements Serializable {
         this.type = type;
     }
 
-    public Integer getNumberQuestionWriting() {
-        return numberQuestionWriting;
-    }
-
-    public ExamType numberQuestionWriting(Integer numberQuestionWriting) {
-        this.numberQuestionWriting = numberQuestionWriting;
-        return this;
-    }
-
-    public void setNumberQuestionWriting(Integer numberQuestionWriting) {
-        this.numberQuestionWriting = numberQuestionWriting;
-    }
-
-    public Integer getNumberQuestionReading() {
-        return numberQuestionReading;
-    }
-
-    public ExamType numberQuestionReading(Integer numberQuestionReading) {
-        this.numberQuestionReading = numberQuestionReading;
-        return this;
-    }
-
-    public void setNumberQuestionReading(Integer numberQuestionReading) {
-        this.numberQuestionReading = numberQuestionReading;
-    }
-
-    public Integer getNumberQuestionListening() {
-        return numberQuestionListening;
-    }
-
-    public ExamType numberQuestionListening(Integer numberQuestionListening) {
-        this.numberQuestionListening = numberQuestionListening;
-        return this;
-    }
-
-    public void setNumberQuestionListening(Integer numberQuestionListening) {
-        this.numberQuestionListening = numberQuestionListening;
-    }
-
-    public Integer getNumberQuestionSpeaking() {
-        return numberQuestionSpeaking;
-    }
-
-    public ExamType numberQuestionSpeaking(Integer numberQuestionSpeaking) {
-        this.numberQuestionSpeaking = numberQuestionSpeaking;
-        return this;
-    }
-
-    public void setNumberQuestionSpeaking(Integer numberQuestionSpeaking) {
-        this.numberQuestionSpeaking = numberQuestionSpeaking;
-    }
+//    public Integer getNumberQuestionWriting() {
+//        return numberQuestionWriting;
+//    }
+//
+//    public ExamType numberQuestionWriting(Integer numberQuestionWriting) {
+//        this.numberQuestionWriting = numberQuestionWriting;
+//        return this;
+//    }
+//
+//    public void setNumberQuestionWriting(Integer numberQuestionWriting) {
+//        this.numberQuestionWriting = numberQuestionWriting;
+//    }
+//
+//    public Integer getNumberQuestionReading() {
+//        return numberQuestionReading;
+//    }
+//
+//    public ExamType numberQuestionReading(Integer numberQuestionReading) {
+//        this.numberQuestionReading = numberQuestionReading;
+//        return this;
+//    }
+//
+//    public void setNumberQuestionReading(Integer numberQuestionReading) {
+//        this.numberQuestionReading = numberQuestionReading;
+//    }
+//
+//    public Integer getNumberQuestionListening() {
+//        return numberQuestionListening;
+//    }
+//
+//    public ExamType numberQuestionListening(Integer numberQuestionListening) {
+//        this.numberQuestionListening = numberQuestionListening;
+//        return this;
+//    }
+//
+//    public void setNumberQuestionListening(Integer numberQuestionListening) {
+//        this.numberQuestionListening = numberQuestionListening;
+//    }
+//
+//    public Integer getNumberQuestionSpeaking() {
+//        return numberQuestionSpeaking;
+//    }
+//
+//    public ExamType numberQuestionSpeaking(Integer numberQuestionSpeaking) {
+//        this.numberQuestionSpeaking = numberQuestionSpeaking;
+//        return this;
+//    }
+//
+//    public void setNumberQuestionSpeaking(Integer numberQuestionSpeaking) {
+//        this.numberQuestionSpeaking = numberQuestionSpeaking;
+//    }
 
     public String getDescription() {
         return description;
@@ -177,10 +190,10 @@ public class ExamType implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
-            ", numberQuestionWriting='" + getNumberQuestionWriting() + "'" +
-            ", numberQuestionReading='" + getNumberQuestionReading() + "'" +
-            ", numberQuestionListening='" + getNumberQuestionListening() + "'" +
-            ", numberQuestionSpeaking='" + getNumberQuestionSpeaking() + "'" +
+//            ", numberQuestionWriting='" + getNumberQuestionWriting() + "'" +
+//            ", numberQuestionReading='" + getNumberQuestionReading() + "'" +
+//            ", numberQuestionListening='" + getNumberQuestionListening() + "'" +
+//            ", numberQuestionSpeaking='" + getNumberQuestionSpeaking() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }

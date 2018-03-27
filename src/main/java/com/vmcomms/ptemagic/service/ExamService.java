@@ -1,5 +1,6 @@
 package com.vmcomms.ptemagic.service;
 
+import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,8 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ExamService {
 
+	Page<ExamDTO> findAllByResult(Pageable pageable, ProgressType result);
+	
     /**
      * Save a exam.
      *

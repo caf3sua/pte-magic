@@ -2,6 +2,7 @@ package com.vmcomms.ptemagic.service.impl;
 
 import com.vmcomms.ptemagic.service.ExamService;
 import com.vmcomms.ptemagic.domain.Exam;
+import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.repository.ExamRepository;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.mapper.ExamMapper;
@@ -56,6 +57,14 @@ public class ExamServiceImpl implements ExamService{
     public Page<ExamDTO> findAll(Pageable pageable) {
         log.debug("Request to get all Exams");
         return examRepository.findAll(pageable)
+            .map(examMapper::toDto);
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ExamDTO> findAllByResult(Pageable pageable, ProgressType result) {
+        log.debug("Request to get all Exams by result");
+        return examRepository.findByResult(result, pageable)
             .map(examMapper::toDto);
     }
 

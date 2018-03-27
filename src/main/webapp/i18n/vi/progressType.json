@@ -5,7 +5,9 @@
             "INPROGRESS": "INPROGRESS",
             "PENDING": "PENDING",
             "FAIL": "FAIL",
-            "PASS": "PASS"
+            "PASS": "PASS",
+            "DONE": "DONE",
+            "MARKING": "MARKING"
         }
     }
 }

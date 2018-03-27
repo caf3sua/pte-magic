@@ -3,17 +3,20 @@ package com.vmcomms.ptemagic.service.impl;
 import com.vmcomms.ptemagic.service.AnswerService;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.ExamService;
+import com.vmcomms.ptemagic.service.ExamTypeService;
 import com.vmcomms.ptemagic.service.MailService;
 import com.vmcomms.ptemagic.service.MarkScoreService;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.service.UserService;
 import com.vmcomms.ptemagic.domain.Exam;
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
+import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.ScoreInfoDTO;
 import com.vmcomms.ptemagic.repository.ExamRepository;
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
+import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 import com.vmcomms.ptemagic.service.dto.UserDTO;
 import com.vmcomms.ptemagic.service.mapper.ExamMapper;
@@ -57,7 +60,14 @@ public class MarkScoreServiceImpl implements MarkScoreService {
     private AnswerService answerService;
     
     @Autowired
+    private ExamTypeService examTypeService;
+    
+    @Autowired
     private QuestionService questionService;
+    
+    private final static Long MOCK_TEST_A_EXAM_TYPE_ID = 2001l;
+    private final static Long MOCK_TEST_B_EXAM_TYPE_ID = 2002l;
+    private final static Long MOCK_TEST_FULL_EXAM_TYPE_ID = 2003l;
     
 	@Override
 	public void markScore(Long examId) {
@@ -87,17 +97,52 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 
 		// Update Exam -> ProgressType.DONE
 		ExamDTO examDTO = examService.findOne(examId);
-		examDTO.setResult(ProgressType.DONE);
-		examService.save(examDTO);
-				
-		ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
-		scoreInfo.setUser(userDTO);
-		scoreInfo.setScore(score);
-		scoreInfo.setTotalQuestion(totalScore);
 		
-        // Send mail
-		mailService.sendScoreEmail(scoreInfo);
+		// Check finish
+		if (isFinishExam(examDTO)) {
+			ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
+			scoreInfo.setUser(userDTO);
+			scoreInfo.setScore(score);
+			scoreInfo.setTotalQuestion(totalScore);
+			
+	        // Send mail
+			mailService.sendScoreEmail(scoreInfo);
+			
+			// Update -> DONE
+			examDTO.setResult(ProgressType.DONE);
+			examService.save(examDTO);
+		} else {
+			examDTO.setResult(ProgressType.MARKING);
+			examService.save(examDTO);
+		}
 	}
 
+	private boolean isFinishExam(ExamDTO examDTO) {
+		if (isMockTest(examDTO)) {
+			return false;
+		}
+		
+		ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+		// Finish : FREE_EXAM
+		if (examTypeDTO.getType() == TestType.FREE_EXAM_LISTENING || examTypeDTO.getType() == TestType.FREE_EXAM_READING) {
+			return true;
+		}
+		
+		// Finish : MEMBER_QUESTION (reading/listening)
+		if (examTypeDTO.getType() == TestType.MEMBER_QUESTION_LISTENING || examTypeDTO.getType() == TestType.MEMBER_QUESTION_READING) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	private boolean isMockTest(ExamDTO examDTO) {
+		Long examTypeId = examDTO.getExamTypeId();
+		if (examTypeId == MOCK_TEST_A_EXAM_TYPE_ID || examTypeId == MOCK_TEST_B_EXAM_TYPE_ID || examTypeId == MOCK_TEST_FULL_EXAM_TYPE_ID) {
+			return true;
+		}
+		
+		return false;
+	}
     
 }

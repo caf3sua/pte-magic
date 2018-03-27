@@ -8,19 +8,22 @@
     MemberQuestionController.$inject = ['$scope', '$window', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType'];
 
     function MemberQuestionController ($scope, $window, Principal, LoginService, $state, $rootScope, $timeout, ExamType) {
-        var vm = this;
+    	var vm = this;
         vm.showExamList = showExamList;
         vm.startTest = startTest;
         vm.examShowFlag = false;
-        vm.exams = [];
+        vm.listeningExams = [];
+        vm.readingExams = [];
+        vm.speakingExams = [];
+        vm.writingExams = [];
         vm.selectedType;
-        vm.filterExams = [];
+        vm.selectedExams = [];
 
-        vm.totalExamReading = 0;
-        vm.totalExamListening = 0;
         vm.totalExamQuestionReading = 0;
         vm.totalExamQuestionListening = 0;
-
+        vm.totalExamQuestionSpeaking = 0;
+        vm.totalExamQuestionWriting = 0;
+        
         function showExamList(type) {
             if(type == 'LISTENING'){
                 $timeout(function (){
@@ -29,27 +32,19 @@
                     angular.element('#listening').addClass("active");
                     angular.element('#listeningMobile').addClass("activeMobile");
                 });
+                
+                vm.selectedExams = vm.listeningExams;
             }else if(type == 'READING'){
                 angular.element(document.getElementsByClassName("pte-freeSample-block")).removeClass("active");
                 angular.element(document.getElementsByClassName("pte-free-sample-mobile-icon")).removeClass("activeMobile");
                 angular.element('#reading').addClass("active");
                 angular.element('#readingMobile').addClass("activeMobile");
+                
+                vm.selectedExams = vm.readingExams;
             }
             vm.examShowFlag = true;
             vm.selectedType = type;
             console.log(vm.selectedType);
-
-            // LISTENING
-            vm.filterExams = [];
-            angular.forEach(vm.exams, function(value, key){
-            	if (type == 'LISTENING' && value.numberQuestionListening > 0) {
-            		value.numberQuestion = value.numberQuestionListening;
-            		vm.filterExams.push(value);
-                } else if (type == 'READING' && value.numberQuestionReading > 0) {
-                	value.numberQuestion = value.numberQuestionReading;
-                	vm.filterExams.push(value);
-                }
-            });
         }
 
         function startTest(examId) {
@@ -62,25 +57,54 @@
 
         // Init controller
   		(function initController() {
-  			ExamType.getAllByType({type: 'FREE_EXAM'}, onSuccess, onError);
+  	        vm.totalExamQuestionReading = 0;
+  	        vm.totalExamQuestionListening = 0;
+  	        vm.totalExamQuestionSpeaking = 0;
+  	        vm.totalExamQuestionWriting = 0;
 
-  			function onSuccess(data, headers) {
-  				console.log(data);
-  				vm.exams = data;
-
-  				angular.forEach(data, function(value, key){
-  	            	if (value.numberQuestionListening > 0) {
-  	            		vm.totalExamListening++;
-  	            		vm.totalExamQuestionListening = vm.totalExamQuestionListening + value.numberQuestionListening;
-  	                } else if (value.numberQuestionReading > 0) {
-  	                	vm.totalExamReading++;
-  	            		vm.totalExamQuestionReading = vm.totalExamQuestionReading + value.numberQuestionReading;
-  	                }
-  	            });
-  			}
-  			function onError(error) {
-
-  			}
+  	        ExamType.getAllByType({type: 'MEMBER_QUESTION_LISTENING'}, 
+  					function(data, headers) {
+		  				vm.listeningExams = data;
+		
+		  				angular.forEach(data, function(value, key){
+	  	            		vm.totalExamQuestionListening = vm.totalExamQuestionListening + value.totalQuestion;
+		  	            });
+  					}, 
+  					function(error) {
+  					});
+  			
+  			ExamType.getAllByType({type: 'MEMBER_QUESTION_READING'}, 
+  					function(data, headers) {
+		  				vm.readingExams = data;
+		
+		  				angular.forEach(data, function(value, key){
+	  	            		vm.totalExamQuestionReading = vm.totalExamQuestionReading + value.totalQuestion;
+		  	            });
+  					}, 
+  					function(error) {
+  					});
+  			
+  			ExamType.getAllByType({type: 'MEMBER_QUESTION_SPEAKING'}, 
+  					function(data, headers) {
+		  				vm.speakingExams = data;
+		
+		  				angular.forEach(data, function(value, key){
+	  	            		vm.totalExamQuestionSpeaking = vm.totalExamQuestionSpeaking + value.totalQuestion;
+		  	            });
+  					}, 
+  					function(error) {
+  					});
+  			
+  			ExamType.getAllByType({type: 'MEMBER_QUESTION_WRITING'}, 
+  					function(data, headers) {
+		  				vm.readingExams = data;
+		
+		  				angular.forEach(data, function(value, key){
+	  	            		vm.totalExamQuestionReading = vm.totalExamQuestionReading + value.totalQuestion;
+		  	            });
+  					}, 
+  					function(error) {
+  					});
   		})();
     }
 })();

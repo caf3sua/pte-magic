@@ -1,9 +1,11 @@
 package com.vmcomms.ptemagic.service.dto;
 
 
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.validation.constraints.NotNull;
+
 import com.vmcomms.ptemagic.domain.enumeration.TestType;
 
 /**
@@ -18,13 +20,15 @@ public class ExamTypeDTO implements Serializable {
 
     private TestType type;
 
-    private Integer numberQuestionWriting;
-
-    private Integer numberQuestionReading;
-
-    private Integer numberQuestionListening;
-
-    private Integer numberQuestionSpeaking;
+//    private Integer numberQuestionWriting;
+//
+//    private Integer numberQuestionReading;
+//
+//    private Integer numberQuestionListening;
+//
+//    private Integer numberQuestionSpeaking;
+    
+    private Integer totalQuestion;
 
     private String description;
 
@@ -50,38 +54,6 @@ public class ExamTypeDTO implements Serializable {
 
     public void setType(TestType type) {
         this.type = type;
-    }
-
-    public Integer getNumberQuestionWriting() {
-        return numberQuestionWriting;
-    }
-
-    public void setNumberQuestionWriting(Integer numberQuestionWriting) {
-        this.numberQuestionWriting = numberQuestionWriting;
-    }
-
-    public Integer getNumberQuestionReading() {
-        return numberQuestionReading;
-    }
-
-    public void setNumberQuestionReading(Integer numberQuestionReading) {
-        this.numberQuestionReading = numberQuestionReading;
-    }
-
-    public Integer getNumberQuestionListening() {
-        return numberQuestionListening;
-    }
-
-    public void setNumberQuestionListening(Integer numberQuestionListening) {
-        this.numberQuestionListening = numberQuestionListening;
-    }
-
-    public Integer getNumberQuestionSpeaking() {
-        return numberQuestionSpeaking;
-    }
-
-    public void setNumberQuestionSpeaking(Integer numberQuestionSpeaking) {
-        this.numberQuestionSpeaking = numberQuestionSpeaking;
     }
 
     public String getDescription() {
@@ -119,11 +91,16 @@ public class ExamTypeDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", type='" + getType() + "'" +
-            ", numberQuestionWriting='" + getNumberQuestionWriting() + "'" +
-            ", numberQuestionReading='" + getNumberQuestionReading() + "'" +
-            ", numberQuestionListening='" + getNumberQuestionListening() + "'" +
-            ", numberQuestionSpeaking='" + getNumberQuestionSpeaking() + "'" +
+            ", totalQuestion='" + getTotalQuestion() + "'" +
             ", description='" + getDescription() + "'" +
             "}";
     }
+
+	public Integer getTotalQuestion() {
+		return totalQuestion;
+	}
+
+	public void setTotalQuestion(Integer totalQuestion) {
+		this.totalQuestion = totalQuestion;
+	}
 }

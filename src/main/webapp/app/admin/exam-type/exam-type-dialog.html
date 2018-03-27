@@ -28,35 +28,18 @@
             <label class="control-label" data-translate="pteMagicApp.examType.type" for="field_type">Type</label>
             <select class="form-control" name="type" ng-model="vm.examType.type" id="field_type">
             	<!-- FREE_EXAM, PART_A, PART_B, FULL, MOCK_TEST -->
-                <option value="FREE_EXAM" data-translate="pteMagicApp.TestType.FREE_EXAM">FREE SAMPLE</option>
-                <option value="MEMBER_QUESTION">MEMBER QUESTION</option>
-                <option value="MOCK_TEST_A">MOCK TEST PART A</option>
-                <option value="MOCK_TEST_B">MOCK TEST PART B</option>
-                <option value="MOCK_TEST_FULL">MOCK TEST FULL</option>
+            	<option value="FREE_EXAM_LISTENING" data-translate="pteMagicApp.TestType.FREE_EXAM_LISTENING">FREE_EXAM_LISTENING</option>
+            	<option value="FREE_EXAM_READING" data-translate="pteMagicApp.TestType.FREE_EXAM_READING">FREE_EXAM_READING</option>
+            	<option value="MEMBER_QUESTION_LISTENING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_LISTENING">MEMBER_QUESTION_LISTENING</option>
+            	<option value="MEMBER_QUESTION_READING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_READING">MEMBER_QUESTION_READING</option>
+            	<option value="MEMBER_QUESTION_SPEAKING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_SPEAKING">MEMBER_QUESTION_SPEAKING</option>
+            	<option value="MEMBER_QUESTION_WRITING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_WRITING">MEMBER_QUESTION_WRITING</option>
             </select>
         </div>
         <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.examType.numberQuestionWriting" for="field_numberQuestionWriting">Number Question Writing</label>
-            <input type="number" class="form-control" name="numberQuestionWriting" id="field_numberQuestionWriting"
-                    ng-model="vm.examType.numberQuestionWriting"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.examType.numberQuestionReading" for="field_numberQuestionReading">Number Question Reading</label>
-            <input type="number" class="form-control" name="numberQuestionReading" id="field_numberQuestionReading"
-                    ng-model="vm.examType.numberQuestionReading"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.examType.numberQuestionListening" for="field_numberQuestionListening">Number Question Listening</label>
-            <input type="number" class="form-control" name="numberQuestionListening" id="field_numberQuestionListening"
-                    ng-model="vm.examType.numberQuestionListening"
-                    />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.examType.numberQuestionSpeaking" for="field_numberQuestionSpeaking">Number Question Speaking</label>
-            <input type="number" class="form-control" name="numberQuestionSpeaking" id="field_numberQuestionSpeaking"
-                    ng-model="vm.examType.numberQuestionSpeaking"
+            <label class="control-label" for="field_totalQuestion">Total Question</label>
+            <input type="number" class="form-control" name="totalQuestion" id="field_totalQuestion"
+                    ng-model="vm.examType.totalQuestion"
                     />
         </div>
         <div class="form-group">

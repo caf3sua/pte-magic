@@ -8,7 +8,7 @@
                     <span class="icon-headset"></span>
                     <div class="pte-freeSample-block-text">
                         <p class="pte-freeSample-block-text-header">Listening</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">{{vm.totalExamListening}}</span></p>
+                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">{{vm.listeningExams.length}}</span></p>
                     </div>
                 </div>
                 <div>
@@ -25,7 +25,7 @@
                     <span class="icon-open-book"></span>
                     <div class="pte-freeSample-block-text">
                         <p class="pte-freeSample-block-text-header">READING</p>
-                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">{{vm.totalExamReading}}</span></p>
+                        <p class="pte-freeSample-block-text-child">Number of Categories: <span class="colorf9db01">{{vm.readingExams.length}}</span></p>
                     </div>
                 </div>
                 <div>
@@ -91,7 +91,7 @@
         <!-- Show list exam -->
         <div class="col-md-12 pte-free-listquestion-mobile" ng-show="vm.examShowFlag">
             <div class="col-md-12 pte-pre-sample-listQuestion">
-                <div class="col-md-4 margin-top30" ng-repeat="exam in vm.filterExams">
+                <div class="col-md-4 margin-top30" ng-repeat="exam in vm.selectedExams">
                     <div class="pte-free-sample-item">
                         <div >
                             <ul class="pte-free-sample-item-text">
@@ -101,7 +101,7 @@
                             </ul>
                         </div>
                         <div class="pte-free-sample-item-footer">
-                            <p class="pte-free-sample-item-footer-text">Total {{exam.numberQuestion | number}} questions</p>
+                            <p class="pte-free-sample-item-footer-text">Total {{exam.totalQuestion | number}} questions</p>
                             <button class="pte-free-sample-item-footer-btn" ng-click="vm.startTest(exam.id)">Test</button>
                         </div>
                     </div>
