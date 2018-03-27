@@ -12,7 +12,7 @@
             parent: 'app',
             url: '/memberQuestion',
             data: {
-                authorities: []
+                authorities: ['ROLE_SILVER', 'ROLE_GOLD', 'ROLE_PLATINUM']
             },
             views: {
                 'content@': {
