@@ -28,6 +28,10 @@
                     />
         </div>
         <div class="form-group">
+        	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)"
+		          accept="image/*" ngf-max-height="1000" ngf-max-size="1MB">
+		      Select File</button>
+        
             <label class="control-label" data-translate="pteMagicApp.question.audioLink" for="field_audioLink">Audio Link</label>
             <input type="text" class="form-control" name="audioLink" id="field_audioLink"
                     ng-model="vm.question.audioLink"

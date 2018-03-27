@@ -88,6 +88,7 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 		// Update Exam -> ProgressType.DONE
 		ExamDTO examDTO = examService.findOne(examId);
 		examDTO.setResult(ProgressType.DONE);
+		examService.save(examDTO);
 				
 		ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
 		scoreInfo.setUser(userDTO);
