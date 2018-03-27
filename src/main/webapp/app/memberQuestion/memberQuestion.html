@@ -1,7 +1,7 @@
 <div ng-cloak >
     <div class="pte-body-content"></div>
     <div class="container margin-bottom90">
-    	<!-- LISTENING -->
+        <!-- LISTENING -->
         <div class="col-md-3 hidden-xs hidden-sm">
             <div class="pte-freeSample-block" id="listening" ng-click="vm.showExamList('LISTENING')">
                 <div class="pte-border-block-freeSample" >
@@ -13,7 +13,7 @@
                 </div>
                 <div>
                     <p class="pte-freeSample-block-sum-questions">
-                       {{vm.totalExamQuestionListening}} QUESTIONS
+                        {{vm.totalExamQuestionListening}} QUESTIONS
                     </p>
                 </div>
             </div>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-md-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block block-user">
+            <div class="pte-freeSample-block " id="speaking" ng-click="vm.showExamList('Speaking')">
                 <div class="pte-border-block-freeSample">
                     <span class="icon-icon"></span>
                     <div class="pte-freeSample-block-text">
@@ -52,7 +52,7 @@
             </div>
         </div>
         <div class="col-md-3 hidden-xs hidden-sm">
-            <div class="pte-freeSample-block block-user">
+            <div class="pte-freeSample-block " id="writing" ng-click="vm.showExamList('WRITING')">
                 <div class="pte-border-block-freeSample">
                     <span class="icon-checkbox-pen-outline2"></span>
                     <div class="pte-freeSample-block-text">
@@ -77,12 +77,12 @@
                 <span class="icon-open-book"></span>
             </div>
         </div>
-        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg block-user">
+        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg " id="speakingMobile" ng-click="vm.showExamList('Speaking')">
             <div class="pte-free-sample-mobile">
                 <span class="icon-icon"></span>
             </div>
         </div>
-        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg block-user">
+        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg " id="writingMobile" ng-click="vm.showExamList('WRITING')">
             <div class="pte-free-sample-mobile">
                 <span class="icon-checkbox-pen-outline2"></span>
             </div>
