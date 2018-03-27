@@ -3,23 +3,20 @@
 
     angular
         .module('pteMagicApp')
-        .filter('secondsToDateTime', secondsToDateTime)
         .controller('TestController', TestController);
 
-    TestController.$inject = ['$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'ngAudio'];
+    TestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
+    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer'];
 
-    function secondsToDateTime() {
-    	return function(seconds) {
-            return new Date(1970, 0, 1).setSeconds(seconds);
-        };
-    }
-    
-    function TestController ($scope, $window, $stateParams, Principal, LoginService, $state, $rootScope, $timeout, ExamType, Exam, Answer, ngAudio) {
+    function TestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
+    		, $rootScope, $timeout, ExamType, Exam, Answer) {
         
     	var vm = this;
+    	// Function
     	vm.answer = answer;
     	vm.closeExam = closeExam;
     	
+    	// Variable, flag
     	vm.examTypeId;
     	vm.exam;
     	vm.questions = [];
@@ -29,11 +26,56 @@
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
     	vm.countdown = 100;
     	vm.audio;
+    	vm.questionGroup;
+    	
+    	function initPlayer() {
+    		var audio = $("#player");      
+            audio[0].addEventListener('ended', callBackAudioEnded);
+    	}
+    	
+    	function callBackAudioEnded() {
+    		console.log('audio ended!');
+    	}
+    	
+    	function playAudio(link, timeout) {
+    		var audio = $("#player");      
+            $("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
+            audio[0].pause();
+            audio[0].load();
+            
+            $timeout(function(){
+            	audio[0].play();
+            }, timeout );
+    	}
+    	
+    	function initAnswer() {
+    		// Stop audio
+    		var audio = $("#player");      
+            audio[0].pause();
+            
+            // Stop timer
+            $scope.$broadcast('timer-stop');
+  			$scope.$broadcast('timer-reset');
+    	}
+    	
+    	angular.element(document).ready(function () {
+    		$timeout(function(){
+	    		// Load player
+	    		initPlayer();
+	    		
+	    		// Load record audio
+	    		initAudio();
+    		}, 1000 );
+        });
     	
     	// Init controller
   		(function initController() {
+  			// instantiate base controller
+			//$controller('PteMagicBaseController', {
+			//	vm : vm
+			//});
+  					
   			vm.examTypeId = $stateParams.type;
-  			//vm.audio = ngAudio.load("https://storage.googleapis.com/pte-magic/CHINA_1.mp3"); // returns NgAudioObject
   			
   			Exam.startExams({
   				examTypeId: vm.examTypeId
@@ -44,14 +86,7 @@
             	console.log(data);
             	
             	// Next question
-            	vm.selectedQuestion = vm.questions.shift();
-            	//vm.audio = ngAudio.load(vm.selectedQuestion.audioLink);
-            	
-            	// "https://storage.googleapis.com/pte-magic/CHINA_1.mp3"
-            	var audio = $("#player");      
-                $("#mp3_src").attr("src", vm.selectedQuestion.audioLink);
-                audio[0].pause();
-                audio[0].load();
+            	nextQuestion();
             }
             function onError(error) {
             }
@@ -73,24 +108,21 @@
   		}
   		
   		function answer() {
-  			$scope.$broadcast('timer-stop');
-  			$scope.$broadcast('timer-reset');
+  			initAnswer();
+  			
   			console.log(vm.selectedQuestion);
   			// Get answer
   			getUserAnswer();
   			console.log(vm.answers);
   			
-  			// Save result
-  			var answer = {};
-  		    answer.examId = vm.exam.examDTO.id;
-  		    answer.questionId = vm.selectedQuestion.id;
-  		    answer.answer = vm.answers.join(',');;
-  		    // answer.audioLink;
-  		    // answer.description;
-  		    
-  			Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
+  			// Save answer
+  			saveAnswer();
   			
   			// Next question
+  			nextQuestion();
+  		}
+  		
+  		function nextQuestion() {
   			vm.selectedQuestion = vm.questions.shift();
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
@@ -109,20 +141,31 @@
   	            	return;
   	            }
   			} else {
+  				// Get question group
+  				vm.questionGroup = getQuestionGroup(vm.selectedQuestion.type);
+  				console.log(vm.questionGroup);
+  				
   				$scope.$broadcast('timer-start');
-  				var audio = $("#player");      
-                $("#mp3_src").attr("src", vm.selectedQuestion.audioLink);
-                audio[0].pause();
-                audio[0].load();
+  				playAudio(vm.selectedQuestion.audioLink, 3000);
   			}
   		}
   		
-  		function onSaveAnswerSuccess() {
+  		function saveAnswer() {
+  			// Save result
+  			var answer = {};
+  		    answer.examId = vm.exam.examDTO.id;
+  		    answer.questionId = vm.selectedQuestion.id;
+  		    answer.answer = vm.answers.join(',');;
+  		    // answer.audioLink;
+  		    // answer.description;
+  		    
+  			Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
   			
-  		}
-  		
-  		function onSaveAnswerError() {
-  			
+  			function onSaveAnswerSuccess() {
+  	  		}
+  	  		
+  	  		function onSaveAnswerError() {
+  	  		}
   		}
     }
 })();

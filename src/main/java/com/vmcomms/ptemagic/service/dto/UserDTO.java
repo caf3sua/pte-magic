@@ -61,13 +61,13 @@ public class UserDTO {
             user.getEmail(), user.getActivated(), user.getLangKey(),
             user.getCreatedBy(), user.getCreatedDate(), user.getLastModifiedBy(), user.getLastModifiedDate(),
             user.getAuthorities().stream().map(Authority::getName)
-                .collect(Collectors.toSet()), user.getFullName(), user.getPhonenumber());
+                .collect(Collectors.toSet()), user.getFullName(), user.getPhonenumber(), user.getRemainDays());
     }
 
     public UserDTO(Long id, String login, 
         String email, boolean activated, String langKey,
         String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
-        Set<String> authorities, String fullName, String phonenumber) {
+        Set<String> authorities, String fullName, String phonenumber, Integer remainDays) {
 
         this.id = id;
         this.login = login;
@@ -81,6 +81,7 @@ public class UserDTO {
         this.authorities = authorities;
         this.fullName = fullName;
         this.phonenumber = phonenumber;
+        this.remainDays = remainDays;
     }
     
 //    public UserType getUserType() {

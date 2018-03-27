@@ -5,17 +5,27 @@
         .module('pteMagicApp')
         .controller('UserManagementDialogController',UserManagementDialogController);
 
-    UserManagementDialogController.$inject = ['$stateParams', '$uibModalInstance', 'entity', 'User', 'JhiLanguageService'];
+    UserManagementDialogController.$inject = ['$scope', '$stateParams', '$uibModalInstance', 'entity', 'User', 'JhiLanguageService'];
 
-    function UserManagementDialogController ($stateParams, $uibModalInstance, entity, User, JhiLanguageService) {
+    function UserManagementDialogController ($scope, $stateParams, $uibModalInstance, entity, User, JhiLanguageService) {
         var vm = this;
 
-        vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
+        vm.authorities = ['ROLE_FREE_MEMBER', 'ROLE_SILVER', 'ROLE_GOLD', 'ROLE_PLATIUM'];
         vm.clear = clear;
         vm.languages = null;
         vm.save = save;
         vm.user = entity;
-
+        
+        $scope.$watch('vm.user.authorities', function () {
+            console.log(vm.user.authorities);
+        	if (!$.inArray('ROLE_FREE_MEMBER', vm.user.authorities)) {
+        		vm.user.remainDays = null;
+            } else {
+            	if (vm.user.remainDays == null) {
+            		vm.user.remainDays = 120;
+            	}
+            }
+        });
 
         JhiLanguageService.getAll().then(function (languages) {
             vm.languages = languages;

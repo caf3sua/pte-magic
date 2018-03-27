@@ -186,10 +186,11 @@ public class UserService {
         return Optional.of(userRepository
             .findOne(userDTO.getId()))
             .map(user -> {
-                user.setLogin(userDTO.getLogin());
-                user.setEmail(userDTO.getEmail());
-                user.setActivated(userDTO.isActivated());
-                user.setLangKey(userDTO.getLangKey());
+//                user.setLogin(userDTO.getLogin());
+//                user.setEmail(userDTO.getEmail());
+//                user.setActivated(userDTO.isActivated());
+//                user.setLangKey(userDTO.getLangKey());
+            	user.setRemainDays(userDTO.getRemainDays());
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
