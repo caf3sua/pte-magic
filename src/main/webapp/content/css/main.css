@@ -1196,17 +1196,26 @@ audio::-webkit-media-controls-panel {
     width: calc(100% + 30px); /* Adjust as needed */
 }
 #override{
-    width: 20px;
+    width: 65%;
     height: 20px;
-    background: #fff;
+    background: transparent;
     position: absolute;
     z-index: 99;
     top: 25px;
     left: 26px;
 }
 /* jhipster-needle-css-add-main JHipster will add new css style */
-@media (min-width:992px) and (max-width:1200px) {
 
+@media (min-width:992px) and (max-width:1200px) {
+    #override {
+        width: 65%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
 
     .pte-mock-test-item-footer-btn {
         background: #393939;
@@ -1314,7 +1323,27 @@ audio::-webkit-media-controls-panel {
         margin: 15px 0 0 0;
     }
 }
+@media (min-width:992px) and (max-width:1199px) {
+    #override {
+        width: 55%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
+}
 @media (min-width:768px) and (max-width:991px) {
+    #override {
+        width: 79%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
     .pte-body-content-text {
         position: absolute;
         top: 220px;
@@ -1448,7 +1477,38 @@ audio::-webkit-media-controls-panel {
         font-style: normal;
     }
 }
+@media (min-width:768px) and (max-width:903px) {
+    #override {
+        width: 75%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
+}
+@media (min-width:768px) and (max-width:786px) {
+    #override {
+        width: 72%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
+}
 @media (min-width:480px) and (max-width:767px) {
+    #override {
+        width: 72%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #f9db01;
         text-decoration: none;
@@ -1565,7 +1625,49 @@ audio::-webkit-media-controls-panel {
         padding: 3px 15px;
     }
 }
+@media (min-width:480px) and (max-width:700px) {
+    #override {
+        width: 69%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
+}
+@media (min-width:480px) and (max-width:630px) {
+    #override {
+        width: 64%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
+}
+@media (min-width:480px) and (max-width:560px) {
+    #override {
+        width: 60%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
+}
 @media (max-width:479px){
+    #override {
+        width: 61%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
     .pte-text-answer{
         font-family: 'Roboto';
         font-weight: 400;
@@ -1786,5 +1888,27 @@ audio::-webkit-media-controls-panel {
     .navbar-nav > li > a {
         padding-top: 10px;
         padding-bottom: 10px;
+    }
+}
+@media (max-width:420px){
+    #override {
+        width: 61%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
+    }
+}
+@media (min-width:320px) and (max-width:380px){
+    #override {
+        width: 70%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 26px;
     }
 }
