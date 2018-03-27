@@ -1204,6 +1204,9 @@ audio::-webkit-media-controls-panel {
     top: 25px;
     left: 26px;
 }
+.margin-top130{
+    margin-top: 130px;
+}
 /* jhipster-needle-css-add-main JHipster will add new css style */
 
 @media (min-width:992px) and (max-width:1200px) {
@@ -1912,9 +1915,9 @@ audio::-webkit-media-controls-panel {
         left: 26px;
     }
 }
-canvas { 
-	display: inline-block; 
-	background: #202020; 
+canvas {
+	display: inline-block;
+	background: #202020;
 	width: 95%;
 	height: 45%;
 	box-shadow: 0px 0px 10px blue;
@@ -1928,11 +1931,11 @@ canvas {
 	width: 100%;
 }
 #record { height: 5vh; }
-#record.recording { 
+#record.recording {
 	background: red;
-	background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
-	background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
-	background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%); 
+	background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
+	background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
+	background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
 }
 #save, #save img { height: 4vh; }
 #save { opacity: 0.25;}
