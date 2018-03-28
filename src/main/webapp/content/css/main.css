@@ -710,7 +710,7 @@ ui bootstrap tweaks
 }
 .pte-icon-sign{
     position: relative;
-    font-size: 11px;
+    font-size: 15px;
     color: #9a9a9a;
     top: 1px;
 }
@@ -1374,6 +1374,12 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:768px) and (max-width:991px) {
+    .pte-icon-sign{
+        position: relative;
+        font-size: 11px;
+        color: #9a9a9a;
+        top: 1px;
+    }
     #override {
         width: 79%;
         height: 20px;
