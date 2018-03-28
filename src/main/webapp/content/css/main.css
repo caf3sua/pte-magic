@@ -548,6 +548,7 @@ ui bootstrap tweaks
     color: #fff;
     width: auto;
     height: 120px;
+    cursor: pointer;
 }
 .pte-pree-question:hover{
     background-color: #f9db01;
@@ -1806,6 +1807,7 @@ audio::-webkit-media-controls-panel {
         color: #fff;
         width: auto;
         height: 75px;
+        cursor: pointer;
     }
     .pte-pree-question>img {
         height: 75px;
