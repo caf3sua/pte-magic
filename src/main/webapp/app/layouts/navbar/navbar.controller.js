@@ -39,7 +39,7 @@
                 vm.isAuthenticated = Principal.isAuthenticated;
             });
         }
-
+        showActive();
         function showActive(type) {
             if(type == 'PRACTICE'){
                 $timeout(function (){

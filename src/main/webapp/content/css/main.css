@@ -491,9 +491,8 @@ ui bootstrap tweaks
     margin-left: 25px;
 }
 .pte-logo-desktop{
-    position: absolute;
+    position: fixed;
     top: 0;
-    left: 103.5px;
     z-index: 99;
 }
 .position-relative{
@@ -711,7 +710,7 @@ ui bootstrap tweaks
 }
 .pte-icon-sign{
     position: relative;
-    font-size: 15px;
+    font-size: 11px;
     color: #9a9a9a;
     top: 1px;
 }
@@ -1209,6 +1208,43 @@ audio::-webkit-media-controls-panel {
     margin-top: 130px;
 }
 /* jhipster-needle-css-add-main JHipster will add new css style */
+.padding-top-bottom35{
+    padding-bottom: 35px;
+    padding-top: 35px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 42px;
+}
+.pte-link-page{
+    color: #b0b0b0;
+    margin-right: 35px;
+}
+.pte-link-page>i{
+    font-size: 6px;
+    color: #b0b0b0;
+    position: relative;
+    top: -2px;
+    margin-right: 5px;
+}
+.pte-link-page>span{
+    font-size: 13px;
+}
+.pte-link-page-stay{
+    color: #000;
+    margin-right: 35px;
+}
+.pte-link-page-stay>i{
+    font-size: 6px;
+    color: #000;
+    position: relative;
+    top: -2px;
+    margin-right: 5px;
+}
+.pte-link-page-stay>span{
+    font-size: 13px;
+    font-family: 'Roboto';
+    font-weight: normal;
+    font-style: normal;
+}
 
 @media (min-width:992px) and (max-width:1200px) {
     #override {
@@ -1280,9 +1316,8 @@ audio::-webkit-media-controls-panel {
         float: right;
     }
     .pte-logo-desktop {
-        position: absolute;
+        position: fixed;
         top: 0;
-        left: 30.5px;
         z-index: 99;
     }
     .navbar-nav > li > a {
@@ -1427,9 +1462,8 @@ audio::-webkit-media-controls-panel {
         width: auto;
     }
     .pte-logo-desktop {
-        position: absolute;
+        position: fixed;
         top: 0;
-        left: 12.5px;
         z-index: 99;
     }
     .navbar-nav > li > a {
@@ -1456,7 +1490,7 @@ audio::-webkit-media-controls-panel {
         font-family: 'Roboto';
         font-weight: bold;
         font-style: normal;
-        font-size: 13px;
+        font-size: 11px;
         text-transform: uppercase;
     }
     .navbar-default .navbar-nav > .active > a>span {
