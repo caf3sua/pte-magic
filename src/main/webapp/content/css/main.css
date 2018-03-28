@@ -1245,7 +1245,10 @@ audio::-webkit-media-controls-panel {
     font-weight: normal;
     font-style: normal;
 }
-
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #f9db01;
+    background-color: transparent;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
