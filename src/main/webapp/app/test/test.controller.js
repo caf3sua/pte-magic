@@ -24,7 +24,7 @@
     	vm.answers = [];
     	vm.isFinish = false;
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
-    	vm.countdown = 100;
+    	vm.countdown = 130; // 2min10second
     	vm.audio;
     	vm.questionGroup;
     	

@@ -26,20 +26,18 @@
         </div>
         <div class="form-group">
             <label class="control-label" data-translate="pteMagicApp.examType.type" for="field_type">Type</label>
-            <select class="form-control" name="type" ng-model="vm.examType.type" id="field_type">
-            	<!-- FREE_EXAM, PART_A, PART_B, FULL, MOCK_TEST -->
-            	<option value="FREE_EXAM_LISTENING" data-translate="pteMagicApp.TestType.FREE_EXAM_LISTENING">FREE_EXAM_LISTENING</option>
-            	<option value="FREE_EXAM_READING" data-translate="pteMagicApp.TestType.FREE_EXAM_READING">FREE_EXAM_READING</option>
-            	<option value="MEMBER_QUESTION_LISTENING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_LISTENING">MEMBER_QUESTION_LISTENING</option>
-            	<option value="MEMBER_QUESTION_READING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_READING">MEMBER_QUESTION_READING</option>
-            	<option value="MEMBER_QUESTION_SPEAKING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_SPEAKING">MEMBER_QUESTION_SPEAKING</option>
-            	<option value="MEMBER_QUESTION_WRITING" data-translate="pteMagicApp.TestType.MEMBER_QUESTION_WRITING">MEMBER_QUESTION_WRITING</option>
+            <select class="form-control" name="type" ng-model="vm.examType.type" id="field_type"
+                    ng-options="type for type in vm.questionTypes" ng-change="vm.changeExamType()">
             </select>
         </div>
+        
+        <!-- READING -->
+       	<div ng-include="'app/admin/exam-type/partial.numquestion.html'"></div>
+        
         <div class="form-group">
             <label class="control-label" for="field_totalQuestion">Total Question</label>
             <input type="number" class="form-control" name="totalQuestion" id="field_totalQuestion"
-                    ng-model="vm.examType.totalQuestion"
+                    ng-model="vm.examType.totalQuestion" readonly="readonly"
                     />
         </div>
         <div class="form-group">

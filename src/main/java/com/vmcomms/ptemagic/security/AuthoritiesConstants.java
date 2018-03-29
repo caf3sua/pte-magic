@@ -17,7 +17,7 @@ public final class AuthoritiesConstants {
     
     public static final String GOLD = "ROLE_GOLD";
     
-    public static final String PLATIUM = "ROLE_PLATIUM";
+    public static final String PLATINUM = "ROLE_PLATINUM";
 
     private AuthoritiesConstants() {
     }
