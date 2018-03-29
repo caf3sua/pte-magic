@@ -268,6 +268,7 @@
                     <tr>
                         <td>
                             <h3  th:text="#{email.score.greeting(${user.login})}">Hi,</h3>
+                            <p class="lead" th:text="#{email.score.exam.title(${score.examTitle})}">Your score: ${score.examTitle}</p>
                             <p class="lead" th:text="#{email.score.text1(${score.score}, ${score.totalQuestion})}">Your score: ${score.score}/${score.totalQuestion}</p>
                             <p>Regards</p>
                             <p>Team.</p>

@@ -11,6 +11,7 @@ public class ScoreInfoDTO {
 	/** Free sample */
 	private int totalQuestion;
 	private int score;
+	private String examTitle;
 
 	public UserDTO getUser() {
 		return user;
@@ -34,6 +35,14 @@ public class ScoreInfoDTO {
 
 	public void setScore(int score) {
 		this.score = score;
+	}
+
+	public String getExamTitle() {
+		return examTitle;
+	}
+
+	public void setExamTitle(String examTitle) {
+		this.examTitle = examTitle;
 	}
 
 
