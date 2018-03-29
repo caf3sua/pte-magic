@@ -82,6 +82,7 @@
             vm.isNavbarCollapsed = true;
             $timeout(function () {
                 angular.element(document.getElementsByClassName("dropdown")).removeClass("active");
+                angular.element('#Home').addClass("active");
             })
         }
     }
