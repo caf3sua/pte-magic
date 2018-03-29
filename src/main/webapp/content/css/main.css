@@ -1249,6 +1249,9 @@ audio::-webkit-media-controls-panel {
     color: #f9db01;
     background-color: transparent;
 }
+.pte-margin-left-user{
+    margin-left: 100px;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
@@ -1525,6 +1528,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:768px) and (max-width:903px) {
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 75%;
         height: 20px;
@@ -1536,6 +1542,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:768px) and (max-width:786px) {
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 72%;
         height: 20px;
@@ -1547,6 +1556,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:767px) {
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 72%;
         height: 20px;
@@ -1673,6 +1685,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:700px) {
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 69%;
         height: 20px;
@@ -1684,6 +1699,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:630px) {
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 64%;
         height: 20px;
@@ -1695,6 +1713,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:560px) {
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 60%;
         height: 20px;
@@ -1706,6 +1727,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (max-width:479px){
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 61%;
         height: 20px;
@@ -1939,6 +1963,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (max-width:420px){
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 61%;
         height: 20px;
@@ -1950,6 +1977,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:320px) and (max-width:380px){
+    .pte-margin-left-user{
+        margin-left: 0px;
+    }
     #override {
         width: 70%;
         height: 20px;
