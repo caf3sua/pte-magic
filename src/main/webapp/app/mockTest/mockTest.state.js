@@ -9,8 +9,8 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('mockTest', {
-            parent: 'home',
-            url: '/home/mockTest',
+            parent: 'app',
+            url: '/mockTest',
             data: {
                 authorities: ['ROLE_SILVER', 'ROLE_GOLD', 'ROLE_PLATINUM']
             },
