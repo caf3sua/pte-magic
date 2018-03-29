@@ -100,9 +100,12 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 		
 		// Check finish
 		if (isFinishExam(examDTO)) {
+			ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+			
 			ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
 			scoreInfo.setUser(userDTO);
 			scoreInfo.setScore(score);
+			scoreInfo.setExamTitle(examTypeDTO.getName());
 			scoreInfo.setTotalQuestion(totalScore);
 			
 	        // Send mail
