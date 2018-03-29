@@ -26,7 +26,7 @@
         vm.loggedIn = false;
         vm.notloggedIn = false;
         vm.$state = $state;
-
+        vm.delActive = delActive;
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });
@@ -80,8 +80,10 @@
 
         function collapseNavbar() {
             vm.isNavbarCollapsed = true;
+        }
+        function delActive() {
             $timeout(function () {
-                angular.element(document.getElementsByClassName("dropdown")).removeClass("active");
+                angular.element(document.getElementsByClassName("checkActive")).removeClass("active");
                 angular.element('#Home').addClass("active");
             })
         }

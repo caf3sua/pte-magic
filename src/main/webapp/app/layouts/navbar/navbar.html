@@ -27,7 +27,7 @@
             </div>
             <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
                 <ul class="nav navbar-nav navbar-right">
-                    <li ui-sref-active="active" id="Home">
+                    <li ui-sref-active="active" id="Home" ng-click="vm.delActive()">
                         <a ui-sref="home" ng-click="vm.collapseNavbar()">
                             <span class="" data-translate="global.menu.home">Home</span>
                         </a>
@@ -66,7 +66,7 @@
 
 
 					<!-- LOGGED -->
-                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer pte-margin-left-user" id="USER" ng-switch-when="true">
+                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer checkActive pte-margin-left-user" id="USER" ng-switch-when="true">
                         <a  class="dropdown-toggle" uib-dropdown-toggle  ng-click="vm.showActive('USER')">
                             <span>
                                  <span class="icon-user"></span>
@@ -106,7 +106,7 @@
 	                        </li>
                         </ul>
                     </li>
-                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer" ng-switch-when="true">
+                    <li ui-sref-active="active" uib-dropdown class="dropdown pointer checkActive" ng-switch-when="true">
                         <a ng-click="vm.logout()" class="dropdown-toggle" uib-dropdown-toggle >
                             <span>
                                 <span class="pte-icon-sign icon-sign_out">
