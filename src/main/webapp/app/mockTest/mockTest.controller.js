@@ -45,7 +45,7 @@
                     angular.element(document.getElementsByClassName("pte-mockTest-block")).removeClass("active");
                     angular.element('#fullTest').addClass("active");
                   });
-                vm.selectedExams = vm.writingExams;
+                vm.selectedExams = vm.fullExams;
             }
             vm.examShowFlag = true;
             vm.selectedType = type;

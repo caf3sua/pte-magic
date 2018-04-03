@@ -19,6 +19,7 @@
         }
 
         function confirmDelete (id) {
+        	console.log('delete: ' + id);
             Exam.delete({id: id},
                 function () {
                     $uibModalInstance.close(true);

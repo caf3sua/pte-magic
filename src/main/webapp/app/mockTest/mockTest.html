@@ -71,93 +71,25 @@
         <!--</div>-->
         <div class="col-md-12 pte-free-mock-mobile" ng-show="vm.examShowFlag">
             <div class="col-md-12 pte-pre-sample-listQuestion">
-                <div class="col-md-4 margin-top30">
+                <div class="col-md-4 margin-top30" ng-repeat="exam in vm.selectedExams">
                     <div class="pte-mock-test-item">
                         <div >
                             <ul class="pte-free-sample-item-text">
                                 <li >
-                                    Multiple choice, choose multiple
-                                    answers
+                                    {{exam.name}}
                                 </li>
                             </ul>
                             <ul class="pte-block-item-mocktest-content">
-                                <li><a>Question amuont: <span>24</span></a></li>
+                                <li><a>Question amuont: <span>{{exam.totalQuestion | number}}</span></a></li>
                                 <li><a>Test Durication: <span>00:25:22</span></a></li>
                                 <li><a>Unsubscribe</a></li>
                             </ul>
                         </div>
                         <div class="pte-mock-test-item-footer">
                             <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
-                            <button class="pte-mock-test-item-footer-btn">Start</button>
+                            <button class="pte-mock-test-item-footer-btn" ng-click="vm.startTest(exam.id)">Start</button>
                         </div>
                     </div>
-
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-mock-test-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Multiple choice, choose multiple
-                                    answers
-                                </li>
-                            </ul>
-                            <ul class="pte-block-item-mocktest-content">
-                                <li><a>Question amuont: <span>24</span></a></li>
-                                <li><a>Test Durication: <span>00:25:22</span></a></li>
-                                <li><a>Unsubscribe</a></li>
-                            </ul>
-                        </div>
-                        <div class="pte-mock-test-item-footer">
-                            <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
-                            <button class="pte-mock-test-item-footer-btn">Start</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-mock-test-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Multiple choice, choose multiple
-                                    answers
-                                </li>
-                            </ul>
-                            <ul class="pte-block-item-mocktest-content">
-                                <li><a>Question amuont: <span>24</span></a></li>
-                                <li><a>Test Durication: <span>00:25:22</span></a></li>
-                                <li><a>Unsubscribe</a></li>
-                            </ul>
-                        </div>
-                        <div class="pte-mock-test-item-footer">
-                            <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
-                            <button class="pte-mock-test-item-footer-btn">Start</button>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-4 margin-top30">
-                    <div class="pte-mock-test-item">
-                        <div >
-                            <ul class="pte-free-sample-item-text">
-                                <li >
-                                    Multiple choice, choose multiple
-                                    answers
-                                </li>
-                            </ul>
-                            <ul class="pte-block-item-mocktest-content">
-                                <li><a>Question amuont: <span>24</span></a></li>
-                                <li><a>Test Durication: <span>00:25:22</span></a></li>
-                                <li><a>Unsubscribe</a></li>
-                            </ul>
-                        </div>
-                        <div class="pte-mock-test-item-footer">
-                            <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
-                            <button class="pte-mock-test-item-footer-btn">Start</button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

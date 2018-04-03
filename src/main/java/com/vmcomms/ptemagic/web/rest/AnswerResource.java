@@ -8,6 +8,7 @@ import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
 import com.vmcomms.ptemagic.web.rest.util.PaginationUtil;
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
 import io.swagger.annotations.ApiParam;
+import liquibase.util.StringUtils;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,8 +62,10 @@ public class AnswerResource {
             throw new BadRequestAlertException("A new answer cannot already have an ID", ENTITY_NAME, "idexists");
         }
         // Update audio link
-        String newAudioLink = "https://storage.googleapis.com/" + env.getProperty("google-cloud.storage.bucket-name-answer") + "/" + answerDTO.getAudioLink();
-        answerDTO.setAudioLink(newAudioLink);
+        if (StringUtils.isNotEmpty(answerDTO.getAudioLink())) {
+        	String newAudioLink = "https://storage.googleapis.com/" + env.getProperty("google-cloud.storage.bucket-name-answer") + "/" + answerDTO.getAudioLink();
+            answerDTO.setAudioLink(newAudioLink);
+        }
         
         AnswerDTO result = answerService.save(answerDTO);
         return ResponseEntity.created(new URI("/api/answers/" + result.getId()))
