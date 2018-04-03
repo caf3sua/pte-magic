@@ -8,7 +8,7 @@
             </div>
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4">
-            <div class="pte-mockTest-block" id="pastA" ng-click="vm.pastA()">
+            <div class="pte-mockTest-block" id="pastA" ng-click="vm.showExamList('MOCK_TEST_A')">
                 <div class="pte-border-block-mockTest" >
                     <div class="pte-mockTest-block-text">
                         <p class="pte-mockTest-block-text-header">Part a</p>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4">
-            <div class="pte-mockTest-block">
+            <div class="pte-mockTest-block" id="pastB" ng-click="vm.showExamList('MOCK_TEST_B')">
                 <div class="pte-border-block-mockTest" >
                     <div class="pte-mockTest-block-text">
                         <p class="pte-mockTest-block-text-header">Part b</p>
@@ -36,7 +36,7 @@
             </div>
         </div>
         <div class="col-md-4 col-xs-4 col-sm-4">
-            <div class="pte-mockTest-block" ng-click="vm.listeningList()">
+            <div class="pte-mockTest-block" id="fullTest" ng-click="vm.showExamList('MOCK_TEST_FULL')" >
                 <div class="pte-border-block-mockTest" >
                     <div class="pte-mockTest-block-text">
                         <p class="pte-mockTest-block-text-header">Mock test FULL</p>
@@ -69,7 +69,7 @@
                 <!--<span class="icon-checkbox-pen-outline2"></span>-->
             <!--</div>-->
         <!--</div>-->
-        <div class="col-md-12 pte-free-mock-mobile" ng-show="vm.listQuestionShow">
+        <div class="col-md-12 pte-free-mock-mobile" ng-show="vm.examShowFlag">
             <div class="col-md-12 pte-pre-sample-listQuestion">
                 <div class="col-md-4 margin-top30">
                     <div class="pte-mock-test-item">

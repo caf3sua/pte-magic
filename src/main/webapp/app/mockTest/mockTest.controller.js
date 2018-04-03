@@ -25,25 +25,25 @@
         vm.totalExamQuestionWriting = 0;
 
         function showExamList(type) {
-        	
+
             if(type == 'MOCK_TEST_A'){
                 $timeout(function (){
-                  angular.element('#pastA').addClass("active");
-                  angular.element('#pastAMobile').addClass("activeMobile");
+                    angular.element(document.getElementsByClassName("pte-mockTest-block")).removeClass("active");
+                    angular.element('#pastA').addClass("active");
                 });
 
                 vm.selectedExams = vm.partAExams;
             }else if(type == 'MOCK_TEST_B'){
             	$timeout(function (){
-                    angular.element('#pastA').addClass("active");
-                    angular.element('#pastAMobile').addClass("activeMobile");
+                    angular.element(document.getElementsByClassName("pte-mockTest-block")).removeClass("active");
+                    angular.element('#pastB').addClass("active");
                   });
 
                 vm.selectedExams = vm.partBExams;
             }if(type == 'MOCK_TEST_FULL'){
             	$timeout(function (){
-                    angular.element('#pastA').addClass("active");
-                    angular.element('#pastAMobile').addClass("activeMobile");
+                    angular.element(document.getElementsByClassName("pte-mockTest-block")).removeClass("active");
+                    angular.element('#fullTest').addClass("active");
                   });
                 vm.selectedExams = vm.writingExams;
             }
@@ -80,7 +80,7 @@
   					function(data, headers) {
   						if (data != null) {
 			  				vm.partBExams = data;
-	
+
 			  				angular.forEach(data, function(value, key){
 		  	            		vm.totalExamQuestionReading += value.totalQuestion;
 			  	            });
@@ -93,7 +93,7 @@
   					function(data, headers) {
   						if (data != null) {
 			  				vm.fullExams = data;
-	
+
 			  				angular.forEach(data, function(value, key){
 		  	            		vm.totalExamQuestionSpeaking += value.totalQuestion;
 			  	            });

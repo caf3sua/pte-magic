@@ -1257,6 +1257,7 @@ audio::-webkit-media-controls-panel {
     font-size: 25px;
     margin-top: 18px;
     cursor: pointer;
+    outline: none;
  }
 #record:hover {
     color: #f9db01;
