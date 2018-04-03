@@ -143,18 +143,18 @@
         	}
         	
         	if (vm.examType.type == "MOCK_TEST_FULL") {
-        		showQuestionGroup1();
-        		showQuestionGroup2();
-        		showQuestionGroup3();
-        		showQuestionGroup4();
+        		//showQuestionGroup1();
+        		//showQuestionGroup2();
+        		//showQuestionGroup3();
+        		//showQuestionGroup4();
         	} else if (vm.examType.type == "MOCK_TEST_A") {
         		// Specking/Writing
-        		showQuestionGroup1();
-        		showQuestionGroup2();
+        		//showQuestionGroup1();
+        		//showQuestionGroup2();
     		} else if (vm.examType.type == "MOCK_TEST_B") {
     			// Reading/Listening
-    			showQuestionGroup3();
-        		showQuestionGroup4();
+    			//showQuestionGroup3();
+        		//showQuestionGroup4();
 			} else if (vm.examType.type == "FREE_EXAM_LISTENING" || vm.examType.type == "MEMBER_QUESTION_LISTENING") {
 				showQuestionGroup4();
 			} else if (vm.examType.type == "FREE_EXAM_READING" || vm.examType.type == "MEMBER_QUESTION_READING") {

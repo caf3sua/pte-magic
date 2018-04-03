@@ -29,6 +29,7 @@ import com.codahale.metrics.annotation.Timed;
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
+import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.AnswerQuestionDTO;
 import com.vmcomms.ptemagic.dto.ExamInfoDTO;
 import com.vmcomms.ptemagic.service.AnswerService;
@@ -147,8 +148,17 @@ public class ExamResource {
          
         ExamDTO result = examService.save(examDTO);
         
-        // Random to create/choice question for exam
-        List<QuestionDTO> question = generateQuestionExam(result);
+        ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+        List<QuestionDTO> question = null;
+        /* Generate exam question */
+        // , MOCK_TEST_A, MOCK_TEST_B, MOCK_TEST_FULL
+        if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A) || examTypeDTO.getType().equals(TestType.MOCK_TEST_B) || 
+        		examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
+        	question = generateMockTestQuestionExam(result);
+        } else {
+            // Random to create/choice question for exam
+            question = generateQuestionExam(result);
+        }
         
         
         ExamInfoDTO examInfoDTO = new ExamInfoDTO();
@@ -161,6 +171,38 @@ public class ExamResource {
             .body(examInfoDTO);
     }
 
+    private List<QuestionDTO> generateMockTestQuestionExam(ExamDTO examDTO) {
+    	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+    	List<QuestionDTO> questions = new ArrayList<>();
+    	
+    	if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A)) {
+    		// Speaking/writing
+    		selectMockTestExamQuestionSpeaking(examTypeDTO, questions);
+    		selectMockTestExamQuestionWriting(examTypeDTO, questions);
+        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
+        	// Reading/listening
+        	selectMockTestExamQuestionReading(examTypeDTO, questions);
+        	selectMockTestExamQuestionListening(examTypeDTO, questions);
+        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
+        	// full
+        	selectMockTestExamQuestionSpeaking(examTypeDTO, questions);
+    		selectMockTestExamQuestionWriting(examTypeDTO, questions);
+    		selectMockTestExamQuestionReading(examTypeDTO, questions);
+        	selectMockTestExamQuestionListening(examTypeDTO, questions);
+        }
+    	
+    	int order = 0;
+		for (QuestionDTO questionDTO : questions) {
+			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
+			eqDTO.setExamId(examDTO.getId());
+			eqDTO.setQuestionId(questionDTO.getId());
+			eqDTO.setOrderId(order);
+			examQuestionService.save(eqDTO);
+			order++;
+		}
+		
+		return questions;
+    }
     
     private List<QuestionDTO> generateQuestionExam(ExamDTO examDTO) {
     	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
@@ -243,6 +285,63 @@ public class ExamResource {
     	if (examTypeDTO.getNumQuestion20() != null && examTypeDTO.getNumQuestion20() > 0) {
     		selectQuestionByType(questions, examTypeDTO.getNumQuestion20(), QuestionType.LISTENING_DICTATION);
     	}
+    }
+    
+    
+    private void selectMockTestExamQuestionListening(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
+    	// Select question listening
+		//    	13. Summarize Spoken Text (3)
+		//    	14. Fill in the Blank (2)
+		//    	15. MCQ Single Answer (2)
+		//    	16. MCQs Multiple Answer (2)
+		//    	17. Highlight Correct Summary (2)
+		//    	18. Select Missing Words (2)
+		//    	19. Highlight Incorrect Words (2)
+		//    	20. Dictation (4)
+    		selectQuestionByType(questions, 3, QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_FIB_L);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_SINGLE_ANSWER);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_MULTIPLE_ANSWER);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_CORRECT_SUMMARY);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_SELECT_MISSING_WORD);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD);
+    		selectQuestionByType(questions, 4, QuestionType.LISTENING_DICTATION);
+    }
+    
+    private void selectMockTestExamQuestionReading(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
+    	// Select question reading
+		//    	8. Fill in the Blank: R+W (7)
+		//    	9. Fill in the Blank: R (5)
+		//    	10. Re-order Paragraph (3)
+		//    	11. MCQ Single Answer (2)
+		//    	12. MCQ Multiple Answer (3)
+		selectQuestionByType(questions, 7, QuestionType.READING_FIB_R_W);
+		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
+		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
+		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
+		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
+    }
+    
+    private void selectMockTestExamQuestionWriting(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
+    	// Select question writing
+		//    	6. Summarize Written Text (3)
+		//    	7. Essay (1-2)
+		selectQuestionByType(questions, 3, QuestionType.WRITING_SUMMARIZE_WRITTEN_TEXT);
+		selectQuestionByType(questions, 2, QuestionType.WRITING_ESSAY);
+    }
+    
+    private void selectMockTestExamQuestionSpeaking(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
+    	// Select question Speaking
+		//    	1. Read Aloud (6)
+		//    	2. Repeat Sentence (10)
+		//    	3. Describe Image (6)
+		//    	4. Retell Lecture (4)
+		//    	5. Answer Short Question (10)
+		selectQuestionByType(questions, 6, QuestionType.SPEAKING_READ_ALOUD);
+		selectQuestionByType(questions, 10, QuestionType.SPEAKING_REPEAT_SENTENCE);
+		selectQuestionByType(questions, 6, QuestionType.SPEAKING_DESCRIBE_IMAGE);
+		selectQuestionByType(questions, 4, QuestionType.SPEAKING_RETELL_LECTURE);
+		selectQuestionByType(questions, 10, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
     }
     
     private void selectQuestionByType(List<QuestionDTO> questions, int number, QuestionType type) {
