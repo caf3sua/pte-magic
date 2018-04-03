@@ -1252,6 +1252,21 @@ audio::-webkit-media-controls-panel {
 .pte-margin-left-user{
     margin-left: 100px !important;
 }
+#record {
+    height: 7vh;
+    font-size: 25px;
+    margin-top: 18px;
+    cursor: pointer;
+ }
+#record:hover {
+    color: #f9db01;
+}
+#record:focus {
+    color: #f9db01;
+}
+#record.recording {
+    color: #f9db01;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
@@ -1432,10 +1447,10 @@ audio::-webkit-media-controls-panel {
         right: 30px;
     }
     .pte-free-listquestion-mobile {
-        margin-top: 70px;
+        margin-top: 113px;
     }
     .pte-free-mock-mobile {
-        margin-top: 132px;
+        margin-top: 174px;
     }
     .pte-mockTest-block-text {
         padding: 20px 0;
@@ -1633,10 +1648,10 @@ audio::-webkit-media-controls-panel {
         right: 30px;
     }
     .pte-free-listquestion-mobile {
-        margin-top: 70px;
+        margin-top: 113px;
     }
     .pte-free-mock-mobile {
-        margin-top: 120px;
+        margin-top: 163px;
     }
     .pte-mockTest-block-text {
         padding: 18px 0;
@@ -1913,10 +1928,10 @@ audio::-webkit-media-controls-panel {
         padding: 0;
     }
     .pte-free-listquestion-mobile {
-        margin-top: 57px;
+        margin-top: 99px;
     }
     .pte-free-mock-mobile {
-        margin-top: 90px;
+        margin-top: 136px;
     }
     .pte-pree-question-text {
         text-align: right;
@@ -2005,13 +2020,8 @@ canvas {
 	height: 20%;
 	width: 100%;
 }
-#record { height: 5vh; }
-#record.recording {
-	background: red;
-	background: -webkit-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
-	background: -moz-radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
-	background: radial-gradient(center, ellipse cover, #ff0000 0%,lightgrey 75%,lightgrey 100%,#7db9e8 100%);
-}
+
+
 #save, #save img { height: 4vh; }
 #save { opacity: 0.25;}
 #save[download] { opacity: 1;}
