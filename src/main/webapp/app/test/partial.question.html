@@ -16,7 +16,7 @@
     </div>
 </div>
     <div class="col-md-6 pte-content-question">
-        <p class="pte-text-question">{{vm.selectedQuestion.description}}</p>
+        <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
 
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">
@@ -51,7 +51,7 @@
            </div>
        </div>
        <div class="text-center">
-           <button class="pte-test-answer" ng-click="vm.answer()" >Answer</button>
+           <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">Answer</button>
        </div>
 
 </div>

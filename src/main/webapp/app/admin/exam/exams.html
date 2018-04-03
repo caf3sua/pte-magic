@@ -7,7 +7,6 @@
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="userId"><span data-translate="pteMagicApp.exam.userId">User Id</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="examTypeId"><span data-translate="pteMagicApp.exam.examTypeId">Exam Type Id</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="result"><span data-translate="pteMagicApp.exam.result">Result</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="scoreWriting"><span data-translate="pteMagicApp.exam.scoreWriting">Score Writing</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="scoreListening"><span data-translate="pteMagicApp.exam.scoreListening">Score Listening</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -21,7 +20,6 @@
                 <tr ng-repeat="exam in vm.exams track by exam.id">
                     <td><a ui-sref="exam-detail({id:exam.id})">{{exam.id}}</a></td>
                     <td>{{exam.userId}}</td>
-                    <td>{{exam.examTypeId}}</td>
                     <td data-translate="{{'pteMagicApp.ProgressType.' + exam.result}}">{{exam.result}}</td>
                     <td>{{exam.scoreWriting}}</td>
                     <td>{{exam.scoreListening}}</td>
@@ -37,12 +35,6 @@
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
-                            </button>
-                            <button type="submit"
-                                    ui-sref="exam.edit({id:exam.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="exam.delete({id:exam.id})"

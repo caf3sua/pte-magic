@@ -2,6 +2,7 @@ package com.vmcomms.ptemagic.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.vmcomms.ptemagic.service.AnswerService;
+import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
 import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
 import com.vmcomms.ptemagic.web.rest.util.PaginationUtil;
@@ -10,6 +11,8 @@ import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -34,11 +37,14 @@ public class AnswerResource {
 
     private static final String ENTITY_NAME = "answer";
 
-    private final AnswerService answerService;
-
-    public AnswerResource(AnswerService answerService) {
-        this.answerService = answerService;
-    }
+    @Autowired
+    private AnswerService answerService;
+    
+    @Autowired
+    private QuestionService questionService;
+    
+    @Autowired
+    private Environment env;
 
     /**
      * POST  /answers : Create a new answer.
@@ -54,6 +60,10 @@ public class AnswerResource {
         if (answerDTO.getId() != null) {
             throw new BadRequestAlertException("A new answer cannot already have an ID", ENTITY_NAME, "idexists");
         }
+        // Update audio link
+        String newAudioLink = "https://storage.googleapis.com/" + env.getProperty("google-cloud.storage.bucket-name-answer") + "/" + answerDTO.getAudioLink();
+        answerDTO.setAudioLink(newAudioLink);
+        
         AnswerDTO result = answerService.save(answerDTO);
         return ResponseEntity.created(new URI("/api/answers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -82,6 +92,24 @@ public class AnswerResource {
             .body(result);
     }
 
+    
+    @PutMapping("/answer-update-status")
+    @Timed
+    public ResponseEntity<AnswerDTO> updateStatusAnswer(@RequestBody AnswerDTO answerDTO) throws URISyntaxException {
+        log.debug("REST request to update Answer : {}", answerDTO);
+
+        AnswerDTO result = answerService.findOne(answerDTO.getId());
+        result.setScore(answerDTO.getScore());
+        result.setStatus("DONE");
+        
+        // Save
+        result = answerService.save(result);
+        
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, answerDTO.getId().toString()))
+            .body(result);
+    }
+    
     /**
      * GET  /answers : get all the answers.
      *

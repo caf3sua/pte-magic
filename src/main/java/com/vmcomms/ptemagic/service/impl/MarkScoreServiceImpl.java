@@ -1,5 +1,31 @@
 package com.vmcomms.ptemagic.service.impl;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.auth.oauth2.ServiceAccountCredentials;
+import com.google.cloud.storage.Acl;
+import com.google.cloud.storage.Acl.Role;
+import com.google.cloud.storage.Acl.User;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
+import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
+import com.vmcomms.ptemagic.domain.enumeration.TestType;
+import com.vmcomms.ptemagic.dto.ScoreInfoDTO;
 import com.vmcomms.ptemagic.service.AnswerService;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.ExamService;
@@ -8,31 +34,13 @@ import com.vmcomms.ptemagic.service.MailService;
 import com.vmcomms.ptemagic.service.MarkScoreService;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.service.UserService;
-import com.vmcomms.ptemagic.domain.Exam;
-import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
-import com.vmcomms.ptemagic.domain.enumeration.TestType;
-import com.vmcomms.ptemagic.dto.ScoreInfoDTO;
-import com.vmcomms.ptemagic.repository.ExamRepository;
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 import com.vmcomms.ptemagic.service.dto.UserDTO;
-import com.vmcomms.ptemagic.service.mapper.ExamMapper;
 import com.vmcomms.ptemagic.web.rest.errors.InternalServerErrorException;
-
-import java.util.List;
-import java.util.Optional;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -44,6 +52,9 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 
     private final Logger log = LoggerFactory.getLogger(MarkScoreServiceImpl.class);
 
+    @Autowired
+    private Environment env;
+    
     @Autowired
     private UserService userService;
     
@@ -76,30 +87,30 @@ public class MarkScoreServiceImpl implements MarkScoreService {
                 .map(UserDTO::new)
                 .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
         
-		// Get list exam question
-		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(examId);
-
-        // Calculate score
-		int totalScore = examQuestions.size();
-		int score = 0;
-		// Compare
-		for (ExamQuestionDTO examQuestionDTO : examQuestions) {
-			// Get question to compare
-			QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
-			// Get answer
-			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(examId, examQuestionDTO.getQuestionId());
-			if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
-				score++;
-			}
-		}
-
-		log.debug("score of user : {}/{}", score, totalScore);
-
 		// Update Exam -> ProgressType.DONE
 		ExamDTO examDTO = examService.findOne(examId);
 		
 		// Check finish
 		if (isFinishExam(examDTO)) {
+			// Get list exam question
+			List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(examId);
+
+	        // Calculate score
+			int totalScore = examQuestions.size();
+			int score = 0;
+			// Compare
+			for (ExamQuestionDTO examQuestionDTO : examQuestions) {
+				// Get question to compare
+				QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
+				// Get answer
+				AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(examId, examQuestionDTO.getQuestionId());
+				if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
+					score++;
+				}
+			}
+
+			log.debug("score of user : {}/{}", score, totalScore);
+			
 			ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
 			
 			ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
@@ -148,4 +159,87 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 		return false;
 	}
     
+	public String processUploadToCloud(MultipartFile file, String type) throws IOException {
+		Long currentTime = System.currentTimeMillis();
+		Storage storage;
+		Resource resource = new ClassPathResource("config/" + env.getProperty("google-cloud.storage.credential-file"));
+
+		storage = StorageOptions.newBuilder().setProjectId(env.getProperty("google-cloud.storage.project-id"))
+				.setCredentials(ServiceAccountCredentials.fromStream(resource.getInputStream())).build().getService();
+
+		// Create a bucket
+		String bucketName = env.getProperty("google-cloud.storage.bucket-name-question");
+		if (StringUtils.equals("answer", type)) {
+			bucketName = env.getProperty("google-cloud.storage.bucket-name-answer");
+		}
+
+		String filename = "";
+		if (StringUtils.equals("question", type)) {
+			filename = currentTime + "_" + file.getOriginalFilename();
+		} else {
+			filename = file.getOriginalFilename();
+		}
+				
+		BlobId blobId = BlobId.of(bucketName, filename);
+
+		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType(file.getContentType()).build();
+
+		byte[] content = file.getBytes();
+		storage.create(blobInfo, content);
+		storage.createAcl(blobId, Acl.of(User.ofAllUsers(), Role.READER));
+
+		// Process resize to create thumb
+		String audioUrl = "https://storage.googleapis.com/" + bucketName + "/" + filename;
+		
+		return audioUrl;
+	}
+
+	@Override
+	public void finishExamByMarking(Long examId) {
+		// User info
+        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
+                .map(UserDTO::new)
+                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+        
+		// Update Exam -> ProgressType.DONE
+		ExamDTO examDTO = examService.findOne(examId);
+		
+		// Get list exam question
+		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(examId);
+
+        // Calculate score
+		int totalScore = examQuestions.size();
+		int score = 0;
+		// Compare
+		for (ExamQuestionDTO examQuestionDTO : examQuestions) {
+			// Get question to compare
+			QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
+			// Get answer
+			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(examId, examQuestionDTO.getQuestionId());
+			
+			// Calculate
+			if (StringUtils.equals(answerDTO.getStatus(), "MARKING") && StringUtils.equals(answerDTO.getScore(), "OK") ) {
+				score++;
+			} else if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
+				score++;
+			}
+		}
+
+		log.debug("score of user : {}/{}", score, totalScore);
+		
+		ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+		
+		ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
+		scoreInfo.setUser(userDTO);
+		scoreInfo.setScore(score);
+		scoreInfo.setExamTitle(examTypeDTO.getName());
+		scoreInfo.setTotalQuestion(totalScore);
+		
+        // Send mail
+		mailService.sendScoreEmail(scoreInfo);
+		
+		// Update -> DONE
+		examDTO.setResult(ProgressType.DONE);
+		examService.save(examDTO);
+	}
 }

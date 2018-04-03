@@ -13,6 +13,7 @@
             'query': { method: 'GET', isArray: true},
             'startExams': {url: 'api/start-exam', method: 'POST'},
             'finishExam': {url: 'api/finish-exam', method: 'POST'},
+            'finishMarkingExam': {url: 'api/finish-marking-exam', method: 'POST'},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

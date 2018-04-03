@@ -107,4 +107,10 @@ public class QuestionServiceImpl implements QuestionService{
 		List<Question> data = questionRepository.findByTypeIn(lstQuestionEnum);
 		return questionMapper.toDto(data);
 	}
+
+	@Override
+	public List<QuestionDTO> findAllByType(QuestionType type) {
+		List<Question> data = questionRepository.findAllByType(type);
+		return questionMapper.toDto(data);
+	}
 }

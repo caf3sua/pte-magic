@@ -1,6 +1,7 @@
 package com.vmcomms.ptemagic.repository;
 
 import com.vmcomms.ptemagic.domain.Question;
+import com.vmcomms.ptemagic.domain.QuestionCategory;
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 
 import org.springframework.stereotype.Repository;
@@ -15,8 +16,6 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
-	List<Question> findByTypeIn(List<QuestionType> types);
+public interface QuestionCategoryRepository extends JpaRepository<QuestionCategory, Long> {
 	
-	List<Question> findAllByType(QuestionType type);
 }

@@ -15,6 +15,12 @@
         vm.save = save;
         vm.exams = Exam.query();
         vm.uploadFiles = uploadFiles;
+        vm.questionGroup;
+        vm.changeQuestionType = changeQuestionType;
+        
+        function changeQuestionType() {
+        	vm.questionGroup = getQuestionGroup(vm.question.type);
+        }
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
@@ -25,13 +31,15 @@
             vm.errFile = errFiles && errFiles[0];
             if (file) {
                 file.upload = Upload.upload({
-                    url: '/api/file/upload',
-                    data: {file: file}
+                    url: '/api/file/upload/question',
+                    data: {file: file},
+                    ignoreLoadingBar: true
                 });
-
+                
                 file.upload.then(function (response) {
                     $timeout(function () {
-                        file.result = response.data;
+                    	console.log(response);
+                    	vm.question.audioLink = response.data.filename;
                     });
                 }, function (response) {
                     if (response.status > 0)

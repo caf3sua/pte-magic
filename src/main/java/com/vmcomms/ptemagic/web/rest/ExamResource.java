@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
+import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
+import com.vmcomms.ptemagic.dto.AnswerQuestionDTO;
 import com.vmcomms.ptemagic.dto.ExamInfoDTO;
+import com.vmcomms.ptemagic.service.AnswerService;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.ExamService;
 import com.vmcomms.ptemagic.service.ExamTypeService;
 import com.vmcomms.ptemagic.service.MarkScoreService;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.service.UserService;
+import com.vmcomms.ptemagic.service.dto.AnswerDTO;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
@@ -75,6 +80,9 @@ public class ExamResource {
     private UserService userService;
     
     @Autowired
+    private AnswerService answerService;
+    
+    @Autowired
     private MarkScoreService markScoreService;
     
     @PostMapping("/finish-exam")
@@ -92,6 +100,24 @@ public class ExamResource {
         
         return ResponseEntity.ok().headers(HeaderUtil. createEntityUpdateAlert(ENTITY_NAME, examVM.getId().toString())).build();
     }
+    
+    @PostMapping("/finish-marking-exam")
+    @Timed
+    public ResponseEntity<Void> finishMarkingExam(@RequestBody ExamVM examVM) throws URISyntaxException {
+        log.debug("REST request to finish marking Exam : {}", examVM);
+        
+        // Check input
+        if (examVM.getId() == null) {
+            throw new BadRequestAlertException("A exam cannot null ID", ENTITY_NAME, "idexists");
+        }
+        
+        // Call service
+        markScoreService.finishExamByMarking(examVM.getId());
+        
+        return ResponseEntity.ok().headers(HeaderUtil. createEntityUpdateAlert(ENTITY_NAME, examVM.getId().toString())).build();
+    }
+    
+    
     
     /**
      * POST  /exams : Create a new exam.
@@ -128,6 +154,7 @@ public class ExamResource {
         ExamInfoDTO examInfoDTO = new ExamInfoDTO();
         examInfoDTO.setExamDTO(result);
         examInfoDTO.setQuestions(question);
+        examInfoDTO.setExamTypeDTO(examTypeService.findOne(examVM.getExamTypeId()));
         
         return ResponseEntity.created(new URI("/api/exams/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -136,15 +163,10 @@ public class ExamResource {
 
     
     private List<QuestionDTO> generateQuestionExam(ExamDTO examDTO) {
-    	/** 3 - READING **/
-        /** 4 - LISTENING **/
     	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
-    	Integer numQuestion = examTypeDTO.getTotalQuestion();
-    	
     	List<QuestionDTO> questions = new ArrayList<>();
     	
-    	// Reading
-		selectQuestionBySkill(questions, numQuestion, getSkillTypeByExamType(examTypeDTO));
+    	selectExamQuestion(examTypeDTO, questions);
     	
     	int order = 0;
 		for (QuestionDTO questionDTO : questions) {
@@ -157,6 +179,83 @@ public class ExamResource {
 		}
 		
 		return questions;
+    }
+    
+    private void selectExamQuestion(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
+    	// Select question
+    	if (examTypeDTO.getNumQuestion1() != null && examTypeDTO.getNumQuestion1() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion1(), QuestionType.SPEAKING_READ_ALOUD);
+    	}
+    	if (examTypeDTO.getNumQuestion2() != null && examTypeDTO.getNumQuestion2() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion2(), QuestionType.SPEAKING_REPEAT_SENTENCE);
+    	}
+    	if (examTypeDTO.getNumQuestion3() != null && examTypeDTO.getNumQuestion3() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion3(), QuestionType.SPEAKING_DESCRIBE_IMAGE);
+    	}
+    	if (examTypeDTO.getNumQuestion4() != null && examTypeDTO.getNumQuestion4() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion4(), QuestionType.SPEAKING_RETELL_LECTURE);
+    	}
+    	if (examTypeDTO.getNumQuestion5() != null && examTypeDTO.getNumQuestion5() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion5(), QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
+    	}
+    	if (examTypeDTO.getNumQuestion6() != null && examTypeDTO.getNumQuestion6() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion6(), QuestionType.WRITING_SUMMARIZE_WRITTEN_TEXT);
+    	}
+    	if (examTypeDTO.getNumQuestion7() != null && examTypeDTO.getNumQuestion7() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion7(), QuestionType.WRITING_ESSAY);
+    	}
+    	if (examTypeDTO.getNumQuestion8() != null && examTypeDTO.getNumQuestion8() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion8(), QuestionType.READING_FIB_R_W);
+    	}
+    	if (examTypeDTO.getNumQuestion9() != null && examTypeDTO.getNumQuestion9() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion9(), QuestionType.READING_FIB_R);
+    	}
+    	if (examTypeDTO.getNumQuestion10() != null && examTypeDTO.getNumQuestion10() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion10(), QuestionType.READING_RE_ORDER_PARAGRAPH);
+    	}
+    	if (examTypeDTO.getNumQuestion11() != null && examTypeDTO.getNumQuestion11() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion11(), QuestionType.READING_MCQ_R_SINGLE_ANSWER);
+    	}
+    	if (examTypeDTO.getNumQuestion12() != null && examTypeDTO.getNumQuestion12() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion12(), QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
+    	}
+    	if (examTypeDTO.getNumQuestion13() != null && examTypeDTO.getNumQuestion13() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion13(), QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
+    	}
+    	if (examTypeDTO.getNumQuestion14() != null && examTypeDTO.getNumQuestion14() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion14(), QuestionType.LISTENING_FIB_L);
+    	}
+    	if (examTypeDTO.getNumQuestion15() != null && examTypeDTO.getNumQuestion15() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion15(), QuestionType.LISTENING_MCQ_L_SINGLE_ANSWER);
+    	}
+    	if (examTypeDTO.getNumQuestion16() != null && examTypeDTO.getNumQuestion16() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion16(), QuestionType.LISTENING_MCQ_L_MULTIPLE_ANSWER);
+    	}
+    	if (examTypeDTO.getNumQuestion17() != null && examTypeDTO.getNumQuestion17() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion17(), QuestionType.LISTENING_HIGHLIGHT_CORRECT_SUMMARY);
+    	}
+    	if (examTypeDTO.getNumQuestion18() != null && examTypeDTO.getNumQuestion18() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion18(), QuestionType.LISTENING_SELECT_MISSING_WORD);
+    	}
+    	if (examTypeDTO.getNumQuestion19() != null && examTypeDTO.getNumQuestion19() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion19(), QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD);
+    	}
+    	if (examTypeDTO.getNumQuestion20() != null && examTypeDTO.getNumQuestion20() > 0) {
+    		selectQuestionByType(questions, examTypeDTO.getNumQuestion20(), QuestionType.LISTENING_DICTATION);
+    	}
+    }
+    
+    private void selectQuestionByType(List<QuestionDTO> questions, int number, QuestionType type) {
+    	List<QuestionDTO> questionDTOs = questionService.findAllByType(type);
+    	// sub 
+    	if (questionDTOs != null && questionDTOs.size() > number) {
+    		Collections.shuffle(questionDTOs);
+    		 List<QuestionDTO> data = questionDTOs.subList(0, number);
+    		 questions.addAll(data);
+    		 return;
+    	}
+    	
+    	questions.addAll(questionDTOs);
     }
     
     private SkillType getSkillTypeByExamType(ExamTypeDTO examTypeDTO) {
@@ -266,10 +365,33 @@ public class ExamResource {
      */
     @GetMapping("/exams/{id}")
     @Timed
-    public ResponseEntity<ExamDTO> getExam(@PathVariable Long id) {
+    public ResponseEntity<ExamInfoDTO> getExam(@PathVariable Long id) {
         log.debug("REST request to get Exam : {}", id);
+        ExamInfoDTO examInfoDTO = new ExamInfoDTO();
+        List<AnswerQuestionDTO> lstAnswerQuestion = new ArrayList<>();
+        examInfoDTO.setAnswerQuestions(lstAnswerQuestion);
+        
+        // Get examDTO
         ExamDTO examDTO = examService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(examDTO));
+        examInfoDTO.setExamDTO(examDTO);
+        
+        // Get all question 
+		// Get list exam question
+		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(id);
+
+		for (ExamQuestionDTO examQuestionDTO : examQuestions) {
+			AnswerQuestionDTO item = new AnswerQuestionDTO();
+			// Get question to compare
+			QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
+			// Get answer
+			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(id, examQuestionDTO.getQuestionId());
+			
+			item.setAnswer(answerDTO);
+			item.setQuestion(questionDTO);
+			lstAnswerQuestion.add(item);
+		}
+        
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(examInfoDTO));
     }
 
     /**
@@ -282,7 +404,9 @@ public class ExamResource {
     @Timed
     public ResponseEntity<Void> deleteExam(@PathVariable Long id) {
         log.debug("REST request to delete Exam : {}", id);
-        examService.delete(id);
+        ExamDTO examDTO = examService.findOne(id);
+        examDTO.setResult(ProgressType.DONE);
+        examService.save(examDTO);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 }

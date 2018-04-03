@@ -37,11 +37,29 @@ public class Answer implements Serializable {
     @Column(name = "description")
     private String description;
 
-//    @ManyToOne(optional=false)
-//    @JoinColumn(insertable=false, updatable=false)
-//    private Exam exam;
+    @Column(name = "status")
+    private String status;
+    
+    @Column(name = "score")
+    private String score;
+    
+    public String getStatus() {
+		return status;
+	}
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }

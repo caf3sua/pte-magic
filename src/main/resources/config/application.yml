@@ -45,6 +45,13 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+
+google-cloud:
+    storage:
+        credential-file: pte-magic-api.json
+        project-id: namnh
+        bucket-name-question: pte-magic-2018
+        bucket-name-answer: pte-magic-2018-answer                       
 security:
     basic:
         enabled: false

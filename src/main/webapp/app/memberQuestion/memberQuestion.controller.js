@@ -78,47 +78,59 @@
   	        vm.totalExamQuestionListening = 0;
   	        vm.totalExamQuestionSpeaking = 0;
   	        vm.totalExamQuestionWriting = 0;
+//	  	      vm.listeningExams = [];
+//	          vm.readingExams = [];
+//	          vm.speakingExams = [];
+//	          vm.writingExams = [];
 
   	        ExamType.getAllByType({type: 'MEMBER_QUESTION_LISTENING'},
   					function(data, headers) {
-		  				vm.listeningExams = data;
+  	        			if (data != null) {
+  	        				vm.listeningExams = data;
 
-		  				angular.forEach(data, function(value, key){
-	  	            		vm.totalExamQuestionListening = vm.totalExamQuestionListening + value.totalQuestion;
-		  	            });
+  			  				angular.forEach(data, function(value, key){
+  		  	            		vm.totalExamQuestionListening += value.totalQuestion;
+  			  	            });
+  	        			}
   					},
   					function(error) {
   					});
 
   			ExamType.getAllByType({type: 'MEMBER_QUESTION_READING'},
   					function(data, headers) {
-		  				vm.readingExams = data;
-
-		  				angular.forEach(data, function(value, key){
-	  	            		vm.totalExamQuestionReading = vm.totalExamQuestionReading + value.totalQuestion;
-		  	            });
+  						if (data != null) {
+			  				vm.readingExams = data;
+	
+			  				angular.forEach(data, function(value, key){
+		  	            		vm.totalExamQuestionReading += value.totalQuestion;
+			  	            });
+  						}
   					},
   					function(error) {
   					});
 
   			ExamType.getAllByType({type: 'MEMBER_QUESTION_SPEAKING'},
   					function(data, headers) {
-		  				vm.speakingExams = data;
-
-		  				angular.forEach(data, function(value, key){
-	  	            		vm.totalExamQuestionSpeaking = vm.totalExamQuestionSpeaking + value.totalQuestion;
-		  	            });
+  						if (data != null) {
+			  				vm.speakingExams = data;
+	
+			  				angular.forEach(data, function(value, key){
+		  	            		vm.totalExamQuestionSpeaking += value.totalQuestion;
+			  	            });
+  						}
   					},
   					function(error) {
   					});
 
   			ExamType.getAllByType({type: 'MEMBER_QUESTION_WRITING'},
   					function(data, headers) {
-		  				vm.readingExams = data;
-
-		  				angular.forEach(data, function(value, key){
-	  	            		vm.totalExamQuestionReading = vm.totalExamQuestionReading + value.totalQuestion;
-		  	            });
+  						if (data != null) {
+  							vm.writingExams = data;
+	
+			  				angular.forEach(data, function(value, key){
+		  	            		vm.totalExamQuestionWriting += value.totalQuestion;
+			  	            });
+  						}
   					},
   					function(error) {
   					});

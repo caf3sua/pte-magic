@@ -10,6 +10,7 @@
         var resourceUrl =  'api/answers/:id';
 
         return $resource(resourceUrl, {}, {
+        	'updateStatus': { url: 'api/answer-update-status',  method: 'PUT'},
             'query': { method: 'GET', isArray: true},
             'get': {
                 method: 'GET',

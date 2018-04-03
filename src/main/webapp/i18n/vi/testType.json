@@ -1,6 +1,17 @@
 {
     "pteMagicApp": {
         "TestType" : {
+	        "description" : {
+	        		"MOCK_TEST_A": "Mock test - Part A",
+		            "MOCK_TEST_B": "Mock test - Part B",
+		            "MOCK_TEST_FULL": "Mock test - full",
+		    		"FREE_EXAM_LISTENING": "Sample question - listening",
+		    		"FREE_EXAM_READING": "Sample question - reading",
+		    		"MEMBER_QUESTION_LISTENING": "Member question - listening",
+		    		"MEMBER_QUESTION_READING": "Member question - reading",
+		    		"MEMBER_QUESTION_SPEAKING": "Member question - speaking",
+		    		"MEMBER_QUESTION_WRITING": "Member question - writing"
+        	},
             "null": "",
             "FULL": "FULL",
             "PARTA": "PARTA",

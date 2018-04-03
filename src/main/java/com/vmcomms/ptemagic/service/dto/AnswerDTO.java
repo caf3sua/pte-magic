@@ -4,6 +4,9 @@ package com.vmcomms.ptemagic.service.dto;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.persistence.Column;
+
 import java.util.Objects;
 
 /**
@@ -22,6 +25,10 @@ public class AnswerDTO implements Serializable {
     private String audioLink;
 
     private String description;
+    
+    private String status;
+    
+    private String score;
 
     public Long getId() {
         return id;
@@ -103,4 +110,20 @@ public class AnswerDTO implements Serializable {
             ", description='" + getDescription() + "'" +
             "}";
     }
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
 }
