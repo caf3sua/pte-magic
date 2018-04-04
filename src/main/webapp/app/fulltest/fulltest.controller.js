@@ -82,8 +82,10 @@
 //    	}
     	
     	function initPlayer() {
-    		var audio = $("#player");      
-            audio[0].addEventListener('ended', callBackAudioEnded);
+    		var audio = $("#player");
+    		if (audio[0] != undefined) {
+    			audio[0].addEventListener('ended', callBackAudioEnded);
+    		}
     	}
     	
     	function callBackAudioEnded() {
@@ -91,20 +93,26 @@
     	}
     	
     	function playAudio(link, timeout) {
-    		var audio = $("#player");      
-            $("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
-            audio[0].pause();
-            audio[0].load();
+    		var audio = $("#player");  
+    		if (audio[0] != undefined) {
+    			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
+                audio[0].pause();
+                audio[0].load();
+                
+                $timeout(function(){
+                	audio[0].play();
+                }, timeout );
+    		}
             
-            $timeout(function(){
-            	audio[0].play();
-            }, timeout );
     	}
     	
     	function initAnswer() {
     		// Stop audio
-    		var audio = $("#player");      
-            audio[0].pause();
+    		var audio = $("#player");     
+    		if (audio[0] != undefined) {
+    			audio[0].pause();
+    		}
+            
             
             // Stop timer
             $scope.$broadcast('timer-stop');
