@@ -1,9 +1,9 @@
-<div class="col-md-4">
+<div class="col-md-12 text-center">
 	<span>{{vm.txtInfoCountdown}}</span>
 	<timer countdown="vm.countdownRecording" interval="1000" finish-callback="vm.startRecording()" ng-show="!vm.isRecording">{{sseconds}} seconds</timer></span>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-12 text-center">
 	<canvas id="analyser"></canvas>
 </div>
 <div class="col-md-4" ng-show="false">
