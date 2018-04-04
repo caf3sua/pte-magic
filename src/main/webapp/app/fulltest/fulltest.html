@@ -33,8 +33,11 @@
 	    <div class="container">
 	        <div class="col-md-12 padding0">
 	        
-	        	<!-- READING -->
-	        	<div ng-include="'app/partial/partial.question.html'"></div>
+	        	<!-- WRITING -->
+	        	<div ng-if="vm.questionGroup == 'WRITING'" ng-include="'app/partial/partial.question-writing.html'"></div>
+	        	
+   		        <!-- OTHER -->
+	        	<div ng-if="vm.questionGroup != 'WRITING'" ng-include="'app/partial/partial.question.html'"></div>
 	        	
 	        	<div ng-show="vm.selectedQuestion.type == 'TIME_BREAK'">
 			        <div ng-include="'app/partial/partial.timebreak.html'"></div>

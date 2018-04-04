@@ -40,7 +40,8 @@
                 <td>{{answerQuestion.question.text}}</td>
                 <!-- Audio/Writing -->
                 <td>
-                	<div class="container-audio">
+                	<div ng-show="answerQuestion.answer.answer">{{answerQuestion.answer.answer}}</div>
+                	<div class="container-audio" ng-show="answerQuestion.answer.audioLink">
 			            <audio id="player-{{answerQuestion.answer.id}}" controls preload ng-src="{{answerQuestion.answer.audioLink | trusted}}">
 			                Your browser dose not Support the audio Tag
 			            </audio>
@@ -53,7 +54,7 @@
                             <span class="glyphicon glyphicon-ok"></span>
                             <span class="hidden-sm-down">OK</span>
                         </button>
-                        <button type="button"  ng-click="vm.updateAnswer(answerQuestion.answer, 'NG')"
+                        <button type="button" ng-click="vm.updateAnswer(answerQuestion.answer, 'NG')"
                                 class="btn btn-danger btn-sm">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                             <span class="hidden-sm-down">NG</span>

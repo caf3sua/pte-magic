@@ -245,6 +245,7 @@
 
 
   		function nextQuestion() {
+  			$('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
@@ -288,7 +289,10 @@
   			var answer = {};
   		    answer.examId = vm.exam.examDTO.id;
   		    answer.questionId = vm.selectedQuestion.id;
-  		    answer.answer = vm.answers.join(',');;
+  		    answer.answer = vm.answers.join(',');
+  		    if (vm.questionGroup == 'WRITING' || vm.questionGroup == 'SPEAKING') {
+		    	answer.status = 'MARKING';
+		    }
   		    // answer.audioLink;
   		    // answer.description;
 
