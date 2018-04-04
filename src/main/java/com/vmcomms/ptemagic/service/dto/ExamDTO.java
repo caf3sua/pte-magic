@@ -28,6 +28,10 @@ public class ExamDTO implements Serializable {
 
     private Long examTypeId;
     
+    private String email;
+    
+    private String examTypeName;
+    
     public Long getId() {
         return id;
     }
@@ -126,4 +130,20 @@ public class ExamDTO implements Serializable {
             ", scoreSpeaking='" + getScoreSpeaking() + "'" +
             "}";
     }
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getExamTypeName() {
+		return examTypeName;
+	}
+
+	public void setExamTypeName(String examTypeName) {
+		this.examTypeName = examTypeName;
+	}
 }
