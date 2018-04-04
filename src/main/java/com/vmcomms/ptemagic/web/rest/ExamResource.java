@@ -320,11 +320,11 @@ public class ExamResource {
 		//    	10. Re-order Paragraph (3)
 		//    	11. MCQ Single Answer (2)
 		//    	12. MCQ Multiple Answer (3)
-//		selectQuestionByType(questions, 7, QuestionType.READING_FIB_R_W);
-//		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
-//		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
+		selectQuestionByType(questions, 7, QuestionType.READING_FIB_R_W);
+		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
+		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
 		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
-//		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
+		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
     }
     
     private void selectMockTestExamQuestionWriting(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
