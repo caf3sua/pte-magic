@@ -1,0 +1,51 @@
+<!--[if lt IE 9]>
+<![endif]-->
+<div ng-style="style()" resize >
+    <!-- Angular views -->
+    <div class="pte-test-type-question">
+        <div class="container">
+            <ul class="margin-0">
+                <li>
+                    <span data-translate="pteMagicApp.TestType.description.{{vm.exam.examTypeDTO.type}}" ng-cloak>Sample question - reading</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="pte-test-type-question-two">
+        <div class="container">
+            <div class="col-md-12">
+                <p class="pte-test-type-question-two-title">MULTIPLE CHOICE, CHOOSE SINGLE ANSWER</p>
+                <p class="pte-test-type-question-two-des">Read the text and answer the multiple-choice question by selecting the correct response. Only one response is correct.</p>
+            </div>
+        </div>
+    </div>
+    <div ng-show="!vm.isFinish">
+    	<div class="pte-test-type-question-three">
+	        <div class="pte-test-type-question-three-background">
+	            <span>
+	                 <i class="far fa-clock pte-test-type-question-three-icon"></i>
+	                <span class="pte-test-type-question-three-timeName">TIME REMANING</span>
+	                <span class="pte-test-type-question-three-time"><!-- autostart="false" -->
+	                <timer countdown="vm.countdown" interval="1000" finish-callback="vm.answer()">{{hhours}}:{{mminutes}}:{{sseconds}}</timer></span>
+	            </span>
+	        </div>
+	    </div>
+	    <div class="container">
+	        <div class="col-md-12 padding0">
+	        
+	        	<!-- READING -->
+	        	<div ng-include="'app/test/partial.question.html'"></div>
+	        </div>
+	    </div>
+    </div>
+    <div ng-show="vm.isFinish">
+        <p class="pte-text-finish">Completed ! Check mail to see the result!</p>
+    	<div class="text-center">
+           <button class="pte-test-answer" ng-click="vm.closeExam()">Finish</button>
+       </div>
+    </div>
+</div>
+
+<noscript>
+    <h1>You must enable javascript to view this page.</h1>
+</noscript>

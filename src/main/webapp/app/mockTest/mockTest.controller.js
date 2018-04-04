@@ -52,7 +52,7 @@
         }
 
         function startTest(examId) {
-        	var url = '/#/test?type=' + examId;
+        	var url = '/#/fulltest?type=' + examId;
         	$window.open(url,"_blank", "toolbar=no,scrollbars=no, resizable=no, width=1200, height=700");
         }
 
