@@ -1275,6 +1275,14 @@ audio::-webkit-media-controls-panel {
     height: 30px;
     border-radius: 5px;
 }
+.pte-timeBreak{
+    width: 100%;
+    text-align: center;
+    padding-left: 15px;
+}
+.pte-margin-top100{
+    margin-top:0px;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
@@ -1392,6 +1400,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:992px) and (max-width:1199px) {
+    .pte-margin-top100{
+        margin-top:100px;
+    }
     #override {
         width: 55%;
         height: 20px;
@@ -1403,6 +1414,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:768px) and (max-width:991px) {
+    .pte-margin-top100{
+        margin-top:100px;
+    }
     .pte-icon-sign{
         position: relative;
         font-size: 11px;
@@ -1551,6 +1565,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:768px) and (max-width:903px) {
+    .pte-margin-top100{
+        margin-top:130px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
@@ -1565,6 +1582,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:768px) and (max-width:786px) {
+    .pte-margin-top100{
+        margin-top:100px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
@@ -1579,6 +1599,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:767px) {
+    .pte-margin-top100{
+        margin-top:130px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
@@ -1708,6 +1731,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:700px) {
+    .pte-margin-top100{
+        margin-top:130px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
@@ -1722,6 +1748,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:630px) {
+    .pte-margin-top100{
+        margin-top:130px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
@@ -1736,6 +1765,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (min-width:480px) and (max-width:560px) {
+    .pte-margin-top100{
+        margin-top:130px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
@@ -1750,6 +1782,9 @@ audio::-webkit-media-controls-panel {
     }
 }
 @media (max-width:479px){
+    .pte-margin-top100{
+        margin-top:130px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
