@@ -178,16 +178,21 @@ public class ExamResource {
     	if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A)) {
     		// Speaking/writing
     		selectMockTestExamQuestionSpeaking(examTypeDTO, questions);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
     		selectMockTestExamQuestionWriting(examTypeDTO, questions);
         } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
         	// Reading/listening
         	selectMockTestExamQuestionReading(examTypeDTO, questions);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
         	selectMockTestExamQuestionListening(examTypeDTO, questions);
         } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
         	// full
         	selectMockTestExamQuestionSpeaking(examTypeDTO, questions);
+        	addTimeBreak(questions, QuestionType.TIME_BREAK);
     		selectMockTestExamQuestionWriting(examTypeDTO, questions);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
     		selectMockTestExamQuestionReading(examTypeDTO, questions);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
         	selectMockTestExamQuestionListening(examTypeDTO, questions);
         }
     	
@@ -316,13 +321,9 @@ public class ExamResource {
 		//    	11. MCQ Single Answer (2)
 		//    	12. MCQ Multiple Answer (3)
 		selectQuestionByType(questions, 7, QuestionType.READING_FIB_R_W);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
     }
     
@@ -331,7 +332,6 @@ public class ExamResource {
 		//    	6. Summarize Written Text (3)
 		//    	7. Essay (1-2)
 		selectQuestionByType(questions, 3, QuestionType.WRITING_SUMMARIZE_WRITTEN_TEXT);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 2, QuestionType.WRITING_ESSAY);
     }
     
@@ -343,13 +343,9 @@ public class ExamResource {
 		//    	4. Retell Lecture (4)
 		//    	5. Answer Short Question (10)
 		selectQuestionByType(questions, 6, QuestionType.SPEAKING_READ_ALOUD);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 10, QuestionType.SPEAKING_REPEAT_SENTENCE);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 6, QuestionType.SPEAKING_DESCRIBE_IMAGE);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 4, QuestionType.SPEAKING_RETELL_LECTURE);
-		addTimeBreak(questions, QuestionType.TIME_BREAK);
 		selectQuestionByType(questions, 10, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
     }
     

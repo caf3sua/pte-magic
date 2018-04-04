@@ -1,0 +1,19 @@
+<div class="col-md-4">
+	<span>{{vm.txtInfoCountdown}}</span>
+	<timer countdown="vm.countdownRecording" interval="1000" finish-callback="vm.startRecording()" ng-show="!vm.isRecording">{{sseconds}} seconds</timer></span>
+</div>
+
+<div class="col-md-4">
+	<canvas id="analyser"></canvas>
+</div>
+<div class="col-md-4" ng-show="false">
+	<canvas id="wavedisplay"></canvas>
+</div>
+<div class="col-md-2">
+	<div id="controls">
+        <!-- <i id="record" ng-click="vm.toggleRecording(this);"  class="fas fa-microphone"></i> -->
+		<!--<img id="record" src="content/audio_recorder/mic128.png" ng-click="vm.toggleRecording(this);" class="">-->
+		<a id="save" href="blob:https://pte-magic/4c60ff1d-2bbf-421a-964b-d88cdd0a153a" download="myRecording00.wav" ng-show="false">
+		<img src="content/audio_recorder/save.svg"></a>
+	</div>
+</div>
