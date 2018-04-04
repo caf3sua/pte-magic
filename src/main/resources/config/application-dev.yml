@@ -80,7 +80,13 @@ liquibase:
 #        keyAlias: PteMagic
 # ===================================================================
 server:
-    port: 8080
+     port: 8080
+#     port: 8443
+#     ssl:
+#         key-store: D:/etc/BaovietKeyStore.jks
+#         key-store-password: changeit
+#         keyStoreType: JKS
+#         keyAlias: baoviet
 
 # ===================================================================
 # JHipster specific properties
