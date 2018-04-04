@@ -492,12 +492,15 @@ public class ExamResource {
 		for (ExamQuestionDTO examQuestionDTO : examQuestions) {
 			AnswerQuestionDTO item = new AnswerQuestionDTO();
 			// Get question to compare
-			QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
+			if (examQuestionDTO.getQuestionId() != null) {
+				QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
+				item.setQuestion(questionDTO);
+			}
+			
 			// Get answer
 			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(id, examQuestionDTO.getQuestionId());
 			
 			item.setAnswer(answerDTO);
-			item.setQuestion(questionDTO);
 			lstAnswerQuestion.add(item);
 		}
         
