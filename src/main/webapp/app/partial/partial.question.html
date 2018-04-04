@@ -1,11 +1,11 @@
     <div  class="col-md-12" ng-show="vm.selectedQuestion.type == 'TIME_BREAK'">
-        <div ng-include="'app/fulltest/partial.timebreak.html'"></div>
+        <div ng-include="'app/partial/partial.timebreak.html'"></div>
     </div>
     <div class="col-md-6">
         <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
 
         <!-- Record audio -->
-        <div ng-include="'app/test/partial.record.html'" ng-show="vm.questionGroup == 'SPEAKING'"></div>
+        <div ng-include="'app/partial/partial.record.html'" ng-show="vm.questionGroup == 'SPEAKING'"></div>
         <div ng-show="vm.selectedQuestion.audioLink">
             <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
             <div class="container-audio">
