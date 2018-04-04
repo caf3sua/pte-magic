@@ -268,6 +268,7 @@
 
 
   		function nextQuestion() {
+            $('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
