@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codahale.metrics.annotation.Timed;
+import com.vmcomms.ptemagic.domain.User;
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
@@ -464,6 +465,15 @@ public class ExamResource {
         log.debug("REST request to get a page of Exams");
         Page<ExamDTO> page = examService.findAllByResult(pageable, ProgressType.MARKING);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/exams");
+        
+        // Get email
+        for (ExamDTO examDTO : page.getContent()) {
+			// Find user
+        	User user = userService.getUserWithAuthorities(examDTO.getUserId());
+        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+        	examDTO.setEmail(user.getEmail());
+        	examDTO.setExamTypeName(examTypeDTO.getName());
+		}
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

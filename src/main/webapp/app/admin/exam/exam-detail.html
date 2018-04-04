@@ -7,10 +7,6 @@
         <dd>
             <span>{{vm.exam.examDTO.userId}}</span>
         </dd>
-        <dt><span data-translate="pteMagicApp.exam.examTypeId">Exam Type Id</span></dt>
-        <dd>
-            <span>{{vm.exam.examDTO.examTypeId}}</span>
-        </dd>
         <dt><span data-translate="pteMagicApp.exam.result">Result</span></dt>
         <dd>
             <span data-translate="{{'pteMagicApp.ProgressType.' + vm.exam.examDTO.result}}">{{vm.exam.result}}</span>
@@ -29,7 +25,7 @@
                 <th jh-sort-by="id">Answer ID<span class="glyphicon glyphicon-sort"></span></th>
                 <th>Status</th>
                 <th>Question</th>
-                <th>Audio/Answer</th>
+                <th style="min-width: 250px">Audio/Answer</th>
                 <th></th>
             </tr>
         </thead>
@@ -42,6 +38,7 @@
                 <td>
                 	<div ng-show="answerQuestion.answer.answer">{{answerQuestion.answer.answer}}</div>
                 	<div class="container-audio" ng-show="answerQuestion.answer.audioLink">
+                		<input type="hidden" value="{{answerQuestion.answer.audioLink}}">
 			            <audio id="player-{{answerQuestion.answer.id}}" controls preload ng-src="{{answerQuestion.answer.audioLink | trusted}}">
 			                Your browser dose not Support the audio Tag
 			            </audio>

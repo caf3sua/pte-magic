@@ -172,11 +172,15 @@
 
   		function answer() {
   			initAnswer();
-
+  			var selectedQuestionId = vm.selectedQuestion.id;
+  			
   			// Upload if questionGroup == SPEAKING
   			if (vm.questionGroup == 'SPEAKING') {
   				stopRecording();
-  				uploadRecording(vm.selectedQuestion.id);
+  				$timeout(function(){
+  					uploadRecording(selectedQuestionId);
+  	    		}, 1000 );
+  				
   			} else {
   				console.log(vm.selectedQuestion);
   	  			// Get answer
