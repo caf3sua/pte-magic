@@ -36,6 +36,7 @@
     	vm.txtInfoCountdown = "Begining in ";
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
+    	vm.btnTxt = 'Answer';
     	
     	function startRecording() {
     		// start recording
@@ -74,7 +75,9 @@
 
     	function initPlayer() {
     		var audio = $("#player");
-            audio[0].addEventListener('ended', callBackAudioEnded);
+    		if (audio[0] != undefined) {
+    			audio[0].addEventListener('ended', callBackAudioEnded);	
+    		}
     	}
 
     	function callBackAudioEnded() {
@@ -83,19 +86,23 @@
 
     	function playAudio(link, timeout) {
     		var audio = $("#player");
-            $("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
-            audio[0].pause();
-            audio[0].load();
+    		if (audio[0] != undefined) {
+    			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
+                audio[0].pause();
+                audio[0].load();
 
-            $timeout(function(){
-            	audio[0].play();
-            }, timeout );
+                $timeout(function(){
+                	audio[0].play();
+                }, timeout );
+    		}
     	}
 
     	function initAnswer() {
     		// Stop audio
     		var audio = $("#player");
-            audio[0].pause();
+    		if (audio[0] != undefined) {
+    			audio[0].pause();
+    		}
 
             // Stop timer
             $scope.$broadcast('timer-stop');
@@ -146,7 +153,10 @@
   		function getUserAnswer() {
   			vm.answers = [];
 
-  			if (vm.selectedQuestion.type == 'LISTENING_FIB_L') {
+  			if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' || vm.selectedQuestion.type == 'WRITING_ESSAY') {
+  				var answer = $('#areaTextWriting').val();
+  				vm.answers.push(answer);
+  			} else if (vm.selectedQuestion.type == 'LISTENING_FIB_L') {
   				$('.input_answer').each(function(){
   					vm.answers.push($(this).val());
   				 });
