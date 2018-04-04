@@ -31,24 +31,46 @@
     	vm.fileUpload;
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
+    	vm.startRecording = startRecording;
 
-
-    	function toggleRecording() {
-    	    if ($('#record').hasClass("recording")) {
-    	        // stop recording
-    	        audioRecorder.stop();
-    	        $('#record').removeClass("recording");
-    	        audioRecorder.getBuffers( gotBuffers );
-    	        vm.btnEnable = true;
-    	    } else {
-    	        // start recording
-    	        if (!audioRecorder)
-    	            return;
-    	        $('#record').addClass("recording");
-    	        audioRecorder.clear();
-    	        audioRecorder.record();
-    	    }
+    	vm.txtInfoCountdown = "Begining in ";
+    	vm.countdownRecording = 5;
+    	vm.isRecording = false;
+    	
+    	function startRecording() {
+    		// start recording
+	        if (!audioRecorder)
+	            return;
+	        audioRecorder.clear();
+	        audioRecorder.record();
+	        vm.btnEnable = true;
+	        vm.txtInfoCountdown = "Recording ..."
+        	vm.isRecording = true;
     	}
+    	
+    	function stopRecording() {
+    		// stop recording
+	        audioRecorder.stop();
+	        audioRecorder.getBuffers( gotBuffers );
+	        vm.btnEnable = true;
+    	}
+    	
+//    	function toggleRecording() {
+//    	    if ($('#record').hasClass("recording")) {
+//    	        // stop recording
+//    	        audioRecorder.stop();
+//    	        $('#record').removeClass("recording");
+//    	        audioRecorder.getBuffers( gotBuffers );
+//    	        vm.btnEnable = true;
+//    	    } else {
+//    	        // start recording
+//    	        if (!audioRecorder)
+//    	            return;
+//    	        $('#record').addClass("recording");
+//    	        audioRecorder.clear();
+//    	        audioRecorder.record();
+//    	    }
+//    	}
 
     	function initPlayer() {
     		var audio = $("#player");
@@ -78,6 +100,9 @@
             // Stop timer
             $scope.$broadcast('timer-stop');
   			$scope.$broadcast('timer-reset');
+  			
+  			vm.txtInfoCountdown = "Begining in ";
+  	    	vm.isRecording = false;
     	}
 
     	angular.element(document).ready(function () {
@@ -140,6 +165,7 @@
 
   			// Upload if questionGroup == SPEAKING
   			if (vm.questionGroup == 'SPEAKING') {
+  				stopRecording();
   				uploadRecording(vm.selectedQuestion.id);
   			} else {
   				console.log(vm.selectedQuestion);

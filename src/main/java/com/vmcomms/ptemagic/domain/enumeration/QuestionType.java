@@ -32,7 +32,8 @@ public enum QuestionType {
     , LISTENING_HIGHLIGHT_CORRECT_SUMMARY
     , LISTENING_SELECT_MISSING_WORD
     , LISTENING_HIGHLIGHT_INCORRECT_WORD
-    , LISTENING_DICTATION;
+    , LISTENING_DICTATION
+    , TIME_BREAK;
     
     public static List<QuestionType> getBySkill(String skill) {
     	List<QuestionType> lstQuestionType = new ArrayList<>();
