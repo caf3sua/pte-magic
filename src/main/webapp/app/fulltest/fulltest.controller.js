@@ -32,10 +32,19 @@
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
     	vm.startRecording = startRecording;
-
+    	vm.startNewPart = startNewPart;
+    	
     	vm.txtInfoCountdown = "Begining in ";
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
+    	
+    	vm.countdownTimebreak = 600;
+    	
+    	vm.btnTxt = 'Answer';
+    	
+    	function startNewPart() {
+    		nextQuestion();
+    	}
     	
     	function startRecording() {
     		// start recording
@@ -116,7 +125,6 @@
         });
     	
     	function initMockTest() {
-    		debugger
     		if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
     			vm.countdown = 110 * 60;
     		} else if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
@@ -270,6 +278,13 @@
   	            	return;
   	            }
   			} else {
+  				// update button lable
+  				if (vm.selectedQuestion.type == 'TIME_BREAK') {
+  					vm.btnTxt = 'Skip Timebreak';
+  				} else {
+  					vm.btnTxt = 'Answer';
+  				}
+  				
   				// Get question group
   				updateQuestionInfo(vm.selectedQuestion);
   				
