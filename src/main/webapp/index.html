@@ -13,39 +13,46 @@
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
     <link rel="stylesheet" href="content/css/checkbox.css">
     <link rel="stylesheet" href="content/css/font-style.css">
+    <link rel="stylesheet" href="content/css/AdminLTE.css">
+    <link rel="stylesheet" href="content/css/_all-skins.css">
     <link rel="stylesheet" href="content/css/main.css">
     <!-- endbuild -->
     <link rel="shortcut icon" sizes="196x196" href="content/images/logo-favicon.jpeg">
     <link rel="manifest" href="manifest.webapp" />
 </head>
-<body ng-app="pteMagicApp" ng-strict-di>
+<body class="hold-transition skin-blue sidebar-mini"  ng-app="pteMagicApp" ng-strict-di>
     <!--[if lt IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div ui-view="navbar" ng-cloak></div>
-    <div class="" ui-view="content" ng-style="style()" resize>
+    <div >
+        <div ui-view="navbar" ng-cloak></div>
+        <div class="" ui-view="content" ng-style="style()" resize>
         <!-- Angular views -->
-    </div>
+        </div>
 
-    <div class="footer" ng-cloak >
-        <div class="container">
-            <span class="pte-footer-com">© 2017 Trung tâm luyện thi PTE MAGIC |  All rights reserved.</span>
-            <div class="pte-connect">
-                <span class="pte-footer-com">Connect with Us:</span>
-                <i class="pte-icon-footer pte-color-fff fab fa-facebook-f"></i>
-                <i class="pte-color-fff fab fa-youtube"></i>
+        <div class="footer" ng-cloak >
+            <div class="container">
+                <span class="pte-footer-com">© 2017 Trung tâm luyện thi PTE MAGIC |  All rights reserved.</span>
+                <div class="pte-connect">
+                    <span class="pte-footer-com">Connect with Us:</span>
+                    <i class="pte-icon-footer pte-color-fff fab fa-facebook-f"></i>
+                    <i class="pte-color-fff fab fa-youtube"></i>
+                </div>
             </div>
         </div>
+        <noscript>
+            <h1>You must enable javascript to view this page.</h1>
+        </noscript>
     </div>
-    <noscript>
-        <h1>You must enable javascript to view this page.</h1>
-    </noscript>
+
 
 
     <!-- uncomment this for adding service worker
@@ -98,6 +105,13 @@
 	<script src="content/audio_recorder/audiodisplay.js"></script>
 	<script src="content/audio_recorder/recorder.js"></script>
 	<script src="content/audio_recorder/main.js"></script>
+
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="content/js/adminlte.min.js"></script>
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+    <script src="content/js/dashboard.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="content/js/demo.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -237,5 +251,6 @@
     <script src="app/test/test.state.js"></script>
     <script src="app/fulltest/fulltest.controller.js"></script>
     <script src="app/fulltest/fulltest.state.js"></script>
+
 </body>
 </html>
