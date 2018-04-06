@@ -28,12 +28,12 @@
     <!--[if lt IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div ui-view="navbar" ng-cloak></div>
-    <div class="" ui-view="content" ng-style="style()" resize>
+    <div ui-view="navbar" ng-cloak ng-show="!vm.isAuthenticated() || (vm.isAuthenticated() && vm.user.authorities.indexOf('ROLE_ADMIN') == -1)"></div>
+    <div class="" ui-view="content" ng-style="style()" resize ng-show="!vm.isAuthenticated() || (vm.isAuthenticated() && vm.account.authorities.indexOf('ROLE_ADMIN') == -1)">
         <!-- Angular views -->
     </div>
 
-    <div class="footer" ng-cloak >
+    <div class="footer" ng-cloak ng-show="!vm.isAuthenticated() || (vm.isAuthenticated() && vm.hasAuthority('ROLE_USER'))">
         <div class="container">
             <span class="pte-footer-com">© 2017 Trung tâm luyện thi PTE MAGIC |  All rights reserved.</span>
             <div class="pte-connect">
