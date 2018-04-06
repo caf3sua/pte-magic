@@ -1,0 +1,25 @@
+<div class="modal-body" style="margin-top: 150px;">
+    <div class=" text-center pte-padding-login">
+        <span class="pte-text-header-login">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer or <span><a
+            class="pte-text-sign-up" ng-click="vm.createAccountDialog()">Sign Up</a></span></span>
+        <div class="col-md-12">
+            <div class="alert alert-danger" ng-show="vm.authenticationError"
+                 data-translate="login.messages.error.authentication">
+                <strong>Failed to sign in!</strong> Please check your credentials and try again.
+            </div>
+        </div>
+        <form class="form" role="form" ng-submit="vm.login($event)">
+            <div class="pte-margin-top30">
+                <input class="pte-input-login" type="email" ng-model="vm.username" placeholder="-- Your E-mail Address --" required/>
+            </div>
+            <div class="pte-margin-top15">
+                <input class="pte-input-login" type="password" ng-model="vm.password" placeholder="-- Your Password --" required/>
+            </div>
+            <div class="pte-margin-top30">
+                <button class="pte-btn-login" type="submit">
+                    Sign in
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
