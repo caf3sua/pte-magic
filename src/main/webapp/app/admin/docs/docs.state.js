@@ -17,7 +17,7 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/admin/docs/docs.html'
+                    templateUrl: 'app/admin/docs/login.html'
                 }
             },
             resolve: {
