@@ -979,7 +979,6 @@ table>thead>tr{
     margin-bottom: 15px;
 }
 .pte-detail-user{
-    padding-top: 133px;
     width: 400px;
     margin: 0 auto;
 }
@@ -1874,7 +1873,6 @@ textarea {
         right: 0;
     }
     .pte-detail-user {
-        padding-top: 133px;
         width: 260px;
         margin: 0px auto;
     }
