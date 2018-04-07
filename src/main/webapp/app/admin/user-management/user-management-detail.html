@@ -1,40 +1,59 @@
-<div class="pte-detail-user">
-    <h2 class="text-center">
-        <span data-translate="userManagement.detail.title">User</span> [<b>{{vm.user.login}}</b>]
-    </h2>
-    <dl class="dl-horizontal jh-entity-details pte-detail-user-content">
-        <dt><span data-translate="userManagement.login">Login</span></dt>
-        <dd>
-            <span>{{vm.user.login}}</span>
-            <span class="label label-danger" ng-show="!vm.user.activated"
-                  data-translate="userManagement.deactivated">Deactivated</span>
-            <span class="label label-success" ng-show="vm.user.activated"
-                  data-translate="userManagement.activated">Activated</span>
-        </dd>
-        <dt><span">Full Name</span></dt>
-        <dd>{{vm.user.fullName}}</dd>
-        <dt><span data-translate="userManagement.email">Email</span></dt>
-        <dd>{{vm.user.email}}</dd>
-        <dt><span>Phonenumber</span></dt>
-        <dd>{{vm.user.phonenumber}}</dd>
-        <dt><span data-translate="userManagement.createdDate">Created Date</span></dt>
-        <dd>{{vm.user.createdDate | date:'dd/MM/yy HH:mm' }}</dd>
-        <dt><span data-translate="userManagement.lastModifiedBy">Last Modified By</span></dt>
-        <dd>{{vm.user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</dd>
-        <dt><span data-translate="userManagement.profiles">Profiles</span></dt>
-        <dd>
-            <ul class="list-unstyled">
-                <li ng-repeat="authority in vm.user.authorities">
-                    <span class="label label-info">{{authority}}</span>
-                </li>
-            </ul>
-        </dd>
-        <dt><span>Remain days</span></dt>
-        <dd>{{vm.user.remainDays | number}}</dd>
-    </dl>
-    <button type="submit"
-            ui-sref="user-management"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
+<div class="content-wrapper">
+    <h2 class="pte-title-detail text-center"><span data-translate="userManagement.detail.title">User</span> [<b>{{vm.user.login}}</b>]</h2>
+    <jhi-alert-error></jhi-alert-error>
+    <div class="col-md-12 table-responsive">
+        <table class="h-table table table-striped  table-bordered table-hover">
+            <col width="20%">
+            <col width="80%">
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="pte-font-weight600"   data-translate="userManagement.login">Login</span></td>
+                <td>
+                    <span>{{vm.user.login}}</span>
+                    <span class="label label-danger" ng-show="!vm.user.activated"
+                          data-translate="userManagement.deactivated">Deactivated</span>
+                    <span class="label label-success" ng-show="vm.user.activated"
+                          data-translate="userManagement.activated">Activated</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="pte-font-weight600" >Full Name</span></td>
+                <td>{{vm.user.fullName}}</td>
+            </tr>
+            <tr>
+                <td><span class="pte-font-weight600"  data-translate="userManagement.email">Email</span></td>
+                <td>{{vm.user.email}}</td>
+            </tr>
+            <tr>
+                <td><span class="pte-font-weight600">Phonenumber</span></td>
+                <td>{{vm.user.phonenumber}}</td>
+            </tr>
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="userManagement.createdDate">Created Date</span></td>
+                <td>{{vm.user.createdDate | date:'dd/MM/yy HH:mm' }}</td>
+            </tr>
+            <tr>
+                <td><span  class="pte-font-weight600" data-translate="userManagement.lastModifiedBy">Last Modified By</span></td>
+                <td>{{vm.user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td>
+            </tr>
+            <tr>
+                <td><span  class="pte-font-weight600">Remain days</span></td>
+                <td>{{vm.user.remainDays | number}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pte-margin-left10">
+        <button type="submit"
+                ui-sref="user-management"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+        </button>
+    </div>
 </div>
+
+
+

@@ -1,42 +1,61 @@
-<div class="pte-detail-user">
-    <h2><span data-translate="pteMagicApp.answer.detail.title">Answer</span> {{vm.answer.id}}</h2>
-    <hr>
+<div class="content-wrapper">
+    <h2 class="pte-title-detail text-center"><span data-translate="pteMagicApp.answer.detail.title">Answer</span> {{vm.answer.id}}</h2>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details pte-detail-user-content">
-        <dt><span data-translate="pteMagicApp.answer.examId">Exam Id</span></dt>
-        <dd>
-            <span>{{vm.answer.examId}}</span>
-        </dd>
-        <dt><span data-translate="pteMagicApp.answer.questionId">Question Id</span></dt>
-        <dd>
-            <span>{{vm.answer.questionId}}</span>
-        </dd>
-        <dt><span data-translate="pteMagicApp.answer.answer">Answer</span></dt>
-        <dd>
-            <span>{{vm.answer.answer}}</span>
-        </dd>
-        <dt><span data-translate="pteMagicApp.answer.audioLink">Audio Link</span></dt>
-        <dd>
-            <span>{{vm.answer.audioLink}}</span>
-        </dd>
-        <dt><span data-translate="pteMagicApp.answer.description">Description</span></dt>
-        <dd>
-            <span>{{vm.answer.description}}</span>
-        </dd>
-        <dt><span data-translate="pteMagicApp.answer.exam">Exam</span></dt>
-        <dd>
-            <a ui-sref="exam-detail({id:vm.answer.examId})">{{vm.answer.examId}}</a>
-        </dd>
-    </dl>
+    <div class="col-md-12 table-responsive">
+        <table class="h-table table table-striped  table-bordered table-hover">
+            <col width="20%">
+            <col width="80%">
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.answer.examId">Exam Id</span></td>
+                <td>
+                    <span>{{vm.answer.examId}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.answer.questionId">Question Id</span></td>
+                <td>
+                    <span>{{vm.answer.questionId}}</span>
+                </td>
+            </tr>
 
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.answer.answer">Answer</span></td>
+                <td>
+                    <span>{{vm.answer.answer}}</span>
+                </td>
+            </tr>
 
-    <!--<button type="button" ui-sref="answer-detail.edit({id:vm.answer.id})" class="btn btn-primary">-->
-        <!--<span class="glyphicon glyphicon-pencil"></span>-->
-        <!--<span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>-->
-    <!--</button>-->
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.answer.audioLink">Audio Link</span></td>
+                <td>
+                    <span>{{vm.answer.audioLink}}</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.answer.description">Description</span></td>
+                <td>
+                    <span>{{vm.answer.description}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.answer.exam">Exam</span></td>
+                <td>
+                    <a ui-sref="exam-detail({id:vm.answer.examId})">{{vm.answer.examId}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pte-margin-left10">
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+        </button>
+    </div>
 </div>

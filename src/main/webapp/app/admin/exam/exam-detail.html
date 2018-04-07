@@ -1,77 +1,92 @@
-<div class="pte-detail-user">
-    <h2 class="text-center"><span data-translate="pteMagicApp.exam.detail.title">Exam</span> {{vm.exam.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details pte-detail-user-content">
-        <dt><span data-translate="pteMagicApp.exam.userId">User Id</span></dt>
-        <dd>
-            <span>{{vm.exam.examDTO.userId}}</span>
-        </dd>
-        <dt><span data-translate="pteMagicApp.exam.result">Result</span></dt>
-        <dd>
-            <span data-translate="{{'pteMagicApp.ProgressType.' + vm.exam.examDTO.result}}">{{vm.exam.result}}</span>
-        </dd>
-        <dt><span data-translate="pteMagicApp.exam.examType">Exam Type</span></dt>
-        <dd>
-            <a ui-sref="exam-type-detail({id:vm.exam.examDTO.examTypeId})">{{vm.exam.examDTO.examTypeId}}</a>
-        </dd>
-    </dl>
-</div>
-
-<div class="col-md-12 table-responsive">
-    <table class="jh-table table table-striped  table-bordered table-hover">
-        <thead>
-            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id">Answer ID<span class="glyphicon glyphicon-sort"></span></th>
-                <th>Status</th>
-                <th>Question</th>
-                <th style="min-width: 250px">Audio/Answer</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="answerQuestion in vm.exam.answerQuestions">
-                <td>{{answerQuestion.answer.id}}</td>
-                <td>{{answerQuestion.answer.status}}</td>
-                <td>{{answerQuestion.question.text}}</td>
-                <!-- Audio/Writing -->
+<div class="content-wrapper">
+    <div class="pte-detail-user">
+        <h2 class="text-center"><span data-translate="pteMagicApp.exam.detail.title">Exam</span> {{vm.exam.id}}</h2>
+        <hr>
+        <jhi-alert-error></jhi-alert-error>
+        <table class="h-table table table-striped  table-bordered table-hover">
+            <thead>
+            </thead>
+            <tbody>
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.exam.userId">User Id</span></td>
                 <td>
-                	<div ng-show="answerQuestion.answer.answer">{{answerQuestion.answer.answer}}</div>
-                	<div class="container-audio" ng-show="answerQuestion.answer.audioLink">
-                		<input type="hidden" value="{{answerQuestion.answer.audioLink}}">
-			            <audio id="player-{{answerQuestion.answer.id}}" controls preload ng-src="{{answerQuestion.answer.audioLink | trusted}}">
-			                Your browser dose not Support the audio Tag
-			            </audio>
-			        </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container" ng-show="answerQuestion.answer.status == 'MARKING'">
-                        <button type="button" ng-click="vm.updateAnswer(answerQuestion.answer, 'OK')"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-ok"></span>
-                            <span class="hidden-sm-down">OK</span>
-                        </button>
-                        <button type="button" ng-click="vm.updateAnswer(answerQuestion.answer, 'NG')"
-                                class="btn btn-danger btn-sm">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <span class="hidden-sm-down">NG</span>
-                        </button>
-                    </div>
+                    <span>{{vm.exam.examDTO.userId}}</span>
                 </td>
             </tr>
-        </tbody>
-    </table>
-</div>
+            <tr>
+                <td><span class="pte-font-weight600" data-translate="pteMagicApp.exam.result">Result</span></td>
+                <td>
+                    <span data-translate="{{'pteMagicApp.ProgressType.' + vm.exam.examDTO.result}}">{{vm.exam.result}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td><span  class="pte-font-weight600" data-translate="pteMagicApp.exam.examType">Exam Type</span></td>
+                <td>
+                    <a ui-sref="exam-type-detail({id:vm.exam.examDTO.examTypeId})">{{vm.exam.examDTO.examTypeId}}</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--<div class="pte-detail-user table-responsive">-->
+        <!---->
+    <!--</div>-->
 
-<div class="pte-detail-user">
-    <button type="submit"
-            ui-sref="{{ vm.previousState }}"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-    </button>
-    
-    <button type="button" ng-click="vm.finishMarkingExam()"
-            class="btn btn-info">
-        <span class="glyphicon glyphicon-ok">Finish</span>
-    </button>
+    <div class="col-md-12 table-responsive">
+        <table class="jh-table table table-striped  table-bordered table-hover">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id">Answer ID<span class="glyphicon glyphicon-sort"></span></th>
+                    <th>Status</th>
+                    <th>Question</th>
+                    <th style="min-width: 250px">Audio/Answer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="answerQuestion in vm.exam.answerQuestions">
+                    <td>{{answerQuestion.answer.id}}</td>
+                    <td>{{answerQuestion.answer.status}}</td>
+                    <td>{{answerQuestion.question.text}}</td>
+                    <!-- Audio/Writing -->
+                    <td>
+                        <div ng-show="answerQuestion.answer.answer">{{answerQuestion.answer.answer}}</div>
+                        <div class="container-audio" ng-show="answerQuestion.answer.audioLink">
+                            <input type="hidden" value="{{answerQuestion.answer.audioLink}}">
+                            <audio id="player-{{answerQuestion.answer.id}}" controls preload ng-src="{{answerQuestion.answer.audioLink | trusted}}">
+                                Your browser dose not Support the audio Tag
+                            </audio>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container" ng-show="answerQuestion.answer.status == 'MARKING'">
+                            <button type="button" ng-click="vm.updateAnswer(answerQuestion.answer, 'OK')"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-ok"></span>
+                                <span class="hidden-sm-down">OK</span>
+                            </button>
+                            <button type="button" ng-click="vm.updateAnswer(answerQuestion.answer, 'NG')"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down">NG</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class=" text-center">
+        <button type="submit"
+                ui-sref="{{ vm.previousState }}"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+        </button>
+
+        <button type="button" ng-click="vm.finishMarkingExam()"
+                class="btn btn-info">
+            <span class="glyphicon glyphicon-ok">Finish</span>
+        </button>
+    </div>
 </div>

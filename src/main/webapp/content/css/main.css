@@ -1295,6 +1295,16 @@ textarea {
     overflow-y: scroll;
     height: 670px;
 }
+.pte-font-weight600{
+    font-weight: 600;
+}
+.pte-margin-left10{
+    margin-left: 10px;
+}
+.pte-title-detail{
+    margin-top: 0;
+    padding: 10px;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
