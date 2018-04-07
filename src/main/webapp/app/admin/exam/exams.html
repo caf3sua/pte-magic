@@ -1,31 +1,31 @@
-<div style="margin-top:120px" class="pte-table-user">
+<div  class="content-wrapper pte-table-user">
     <h2 class="col-md-12" data-translate="pteMagicApp.exam.home.title">Exams</h2>
     <jhi-alert></jhi-alert>
     <div class="col-md-12 table-responsive">
         <table class="jh-table table table-striped  table-bordered table-hover">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="userId">Username</span></th>
-                    <th jh-sort-by="result"><span data-translate="pteMagicApp.exam.result">Result</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th class="text-center" jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th class="text-center" jh-sort-by="userId">Username</span></th>
+                    <th class="text-center" jh-sort-by="result"><span data-translate="pteMagicApp.exam.result">Result</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <!-- <th jh-sort-by="scoreWriting"><span data-translate="pteMagicApp.exam.scoreWriting">Score Writing</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="scoreListening"><span data-translate="pteMagicApp.exam.scoreListening">Score Listening</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="scoreReading"><span data-translate="pteMagicApp.exam.scoreReading">Score Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="scoreSpeaking"><span data-translate="pteMagicApp.exam.scoreSpeaking">Score Speaking</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-                    <th jh-sort-by="examTypeId"><span data-translate="pteMagicApp.exam.examType">Exam Type</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th></th>
+                    <th class="text-center" jh-sort-by="examTypeId"><span data-translate="pteMagicApp.exam.examType">Exam Type</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th  class="text-center" ><span  data-translate="pteMagicApp.exam.action">Action</span></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="exam in vm.exams track by exam.id">
-                    <td><a ui-sref="exam-detail({id:exam.id})">{{exam.id}}</a></td>
-                    <td>{{exam.email}}</td>
-                    <td data-translate="{{'pteMagicApp.ProgressType.' + exam.result}}">{{exam.result}}</td>
+                    <td class="text-right"><a ui-sref="exam-detail({id:exam.id})">{{exam.id}}</a></td>
+                    <td class="text-left">{{exam.email}}</td>
+                    <td class="text-left" data-translate="{{'pteMagicApp.ProgressType.' + exam.result}}">{{exam.result}}</td>
                     <!-- <td>{{exam.scoreWriting}}</td>
                     <td>{{exam.scoreListening}}</td>
                     <td>{{exam.scoreReading}}</td>
                     <td>{{exam.scoreSpeaking}}</td> -->
-                    <td>
+                    <td class="text-left">
                         <a ui-sref="exam-type-detail({id:exam.examTypeId})">{{exam.examTypeName}}</a>
                     </td>
                     <td class="text-right">

@@ -26,7 +26,8 @@
             "answerE": "Answer E",
             "expectAnswer": "Expect Answer",
             "active": "Active",
-            "exam": "Exam"
+            "exam": "Exam",
+            "action": "Action"
         }
     }
 }

@@ -379,7 +379,7 @@ entity tables helpers
    -webkit-flex-direction: row;
    flex-direction: row;
    -webkit-justify-content: flex-end;
-   justify-content: flex-end;
+   justify-content: center;
 }
 
 .jh-table > tbody > tr > td {
@@ -1067,7 +1067,6 @@ table>thead>tr{
     font-style: normal;
 }
 .pte-test-type-question-three{
-    float: right;
     padding: 25px 0;
 }
 .pte-test-type-question-three-background{

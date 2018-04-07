@@ -1,14 +1,13 @@
-<div class="col-md-6 ">
+<div class="col-md-12">
     <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
 
 	<div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
 </div>
-    <div class="col-md-6 pte-content-question">
-        <div class="padding-left30">
+<div class="col-md-12">
+        <div class="">
             <textarea id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
        </div>
-       <div class="text-center">
+       <div class="text-right">
            <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
        </div>
-
 </div>

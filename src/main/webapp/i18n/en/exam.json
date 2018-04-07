@@ -24,7 +24,8 @@
             "scoreSpeaking": "Score Speaking",
             "examType": "Exam Type",
             "questions": "Questions",
-            "answes": "Answes"
+            "answes": "Answes",
+            "action" : "Action"
         }
     }
 }

@@ -28,14 +28,13 @@
                     angular.element('#listening').addClass("active");
                     angular.element('#listeningMobile').addClass("activeMobile");
                 });
-                
                 vm.selectedExams = vm.listeningExams;
             }else if(type == 'READING'){
                 angular.element(document.getElementsByClassName("pte-freeSample-block")).removeClass("active");
                 angular.element(document.getElementsByClassName("pte-free-sample-mobile-icon")).removeClass("activeMobile");
                 angular.element('#reading').addClass("active");
                 angular.element('#readingMobile').addClass("activeMobile");
-                
+
                 vm.selectedExams = vm.readingExams;
             }
             vm.examShowFlag = true;
@@ -53,24 +52,24 @@
 
         // Init controller
   		(function initController() {
-  			
-  			ExamType.getAllByType({type: 'FREE_EXAM_LISTENING'}, 
+
+  			ExamType.getAllByType({type: 'FREE_EXAM_LISTENING'},
   					function(data, headers) {
 		  				vm.listeningExams = data;
 		  				angular.forEach(data, function(value, key){
 	  	            		vm.totalExamQuestionListening = vm.totalExamQuestionListening + value.totalQuestion;
 		  	            });
-  					}, 
+  					},
   					function(error) {
   					});
-  			
-  			ExamType.getAllByType({type: 'FREE_EXAM_READING'}, 
+
+  			ExamType.getAllByType({type: 'FREE_EXAM_READING'},
   					function(data, headers) {
 		  				vm.readingExams = data;
 		  				angular.forEach(data, function(value, key){
 	  	            		vm.totalExamQuestionReading = vm.totalExamQuestionReading + value.totalQuestion;
 		  	            });
-  					}, 
+  					},
   					function(error) {
   					});
   		})();

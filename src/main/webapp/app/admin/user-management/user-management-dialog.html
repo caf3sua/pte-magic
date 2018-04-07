@@ -1,5 +1,4 @@
 <form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
-
     <div class="modal-header">
         <span class="icon-close pte-icon-close-dialog" ng-click="vm.clear()"></span>
         <h4 class="modal-title text-center" id="myUserLabel">
@@ -59,7 +58,7 @@
                     ng-options="authority for authority in vm.authorities">
             </select>
         </div>
-        
+
         <div class="form-group">
             <label class="control-label">Remain days</label>
             <input type="text" class="form-control" name="login"

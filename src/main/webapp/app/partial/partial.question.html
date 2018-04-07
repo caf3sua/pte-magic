@@ -1,7 +1,7 @@
     <div  class="col-md-12" ng-show="vm.selectedQuestion.type == 'TIME_BREAK'">
         <div ng-include="'app/partial/partial.timebreak.html'"></div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
 
         <!-- Record audio -->
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 pte-content-question" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
+    <div class="col-md-12 " ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
 
@@ -52,7 +52,7 @@
                    </label>
            </div>
        </div>
-       <div class="text-center"   >
+       <div class="text-right">
            <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
        </div>
 

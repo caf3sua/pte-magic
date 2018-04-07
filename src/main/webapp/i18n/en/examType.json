@@ -21,7 +21,8 @@
             "numberQuestionReading": "Number Question Reading",
             "numberQuestionListening": "Number Question Listening",
             "numberQuestionSpeaking": "Number Question Speaking",
-            "description": "Description"
+            "description": "Description",
+            "action": "Action"
         }
     }
 }

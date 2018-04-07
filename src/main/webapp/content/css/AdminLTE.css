@@ -246,11 +246,10 @@ a:focus {
   }
 }
 .main-header .sidebar-toggle {
-  float: left;
-  background-color: transparent;
-  background-image: none;
-  padding: 15px 15px;
-  font-family: fontAwesome;
+    float: left;
+    background-color: transparent;
+    background-image: none;
+    padding: 18px 15px;
 }
 .main-header .sidebar-toggle:before {
   content: "\f0c9";
@@ -459,7 +458,7 @@ a:focus {
 .user-panel {
   position: relative;
   width: 100%;
-  padding: 10px;
+  padding: 20px;
   overflow: hidden;
 }
 .user-panel:before,
