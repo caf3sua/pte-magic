@@ -36,8 +36,8 @@
     	vm.txtInfoCountdown = "Begining in ";
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
-    	vm.btnTxt = 'Answer';
-    	
+    	vm.btnTxt = 'Next';
+
     	function startRecording() {
     		// start recording
 	        if (!audioRecorder)
@@ -48,14 +48,14 @@
 	        vm.txtInfoCountdown = "Recording ..."
         	vm.isRecording = true;
     	}
-    	
+
     	function stopRecording() {
     		// stop recording
 	        audioRecorder.stop();
 	        audioRecorder.getBuffers( gotBuffers );
 	        vm.btnEnable = true;
     	}
-    	
+
 //    	function toggleRecording() {
 //    	    if ($('#record').hasClass("recording")) {
 //    	        // stop recording
@@ -76,7 +76,7 @@
     	function initPlayer() {
     		var audio = $("#player");
     		if (audio[0] != undefined) {
-    			audio[0].addEventListener('ended', callBackAudioEnded);	
+    			audio[0].addEventListener('ended', callBackAudioEnded);
     		}
     	}
 
@@ -107,7 +107,7 @@
             // Stop timer
             $scope.$broadcast('timer-stop');
   			$scope.$broadcast('timer-reset');
-  			
+
   			vm.txtInfoCountdown = "Begining in ";
   	    	vm.isRecording = false;
     	}
@@ -173,14 +173,14 @@
   		function answer() {
   			initAnswer();
   			var selectedQuestionId = vm.selectedQuestion.id;
-  			
+
   			// Upload if questionGroup == SPEAKING
   			if (vm.questionGroup == 'SPEAKING') {
   				stopRecording();
   				$timeout(function(){
   					uploadRecording(selectedQuestionId);
   	    		}, 1000 );
-  				
+
   			} else {
   				console.log(vm.selectedQuestion);
   	  			// Get answer

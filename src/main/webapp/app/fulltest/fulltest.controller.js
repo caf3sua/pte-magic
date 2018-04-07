@@ -40,7 +40,7 @@
 
     	vm.countdownTimebreak = 600;
 
-    	vm.btnTxt = 'Answer';
+    	vm.btnTxt = 'Next';
 
     	function startNewPart() {
     		nextQuestion();
