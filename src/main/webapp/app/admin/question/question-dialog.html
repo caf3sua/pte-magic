@@ -43,11 +43,11 @@
                     ng-model="vm.question.text"
                     />
         </div>
-        <div class="form-group" ng-show="vm.questionGroup == 'LISTENING'">
-        	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)" accept="audio/*" ngf-max-size="2MB">
+        <div class="form-group" ng-show="vm.questionGroup == 'LISTENING' || vm.question.type == 'SPEAKING_REPEAT_SENTENCE'">
+        	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)" accept="audio/*,image/*" ngf-max-size="4MB">
 		      Select File</button>
         
-            <label class="control-label" data-translate="pteMagicApp.question.audioLink" for="field_audioLink">Audio Link</label>
+            <label class="control-label" data-translate="pteMagicApp.question.audioLink" for="field_audioLink">Audio/Image Link</label>
             <input type="text" class="form-control" name="audioLink" id="field_audioLink" ng-model="vm.question.audioLink" readonly="readonly"/>
         </div>
         <div class="form-group">
@@ -56,29 +56,32 @@
                     ng-model="vm.question.description"
                     />
         </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.question.answerA" for="field_answerA">Answer A</label>
-            <input type="text" class="form-control" name="answerA" id="field_answerA" ng-model="vm.question.answerA" />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.question.answerB" for="field_answerB">Answer B</label>
-            <input type="text" class="form-control" name="answerB" id="field_answerB" ng-model="vm.question.answerB" />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.question.answerC" for="field_answerC">Answer C</label>
-            <input type="text" class="form-control" name="answerC" id="field_answerC" ng-model="vm.question.answerC" />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.question.answerD" for="field_answerD">Answer D</label>
-            <input type="text" class="form-control" name="answerD" id="field_answerD" ng-model="vm.question.answerD" />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.question.answerE" for="field_answerE">Answer E</label>
-            <input type="text" class="form-control" name="answerE" id="field_answerE" ng-model="vm.question.answerE" />
-        </div>
-        <div class="form-group">
-            <label class="control-label" data-translate="pteMagicApp.question.expectAnswer" for="field_expectAnswer">Expect answer</label>
-            <input type="text" class="form-control" name="expectAnswer" id="field_expectAnswer" ng-model="vm.question.expectAnswer" />
+        
+        <div ng-show="vm.questionGroup == 'LISTENING' || vm.questionGroup == 'WRITING' || vm.questionGroup == 'READING'">
+	        <div class="form-group">
+	            <label class="control-label" data-translate="pteMagicApp.question.answerA" for="field_answerA">Answer A</label>
+	            <input type="text" class="form-control" name="answerA" id="field_answerA" ng-model="vm.question.answerA" />
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label" data-translate="pteMagicApp.question.answerB" for="field_answerB">Answer B</label>
+	            <input type="text" class="form-control" name="answerB" id="field_answerB" ng-model="vm.question.answerB" />
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label" data-translate="pteMagicApp.question.answerC" for="field_answerC">Answer C</label>
+	            <input type="text" class="form-control" name="answerC" id="field_answerC" ng-model="vm.question.answerC" />
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label" data-translate="pteMagicApp.question.answerD" for="field_answerD">Answer D</label>
+	            <input type="text" class="form-control" name="answerD" id="field_answerD" ng-model="vm.question.answerD" />
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label" data-translate="pteMagicApp.question.answerE" for="field_answerE">Answer E</label>
+	            <input type="text" class="form-control" name="answerE" id="field_answerE" ng-model="vm.question.answerE" />
+	        </div>
+	        <div class="form-group">
+	            <label class="control-label" data-translate="pteMagicApp.question.expectAnswer" for="field_expectAnswer">Expect answer</label>
+	            <input type="text" class="form-control" name="expectAnswer" id="field_expectAnswer" ng-model="vm.question.expectAnswer" />
+	        </div>
         </div>
     </div>
     <div class="modal-footer">

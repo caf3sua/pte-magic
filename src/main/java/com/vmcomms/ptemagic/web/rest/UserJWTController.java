@@ -55,6 +55,13 @@ public class UserJWTController {
         	} else {
         		throw new BadRequestAlertException("User not Admin role", "user", "not_permission");
         	}
+        } else {
+        	// Check role
+        	SimpleGrantedAuthority adminRole = new SimpleGrantedAuthority("ROLE_ADMIN");
+        	
+        	if (authentication.getAuthorities().contains(adminRole)) {
+        		throw new BadRequestAlertException("User not Admin role", "user", "not_permission");
+        	}
         }
         
         SecurityContextHolder.getContext().setAuthentication(authentication);
