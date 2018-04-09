@@ -15,7 +15,6 @@
                 <th jh-sort-by="id" class="text-center"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
                 <!-- <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                 <th jh-sort-by="email"  class="text-center"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th  class="text-center"><span  data-translate="userManagement.status">Status</span></th>
                 <!-- <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>   -->
                 <th  class="text-center"><span data-translate="userManagement.profiles">Profiles</span></th>
                 <th  class="text-center" jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -29,12 +28,6 @@
                 <td class="text-right"><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
                 <!-- <td>{{user.login}}</td> -->
                 <td class="text-center">{{user.email}}</td>
-                <td class="text-center">
-                    <button class="btn btn-danger btn-xs" ng-click="vm.setActive(user, true)" ng-show="!user.activated"
-                            data-translate="userManagement.deactivated">Deactivated</button>
-                    <button class="btn btn-success btn-xs" ng-click="vm.setActive(user, false)" ng-show="user.activated"
-                            ng-disabled="vm.currentAccount.login === user.login" data-translate="userManagement.activated">Activated</button>
-                </td>
                 <!-- <td>{{user.langKey}}</td> -->
                 <td>
                     <div ng-repeat="authority in user.authorities">

@@ -3,13 +3,17 @@
     </div>
     <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING' || vm.questionGroup== 'WRITING'">
         <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
-        
+
         <!-- Include image -->
-        <div ng-show="vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'">
-			<img alt="" src="{{vm.selectedQuestion.audioLink}}">        	
-        </div>
+
     </div>
-    <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING'">
+    <div class="col-md-6" ng-show="vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'">
+        <img class="pte-width-100 pte-margin-bottom-10" alt="" src="{{vm.selectedQuestion.audioLink}}">
+    </div>
+    <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING' && vm.selectedQuestion.type != 'SPEAKING_DESCRIBE_IMAGE'">
+        <div ng-include="'app/partial/partial.record.html'"></div>
+    </div>
+    <div class="col-md-6"  ng-show="vm.questionGroup == 'SPEAKING' && vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'">
         <div ng-include="'app/partial/partial.record.html'"></div>
     </div>
     <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING' || vm.questionGroup== 'WRITING'"   ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
