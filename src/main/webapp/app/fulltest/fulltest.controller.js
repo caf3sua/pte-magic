@@ -126,6 +126,9 @@
     		$timeout(function(){
 	    		// Load player
 	    		initPlayer();
+
+	    		// Load record audio
+	    		initAudio();
     		}, 1000 );
         });
 
@@ -164,9 +167,6 @@
 
             	// Next question
             	nextQuestion();
-            	
-            	// Load record audio
-	    		initAudio();            	
             }
             function onError(error) {
             }

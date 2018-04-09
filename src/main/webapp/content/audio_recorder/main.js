@@ -87,9 +87,11 @@ function cancelAnalyserUpdates() {
 function updateAnalysers(time) {
     if (!analyserContext) {
         var canvas = document.getElementById("analyser");
-        canvasWidth = canvas.width;
-        canvasHeight = canvas.height;
-        analyserContext = canvas.getContext('2d');
+        if (null != canvas) {
+        	canvasWidth = canvas.width;
+            canvasHeight = canvas.height;
+            analyserContext = canvas.getContext('2d');
+        }
     }
 
     // analyzer draw code here

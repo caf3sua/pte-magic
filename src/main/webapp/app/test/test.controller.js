@@ -74,7 +74,7 @@
 //    	}
 
     	function initPlayer() {
-    		var audio = $("#player");
+			var audio = $("#player");
     		if (audio[0] != undefined) {
     			audio[0].addEventListener('ended', callBackAudioEnded);
     		}
@@ -85,16 +85,16 @@
     	}
 
     	function playAudio(link, timeout) {
-    		var audio = $("#player");
-    		if (audio[0] != undefined) {
-    			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
-                audio[0].pause();
-                audio[0].load();
-
-                $timeout(function(){
-                	audio[0].play();
-                }, timeout );
-    		}
+            $timeout(function(){
+            	var audio = $("#player");
+        		if (audio[0] != undefined) {
+        			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
+                    audio[0].pause();
+                    audio[0].load();
+                    audio[0].play();
+        		}
+            }, timeout );
+    		
     	}
 
     	function initAnswer() {
@@ -113,13 +113,13 @@
     	}
 
     	angular.element(document).ready(function () {
-    		$timeout(function(){
-	    		// Load player
-	    		initPlayer();
-
-	    		// Load record audio
-	    		initAudio();
-    		}, 1000 );
+//    		$timeout(function(){
+//	    		// Load player
+//	    		initPlayer();
+//
+//	    		// Load record audio
+//	    		initAudio();
+//    		}, 1000 );
         });
 
     	// Init controller
@@ -139,6 +139,12 @@
             	vm.questions = data.questions;
             	console.log(data);
 
+            	// Load player
+	    		initPlayer();
+
+	    		// Load record audio
+	    		initAudio();
+	    		
             	// Next question
             	nextQuestion();
             }
@@ -284,6 +290,13 @@
   				}
 
   				$scope.$broadcast('timer-start');
+  				
+	    		// Load player
+	    		initPlayer();
+
+	    		// Load record audio
+	    		initAudio();
+  				
   				playAudio(vm.selectedQuestion.audioLink, 3000);
   			}
   		}
