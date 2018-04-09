@@ -64,6 +64,8 @@
         }
 
         function login() {
+        	Auth.logout();
+        	
             collapseNavbar();
             LoginService.open();
         }

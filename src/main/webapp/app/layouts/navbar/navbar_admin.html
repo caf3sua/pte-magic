@@ -1,4 +1,4 @@
-<header class="main-header" ng-show="vm.isAuthenticated()">
+<header class="main-header" ng-show="vm.isAuthenticated()" has-authority="ROLE_ADMIN">
     <!-- Logo -->
     <a class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -12,7 +12,7 @@
         <i  data-toggle="push-menu" role="button" class="sidebar-toggle fas fa-bars"></i>
     </nav>
 </header>
-<aside class="main-sidebar" ng-show="vm.isAuthenticated()">
+<aside class="main-sidebar" ng-show="vm.isAuthenticated()" has-authority="ROLE_ADMIN">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
         <!-- Sidebar user panel -->

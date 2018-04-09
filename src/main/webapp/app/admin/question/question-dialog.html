@@ -37,13 +37,13 @@
                 <option value="LISTENING_DICTATION" data-translate="pteMagicApp.QuestionType.LISTENING_DICTATION">LISTENING_DICTATION</option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-show="vm.question.type != 'SPEAKING_REPEAT_SENTENCE' && vm.question.type != 'SPEAKING_DESCRIBE_IMAGE' && vm.question.type != 'SPEAKING_RETELL_LECTURE' && vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION'">
             <label class="control-label" data-translate="pteMagicApp.question.text" for="field_text">Text</label>
             <input type="text" class="form-control" name="text" id="field_text"
                     ng-model="vm.question.text"
                     />
         </div>
-        <div class="form-group" ng-show="vm.questionGroup == 'LISTENING' || vm.question.type == 'SPEAKING_REPEAT_SENTENCE'">
+        <div class="form-group" ng-show="vm.questionGroup == 'LISTENING' || vm.question.type == 'SPEAKING_REPEAT_SENTENCE' || vm.question.type == 'SPEAKING_DESCRIBE_IMAGE' || vm.question.type == 'SPEAKING_RETELL_LECTURE'|| vm.question.type == 'SPEAKING_ANSWER_SHORT_QUESTION'">
         	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)" accept="audio/*,image/*" ngf-max-size="4MB">
 		      Select File</button>
         
