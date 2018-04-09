@@ -12,7 +12,7 @@
             </select>
         </div>
         <div class="col-md-6 text-right pte-no-padding-right">
-            <button class=" btn btn-primary " ui-sref="question.new" >
+            <button class=" btn btn-primary " ui-sref="question.new({selectedSkill: vm.selectedSkill})" >
                 <span class="glyphicon glyphicon-plus"></span>
                 <span  data-translate="pteMagicApp.question.home.createLabel">
                 Create new Question

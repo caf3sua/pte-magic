@@ -116,6 +116,9 @@
             data: {
                 authorities: ['ROLE_ADMIN']
             },
+            params:{
+                selectedSkill:null
+            },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
                     templateUrl: 'app/admin/question/question-dialog.html',

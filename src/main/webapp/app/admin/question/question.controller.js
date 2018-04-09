@@ -17,13 +17,12 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.selectedSkill = 'SPEAKING';
-
         vm.loadAll = loadAll;
 
         loadAll();
-        
+
         function loadAll () {
-        	
+
         	Question.queryBySkill({
 //            Question.query({
                 page: pagingParams.page - 1,

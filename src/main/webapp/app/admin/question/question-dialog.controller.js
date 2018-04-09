@@ -17,7 +17,7 @@
         vm.uploadFiles = uploadFiles;
         vm.questionGroup;
         vm.changeQuestionType = changeQuestionType;
-        
+        vm.checkTypeQuestion = $stateParams.selectedSkill;
         function changeQuestionType() {
         	vm.questionGroup = getQuestionGroup(vm.question.type);
         }
@@ -35,7 +35,7 @@
                     data: {file: file},
                     ignoreLoadingBar: true
                 });
-                
+
                 file.upload.then(function (response) {
                     $timeout(function () {
                     	console.log(response);
@@ -45,12 +45,12 @@
                     if (response.status > 0)
                         $scope.errorMsg = response.status + ': ' + response.data;
                 }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 * 
+                    file.progress = Math.min(100, parseInt(100.0 *
                                              evt.loaded / evt.total));
                 });
-            }   
+            }
         }
-        
+
         function clear () {
             $uibModalInstance.dismiss('cancel');
         }

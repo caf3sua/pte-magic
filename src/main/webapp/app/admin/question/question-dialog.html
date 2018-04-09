@@ -15,26 +15,26 @@
         <div class="form-group">
             <label class="control-label" data-translate="pteMagicApp.question.type" for="field_type">Type</label>
             <select class="form-control" name="type" ng-model="vm.question.type" id="field_type" ng-change="vm.changeQuestionType()">
-                <option value="SPEAKING_READ_ALOUD" data-translate="pteMagicApp.QuestionType.SPEAKING_READ_ALOUD">SPEAKING_READ_ALOUD</option>
-                <option value="SPEAKING_REPEAT_SENTENCE" data-translate="pteMagicApp.QuestionType.SPEAKING_REPEAT_SENTENCE">SPEAKING_REPEAT_SENTENCE</option>
-                <option value="SPEAKING_DESCRIBE_IMAGE" data-translate="pteMagicApp.QuestionType.SPEAKING_DESCRIBE_IMAGE">SPEAKING_DESCRIBE_IMAGE</option>
-                <option value="SPEAKING_RETELL_LECTURE" data-translate="pteMagicApp.QuestionType.SPEAKING_RETELL_LECTURE">SPEAKING_RETELL_LECTURE</option>
-                <option value="SPEAKING_ANSWER_SHORT_QUESTION" data-translate="pteMagicApp.QuestionType.SPEAKING_ANSWER_SHORT_QUESTION">SPEAKING_ANSWER_SHORT_QUESTION</option>
-                <option value="WRITING_SUMMARIZE_WRITTEN_TEXT" data-translate="pteMagicApp.QuestionType.WRITING_SUMMARIZE_WRITTEN_TEXT">WRITING_SUMMARIZE_WRITTEN_TEXT</option>
-                <option value="WRITING_ESSAY" data-translate="pteMagicApp.QuestionType.WRITING_ESSAY">WRITING_ESSAY</option>
-                <option value="READING_FIB_R_W" data-translate="pteMagicApp.QuestionType.READING_FIB_R_W">READING_FIB_R_W</option>
-                <option value="READING_FIB_R" data-translate="pteMagicApp.QuestionType.READING_FIB_R">READING_FIB_R</option>
-                <option value="READING_RE_ORDER_PARAGRAPH" data-translate="pteMagicApp.QuestionType.READING_RE_ORDER_PARAGRAPH">READING_RE_ORDER_PARAGRAPH</option>
-                <option value="READING_MCQ_R_SINGLE_ANSWER" data-translate="pteMagicApp.QuestionType.READING_MCQ_R_SINGLE_ANSWER">READING_MCQ_R_SINGLE_ANSWER</option>
-                <option value="READING_MCQ_R_MULTIPLE_ANSWER" data-translate="pteMagicApp.QuestionType.READING_MCQ_R_MULTIPLE_ANSWER">READING_MCQ_R_MULTIPLE_ANSWER</option>
-                <option value="LISTENING_SUMMARIZE_SPOKEN_TEXT" data-translate="pteMagicApp.QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT">LISTENING_SUMMARIZE_SPOKEN_TEXT</option>
-                <option value="LISTENING_FIB_L" data-translate="pteMagicApp.QuestionType.LISTENING_FIB_L">LISTENING_FIB_L</option>
-                <option value="LISTENING_MCQ_L_SINGLE_ANSWER" data-translate="pteMagicApp.QuestionType.LISTENING_MCQ_L_SINGLE_ANSWER">LISTENING_MCQ_L_SINGLE_ANSWER</option>
-                <option value="LISTENING_MCQ_L_MULTIPLE_ANSWER" data-translate="pteMagicApp.QuestionType.LISTENING_MCQ_L_MULTIPLE_ANSWER">LISTENING_MCQ_L_MULTIPLE_ANSWER</option>
-                <option value="LISTENING_HIGHLIGHT_CORRECT_SUMMARY" data-translate="pteMagicApp.QuestionType.LISTENING_HIGHLIGHT_CORRECT_SUMMARY">LISTENING_HIGHLIGHT_CORRECT_SUMMARY</option>
-                <option value="LISTENING_SELECT_MISSING_WORD" data-translate="pteMagicApp.QuestionType.LISTENING_SELECT_MISSING_WORD">LISTENING_SELECT_MISSING_WORD</option>
-                <option value="LISTENING_HIGHLIGHT_INCORRECT_WORD" data-translate="pteMagicApp.QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD">LISTENING_HIGHLIGHT_INCORRECT_WORD</option>
-                <option value="LISTENING_DICTATION" data-translate="pteMagicApp.QuestionType.LISTENING_DICTATION">LISTENING_DICTATION</option>
+                <option value="SPEAKING_READ_ALOUD" ng-show="vm.checkTypeQuestion =='SPEAKING'" data-translate="pteMagicApp.QuestionType.SPEAKING_READ_ALOUD">SPEAKING_READ_ALOUD</option>
+                <option value="SPEAKING_REPEAT_SENTENCE" ng-show="vm.checkTypeQuestion =='SPEAKING'" data-translate="pteMagicApp.QuestionType.SPEAKING_REPEAT_SENTENCE">SPEAKING_REPEAT_SENTENCE</option>
+                <option value="SPEAKING_DESCRIBE_IMAGE" ng-show="vm.checkTypeQuestion =='SPEAKING'" data-translate="pteMagicApp.QuestionType.SPEAKING_DESCRIBE_IMAGE">SPEAKING_DESCRIBE_IMAGE</option>
+                <option value="SPEAKING_RETELL_LECTURE" ng-show="vm.checkTypeQuestion =='SPEAKING'" data-translate="pteMagicApp.QuestionType.SPEAKING_RETELL_LECTURE">SPEAKING_RETELL_LECTURE</option>
+                <option value="SPEAKING_ANSWER_SHORT_QUESTION" ng-show="vm.checkTypeQuestion =='SPEAKING'" data-translate="pteMagicApp.QuestionType.SPEAKING_ANSWER_SHORT_QUESTION">SPEAKING_ANSWER_SHORT_QUESTION</option>
+                <option value="WRITING_SUMMARIZE_WRITTEN_TEXT" ng-show="vm.checkTypeQuestion =='WRITING'" data-translate="pteMagicApp.QuestionType.WRITING_SUMMARIZE_WRITTEN_TEXT">WRITING_SUMMARIZE_WRITTEN_TEXT</option>
+                <option value="WRITING_ESSAY" ng-show="vm.checkTypeQuestion =='WRITING'" data-translate="pteMagicApp.QuestionType.WRITING_ESSAY">WRITING_ESSAY</option>
+                <option value="READING_FIB_R_W" ng-show="vm.checkTypeQuestion =='READING'" data-translate="pteMagicApp.QuestionType.READING_FIB_R_W">READING_FIB_R_W</option>
+                <option value="READING_FIB_R" ng-show="vm.checkTypeQuestion =='READING'" data-translate="pteMagicApp.QuestionType.READING_FIB_R">READING_FIB_R</option>
+                <option value="READING_RE_ORDER_PARAGRAPH" ng-show="vm.checkTypeQuestion =='READING'" data-translate="pteMagicApp.QuestionType.READING_RE_ORDER_PARAGRAPH">READING_RE_ORDER_PARAGRAPH</option>
+                <option value="READING_MCQ_R_SINGLE_ANSWER" ng-show="vm.checkTypeQuestion =='READING'"  data-translate="pteMagicApp.QuestionType.READING_MCQ_R_SINGLE_ANSWER">READING_MCQ_R_SINGLE_ANSWER</option>
+                <option value="READING_MCQ_R_MULTIPLE_ANSWER" ng-show="vm.checkTypeQuestion =='READING'" data-translate="pteMagicApp.QuestionType.READING_MCQ_R_MULTIPLE_ANSWER">READING_MCQ_R_MULTIPLE_ANSWER</option>
+                <option value="LISTENING_SUMMARIZE_SPOKEN_TEXT" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT">LISTENING_SUMMARIZE_SPOKEN_TEXT</option>
+                <option value="LISTENING_FIB_L" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_FIB_L">LISTENING_FIB_L</option>
+                <option value="LISTENING_MCQ_L_SINGLE_ANSWER" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_MCQ_L_SINGLE_ANSWER">LISTENING_MCQ_L_SINGLE_ANSWER</option>
+                <option value="LISTENING_MCQ_L_MULTIPLE_ANSWER" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_MCQ_L_MULTIPLE_ANSWER">LISTENING_MCQ_L_MULTIPLE_ANSWER</option>
+                <option value="LISTENING_HIGHLIGHT_CORRECT_SUMMARY" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_HIGHLIGHT_CORRECT_SUMMARY">LISTENING_HIGHLIGHT_CORRECT_SUMMARY</option>
+                <option value="LISTENING_SELECT_MISSING_WORD" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_SELECT_MISSING_WORD">LISTENING_SELECT_MISSING_WORD</option>
+                <option value="LISTENING_HIGHLIGHT_INCORRECT_WORD" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD">LISTENING_HIGHLIGHT_INCORRECT_WORD</option>
+                <option value="LISTENING_DICTATION" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_DICTATION">LISTENING_DICTATION</option>
             </select>
         </div>
         <div class="form-group" ng-show="vm.question.type != 'SPEAKING_REPEAT_SENTENCE' && vm.question.type != 'SPEAKING_DESCRIBE_IMAGE' && vm.question.type != 'SPEAKING_RETELL_LECTURE' && vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION'">
