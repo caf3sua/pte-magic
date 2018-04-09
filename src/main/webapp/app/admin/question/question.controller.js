@@ -16,14 +16,20 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
+        vm.selectedSkill = 'SPEAKING';
+
+        vm.loadAll = loadAll;
 
         loadAll();
-
+        
         function loadAll () {
-            Question.query({
+        	
+        	Question.queryBySkill({
+//            Question.query({
                 page: pagingParams.page - 1,
                 size: vm.itemsPerPage,
-                sort: sort()
+                sort: sort(),
+                skill: vm.selectedSkill
             }, onSuccess, onError);
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];

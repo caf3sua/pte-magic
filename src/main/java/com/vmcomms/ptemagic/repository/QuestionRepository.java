@@ -1,13 +1,14 @@
 package com.vmcomms.ptemagic.repository;
 
-import com.vmcomms.ptemagic.domain.Question;
-import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
-
-import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
-import org.springframework.data.jpa.repository.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.vmcomms.ptemagic.domain.Question;
+import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 
 
 /**
@@ -19,4 +20,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 	List<Question> findByTypeIn(List<QuestionType> types);
 	
 	List<Question> findAllByType(QuestionType type);
+	
+	Page<Question> findByTypeIn(List<QuestionType> types, Pageable pageable);
 }

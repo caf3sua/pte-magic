@@ -36,6 +36,8 @@ public interface QuestionService {
 
     List<QuestionDTO> findAllBySkill(SkillType skill);
     
+    Page<QuestionDTO> findAllBySkillPageable(SkillType skill, Pageable pageable);
+    
     List<QuestionDTO> findAllByType(QuestionType type);
     
     /**

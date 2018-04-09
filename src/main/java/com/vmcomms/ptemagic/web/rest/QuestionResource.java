@@ -1,6 +1,7 @@
 package com.vmcomms.ptemagic.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.vmcomms.ptemagic.domain.enumeration.SkillType;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
 import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,6 +98,17 @@ public class QuestionResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/questions-by-skill")
+    @Timed
+    public ResponseEntity<List<QuestionDTO>> findAllBySkillPageable(@ApiParam Pageable pageable, @RequestParam(value = "skill", required = false) String skill) {
+        log.debug("REST request to get a page of Questions");
+        Page<QuestionDTO> page = questionService.findAllBySkillPageable(SkillType.valueOf(skill), pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    
+    
+    
     /**
      * GET  /questions/:id : get the "id" question.
      *

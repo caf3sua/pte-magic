@@ -35,8 +35,15 @@
 	        	<!-- WRITING -->
 	        	<div ng-if="vm.questionGroup == 'WRITING'" ng-include="'app/partial/partial.question-writing.html'"></div>
 
-   		        <!-- OTHER -->
-	        	<div ng-if="vm.questionGroup != 'WRITING'" ng-include="'app/partial/partial.question.html'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-margin-top100':''"></div>
+   		        <!-- READING -->
+	        	<div ng-if="vm.questionGroup == 'READING'" ng-include="'app/partial/partial.question-reading.html'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-margin-top100':''"></div>
+	        	
+	        	<!-- SPEAKING -->
+	        	<div ng-if="vm.questionGroup == 'SPEAKING'" ng-include="'app/partial/partial.question-speaking.html'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-margin-top100':''"></div>
+	        	
+	        	<!-- LISTENING -->
+	        	<div ng-if="vm.questionGroup == 'LISTENING'" ng-include="'app/partial/partial.question-listening.html'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-margin-top100':''"></div>
+	        	
 	        </div>
 	    </div>
     </div>

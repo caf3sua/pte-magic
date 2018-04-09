@@ -4,11 +4,11 @@
     <div class="col-md-12  no-padding-left">
         <div class="col-md-6">
             <label  for="sel1">Select question type: </label>
-            <select id="sel1" class="pte-select-question">
-                <option>Speaking</option>
-                <option>Reading</option>
-                <option>Writing</option>
-                <option>Listening</option>
+            <select id="sel1" class="pte-select-question" ng-model="vm.selectedSkill" ng-change="vm.loadAll()">
+                <option value="SPEAKING">Speaking</option>
+                <option value="READING">Reading</option>
+                <option value="WRITING">Writing</option>
+                <option value="LISTENING">Listening</option>
             </select>
         </div>
         <div class="col-md-6 text-right pte-no-padding-right">

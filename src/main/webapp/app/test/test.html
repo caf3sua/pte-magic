@@ -14,8 +14,8 @@
     <div class="pte-test-type-question-two">
         <div class="container">
             <div class="col-md-12">
-                <p class="pte-test-type-question-two-title">MULTIPLE CHOICE, CHOOSE SINGLE ANSWER</p>
-                <p class="pte-test-type-question-two-des">Read the text and answer the multiple-choice question by selecting the correct response. Only one response is correct.</p>
+                <p class="pte-test-type-question-two-title" data-translate="pteMagicApp.QuestionType.title.{{vm.selectedQuestion.type}}">MULTIPLE CHOICE, CHOOSE SINGLE ANSWER</p>
+                <p class="pte-test-type-question-two-des" data-translate="pteMagicApp.QuestionType.description.{{vm.selectedQuestion.type}}">Description</p>
             </div>
         </div>
     </div>
@@ -35,8 +35,14 @@
 	        	<!-- WRITING -->
 	        	<div ng-if="vm.questionGroup == 'WRITING'" ng-include="'app/partial/partial.question-writing.html'"></div>
 
-   		        <!-- OTHER -->
-	        	<div ng-if="vm.questionGroup != 'WRITING'" ng-include="'app/partial/partial.question.html'"></div>
+   		        <!-- READING -->
+	        	<div ng-if="vm.questionGroup == 'READING'" ng-include="'app/partial/partial.question-reading.html'"></div>
+	        	
+	        	<!-- SPEAKING -->
+	        	<div ng-if="vm.questionGroup == 'SPEAKING'" ng-include="'app/partial/partial.question-speaking.html'"></div>
+	        	
+	        	<!-- LISTENING -->
+	        	<div ng-if="vm.questionGroup == 'LISTENING'" ng-include="'app/partial/partial.question-listening.html'"></div>
 	        </div>
 	    </div>
     </div>

@@ -113,4 +113,11 @@ public class QuestionServiceImpl implements QuestionService{
 		List<Question> data = questionRepository.findAllByType(type);
 		return questionMapper.toDto(data);
 	}
+
+	@Override
+	public Page<QuestionDTO> findAllBySkillPageable(SkillType skill, Pageable pageable) {
+		List<QuestionType> lstQuestionEnum = QuestionType.getBySkill(skill.toString());
+		Page<Question> data = questionRepository.findByTypeIn(lstQuestionEnum, pageable);
+		return data.map(questionMapper::toDto);
+	}
 }
