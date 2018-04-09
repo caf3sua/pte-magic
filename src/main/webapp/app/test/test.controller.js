@@ -6,10 +6,10 @@
         .controller('TestController', TestController);
 
     TestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
-    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce'];
+    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity'];
 
     function TestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
-    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce) {
+    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity) {
 
     	var vm = this;
     	// Function
@@ -19,8 +19,8 @@
 
     	// Variable, flag
     	vm.examTypeId;
-    	vm.exam;
-    	vm.questions = [];
+    	vm.exam = entity;
+    	vm.questions = entity.questions;
     	vm.selectedQuestion;
     	vm.answers = [];
     	vm.isFinish = false;
@@ -55,23 +55,6 @@
 	        audioRecorder.getBuffers( gotBuffers );
 	        vm.btnEnable = true;
     	}
-
-//    	function toggleRecording() {
-//    	    if ($('#record').hasClass("recording")) {
-//    	        // stop recording
-//    	        audioRecorder.stop();
-//    	        $('#record').removeClass("recording");
-//    	        audioRecorder.getBuffers( gotBuffers );
-//    	        vm.btnEnable = true;
-//    	    } else {
-//    	        // start recording
-//    	        if (!audioRecorder)
-//    	            return;
-//    	        $('#record').addClass("recording");
-//    	        audioRecorder.clear();
-//    	        audioRecorder.record();
-//    	    }
-//    	}
 
     	function initPlayer() {
 			var audio = $("#player");
@@ -129,15 +112,15 @@
 			//	vm : vm
 			//});
 
-  			vm.examTypeId = $stateParams.type;
-
-  			Exam.startExams({
-  				examTypeId: vm.examTypeId
-            }, onSuccess, onError);
-            function onSuccess(data, headers) {
-            	vm.exam = data;
-            	vm.questions = data.questions;
-            	console.log(data);
+//  			vm.examTypeId = $stateParams.type;
+//
+//  			Exam.startExams({
+//  				examTypeId: vm.examTypeId
+//            }, onSuccess, onError);
+//            function onSuccess(data, headers) {
+//            	vm.exam = data;
+//            	vm.questions = data.questions;
+//            	console.log(data);
 
             	// Load player
 	    		initPlayer();
@@ -147,9 +130,9 @@
 	    		
             	// Next question
             	nextQuestion();
-            }
-            function onError(error) {
-            }
+//            }
+//            function onError(error) {
+//            }
   		})();
 
   		function closeExam() {

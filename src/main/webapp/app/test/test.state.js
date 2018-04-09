@@ -32,6 +32,9 @@
                     $translatePartialLoader.addPart('testType');
                     $translatePartialLoader.addPart('questionType');
                     return $translate.refresh();
+                }],
+                entity: ['$stateParams', 'Exam', function($stateParams, Exam) {
+                    return Exam.startExams({examTypeId : $stateParams.type}).$promise;
                 }]
             }
         });
