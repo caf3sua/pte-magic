@@ -36,19 +36,20 @@
         <table class="jh-table table table-striped  table-bordered table-hover">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                    <th jh-sort-by="id">Answer ID<span class="glyphicon glyphicon-sort"></span></th>
-                    <th>Status</th>
-                    <th>Question</th>
-                    <th style="min-width: 250px">Audio/Answer</th>
+                    <th class="text-center" jh-sort-by="id">Answer ID<span class="glyphicon glyphicon-sort"></span></th>
+                    <th class="text-center" > Status</th>
+                    <th class="text-center">Question</th>
+                    <th  class="text-center" style="min-width: 250px">Audio/Answer</th>
+                    <th class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="answerQuestion in vm.exam.answerQuestions">
-                    <td>{{answerQuestion.answer.id}}</td>
-                    <td>{{answerQuestion.answer.status}}</td>
-                    <td>{{answerQuestion.question.text}}</td>
+                    <td class="text-right">{{answerQuestion.answer.id}}</td>
+                    <td  class="text-left">{{answerQuestion.answer.status}}</td>
+                    <td  class="text-left">{{answerQuestion.question.text}}</td>
                     <!-- Audio/Writing -->
-                    <td>
+                    <td >
                         <div ng-show="answerQuestion.answer.answer">{{answerQuestion.answer.answer}}</div>
                         <div class="container-audio" ng-show="answerQuestion.answer.audioLink">
                             <input type="hidden" value="{{answerQuestion.answer.audioLink}}">
