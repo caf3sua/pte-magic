@@ -195,15 +195,15 @@
                 </a>
             </li>
             <li class="treeview">
-                <a ui-sref="answer">
-                    <i class="fas fa-columns"></i>
-                    <span data-translate="global.menu.entities.answer">Answer</span>
-                </a>
-            </li>
-            <li class="treeview">
                 <a ui-sref="exam">
                     <i class="fas fa-clipboard"></i>
                     <span data-translate="global.menu.entities.exam">Exam</span>
+                </a>
+            </li>
+            <li  class="treeview">
+                <a ng-click="vm.logout()" class="dropdown-toggle" uib-dropdown-toggle >
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span >SIGN OUT</span>
                 </a>
             </li>
         </ul>
