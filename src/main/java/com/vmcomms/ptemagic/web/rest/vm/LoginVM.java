@@ -25,6 +25,8 @@ public class LoginVM {
     private String password;
 
     private Boolean rememberMe;
+    
+    private String role;
 
     public String getUsername() {
         return username;
@@ -49,4 +51,12 @@ public class LoginVM {
     public void setRememberMe(Boolean rememberMe) {
         this.rememberMe = rememberMe;
     }
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }

@@ -28,7 +28,8 @@
             var data = {
                 username: credentials.username,
                 password: credentials.password,
-                rememberMe: credentials.rememberMe
+                rememberMe: credentials.rememberMe,
+                role: credentials.role
             };
             return $http.post('api/authenticate', data).success(authenticateSuccess);
 
