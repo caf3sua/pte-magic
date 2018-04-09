@@ -22,7 +22,8 @@
             event.preventDefault();
             Auth.login({
                 username: vm.username,
-                password: vm.password
+                password: vm.password,
+                role: 'ROLE_ADMIN'
             }).then(function () {
                 vm.authenticationError = false;
 
