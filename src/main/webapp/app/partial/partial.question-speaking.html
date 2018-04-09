@@ -1,22 +1,13 @@
     <div  class="col-md-12" ng-show="vm.selectedQuestion.type == 'TIME_BREAK'">
         <div ng-include="'app/partial/partial.timebreak.html'"></div>
     </div>
-    <div class="col-md-6" ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING'">
-        <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
-        <!-- Record audio -->
-        <div ng-show="vm.selectedQuestion.audioLink">
-            <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
-            <div class="container-audio">
-                <div id="override"></div>
-                <audio id="player" controls autoplay preload >
-                    <source id="mp3_src" src="" type="audio/mp3"  />
-                    Your browser dose not Support the audio Tag
-                </audio>
-            </div>
-        </div>
-    </div>
     <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING' || vm.questionGroup== 'WRITING'">
         <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
+        
+        <!-- Include image -->
+        <div ng-show="vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'">
+			<img alt="" src="{{vm.selectedQuestion.audioLink}}">        	
+        </div>
     </div>
     <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING'">
         <div ng-include="'app/partial/partial.record.html'"></div>
