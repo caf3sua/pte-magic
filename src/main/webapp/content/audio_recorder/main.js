@@ -45,7 +45,6 @@ function gotBuffers( buffers ) {
     // the ONLY time gotBuffers is called is right after a new recording is completed - 
     // so here's where we should set up the download.
     audioRecorder.exportWAV( doneEncoding );
-    debugger
 }
 
 function doneEncoding( blob ) {
