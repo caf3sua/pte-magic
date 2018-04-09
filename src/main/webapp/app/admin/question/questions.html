@@ -1,13 +1,24 @@
 <div  class="content-wrapper pte-table-user">
     <h2 class="col-md-12" data-translate="pteMagicApp.question.home.title">Questions</h2>
     <jhi-alert></jhi-alert>
-    <div class="col-md-12 text-right no-padding-left">
-        <button class="btn btn-primary" ui-sref="question.new" >
-            <span class="glyphicon glyphicon-plus"></span>
-            <span  data-translate="pteMagicApp.question.home.createLabel">
+    <div class="col-md-12  no-padding-left">
+        <div class="col-md-6">
+            <label  for="sel1">Select question type: </label>
+            <select id="sel1" class="pte-select-question">
+                <option>Speaking</option>
+                <option>Reading</option>
+                <option>Writing</option>
+                <option>Listening</option>
+            </select>
+        </div>
+        <div class="col-md-6 text-right pte-no-padding-right">
+            <button class=" btn btn-primary " ui-sref="question.new" >
+                <span class="glyphicon glyphicon-plus"></span>
+                <span  data-translate="pteMagicApp.question.home.createLabel">
                 Create new Question
             </span>
-        </button>
+            </button>
+        </div>
     </div>
     <div class="col-md-12 table-responsive">
         <table class="h-table table table-striped  table-bordered table-hover">

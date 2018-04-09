@@ -1305,6 +1305,14 @@ textarea {
     margin-top: 0;
     padding: 10px;
 }
+.pte-select-question{
+    border: 1px solid #ccc;
+    height: 30px;
+    padding: 0 10px;
+}
+.pte-no-padding-right{
+    padding-right: 0 !important;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
