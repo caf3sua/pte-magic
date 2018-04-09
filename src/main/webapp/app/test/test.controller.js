@@ -32,7 +32,13 @@
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
     	vm.startRecording = startRecording;
-
+        vm.spellCheck = spellCheck;
+        vm.UpdateLengths = UpdateLengths;
+        vm.checkClickspell = true;
+        vm.CharacterLength = 0;
+        vm.WORDS_MAXIMUM = 10; // changeable
+        vm.WordsLength=0;
+        vm.Text = "";
     	vm.txtInfoCountdown = "Begining in ";
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
@@ -77,7 +83,7 @@
                     audio[0].play();
         		}
             }, timeout );
-    		
+
     	}
 
     	function initAnswer() {
@@ -127,7 +133,7 @@
 
 	    		// Load record audio
 	    		initAudio();
-	    		
+
             	// Next question
             	nextQuestion();
 //            }
@@ -273,13 +279,13 @@
   				}
 
   				$scope.$broadcast('timer-start');
-  				
+
 	    		// Load player
 	    		initPlayer();
 
 	    		// Load record audio
 	    		initAudio();
-  				
+
   				playAudio(vm.selectedQuestion.audioLink, 3000);
   			}
   		}
@@ -321,5 +327,64 @@
   	  		function onSaveAnswerError() {
   	  		}
   		}
+
+        function spellCheck() {
+  		    if(vm.checkClickspell == true){
+                document.getElementById("areaTextWriting").setAttribute("spellcheck", "true");
+                vm.checkClickspell = false;
+            }else {
+                document.getElementById("areaTextWriting").removeAttribute("spellcheck");
+                vm.checkClickspell = true;
+            }
+        }
+
+        function UpdateLengths($event) {
+            vm.CharacterLength = vm.Text.length;
+            vm.WordsLength=0;
+            if(vm.Text.length == 1 && vm.Text[0]!='')
+            {
+                vm.WordsLength = 1;
+            }
+
+            for( var i=1; i< vm.Text.length; i++)
+            {
+                if( vm.IsAlphabet(vm.Text[i])  && !vm.IsAlphabet(vm.Text[i-1]))
+                {
+                    vm.WordsLength++;
+                    if(vm.WordsLength == vm.WORDS_MAXIMUM + 1)// WORDS_MAXIMUM = 10
+                    {
+                        vm.WordsLength--;
+                        vm.Text = vm.Text.substring(0, i);
+                        return;
+                    }
+                }else if (vm.IsAlphabet(vm.Text[i]) && vm.IsAlphabet(vm.Text[i-1]) )
+                {
+                    if(vm.WordsLength==0)
+                    {
+                        vm.WordsLength=1;
+                    }
+                }else if(!vm.IsAlphabet(vm.Text[i]) && !vm.IsAlphabet(vm.Text[i-1]))
+                {
+                    continue;
+                }else if(!vm.IsAlphabet(vm.Text[i]) && vm.IsAlphabet(vm.Text[i-1]))
+                {
+                    continue;
+                }
+            }
+        }
+        vm.IsAlphabet = function(character)
+        {
+            var numeric_char = character.charCodeAt(character);
+
+            if(numeric_char>64 && numeric_char<91)// A-Z
+            {
+                return true;
+            }
+            if(numeric_char>96 && numeric_char<123)// a-z
+            {
+                return true;
+            }
+            return false;
+        }
     }
 })();

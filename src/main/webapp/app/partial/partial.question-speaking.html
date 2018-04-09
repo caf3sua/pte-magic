@@ -1,6 +1,16 @@
 <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING' || vm.questionGroup== 'WRITING'">
     <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
 </div>
+<div class="col-md-12 text-center" ng-show="vm.selectedQuestion.audioLink && vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'">
+    <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
+    <div class="container-audio">
+        <div id="override"></div>
+        <audio id="player" controls autoplay preload >
+            <source id="mp3_src" src="" type="audio/mp3"  />
+            Your browser dose not Support the audio Tag
+        </audio>
+    </div>
+</div>
 <div class="col-md-6" ng-show="vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'">
     <img class="pte-width-100 pte-margin-bottom-10" alt="" src="{{vm.selectedQuestion.audioLink}}">
 </div>

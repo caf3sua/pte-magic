@@ -16,6 +16,7 @@
                 authorities: ['ROLE_ADMIN'],
                 pageTitle: 'pteMagicApp.question.home.title'
             },
+
             views: {
                 'content@': {
                     templateUrl: 'app/admin/question/questions.html',
@@ -32,7 +33,8 @@
                     value: 'id,asc',
                     squash: true
                 },
-                search: null
+                search: null,
+                selectedSkill:null
             },
             resolve: {
                 pagingParams: ['$stateParams', 'PaginationUtil', function ($stateParams, PaginationUtil) {
@@ -58,6 +60,9 @@
             data: {
                 authorities: ['ROLE_ADMIN'],
                 pageTitle: 'pteMagicApp.question.detail.title'
+            },
+            params:{
+                selectedSkill:null
             },
             views: {
                 'content@': {

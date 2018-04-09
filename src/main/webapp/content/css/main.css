@@ -1337,6 +1337,26 @@ textarea {
     margin-top: 100px;
     box-shadow: 1px 2px 4px 0px #f9db01;
 }
+.pte-row-check-spell{
+    background: #ddd;
+    padding: 5px 10px;
+    margin: 10px 0;
+}
+.pte-checkbot-spell{
+    position: relative;
+    top: 2px;
+    left: 0px;
+    margin-right: 5px !important;
+}
+.pte-wordLimit-writing{
+    float: right;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+}
+.pte-inline-block{
+    display: inline-block;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;

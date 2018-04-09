@@ -5,9 +5,9 @@
         .module('pteMagicApp')
         .controller('QuestionController', QuestionController);
 
-    QuestionController.$inject = ['$state', 'Question', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    QuestionController.$inject = ['$state', 'Question', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', '$rootScope', '$stateParams'];
 
-    function QuestionController($state, Question, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function QuestionController($state, Question, ParseLinks, AlertService, paginationConstants, pagingParams, $rootScope, $stateParams) {
 
         var vm = this;
 
@@ -16,8 +16,12 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-        vm.selectedSkill = 'SPEAKING';
         vm.loadAll = loadAll;
+        if($stateParams.selectedSkill == null){
+            vm.selectedSkill = 'SPEAKING';
+        }else{
+            vm.selectedSkill = $stateParams.selectedSkill;
+        }
 
         loadAll();
 

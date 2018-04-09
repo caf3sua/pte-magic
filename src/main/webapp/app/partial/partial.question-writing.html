@@ -7,8 +7,21 @@
 	<div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
 </div>
 <div class="col-md-12">
+    <div class="pte-row-check-spell">
+        <div class="pte-inline-block">
+            <label><input class="pte-checkbot-spell" ng-click="vm.spellCheck()" type="checkbox" value="">Spell check</label>
+        </div>
+        <div class="text-right pte-wordLimit-writing">
+            <span ng-model="vm.WordsLength">
+                <!--{{300 - vm.writing.length}} Word Limit-->
+                {{vm.WordsLength}}/300 Word Limit
+            </span>
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
         <div class="">
-            <textarea id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
+            <textarea  ng-model="vm.Text" maxlength="300"  ng-change="vm.UpdateLengths()" id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
        </div>
        <div class="text-right">
            <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
