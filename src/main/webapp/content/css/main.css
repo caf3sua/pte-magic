@@ -532,6 +532,13 @@ ui bootstrap tweaks
     position: relative;
     min-height: 850px;
 }
+.pte-background-admin{
+    background: url(../images/body.png) no-repeat left top;
+    height: 100vh;
+    width: auto;
+    background-size: cover;
+    position: relative;
+}
 .pte-body-content{
     background: url(../images/bodyContent.png) no-repeat left top;
     background-size: cover;
@@ -1313,6 +1320,23 @@ textarea {
 .pte-no-padding-right{
     padding-right: 0 !important;
 }
+.pte-margin-bottom-10{
+    margin-bottom: 10px;
+}
+.pte-width-100{
+    width: 100%;
+}
+.pte-from-login-admin{
+    width: 400px;
+    margin: 0 auto;
+    justify-content: center;
+    border: 1px solid #f9db01;
+    padding: 20px;
+    z-index: 999;
+    /* opacity: 0.7; */
+    margin-top: 100px;
+    box-shadow: 1px 2px 4px 0px #f9db01;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
@@ -1812,6 +1836,17 @@ textarea {
     }
 }
 @media (max-width:479px){
+    .pte-from-login-admin{
+        width: 300px;
+        margin: 0 auto;
+        justify-content: center;
+        border: 1px solid #f9db01;
+        padding: 20px;
+        z-index: 999;
+        /* opacity: 0.7; */
+        margin-top: 100px;
+        box-shadow: 1px 2px 4px 0px #f9db01;
+    }
     .pte-margin-top100{
         margin-top:130px;
     }
