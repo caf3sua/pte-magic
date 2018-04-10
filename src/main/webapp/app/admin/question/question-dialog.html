@@ -37,13 +37,30 @@
                 <option value="LISTENING_DICTATION" ng-show="vm.checkTypeQuestion =='LISTENING'" data-translate="pteMagicApp.QuestionType.LISTENING_DICTATION">LISTENING_DICTATION</option>
             </select>
         </div>
-        <div class="form-group" ng-show="vm.question.type != 'SPEAKING_REPEAT_SENTENCE' && vm.question.type != 'SPEAKING_DESCRIBE_IMAGE' && vm.question.type != 'SPEAKING_RETELL_LECTURE' && vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION'">
+        <div class="form-group"
+             ng-show="vm.question.type != 'SPEAKING_REPEAT_SENTENCE'
+             && vm.question.type != 'SPEAKING_DESCRIBE_IMAGE'
+             && vm.question.type != 'SPEAKING_RETELL_LECTURE'
+             && vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION'
+             && vm.question.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
+             && vm.question.type != 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
+             && vm.question.type != 'LISTENING_SELECT_MISSING_WORD'
+             && vm.question.type != 'LISTENING_DICTATION'"
+        >
             <label class="control-label" data-translate="pteMagicApp.question.text" for="field_text">Text</label>
             <input type="text" class="form-control" name="text" id="field_text"
                     ng-model="vm.question.text"
                     />
         </div>
-        <div class="form-group" ng-show="vm.questionGroup == 'LISTENING' || vm.question.type == 'SPEAKING_REPEAT_SENTENCE' || vm.question.type == 'SPEAKING_DESCRIBE_IMAGE' || vm.question.type == 'SPEAKING_RETELL_LECTURE'|| vm.question.type == 'SPEAKING_ANSWER_SHORT_QUESTION'">
+        <div class="form-group"
+             ng-show="(
+             vm.questionGroup == 'LISTENING' ||
+             vm.question.type == 'SPEAKING_REPEAT_SENTENCE' ||
+             vm.question.type == 'SPEAKING_DESCRIBE_IMAGE' ||
+             vm.question.type == 'SPEAKING_RETELL_LECTURE'||
+             vm.question.type == 'SPEAKING_ANSWER_SHORT_QUESTION') &&
+             vm.question.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'"
+        >
         	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)" accept="audio/*,image/*" ngf-max-size="4MB">
 		      Select File</button>
 
@@ -57,8 +74,17 @@
                     ng-model="vm.question.description"
                     />
         </div>
-
-        <div ng-show="vm.questionGroup == 'LISTENING' || vm.questionGroup == 'WRITING' || vm.questionGroup == 'READING'">
+        <div
+            ng-show="
+            (vm.questionGroup == 'LISTENING' ||
+            vm.questionGroup == 'WRITING' ||
+            vm.questionGroup == 'READING')
+            && vm.question.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
+            && vm.question.type != 'LISTENING_FIB_L'
+            && vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT'
+            && vm.question.type != 'LISTENING_DICTATION'
+            && vm.question.type != 'WRITING_ESSAY'"
+        >
 	        <div class="form-group">
 	            <label class="control-label" data-translate="pteMagicApp.question.answerA" for="field_answerA">Answer A</label>
 	            <input type="text" class="form-control" name="answerA" id="field_answerA" ng-model="vm.question.answerA" />
@@ -79,10 +105,20 @@
 	            <label class="control-label" data-translate="pteMagicApp.question.answerE" for="field_answerE">Answer E</label>
 	            <input type="text" class="form-control" name="answerE" id="field_answerE" ng-model="vm.question.answerE" />
 	        </div>
-	        <div class="form-group">
-	            <label class="control-label" data-translate="pteMagicApp.question.expectAnswer" for="field_expectAnswer">Expect answer</label>
-	            <input type="text" class="form-control" name="expectAnswer" id="field_expectAnswer" ng-model="vm.question.expectAnswer" />
-	        </div>
+
+        </div>
+        <div class="form-group"
+             ng-show="
+              vm.question.type != 'SPEAKING_REPEAT_SENTENCE' &&
+              vm.question.type != 'SPEAKING_DESCRIBE_IMAGE' &&
+              vm.question.type != 'SPEAKING_RETELL_LECTURE'&&
+              vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION' &&
+              vm.question.type != 'SPEAKING_READ_ALOUD' &&
+              vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT' &&
+              vm.question.type != 'WRITING_ESSAY'"
+        >
+            <label class="control-label" data-translate="pteMagicApp.question.expectAnswer" for="field_expectAnswer">Expect answer</label>
+            <input type="text" class="form-control" name="expectAnswer" id="field_expectAnswer" ng-model="vm.question.expectAnswer" />
         </div>
     </div>
     <div class="modal-footer">

@@ -1357,6 +1357,9 @@ textarea {
 .pte-inline-block{
     display: inline-block;
 }
+.pte-inline-block>label{
+    font-weight: 400;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;

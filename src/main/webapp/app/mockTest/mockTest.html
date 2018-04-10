@@ -75,8 +75,8 @@
                     <div class="pte-mock-test-item">
                         <div >
                             <ul class="pte-free-sample-item-text">
-                                <li >
-                                    {{exam.name}}
+                                <li title="{{exam.name}}">
+                                    {{exam.name | lmto : 25}}
                                 </li>
                             </ul>
                             <ul class="pte-block-item-mocktest-content">

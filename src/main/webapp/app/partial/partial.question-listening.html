@@ -1,4 +1,11 @@
-    <div class="col-md-6" ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING'">
+    <div
+         ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING'"
+         ng-class="(
+         vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' ||
+         vm.selectedQuestion.type == 'LISTENING_FIB_L' ||
+         vm.selectedQuestion.type == 'LISTENING_DICTATION'
+          ? 'col-md-12':'col-md-6')"
+        >
         <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
         <!-- Record audio -->
         <div ng-show="vm.selectedQuestion.audioLink">
@@ -12,7 +19,37 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 " ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
+    <div class="col-md-12" ng-show="vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'">
+        <div class="pte-row-check-spell">
+            <div class="pte-inline-block">
+                <label><input class="pte-checkbot-spell" ng-click="vm.spellCheck()" type="checkbox" value="">Spell check</label>
+            </div>
+            <div class="text-right pte-wordLimit-writing">
+            <span ng-model="vm.WordsLength">
+                <!--{{300 - vm.writing.length}} Word Limit-->
+                {{vm.WordsLength}}/70 Word Limit
+            </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" ng-show="vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.selectedQuestion.type == 'LISTENING_DICTATION'" >
+        <div class="">
+            <textarea  ng-model="vm.Text" maxlength="300"  ng-change="vm.UpdateLengths()" id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
+        </div>
+        <div class="text-right">
+            <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
+        </div>
+    </div>
+    <div
+         ng-show="
+         (vm.questionGroup == 'LISTENING'
+         || vm.selectedQuestion.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
+         || vm.selectedQuestion.type != 'LISTENING_SELECT_MISSING_WORD')
+         && vm.selectedQuestion.type == 'LISTENING_FIB_L'
+         && vm.selectedQuestion.type != 'LISTENING_DICTATION'"
+         ng-class="(vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':'')
+         && (vm.selectedQuestion.type == 'LISTENING_FIB_L'  ? 'col-md-12':'col-md-6')"
+    >
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
 
@@ -52,37 +89,48 @@
        </div>
 
     </div>
-    <div class="col-md-6 " ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING' && vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
+    {{vm.selectedQuestion.type}}
+    <div class="col-md-6 "
+         ng-show="
+         ( vm.questionGroup == 'LISTENING'
+         || vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
+         || vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD'
+         )
+         && vm.selectedQuestion.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'
+         && vm.selectedQuestion.type != 'LISTENING_FIB_L'
+         && vm.selectedQuestion.type != 'LISTENING_DICTATION'
+         && vm.selectedQuestion.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'"
+         ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
 
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">
-                <input type="radio" name="answerA" id="answerA1" value="true" >
-                <label for="answerA" class="line-height-30">
+                <input type="radio" name="answer" id="answerA1" value="true" >
+                <label for="answerA1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerA}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerB">
-                <input type="radio" name="answerB" id="answerB1" value="true">
-                <label for="answerB" class="line-height-30">
+                <input type="radio" name="answer" id="answerB1" value="true">
+                <label for="answerB1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerB}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerC">
-                <input type="radio" name="answerC" id="answerC1" value="true">
-                <label for="answerC" class="line-height-30">
+                <input type="radio" name="answer" id="answerC1" value="true">
+                <label for="answerC1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerC}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerD">
-                <input type="radio" name="answerD" id="answerD1" value="true">
-                <label for="answerD" class="line-height-30">
+                <input type="radio" name="answer" id="answerD1" value="true">
+                <label for="answerD1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerD}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerE">
-                <input type="radio" name="answerE" id="answerE1" value="true">
-                <label for="answerE" class="line-height-30">
+                <input type="radio" name="answer" id="answerE1" value="true">
+                <label for="answerE1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerE}}</p>
                 </label>
             </div>
