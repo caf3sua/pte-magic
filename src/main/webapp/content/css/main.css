@@ -1361,6 +1361,14 @@ textarea {
 .pte-inline-block>label{
     font-weight: 400;
 }
+.panel-info > .panel-heading {
+    color: #393939;
+    background-color: #f9db01;
+    border-color: #f9db01;
+}
+.panel-info {
+    border-color: #f9db01;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
