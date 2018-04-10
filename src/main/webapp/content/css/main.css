@@ -1298,10 +1298,12 @@ audio::-webkit-media-controls-panel {
 textarea {
     resize: none;
 }
-.pte-scroll-popup{
-    overflow-x: hidden;
-    overflow-y: scroll;
-    height: 670px;
+@-moz-document url-prefix() {
+    .pte-scroll-popup{
+        overflow-x: hidden;
+        overflow-y: scroll;
+        height: 100vh;
+    }
 }
 .pte-font-weight600{
     font-weight: 600;
@@ -2202,13 +2204,16 @@ canvas {
 }
 
 .simpleDemo ul[dnd-list] li {
-    background-color: #fff;
-    border: 1px solid #ddd;
+    background-color: #f1e16f38;
+    border: 1px solid #bca811d4;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     display: block;
     padding: 10px 15px;
     margin-bottom: -1px;
+}
+.panel-heading>h3{
+    font-weight: 600;
 }
 
 /**
