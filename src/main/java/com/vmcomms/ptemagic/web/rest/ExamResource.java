@@ -495,6 +495,9 @@ public class ExamResource {
         ExamDTO examDTO = examService.findOne(id);
         examInfoDTO.setExamDTO(examDTO);
         
+        ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+        examInfoDTO.setExamTypeDTO(examTypeDTO);
+        
         // Get all question 
 		// Get list exam question
 		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(id);
