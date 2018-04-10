@@ -2,7 +2,7 @@
 <![endif]-->
 <div class="pte-scroll-popup">
     <!-- Angular views -->
-    <div class="pte-test-type-question">
+    <div class="pte-test-type-question" ng-show="!vm.isFinish">
         <div class="container">
             <ul class="margin-0">
                 <li>
@@ -11,7 +11,7 @@
             </ul>
         </div>
     </div>
-    <div class="pte-test-type-question-two">
+    <div class="pte-test-type-question-two" ng-show="!vm.isFinish">
         <div class="container">
             <div class="col-md-12">
                 <p class="pte-test-type-question-two-title">MULTIPLE CHOICE, CHOOSE SINGLE ANSWER</p>
@@ -35,19 +35,19 @@
 				<div  class="col-md-12" ng-show="vm.selectedQuestion.type == 'TIME_BREAK'">
 			        <div ng-include="'app/partial/partial.timebreak.html'"></div>
 			    </div>
-	        	
+
 	        	<!-- WRITING -->
 	        	<div ng-if="vm.questionGroup == 'WRITING'" ng-include="'app/partial/partial.question-writing.html'"></div>
 
    		        <!-- READING -->
 	        	<div ng-if="vm.questionGroup == 'READING'" ng-include="'app/partial/partial.question-reading.html'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-margin-top100':''"></div>
-	        	
+
 	        	<!-- SPEAKING -->
 	        	<div ng-if="vm.questionGroup == 'SPEAKING'" ng-include="'app/partial/partial.question-speaking.html'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-margin-top100':''"></div>
-	        	
+
 	        	<!-- LISTENING -->
 	        	<div ng-if="vm.questionGroup == 'LISTENING'" ng-include="'app/partial/partial.question-listening.html'" ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-margin-top100':''"></div>
-	        	
+
 	        </div>
 	    </div>
     </div>

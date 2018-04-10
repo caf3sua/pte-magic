@@ -2,7 +2,7 @@
 <![endif]-->
 <div class="pte-scroll-popup" >
     <!-- Angular views -->
-    <div class="pte-test-type-question">
+    <div class="pte-test-type-question" ng-show="!vm.isFinish">
         <div class="container">
             <ul class="margin-0">
                 <li>
@@ -11,7 +11,7 @@
             </ul>
         </div>
     </div>
-    <div class="pte-test-type-question-two">
+    <div class="pte-test-type-question-two" ng-show="!vm.isFinish">
         <div class="container">
             <div class="col-md-12">
                 <p class="pte-test-type-question-two-title" data-translate="pteMagicApp.QuestionType.title.{{vm.selectedQuestion.type}}">MULTIPLE CHOICE, CHOOSE SINGLE ANSWER</p>
