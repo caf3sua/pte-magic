@@ -20,6 +20,7 @@
         vm.user;
         vm.login = login;
         vm.logout = logout;
+        vm.logoutAdmin = logoutAdmin;
         vm.register = register;
         vm.toggleNavbar = toggleNavbar;
         vm.collapseNavbar = collapseNavbar;
@@ -65,7 +66,7 @@
 
         function login() {
         	Auth.logout();
-        	
+
             collapseNavbar();
             LoginService.open();
         }
@@ -74,6 +75,11 @@
             collapseNavbar();
             Auth.logout();
             $state.go('home');
+        }
+        function logoutAdmin() {
+            collapseNavbar();
+            Auth.logout();
+            $state.go('login');
         }
 
         function toggleNavbar() {
