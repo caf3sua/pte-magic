@@ -44,81 +44,39 @@
         </div>
     </div>
 
-
-    <div class="col-md-6 " ng-show="( vm.questionGroup == 'READING' || vm.selectedQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER') && vm.selectedQuestion.type != 'READING_MCQ_R_SINGLE_ANSWER'"ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
-        <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
-        <div class="padding-left30">
-
-            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">
-                <input type="checkbox" name="answerA" id="answerA" value="true" >
-                <label for="answerA" class="line-height-30">
-                    <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerA}}</p>
-                </label>
-            </div>
-            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerB">
-                <input type="checkbox" name="answerB" id="answerB" value="true">
-                <label for="answerB" class="line-height-30">
-                    <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerB}}</p>
-                </label>
-            </div>
-            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerC">
-                <input type="checkbox" name="answerC" id="answerC" value="true">
-                <label for="answerC" class="line-height-30">
-                    <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerC}}</p>
-                </label>
-            </div>
-            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerD">
-                <input type="checkbox" name="answerD" id="answerD" value="true">
-                <label for="answerD" class="line-height-30">
-                    <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerD}}</p>
-                </label>
-            </div>
-			<div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerE">
-                   <input type="checkbox" name="answerE" id="answerE" value="true">
-                   <label for="answerE" class="line-height-30">
-                       <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerE}}</p>
-                   </label>
-           </div>
-       </div>
-       <div class="text-right">
-           <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
-       </div>
-
-    </div>
     <div class="col-md-6 "
-         ng-show="
-            (vm.questionGroup == 'READING' || vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER') && vm.selectedQuestion.type != 'READING_MCQ_R_MULTIPLE_ANSWER'"
+         ng-show="vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' || vm.selectedQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER'"
          ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
 
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">
-                <input type="radio" name="answer" id="answerA1" value="true" >
-                <label for="answerA1" class="line-height-30">
+                <input type="{{vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' ? 'radio' : 'checkbox'}}" name="answer" id="answerA" value="true" >
+                <label for="answerA" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerA}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerB">
-                <input type="radio" name="answer" id="answerB1" value="true">
-                <label for="answerB1" class="line-height-30">
+                <input type="{{vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' ? 'radio' : 'checkbox'}}" name="answer" id="answerB" value="true">
+                <label for="answerB" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerB}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerC">
-                <input type="radio" name="answer" id="answerC1" value="true">
-                <label for="answerC1" class="line-height-30">
+                <input type="{{vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' ? 'radio' : 'checkbox'}}" name="answer" id="answerC" value="true">
+                <label for="answerC" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerC}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerD">
-                <input type="radio" name="answer" id="answerD1" value="true">
-                <label for="answerD1" class="line-height-30">
+                <input type="{{vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' ? 'radio' : 'checkbox'}}" name="answer" id="answerD" value="true">
+                <label for="answerD" class="line-height-30">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerD}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerE">
-                <input type="radio" name="answer" id="answerE1" value="true">
-                <label for="answerE1" class="line-height-30">
+                <input type="{{vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' ? 'radio' : 'checkbox'}}" name="answer" id="answerE" value="true">
+                <label for="answerE" class="line-height-30">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerE}}</p>
                 </label>
             </div>
