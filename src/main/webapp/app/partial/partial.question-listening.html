@@ -44,15 +44,17 @@
          ng-show="
          (vm.questionGroup == 'LISTENING'
          || vm.selectedQuestion.type == 'LISTENING_FIB_L'
-         || vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER'
+
+         || vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
          )
          && vm.selectedQuestion.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
          && vm.selectedQuestion.type != 'LISTENING_SELECT_MISSING_WORD'
          && vm.selectedQuestion.type != 'LISTENING_DICTATION'
-         && vm.selectedQuestion.type != 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'"
+         && vm.selectedQuestion.type != 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
+         && vm.selectedQuestion.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'"
          ng-class="
          vm.selectedQuestion.type == 'LISTENING_FIB_L' ||
-         vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER'  ? 'col-md-12':'col-md-6'"
+         vm.selectedQuestion.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'  ? 'col-md-12':'col-md-6'"
     >
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
@@ -99,11 +101,12 @@
          ( vm.questionGroup == 'LISTENING'
          || vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
          || vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD'
+         || vm.selectedQuestion.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'
          )
-         && vm.selectedQuestion.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'
          && vm.selectedQuestion.type != 'LISTENING_FIB_L'
          && vm.selectedQuestion.type != 'LISTENING_DICTATION'
-         && vm.selectedQuestion.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'"
+         && vm.selectedQuestion.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
+         && vm.selectedQuestion.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'"
          ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
