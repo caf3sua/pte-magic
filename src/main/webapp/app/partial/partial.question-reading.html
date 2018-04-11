@@ -76,9 +76,14 @@
 
 
     </div>
-
-    <div class="col-md-6" ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING'">
-        <!--<p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>-->
+{{vm.selectedQuestion.type }}
+    <div class="col-md-6" ng-show="
+    vm.questionGroup == 'READING' && (
+    vm.selectedQuestion.type != 'READING_RE_ORDER_PARAGRAPH' &&
+    vm.selectedQuestion.type != 'READING_FIB_R')"
+    >
+        <p class="pte-test-content-question"
+          >{{vm.selectedQuestion.text}}</p>
         <!-- Record audio -->
         <div ng-show="vm.selectedQuestion.audioLink">
             <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
