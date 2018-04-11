@@ -22,7 +22,9 @@
 	        lists: {"A": [], "B": []},
             fillInTheBlankQuestionArr: [],
             answer: [],
-            fillInTheBlanklLists: {"questionPanel": []}
+            fillInTheBlanklLists: {"questionPanel": []},
+            startText: '',
+            fillInTheBlankPartialTexts: []
 	    };
 
 		// Function
@@ -58,7 +60,7 @@
                 //selQuestion.description.split('@Blank@').join('xxxxxxx');
                 $scope.models.fillInTheBlanklLists.questionPanel = [];
 
-                var count = (vm.selectedQuestion.text.match(/@Blank@/g) || []).length;
+                var count = (selQuestion.text.match(/@Blank@/g) || []).length;
 
                 for (var i = 0; i < count; i++) {
                     var name = "answer" + i;
@@ -73,6 +75,24 @@
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
+
+                var partialTexts = selQuestion.text.split('@Blank@');
+                if(partialTexts.length > count) {
+                    $scope.models.startText = partialTexts[0];
+                    partialTexts.splice(0, 1);
+                    $scope.models.fillInTheBlankPartialTexts = partialTexts;
+                } else if(partialTexts.length == count) {
+                    if(selQuestion.text.indexOf('@Blank@') > 0) {
+                        $scope.models.startText = partialTexts[0];
+                        partialTexts.splice(0, 1);
+                        $scope.models.fillInTheBlankPartialTexts = partialTexts;
+                    } else {
+                        $scope.models.fillInTheBlankPartialTexts = partialTexts;
+                    }
+                } else {
+                    $scope.models.fillInTheBlankPartialTexts = partialTexts;
+                    $scope.models.fillInTheBlankPartialTexts[$scope.models.fillInTheBlankPartialTexts.length] = '';
+                }
             }
 
   			if (selQuestion.type == 'READING_FIB_R_W') {
