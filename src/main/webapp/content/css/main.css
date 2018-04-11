@@ -1371,6 +1371,56 @@ textarea {
 .panel-info {
     border-color: #f9db01;
 }
+#drgFillBL {
+    border-color: #e1d68075;
+}
+#drgFillBL .panel-body{
+    background: #d7c75242;
+}
+.simpleDemo #drgFillBL ul[dnd-list] li {
+    background: #f9db01;
+    border: 1px solid #bca811d4;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 10px;
+    margin-bottom: -1px;
+}
+.simpleDemo #drgFillBL ul[dnd-list] {
+    /* min-height: 42px; */
+    padding-left: 0px;
+    margin-bottom: 0;
+}
+#dragInput .panel-body {
+    padding: 0px;
+}
+.simpleDemo #dragInput ul[dnd-list] {
+    padding-left: 0px;
+    margin-bottom: 0;
+    min-height: 30px;
+    text-align: center;
+}
+#dragInput .panel-info {
+    border-color: #ccc;
+    width: 125px;
+    display: inline-block;
+    margin-bottom: 0;
+    height: 35px;
+}
+.simpleDemo #dragInput ul[dnd-list] li {
+    background-color: #f9db01;
+    border: 0px solid #CCB;
+    border-radius: 4px;
+    display: inline-block;
+    padding: 2px 5px;
+    margin-bottom: -1px;
+    margin: 5px auto
+}
+.simpleDemo #dragInput ul[dnd-list] .dndPlaceholder {
+    background-color: #ddd;
+    display: block;
+    min-height: 30px;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
