@@ -44,6 +44,11 @@
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
         vm.dropCallback = dropCallback;
+        
+        $scope.models = {
+	        selected: null,
+	        lists: {"A": [], "B": []},
+	    };
 
     	function startRecording() {
     		// start recording
@@ -119,16 +124,6 @@
 			//	vm : vm
 			//});
 
-//  			vm.examTypeId = $stateParams.type;
-//
-//  			Exam.startExams({
-//  				examTypeId: vm.examTypeId
-//            }, onSuccess, onError);
-//            function onSuccess(data, headers) {
-//            	vm.exam = data;
-//            	vm.questions = data.questions;
-//            	console.log(data);
-
             	// Load player
 	    		initPlayer();
 
@@ -156,6 +151,13 @@
   				$('.input_answer').each(function(){
   					vm.answers.push($(this).val());
   				 });
+  			} else if (vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
+  				var arrAnswer = $scope.models.lists.B;
+  				console.log(arrAnswer);
+  				angular.forEach(arrAnswer, function(value, key){
+  	  				vm.answers.push(value.key);
+  	            });
+  				console.log(vm.answers);
   			} else {
   				angular.forEach(vm.listItemAnswer, function(value, key){
   	  				if ($('#answer' + value).is(":checked")) {
@@ -240,6 +242,29 @@
   			if (selQuestion.type == 'LISTENING_FIB_L') {
   				selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
   				//selQuestion.description.split('@Blank@').join('xxxxxxx');
+  			}
+  			
+  			// Update re-order
+  			if (selQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
+  				$scope.models.lists.A = [];
+  				$scope.models.lists.B = [];
+  				$scope.models.selected = null;
+  				// Build models
+  				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerA, key: "A"});
+  				}
+  				if (selQuestion.answerB != "" && selQuestion.answerB != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerB, key: "B"});
+  				}
+  				if (selQuestion.answerC != "" && selQuestion.answerC != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerC, key: "C"});
+  				}
+  				if (selQuestion.answerD != "" && selQuestion.answerD != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerD, key: "D"});
+  				}
+  				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerE, key: "E"});
+  				}
   			}
   		}
 
@@ -389,22 +414,12 @@
             return false;
         }
 
-        $scope.models = {
-            selected: null,
-            lists: {"A": [], "B": []},
-            lists1: {"C": []},
-            listsA1: {"A1": []},
-            listsA2: {"A2": []},
-            listsA3: {"A3": []},
-            listsA4: {"A4": []},
-        };
-
         // Generate initial model
-        for (var i = 1; i <= 4; ++i) {
-            $scope.models.lists.A.push({label: "IEnglish is a West Germanic language that was first spoken in early medieval England and is now a global lingua franca.[4][5] Named after the Angles, one of the Germanic tribes that migrated to England, it ultimately derives its name from the Anglia (Angeln) peninsula in the Baltic Sea. It is closely related to the Frisian languages, but its vocabulary has been significantly influenced by other Germanic languages, particularly Norse (a North Germanic language), as well as by Latin and Romance languages, especially French.[6" + i});
-            $scope.models.lists.B.push({label: "English is a West Germanic language that was first spoken in early medieval England and is now a global lingua franca.[4][5] Named after the Angles, one of the Germanic tribes that migrated to England, it ultimately derives its name from the Anglia (Angeln) peninsula in the Baltic Sea. It is closely related to the Frisian languages, but its vocabulary has been significantly influenced by other Germanic languages, particularly Norse (a North Germanic language), as well as by Latin and Romance languages, especially French.[6" + i});
-            $scope.models.lists1.C.push({label: "Answer" + i});
-        }
+//        for (var i = 1; i <= 4; ++i) {
+//            $scope.models.lists.A.push({label: "Label 1" + i});
+//            //$scope.models.lists.B.push({label: "English is a West Germanic language that was first spoken in early medieval England and is now a global lingua franca.[4][5] Named after the Angles, one of the Germanic tribes that migrated to England, it ultimately derives its name from the Anglia (Angeln) peninsula in the Baltic Sea. It is closely related to the Frisian languages, but its vocabulary has been significantly influenced by other Germanic languages, particularly Norse (a North Germanic language), as well as by Latin and Romance languages, especially French.[6" + i});
+//            //$scope.models.lists1.C.push({label: "Answer" + i});
+//        }
 
         // Model to JSON for demo purpose
         $scope.$watch('models', function(model) {
