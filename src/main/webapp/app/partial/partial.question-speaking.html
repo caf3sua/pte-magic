@@ -1,7 +1,7 @@
 <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING' || vm.questionGroup== 'WRITING'">
     <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
 </div>
-<div class="col-md-12 text-center" ng-show="vm.selectedQuestion.audioLink && vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'">
+<div class="col-md-12 text-center" ng-show="vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'">
     <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
     <div class="container-audio">
         <div id="override"></div>
