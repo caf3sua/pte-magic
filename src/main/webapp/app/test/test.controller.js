@@ -40,7 +40,7 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-        vm.dropCallback = dropCallback;
+
     	function startRecording() {
     		// start recording
 	        if (!audioRecorder)
