@@ -3,13 +3,29 @@
 
     angular
         .module('pteMagicApp')
-        .controller('TestController', TestController);
+        .controller('TestController', TestController)
+        .directive('dynamic', ['$compile', function ($compile) {
+            return {
+                restrict: 'A',
+                replace: true,
+                link: function (scope, element, attrs) {
+                    scope.$watch(attrs.dynamic, function(html) {
+                        // element[0].innerHTML = html;
+                        var $el = $('<div>' + html + '</div>').appendTo('#panel111');
+                        $compile($el)(scope);
+
+                        // $compile(element.contents())(scope);
+                    });
+                }
+            };
+        }]);
+    ;
 
     TestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
-    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity'];
+    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity', '$templateCache'];
 
     function TestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
-    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity) {
+    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, $templateCache) {
 
     	var vm = this;
     	// Function
@@ -40,8 +56,9 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-        
-    	function startRecording() {
+        vm.dropCallback = dropCallback;
+
+        function startRecording() {
     		// start recording
 	        if (!audioRecorder)
 	            return;
@@ -101,7 +118,7 @@
     	angular.element(document).ready(function () {
         });
 
-    	
+
     	// Init controller
   		(function initController() {
   			// instantiate base controller
@@ -187,17 +204,50 @@
   		}
 
   		function updateQuestionInfo(selQuestion) {
+            $scope.models.selected = null;
+
   			// Replace @Blank@
-  			if (selQuestion.type == 'LISTENING_FIB_L') {
+  			if (selQuestion.type == 'READING_FIB_R') {
   				selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
   				//selQuestion.description.split('@Blank@').join('xxxxxxx');
+                $scope.models.fillInTheBlanklLists.questionPanel = [];
+
+                var count = (vm.selectedQuestion.text.match(/@Blank@/g) || []).length;
+
+                // var template = '<ul dnd-list="list"' +
+                //     'dnd-horizontal-list="true"' +
+                //     'dnd-drop="vm.dropCallback(index, item, external, type, list, listName)">' +
+                //     '<li ng-repeat="item in list"' +
+                //     'dnd-draggable="item"' +
+                //     'dnd-moved="list.splice($index, 1)"' +
+                //     'dnd-effect-allowed="move"' +
+                //     'dnd-selected="models.selected = item"' +
+                //     'ng-class="{\'selected\': models.selected === item}">' +
+                //     '{{item.label}}' +
+                //     '</li>' +
+                //     '</ul>';
+                for (var i = 0; i < count; i++) {
+                    var draggablePanel = '<div ng-repeat="(listName, list) in vm.models.lists' + i + '" >' +
+                        '<div class="panel panel-info">' +
+                        '<div class="panel-body" ng-include="\'app/partial/draggable.replace-panel.html\'"</div>' +
+                        '</div>' +
+                        '</div> ';
+                    var paramIndex = vm.selectedQuestion.text.indexOf("@Blank@");
+                    vm.selectedQuestion.text = vm.selectedQuestion.text.substring(0, paramIndex) +
+                        draggablePanel + vm.selectedQuestion.text.substring(paramIndex + 7, vm.selectedQuestion.text.length);
+                }
+
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerA, key: "A"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerB, key: "B"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
   			}
-  			
+
   			// Update re-order
   			if (selQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
   				$scope.models.lists.A = [];
   				$scope.models.lists.B = [];
-  				$scope.models.selected = null;
   				// Build models
   				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
   					$scope.models.lists.A.push({label: selQuestion.answerA, key: "A"});
@@ -362,5 +412,14 @@
             }
             return false;
         }
+
+        function dropCallback(index, item, external, type, list, listName) {
+            if(list[0]) {
+                vm.models.fillInTheBlanklLists.questionPanel.push(list[0]);
+            }
+            vm.models['lists' + listName][listName] = [item];
+            // Return false here to cancel drop. Return true if you insert the item yourself.
+            return item;
+        };
     }
 })();

@@ -34,35 +34,12 @@
 
         <div class="col-md-12">
             <div class="row" id="dragInput">
-                        <div ng-repeat="(listName, list) in models.listsA1" >
-                            <div class="panel panel-info">
-                                <div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div>
-                            </div>
-                            abc
-                        </div>
-                        <div ng-repeat="(listName, list) in models.listsA2" >
-                            <div class="panel panel-info">
-                                <div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div>
-                            </div>
-                            def
-                        </div>
-                        <div ng-repeat="(listName, list) in models.listsA3">
-                            <div class="panel panel-info">
-                                <div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div>
-                            </div>
-                            ghj
-                        </div>
-                        <div ng-repeat="(listName, list) in models.listsA4">
-                            <div class="panel panel-info">
-                                <div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div>
-                            </div>
-                            klm
-                        </div>
+                <div dynamic="vm.selectedQuestion.text" id="panel111"></div>
             </div>
 
             <div view-source="simple"></div>
             <div class="row">
-                <div ng-repeat="(listName, list) in models.lists1" >
+                <div ng-repeat="(listName, list) in models.fillInTheBlanklLists" >
                     <div class="panel panel-info text-center" id="drgFillBL">
                         <div class="panel-body" ng-include="'app/partial/draggable.h-panel.html'"></div>
                     </div>

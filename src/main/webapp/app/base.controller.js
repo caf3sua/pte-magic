@@ -1,4 +1,4 @@
-// code style: https://github.com/johnpapa/angular-styleguide 
+// code style: https://github.com/johnpapa/angular-styleguide
 // Create by: Nam, Nguyen Hoai - ITSOL.vn
 
 (function() {
@@ -6,36 +6,37 @@
     angular
       .module('pteMagicApp')
       .controller('PteMagicBaseController', PteMagicBaseController);
-    
+
     PteMagicBaseController.$inject = ['vm', '$scope', '$window'];
 
     function PteMagicBaseController(vm, $scope, $window){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
-		
-		// Attribute 
+
+		// Attribute
 		vm.answers = [];
 		vm.selectedQuestion;
         $scope.models = {
 	        selected: null,
 	        lists: {"A": [], "B": []},
+            fillInTheBlanklLists: {"questionPanel": []}
 	    };
-		
+
 		// Function
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
 		vm.closeExam = closeExam;
-		
-		
+
+
 	    // add any other shared functionality here.
 		function initBase() {
 			console.log('init base');
 		}
-		
+
 		function closeExam() {
   			$window.close();
   		}
-		
+
 		function getUserAnswer() {
   			vm.answers = [];
 
