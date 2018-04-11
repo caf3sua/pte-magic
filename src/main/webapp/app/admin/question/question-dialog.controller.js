@@ -5,15 +5,14 @@
         .module('pteMagicApp')
         .controller('QuestionDialogController', QuestionDialogController);
 
-    QuestionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Question', 'Exam', 'Upload'];
+    QuestionDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Question', 'Upload'];
 
-    function QuestionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Question, Exam, Upload) {
+    function QuestionDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Question, Upload) {
         var vm = this;
 
         vm.question = entity;
         vm.clear = clear;
         vm.save = save;
-        vm.exams = Exam.query();
         vm.uploadFiles = uploadFiles;
         vm.questionGroup;
         vm.changeQuestionType = changeQuestionType;

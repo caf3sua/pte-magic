@@ -45,6 +45,10 @@ spring:
             enabled: false
     thymeleaf:
         mode: XHTML
+    http:
+      multipart:
+       max-file-size: 3MB
+       max-request-size: 3MB
 
 google-cloud:
     storage:
