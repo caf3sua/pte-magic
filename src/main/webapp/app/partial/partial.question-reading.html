@@ -56,15 +56,13 @@
                 <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
             </div>
         </div>
-
-
-
     </div>
-
-    <div class="col-md-6" ng-show="
-    vm.questionGroup == 'READING' && (
-    vm.selectedQuestion.type != 'READING_RE_ORDER_PARAGRAPH' &&
-    vm.selectedQuestion.type != 'READING_FIB_R')"
+    <div class="" ng-show="
+        vm.questionGroup == 'READING' && (
+        vm.selectedQuestion.type != 'READING_RE_ORDER_PARAGRAPH' &&
+        vm.selectedQuestion.type != 'READING_FIB_R')"
+         ng-class="(
+         vm.selectedQuestion.type == 'READING_FIB_R_W' ? 'col-md-12':'col-md-6')"
     >
         <p class="pte-test-content-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.text)"></p>
         <!-- Record audio -->
@@ -123,11 +121,10 @@
 
     </div>
 
-    <div class="col-md-6 "
+    <div class="col-md-12 "
          ng-show="vm.selectedQuestion.type == 'READING_FIB_R_W'"
          ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
         <div class="text-right">
             <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
         </div>
-
     </div>

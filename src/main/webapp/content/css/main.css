@@ -1421,6 +1421,15 @@ textarea {
     display: block;
     min-height: 30px;
 }
+.select_READING_FIB_R_W{
+    margin: 5px 5px 5px 5px;
+    border: 1px solid #ccc;
+    height: 30px;
+    border-radius: 5px;
+}
+.pte-width-audio-speaking{
+    width: 400px;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
@@ -1920,6 +1929,9 @@ textarea {
     }
 }
 @media (max-width:479px){
+    .pte-width-audio-speaking {
+        width: 380px;
+    }
     .pte-from-login-admin{
         width: 300px;
         margin: 0 auto;
@@ -2169,6 +2181,9 @@ textarea {
     }
 }
 @media (max-width:420px){
+    .pte-width-audio-speaking {
+        width: 333px;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
