@@ -14,6 +14,7 @@
 
 
 		// Attribute
+		vm.showRecording = true;
 		vm.answers = [];
 		vm.selectedQuestion;
         $scope.models = {
@@ -28,7 +29,17 @@
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
 		vm.closeExam = closeExam;
+		vm.updateQuestionInfo = updateQuestionInfo;
 
+		function buildSelectElement(answer) {
+  			var arrAnswer = answer.split('/');
+			var optTmp = '';
+			angular.forEach(arrAnswer, function (data) {
+					optTmp = optTmp + "<option>" + data + "</option>";
+			});
+			var sel = '<select name="select" class="select_READING_FIB_R_W"><option value=""></option>' + optTmp + '</select>';
+			return sel;
+  		}
 
 	    // add any other shared functionality here.
 		function initBase() {
@@ -37,6 +48,81 @@
 
 		function closeExam() {
   			$window.close();
+  		}
+
+		function updateQuestionInfo(selQuestion) {
+            // Replace @Blank@
+            if (selQuestion.type == 'READING_FIB_R') {
+                $scope.models.selected = null;
+                selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
+                //selQuestion.description.split('@Blank@').join('xxxxxxx');
+                $scope.models.fillInTheBlanklLists.questionPanel = [];
+
+                var count = (vm.selectedQuestion.text.match(/@Blank@/g) || []).length;
+
+                for (var i = 0; i < count; i++) {
+                    var name = "answer" + i;
+                    // $scope.models.answer[i] = {"answer": []};
+                    $scope.models.answer[name] = {};
+                    $scope.models.answer[name][i] = [];
+                    $scope.models.fillInTheBlankQuestionArr.push($scope.models.answer[name]);
+                }
+
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerA, key: "A"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerB, key: "B"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
+                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
+            }
+
+  			if (selQuestion.type == 'READING_FIB_R_W') {
+  				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
+  					var txt = buildSelectElement(selQuestion.answerA);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerB != "" && selQuestion.answerB != null) {
+  					var txt = buildSelectElement(selQuestion.answerB);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerC != "" && selQuestion.answerC != null) {
+  					var txt = buildSelectElement(selQuestion.answerC);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerD != "" && selQuestion.answerD != null) {
+  					var txt = buildSelectElement(selQuestion.answerD);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
+  					var txt = buildSelectElement(selQuestion.answerE);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  			}
+
+  			// Update re-order
+  			if (selQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
+  				$scope.models.lists.A = [];
+  				$scope.models.lists.B = [];
+  				$scope.models.selected = null;
+  				// Build models
+  				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerA, key: "A"});
+  				}
+  				if (selQuestion.answerB != "" && selQuestion.answerB != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerB, key: "B"});
+  				}
+  				if (selQuestion.answerC != "" && selQuestion.answerC != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerC, key: "C"});
+  				}
+  				if (selQuestion.answerD != "" && selQuestion.answerD != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerD, key: "D"});
+  				}
+  				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
+  					$scope.models.lists.A.push({label: selQuestion.answerE, key: "E"});
+  				}
+  			}
+  			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+  				vm.showRecording = false;
+  			}
   		}
 
 		function getUserAnswer() {
@@ -56,6 +142,10 @@
   	  				vm.answers.push(value.key);
   	            });
   				console.log(vm.answers);
+  			} else if (vm.selectedQuestion.type == 'READING_FIB_R_W') {
+  				$('.select_READING_FIB_R_W').each(function(){
+  					vm.answers.push($(this).find('option:selected').text());
+  				});
   			} else {
   				angular.forEach(vm.listItemAnswer, function(value, key){
   	  				if ($('#answer' + value).is(":checked")) {

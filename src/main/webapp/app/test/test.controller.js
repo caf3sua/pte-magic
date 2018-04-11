@@ -3,29 +3,13 @@
 
     angular
         .module('pteMagicApp')
-        .controller('TestController', TestController)
-        .directive('dynamic', ['$compile', function ($compile) {
-            return {
-                restrict: 'A',
-                replace: true,
-                link: function (scope, element, attrs) {
-                    scope.$watch(attrs.dynamic, function(html) {
-                        // element[0].innerHTML = html;
-                        var $el = $('<div>' + html + '</div>').appendTo('#panel111');
-                        $compile($el)(scope);
-
-                        // $compile(element.contents())(scope);
-                    });
-                }
-            };
-        }]);
-    ;
+        .controller('TestController', TestController);
 
     TestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
-    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity', '$templateCache'];
+    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity'];
 
     function TestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
-    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, $templateCache) {
+    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity) {
 
     	var vm = this;
     	// Function
@@ -58,7 +42,6 @@
     	vm.btnTxt = 'Next';
         vm.dropCallback = dropCallback;
 
-    	vm.showRecording = true;
     	vm.countdownSpeaking = 5;
 
     	function startRecording() {
@@ -269,7 +252,6 @@
   			}
   		}
 
-
   		function nextQuestion() {
   			$('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
@@ -291,7 +273,7 @@
   	            }
   			} else {
   				// Get question group
-  				updateQuestionInfo(vm.selectedQuestion);
+  				vm.updateQuestionInfo(vm.selectedQuestion);
 
   				console.log(vm.selectedQuestion);
 
