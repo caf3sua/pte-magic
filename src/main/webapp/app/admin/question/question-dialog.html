@@ -45,7 +45,9 @@
              && vm.question.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
              && vm.question.type != 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
              && vm.question.type != 'LISTENING_SELECT_MISSING_WORD'
-             && vm.question.type != 'LISTENING_DICTATION'"
+             && vm.question.type != 'LISTENING_DICTATION'
+             && vm.question.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
+             && vm.question.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'"
         >
             <label class="control-label" data-translate="pteMagicApp.question.text" for="field_text">Text</label>
             <input type="text" class="form-control" name="text" id="field_text"
@@ -58,8 +60,9 @@
              vm.question.type == 'SPEAKING_REPEAT_SENTENCE' ||
              vm.question.type == 'SPEAKING_DESCRIBE_IMAGE' ||
              vm.question.type == 'SPEAKING_RETELL_LECTURE'||
-             vm.question.type == 'SPEAKING_ANSWER_SHORT_QUESTION') &&
-             vm.question.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'"
+             vm.question.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'||
+             vm.question.type == 'SPEAKING_ANSWER_SHORT_QUESTION')
+             "
         >
         	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)" accept="audio/*,image/*" ngf-max-size="4MB">
 		      Select File</button>
