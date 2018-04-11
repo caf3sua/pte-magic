@@ -45,6 +45,9 @@
     	vm.btnTxt = 'Next';
         vm.dropCallback = dropCallback;
 
+
+
+
     	function startRecording() {
     		// start recording
 	        if (!audioRecorder)
