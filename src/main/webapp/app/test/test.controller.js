@@ -14,15 +14,12 @@
     	var vm = this;
     	// Function
     	vm.answer = answer;
-    	vm.closeExam = closeExam;
     	vm.trustAsHtml = $sce.trustAsHtml;
 
     	// Variable, flag
     	vm.examTypeId;
     	vm.exam = entity;
     	vm.questions = entity.questions;
-    	vm.selectedQuestion;
-    	vm.answers = [];
     	vm.isFinish = false;
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
     	vm.countdown = 130; // 2min10second
@@ -43,13 +40,7 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-        vm.dropCallback = dropCallback;
         
-        $scope.models = {
-	        selected: null,
-	        lists: {"A": [], "B": []},
-	    };
-
     	function startRecording() {
     		// start recording
 	        if (!audioRecorder)
@@ -108,21 +99,13 @@
     	}
 
     	angular.element(document).ready(function () {
-//    		$timeout(function(){
-//	    		// Load player
-//	    		initPlayer();
-//
-//	    		// Load record audio
-//	    		initAudio();
-//    		}, 1000 );
         });
 
+    	
     	// Init controller
   		(function initController() {
   			// instantiate base controller
-			//$controller('PteMagicBaseController', {
-			//	vm : vm
-			//});
+  		    $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
 
             	// Load player
 	    		initPlayer();
@@ -132,41 +115,7 @@
 
             	// Next question
             	nextQuestion();
-//            }
-//            function onError(error) {
-//            }
   		})();
-
-  		function closeExam() {
-  			$window.close();
-  		}
-
-  		function getUserAnswer() {
-  			vm.answers = [];
-
-  			if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' || vm.selectedQuestion.type == 'WRITING_ESSAY') {
-  				var answer = $('#areaTextWriting').val();
-  				vm.answers.push(answer);
-  			} else if (vm.selectedQuestion.type == 'LISTENING_FIB_L') {
-  				$('.input_answer').each(function(){
-  					vm.answers.push($(this).val());
-  				 });
-  			} else if (vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
-  				var arrAnswer = $scope.models.lists.B;
-  				console.log(arrAnswer);
-  				angular.forEach(arrAnswer, function(value, key){
-  	  				vm.answers.push(value.key);
-  	            });
-  				console.log(vm.answers);
-  			} else {
-  				angular.forEach(vm.listItemAnswer, function(value, key){
-  	  				if ($('#answer' + value).is(":checked")) {
-  	  	  				vm.answers.push(value);
-  	  	  			}
-  	  				$("#answer" + value).prop( "checked", false );
-  	            });
-  			}
-  		}
 
   		function answer() {
   			initAnswer();
@@ -182,7 +131,7 @@
   			} else {
   				console.log(vm.selectedQuestion);
   	  			// Get answer
-  	  			getUserAnswer();
+  	  			vm.getUserAnswer();
   	  			console.log(vm.answers);
 
   	  			// Save answer
@@ -413,27 +362,5 @@
             }
             return false;
         }
-
-        // Generate initial model
-//        for (var i = 1; i <= 4; ++i) {
-//            $scope.models.lists.A.push({label: "Label 1" + i});
-//            //$scope.models.lists.B.push({label: "English is a West Germanic language that was first spoken in early medieval England and is now a global lingua franca.[4][5] Named after the Angles, one of the Germanic tribes that migrated to England, it ultimately derives its name from the Anglia (Angeln) peninsula in the Baltic Sea. It is closely related to the Frisian languages, but its vocabulary has been significantly influenced by other Germanic languages, particularly Norse (a North Germanic language), as well as by Latin and Romance languages, especially French.[6" + i});
-//            //$scope.models.lists1.C.push({label: "Answer" + i});
-//        }
-
-        // Model to JSON for demo purpose
-        $scope.$watch('models', function(model) {
-            $scope.modelAsJson = angular.toJson(model, true);
-        }, true);
-
-        function dropCallback(index, item, external, type, list, listName) {
-            if(list[0]) {
-                $scope.models.lists1.C.push(list[0]);
-            }
-            $scope.models['lists' + listName][listName] = [item];
-            // Return false here to cancel drop. Return true if you insert the item yourself.
-            return item;
-        };
-
     }
 })();

@@ -14,7 +14,6 @@
     	var vm = this;
     	// Function
     	vm.answer = answer;
-    	vm.closeExam = closeExam;
     	vm.trustAsHtml = $sce.trustAsHtml;
 
     	// Variable, flag
@@ -150,27 +149,6 @@
         	nextQuestion();
   		})();
 
-  		function closeExam() {
-  			$window.close();
-  		}
-
-  		function getUserAnswer() {
-  			vm.answers = [];
-
-  			if (vm.selectedQuestion.type == 'LISTENING_FIB_L') {
-  				$('.input_answer').each(function(){
-  					vm.answers.push($(this).val());
-  				 });
-  			} else {
-  				angular.forEach(vm.listItemAnswer, function(value, key){
-  	  				if ($('#answer' + value).is(":checked")) {
-  	  	  				vm.answers.push(value);
-  	  	  			}
-  	  				$("#answer" + value).prop( "checked", false );
-  	            });
-  			}
-  		}
-
   		function answer() {
   			initAnswer();
 
@@ -181,7 +159,7 @@
   			} else {
   				console.log(vm.selectedQuestion);
   	  			// Get answer
-  	  			getUserAnswer();
+  	  			vm.getUserAnswer();
   	  			console.log(vm.answers);
 
   	  			// Save answer
@@ -393,20 +371,5 @@
             }
             return false;
         }
-        $scope.models = {
-            selected: null,
-            lists: {"A": [], "B": []}
-        };
-
-        // Generate initial model
-        for (var i = 1; i <= 4; ++i) {
-            $scope.models.lists.A.push({label: "IEnglish is a West Germanic language that was first spoken in early medieval England and is now a global lingua franca.[4][5] Named after the Angles, one of the Germanic tribes that migrated to England, it ultimately derives its name from the Anglia (Angeln) peninsula in the Baltic Sea. It is closely related to the Frisian languages, but its vocabulary has been significantly influenced by other Germanic languages, particularly Norse (a North Germanic language), as well as by Latin and Romance languages, especially French.[6" + i});
-            $scope.models.lists.B.push({label: "English is a West Germanic language that was first spoken in early medieval England and is now a global lingua franca.[4][5] Named after the Angles, one of the Germanic tribes that migrated to England, it ultimately derives its name from the Anglia (Angeln) peninsula in the Baltic Sea. It is closely related to the Frisian languages, but its vocabulary has been significantly influenced by other Germanic languages, particularly Norse (a North Germanic language), as well as by Latin and Romance languages, especially French.[6" + i});
-        }
-
-        // Model to JSON for demo purpose
-        $scope.$watch('models', function(model) {
-            $scope.modelAsJson = angular.toJson(model, true);
-        }, true);
     }
 })();
