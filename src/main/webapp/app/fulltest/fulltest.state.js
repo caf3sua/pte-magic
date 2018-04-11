@@ -30,6 +30,7 @@
                 translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate,$translatePartialLoader) {
                     $translatePartialLoader.addPart('home');
                     $translatePartialLoader.addPart('testType');
+                    $translatePartialLoader.addPart('questionType');
                     return $translate.refresh();
                 }],
                 entity: ['$stateParams', 'Exam', function($stateParams, Exam) {
