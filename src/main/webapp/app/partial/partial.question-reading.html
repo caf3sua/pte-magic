@@ -1,5 +1,4 @@
     <div class="simpleDemo row" ng-show="vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH'">
-
         <div class="col-md-12">
             <div class="row">
                 <div ng-repeat="(listName, list) in models.lists" class="col-md-6">
@@ -32,7 +31,7 @@
     </div>
 
     <div class="col-md-6" ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING'">
-        <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
+        <!--<p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>-->
         <!-- Record audio -->
         <div ng-show="vm.selectedQuestion.audioLink">
             <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
