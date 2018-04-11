@@ -40,7 +40,7 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-    	vm.showRecording = true;
+    	
 
     	vm.countdownSpeaking = 5;
     	
@@ -199,42 +199,7 @@
   			};
   			xhr.send();
   		}
-
-  		function updateQuestionInfo(selQuestion) {
-  			// Replace @Blank@
-  			if (selQuestion.type == 'LISTENING_FIB_L') {
-  				selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
-  				//selQuestion.description.split('@Blank@').join('xxxxxxx');
-  			}
-  			
-  			// Update re-order
-  			if (selQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
-  				$scope.models.lists.A = [];
-  				$scope.models.lists.B = [];
-  				$scope.models.selected = null;
-  				// Build models
-  				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerA, key: "A"});
-  				}
-  				if (selQuestion.answerB != "" && selQuestion.answerB != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerB, key: "B"});
-  				}
-  				if (selQuestion.answerC != "" && selQuestion.answerC != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerC, key: "C"});
-  				}
-  				if (selQuestion.answerD != "" && selQuestion.answerD != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerD, key: "D"});
-  				}
-  				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerE, key: "E"});
-  				}
-  			}
-  			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
-  				vm.showRecording = false;
-  			}
-  		}
-
-
+  		
   		function nextQuestion() {
   			$('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
@@ -256,7 +221,7 @@
   	            }
   			} else {
   				// Get question group
-  				updateQuestionInfo(vm.selectedQuestion);
+  				vm.updateQuestionInfo(vm.selectedQuestion);
 
   				console.log(vm.selectedQuestion);
 

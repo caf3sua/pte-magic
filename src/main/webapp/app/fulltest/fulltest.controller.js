@@ -76,12 +76,25 @@
     	}
 
     	function callBackAudioEnded() {
-    		console.log('audio ended!');
+    		console.log('play audio ended!');
+    		vm.showRecording = true;
+    		
+    		vm.counter = 5;
+    		var interval = setInterval(function() {
+    			vm.counter--;
+    		    // Display 'counter' wherever you want to display it.
+    		    if (vm.counter == 0) {
+    		        // Display a login box
+    		        clearInterval(interval);
+    		        startRecording();
+    		    }
+    		}, 1000);
     	}
 
     	function playAudio(link, timeout) {
     		var audio = $("#player");
     		if (audio[0] != undefined) {
+    			audio[0].addEventListener('ended', callBackAudioEnded);
     			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
                 audio[0].pause();
                 audio[0].load();
@@ -132,10 +145,8 @@
     	// Init controller
   		(function initController() {
   			// instantiate base controller
-			//$controller('PteMagicBaseController', {
-			//	vm : vm
-			//});
-
+  		    $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
+  		    
   			// Load player
     		initPlayer();
 
@@ -214,15 +225,6 @@
   			xhr.send();
   		}
 
-  		function updateQuestionInfo(selQuestion) {
-  			// Replace @Blank@
-  			if (selQuestion.type == 'LISTENING_FIB_L') {
-  				selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
-  				//selQuestion.description.split('@Blank@').join('xxxxxxx');
-  			}
-  		}
-
-
   		function nextQuestion() {
             $('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
@@ -251,7 +253,7 @@
   				}
 
   				// Get question group
-  				updateQuestionInfo(vm.selectedQuestion);
+  				vm.updateQuestionInfo(vm.selectedQuestion);
 
   				console.log(vm.selectedQuestion);
 
