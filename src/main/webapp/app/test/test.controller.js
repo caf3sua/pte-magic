@@ -228,27 +228,12 @@
 
                 var count = (vm.selectedQuestion.text.match(/@Blank@/g) || []).length;
 
-                // var template = '<ul dnd-list="list"' +
-                //     'dnd-horizontal-list="true"' +
-                //     'dnd-drop="vm.dropCallback(index, item, external, type, list, listName)">' +
-                //     '<li ng-repeat="item in list"' +
-                //     'dnd-draggable="item"' +
-                //     'dnd-moved="list.splice($index, 1)"' +
-                //     'dnd-effect-allowed="move"' +
-                //     'dnd-selected="models.selected = item"' +
-                //     'ng-class="{\'selected\': models.selected === item}">' +
-                //     '{{item.label}}' +
-                //     '</li>' +
-                //     '</ul>';
                 for (var i = 0; i < count; i++) {
-                    var draggablePanel = '<div ng-repeat="(listName, list) in vm.models.lists' + i + '" >' +
-                        '<div class="panel panel-info">' +
-                        '<div class="panel-body" ng-include="\'app/partial/draggable.replace-panel.html\'"</div>' +
-                        '</div>' +
-                        '</div> ';
-                    var paramIndex = vm.selectedQuestion.text.indexOf("@Blank@");
-                    vm.selectedQuestion.text = vm.selectedQuestion.text.substring(0, paramIndex) +
-                        draggablePanel + vm.selectedQuestion.text.substring(paramIndex + 7, vm.selectedQuestion.text.length);
+                    var name = "answer" + i;
+                    // $scope.models.answer[i] = {"answer": []};
+                    $scope.models.answer[name] = {};
+                    $scope.models.answer[name][i] = [];
+                    $scope.models.fillInTheBlankQuestionArr.push($scope.models.answer[name]);
                 }
 
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerA, key: "A"});
@@ -433,9 +418,9 @@
 
         function dropCallback(index, item, external, type, list, listName) {
             if(list[0]) {
-                vm.models.fillInTheBlanklLists.questionPanel.push(list[0]);
+                $scope.models.fillInTheBlanklLists.questionPanel.push(list[0]);
             }
-            vm.models['lists' + listName][listName] = [item];
+            $scope.models.answer['answer' + listName][listName] = [item];
             // Return false here to cancel drop. Return true if you insert the item yourself.
             return item;
         };

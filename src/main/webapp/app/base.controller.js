@@ -19,6 +19,8 @@
         $scope.models = {
 	        selected: null,
 	        lists: {"A": [], "B": []},
+            fillInTheBlankQuestionArr: [],
+            answer: [],
             fillInTheBlanklLists: {"questionPanel": []}
 	    };
 

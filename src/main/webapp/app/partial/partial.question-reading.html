@@ -34,7 +34,15 @@
 
         <div class="col-md-12">
             <div class="row" id="dragInput">
-                <div dynamic="vm.selectedQuestion.text" id="panel111"></div>
+                <!--<div dynamic="vm.selectedQuestion.text" id="panel111"></div>-->
+                <div ng-repeat="(index, value) in models.fillInTheBlankQuestionArr" >
+                    <div ng-repeat="(listName, list) in value" >
+                        <div class="panel panel-info">
+                            <div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div>
+                        </div>
+                        abc
+                    </div>
+                </div>
             </div>
 
             <div view-source="simple"></div>
