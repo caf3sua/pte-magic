@@ -40,7 +40,10 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-        
+    	vm.showRecording = true;
+
+    	vm.countdownSpeaking = 5;
+    	
     	function startRecording() {
     		// start recording
 	        if (!audioRecorder)
@@ -59,21 +62,35 @@
 	        vm.btnEnable = true;
     	}
 
-    	function initPlayer() {
-			var audio = $("#player");
-    		if (audio[0] != undefined) {
-    			audio[0].addEventListener('ended', callBackAudioEnded);
-    		}
-    	}
+//    	function initPlayer() {
+//			var audio = $("#player");
+//			debugger
+//    		if (audio[0] != undefined) {
+//    			audio[0].addEventListener('ended', callBackAudioEnded);
+//    		}
+//    	}
 
     	function callBackAudioEnded() {
-    		console.log('audio ended!');
+    		console.log('play audio ended!');
+    		vm.showRecording = true;
+    		
+    		vm.counter = 5;
+    		var interval = setInterval(function() {
+    			vm.counter--;
+    		    // Display 'counter' wherever you want to display it.
+    		    if (vm.counter == 0) {
+    		        // Display a login box
+    		        clearInterval(interval);
+    		        startRecording();
+    		    }
+    		}, 1000);
     	}
 
     	function playAudio(link, timeout) {
             $timeout(function(){
             	var audio = $("#player");
         		if (audio[0] != undefined) {
+        			audio[0].addEventListener('ended', callBackAudioEnded);
         			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
                     audio[0].pause();
                     audio[0].load();
@@ -99,6 +116,8 @@
     	}
 
     	angular.element(document).ready(function () {
+    		// Load record audio
+    		initAudio();
         });
 
     	
@@ -107,14 +126,9 @@
   			// instantiate base controller
   		    $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
 
-            	// Load player
-	    		initPlayer();
 
-	    		// Load record audio
-	    		initAudio();
-
-            	// Next question
-            	nextQuestion();
+        	// Next question
+        	nextQuestion();
   		})();
 
   		function answer() {
@@ -215,6 +229,9 @@
   					$scope.models.lists.A.push({label: selQuestion.answerE, key: "E"});
   				}
   			}
+  			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+  				vm.showRecording = false;
+  			}
   		}
 
 
@@ -256,11 +273,12 @@
   				$scope.$broadcast('timer-start');
 
 	    		// Load player
-	    		initPlayer();
+//	    		initPlayer();
 
 	    		// Load record audio
 	    		initAudio();
 
+	    		// Play mp3 audio
   				playAudio(vm.selectedQuestion.audioLink, 3000);
   			}
   		}
