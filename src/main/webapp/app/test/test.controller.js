@@ -3,29 +3,13 @@
 
     angular
         .module('pteMagicApp')
-        .controller('TestController', TestController)
-        .directive('dynamic', ['$compile', function ($compile) {
-            return {
-                restrict: 'A',
-                replace: true,
-                link: function (scope, element, attrs) {
-                    scope.$watch(attrs.dynamic, function(html) {
-                        // element[0].innerHTML = html;
-                        var $el = $('<div>' + html + '</div>').appendTo('#panel111');
-                        $compile($el)(scope);
-
-                        // $compile(element.contents())(scope);
-                    });
-                }
-            };
-        }]);
-    ;
+        .controller('TestController', TestController);
 
     TestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
-    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity', '$templateCache'];
+    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity'];
 
     function TestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
-    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, $templateCache) {
+    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity) {
 
     	var vm = this;
     	// Function
@@ -56,11 +40,10 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-        vm.dropCallback = dropCallback;
+    	
 
-    	vm.showRecording = true;
     	vm.countdownSpeaking = 5;
-
+    	
     	function startRecording() {
     		// start recording
 	        if (!audioRecorder)
@@ -90,7 +73,7 @@
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
-
+    		
     		vm.counter = 5;
     		var interval = setInterval(function() {
     			vm.counter--;
@@ -137,7 +120,7 @@
     		initAudio();
         });
 
-
+    	
     	// Init controller
   		(function initController() {
   			// instantiate base controller
@@ -216,75 +199,7 @@
   			};
   			xhr.send();
   		}
-
-  		function updateQuestionInfo(selQuestion) {
-            $scope.models.selected = null;
-
-  			// Replace @Blank@
-  			if (selQuestion.type == 'READING_FIB_R') {
-  				selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
-  				//selQuestion.description.split('@Blank@').join('xxxxxxx');
-                $scope.models.fillInTheBlanklLists.questionPanel = [];
-
-                var count = (vm.selectedQuestion.text.match(/@Blank@/g) || []).length;
-
-                // var template = '<ul dnd-list="list"' +
-                //     'dnd-horizontal-list="true"' +
-                //     'dnd-drop="vm.dropCallback(index, item, external, type, list, listName)">' +
-                //     '<li ng-repeat="item in list"' +
-                //     'dnd-draggable="item"' +
-                //     'dnd-moved="list.splice($index, 1)"' +
-                //     'dnd-effect-allowed="move"' +
-                //     'dnd-selected="models.selected = item"' +
-                //     'ng-class="{\'selected\': models.selected === item}">' +
-                //     '{{item.label}}' +
-                //     '</li>' +
-                //     '</ul>';
-                for (var i = 0; i < count; i++) {
-                    var draggablePanel = '<div ng-repeat="(listName, list) in vm.models.lists' + i + '" >' +
-                        '<div class="panel panel-info">' +
-                        '<div class="panel-body" ng-include="\'app/partial/draggable.replace-panel.html\'"</div>' +
-                        '</div>' +
-                        '</div> ';
-                    var paramIndex = vm.selectedQuestion.text.indexOf("@Blank@");
-                    vm.selectedQuestion.text = vm.selectedQuestion.text.substring(0, paramIndex) +
-                        draggablePanel + vm.selectedQuestion.text.substring(paramIndex + 7, vm.selectedQuestion.text.length);
-                }
-
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerA, key: "A"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerB, key: "B"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
-  			}
-
-  			// Update re-order
-  			if (selQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
-  				$scope.models.lists.A = [];
-  				$scope.models.lists.B = [];
-  				// Build models
-  				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerA, key: "A"});
-  				}
-  				if (selQuestion.answerB != "" && selQuestion.answerB != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerB, key: "B"});
-  				}
-  				if (selQuestion.answerC != "" && selQuestion.answerC != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerC, key: "C"});
-  				}
-  				if (selQuestion.answerD != "" && selQuestion.answerD != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerD, key: "D"});
-  				}
-  				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerE, key: "E"});
-  				}
-  			}
-  			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
-  				vm.showRecording = false;
-  			}
-  		}
-
-
+  		
   		function nextQuestion() {
   			$('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
@@ -306,7 +221,7 @@
   	            }
   			} else {
   				// Get question group
-  				updateQuestionInfo(vm.selectedQuestion);
+  				vm.updateQuestionInfo(vm.selectedQuestion);
 
   				console.log(vm.selectedQuestion);
 
@@ -430,14 +345,5 @@
             }
             return false;
         }
-
-        function dropCallback(index, item, external, type, list, listName) {
-            if(list[0]) {
-                vm.models.fillInTheBlanklLists.questionPanel.push(list[0]);
-            }
-            vm.models['lists' + listName][listName] = [item];
-            // Return false here to cancel drop. Return true if you insert the item yourself.
-            return item;
-        };
     }
 })();
