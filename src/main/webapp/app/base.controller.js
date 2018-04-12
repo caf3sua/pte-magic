@@ -80,7 +80,7 @@
 
 		function updateQuestionInfo(selQuestion) {
             // Replace @Blank@
-            if (selQuestion.type == 'LISTENING_FIB_L') {
+            if (selQuestion.type == 'READING_FIB_R') {
                 $scope.models.selected = null;
                 selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
                 //selQuestion.description.split('@Blank@').join('xxxxxxx');
@@ -119,6 +119,11 @@
                     $scope.models.fillInTheBlankPartialTexts = partialTexts;
                     $scope.models.fillInTheBlankPartialTexts[$scope.models.fillInTheBlankPartialTexts.length] = '';
                 }
+            }
+            
+            if (selQuestion.type == 'LISTENING_FIB_L') {
+                selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
+                //selQuestion.description.split('@Blank@').join('xxxxxxx');
             }
 
   			if (selQuestion.type == 'READING_FIB_R_W') {
