@@ -5,7 +5,7 @@
 
     <li ng-repeat="item in list"
         dnd-draggable="item"
-        dnd-moved="vm.movedCallback($index, list)"
+        dnd-moved="vm.movedCallback($index, list, listName)"
         dnd-effect-allowed="move"
         dnd-selected="models.selected = item"
         ng-class="{'selected': models.selected === item}"
