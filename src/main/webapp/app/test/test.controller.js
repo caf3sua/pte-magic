@@ -39,6 +39,7 @@
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
         vm.dropCallback = dropCallback;
+        vm.movedCallback = movedCallback;
 
     	vm.countdownSpeaking = 5;
 
@@ -56,7 +57,7 @@
 //    			audio[0].addEventListener('ended', callBackAudioEnded);
 //    		}
 //    	}
-    	
+
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
@@ -232,7 +233,7 @@
 
 	    		// Play mp3 audio
   				playAudio(vm.selectedQuestion.audioLink, 3000);
-  				
+
   				vm.countdownToRecording();
   			}
   		}
@@ -343,6 +344,10 @@
             $scope.models.answer['answer' + listName][listName] = [item];
             // Return false here to cancel drop. Return true if you insert the item yourself.
             return item;
+        };
+
+        function movedCallback(index, list) {
+            list.splice(index, 1)
         };
     }
 })();
