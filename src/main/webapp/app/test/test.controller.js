@@ -27,7 +27,6 @@
     	vm.fileUpload;
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
-    	vm.startRecording = startRecording;
         vm.spellCheck = spellCheck;
         vm.UpdateLengths = UpdateLengths;
         vm.checkClickspell = true;
@@ -42,17 +41,6 @@
         vm.dropCallback = dropCallback;
 
     	vm.countdownSpeaking = 5;
-
-    	function startRecording() {
-    		// start recording
-	        if (!audioRecorder)
-	            return;
-	        audioRecorder.clear();
-	        audioRecorder.record();
-	        vm.btnEnable = true;
-	        vm.txtInfoCountdown = "Recording ..."
-        	vm.isRecording = true;
-    	}
 
     	function stopRecording() {
     		// stop recording

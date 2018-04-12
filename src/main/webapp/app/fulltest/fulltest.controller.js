@@ -29,7 +29,6 @@
     	vm.fileUpload;
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
-    	vm.startRecording = startRecording;
     	vm.startNewPart = startNewPart;
         vm.checkClickspell = true;
         vm.spellCheck = spellCheck;
@@ -49,17 +48,6 @@
     		initAnswer();
     		
     		nextQuestion();
-    	}
-
-    	function startRecording() {
-    		// start recording
-	        if (!audioRecorder)
-	            return;
-	        audioRecorder.clear();
-	        audioRecorder.record();
-	        vm.btnEnable = true;
-	        vm.txtInfoCountdown = "Recording ..."
-        	vm.isRecording = true;
     	}
 
     	function stopRecording() {

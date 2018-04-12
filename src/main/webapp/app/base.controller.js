@@ -14,6 +14,8 @@
 
 
 		// Attribute
+		vm.showProgressBar = false;
+		vm.countdownPercent = 0;
 		vm.questionGroup;
 		vm.counter;
 		vm.showRecording = true;
@@ -35,7 +37,47 @@
 		vm.closeExam = closeExam;
 		vm.updateQuestionInfo = updateQuestionInfo;
 		vm.countdownToRecording = countdownToRecording;
-
+    	vm.startRecording = startRecording;
+		
+    	function resetStatus() {
+    		vm.showProgressBar = false;
+    		vm.countdownPercent = 0;    		
+    	}
+    	
+    	function calProgress() {
+    		vm.timeProgress = 0;
+    		var intervalProgress = setInterval(function() {
+    			vm.timeProgress++;
+    			vm.countdownPercent = vm.timeProgress / 40 * 100;
+    		    // Display 'counter' wherever you want to display it.
+    		    if (vm.timeProgress == 40) {
+    		        // Display a login box
+    		        clearInterval(intervalProgress);
+    		    }
+    		}, 1000);
+    	}
+    	
+		function startRecording() {
+			// Reset
+	        resetStatus();
+	        
+    		// start recording
+	        if (!audioRecorder)
+	            return;
+	        audioRecorder.clear();
+	        audioRecorder.record();
+	        vm.btnEnable = true;
+	        vm.txtInfoCountdown = "Recording ..."
+        	vm.isRecording = true;
+	        
+	        if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' 
+	        		|| vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'
+        			|| vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' 
+	        		|| vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+	        	vm.showProgressBar = true;
+	        	calProgress();
+	        }
+    	}
 		
 		function countdownToRecording() {
     		if (vm.questionGroup == 'SPEAKING') {
