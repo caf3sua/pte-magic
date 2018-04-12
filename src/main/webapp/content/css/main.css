@@ -1442,6 +1442,10 @@ textarea {
 #dragInput label{
     position: relative;
 }
+.pte-progress{
+    margin: 0 auto;
+    width: 400px;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;
