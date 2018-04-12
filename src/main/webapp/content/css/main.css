@@ -1373,6 +1373,7 @@ textarea {
 }
 #drgFillBL {
     border-color: #e1d68075;
+    margin-top: 20px;
 }
 #drgFillBL .panel-body{
     background: #d7c75242;
@@ -1397,7 +1398,7 @@ textarea {
 .simpleDemo #dragInput ul[dnd-list] {
     padding-left: 0px;
     margin-bottom: 0;
-    min-height: 30px;
+    max-height: 30px;
     text-align: center;
 }
 #dragInput .panel-info {
@@ -1405,16 +1406,21 @@ textarea {
     width: 125px;
     display: inline-block;
     margin-bottom: 0;
-    height: 35px;
+    line-height: 35px;
+    position: relative;
+    max-height: 35px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 .simpleDemo #dragInput ul[dnd-list] li {
     background-color: #f9db01;
     border: 0px solid #CCB;
     border-radius: 4px;
     display: inline-block;
-    padding: 2px 5px;
-    margin-bottom: -1px;
-    margin: 5px auto
+    padding: 2px 4px;
+    line-height: 18px;
+    max-height: 30px;
+    margin: 0px auto;
 }
 .simpleDemo #dragInput ul[dnd-list] .dndPlaceholder {
     background-color: #ddd;
@@ -1429,6 +1435,12 @@ textarea {
 }
 .pte-width-audio-speaking{
     width: 400px;
+}
+.pte-display-inline-block{
+    display: inline-block;
+}
+#dragInput label{
+    position: relative;
 }
 @media (min-width:992px) and (max-width:1200px) {
     #override {
@@ -2198,6 +2210,10 @@ textarea {
     }
 }
 @media (min-width:320px) and (max-width:380px){
+    #dragInput label{
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
     .pte-margin-left-user{
         margin-left: 0px !important;
     }

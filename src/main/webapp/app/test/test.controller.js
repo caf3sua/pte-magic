@@ -402,6 +402,7 @@
             if(list[0]) {
                 $scope.models.fillInTheBlanklLists.questionPanel.push(list[0]);
             }
+            document.getElementById('drag-panel'+ index).className = "panel panel-info";
             $scope.models.answer['answer' + listName][listName] = [item];
             // Return false here to cancel drop. Return true if you insert the item yourself.
             return item;
