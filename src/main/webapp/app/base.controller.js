@@ -7,9 +7,9 @@
       .module('pteMagicApp')
       .controller('PteMagicBaseController', PteMagicBaseController);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile'];
 
-    function PteMagicBaseController(vm, $scope, $window){
+    function PteMagicBaseController(vm, $scope, $window, $compile){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 
@@ -40,6 +40,7 @@
     	vm.startRecording = startRecording;
         vm.dropCallback = dropCallback;
         vm.movedCallback = movedCallback;
+        vm.hightlight = hightlight;
 
     	function resetStatus() {
     		vm.showProgressBar = false;
@@ -220,7 +221,7 @@
   				vm.showRecording = false;
   			}
             if (selQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
-                selQuestion.description
+                parseTextToWords(selQuestion.description);
             }
   		}
 
@@ -255,18 +256,62 @@
   			}
   		}
 
+        function parseTextToWords(textToClear){
+            // basic interpunct chars should be single elements to click
+            textToClear = textToClear.replace(/\./g, ' .');
+            textToClear = textToClear.replace(/\?/g, ' ?');
+            textToClear = textToClear.replace(/\!/g, ' !');
+            textToClear = textToClear.replace(/\,/g, ' ,');
+            textToClear = textToClear.replace(/\"/g, ' " ');
+            // removing multiple spaces for single
+            textToClear = textToClear.replace(/ +(?= )/g,'');
+
+            var words = textToClear.split(" ");
+
+            vm.selectedQuestion.description = '';
+
+            // generate words with ids to change their future css
+            for ( var i = 0, l = words.length; i < l; i++ ) {
+                var word = $('<span onclick="vm.hightlight(this)"/>').attr({'id':'word'+i }).html(" "+words[i]);
+                word.css('color','black');
+                // word.appendTo('#pte-text-question');
+                // $compile(word)($scope);
+                // $('.clearText').append(word);
+                vm.selectedQuestion.description += word.prop('outerHTML');
+
+                // $('#word'+i).click(function() {
+                //     if($(this).css('color') == "rgb(0, 0, 0)"){
+                //         $(this).css('color','red');
+                //     }else{
+                //         $(this).css('color','black');
+                //     }
+                // });
+            }
+        }
+
+        function hightlight(activeSpan) {
+            if(activeSpan.css('color') == "rgb(0, 0, 0)"){
+                activeSpan.css('color','red');
+            }else{
+                activeSpan.css('color','black');
+            }
+        }
+
         function dropCallback(index, item, external, type, list, listName) {
+            var parentIndex = parseInt(listName);
             if(list[0]) {
                 $scope.models.fillInTheBlanklLists.questionPanel.push(list[0]);
             }
-            document.getElementById('drag-panel'+ index).className = "panel panel-info";
+            document.getElementById('drag-panel'+ parentIndex).className = "panel panel-info ";
             $scope.models.answer['answer' + listName][listName] = [item];
             // Return false here to cancel drop. Return true if you insert the item yourself.
             return item;
         };
 
         function movedCallback(index, list, listName) {
+            var parentIndex = parseInt(listName);
             list.splice(index, 1)
+            document.getElementById('drag-panel'+ parentIndex).className = "panel panel-info pte-position-top10";
         };
     }
 })();

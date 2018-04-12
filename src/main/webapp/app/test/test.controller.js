@@ -38,8 +38,6 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-        vm.dropCallback = dropCallback;
-        vm.movedCallback = movedCallback;
 
     	vm.countdownSpeaking = 5;
 
@@ -334,22 +332,5 @@
             }
             return false;
         }
-
-        function dropCallback(index, item, external, type, list, listName) {
-            var parentIndex = parseInt(listName);
-            if(list[0]) {
-                $scope.models.fillInTheBlanklLists.questionPanel.push(list[0]);
-            }
-            document.getElementById('drag-panel'+ parentIndex).className = "panel panel-info ";
-            $scope.models.answer['answer' + listName][listName] = [item];
-            // Return false here to cancel drop. Return true if you insert the item yourself.
-            return item;
-        };
-
-        function movedCallback(index, list, listName) {
-            var parentIndex = parseInt(listName);
-            list.splice(index, 1)
-            document.getElementById('drag-panel'+ parentIndex).className = "panel panel-info pte-position-top10";
-        };
     }
 })();
