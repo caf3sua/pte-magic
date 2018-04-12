@@ -39,6 +39,7 @@
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
         vm.dropCallback = dropCallback;
+        vm.movedCallback = movedCallback;
 
     	vm.countdownSpeaking = 5;
 
@@ -342,6 +343,10 @@
             $scope.models.answer['answer' + listName][listName] = [item];
             // Return false here to cancel drop. Return true if you insert the item yourself.
             return item;
+        };
+
+        function movedCallback(index, list) {
+            list.splice(index, 1)
         };
     }
 })();
