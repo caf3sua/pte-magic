@@ -38,6 +38,8 @@
 		vm.updateQuestionInfo = updateQuestionInfo;
 		vm.countdownToRecording = countdownToRecording;
     	vm.startRecording = startRecording;
+        vm.dropCallback = dropCallback;
+        vm.movedCallback = movedCallback;
 
     	function resetStatus() {
     		vm.showProgressBar = false;
@@ -217,6 +219,9 @@
   			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
   				vm.showRecording = false;
   			}
+            if (selQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
+                selQuestion.description
+            }
   		}
 
 		function getUserAnswer() {
@@ -249,5 +254,19 @@
   	            });
   			}
   		}
+
+        function dropCallback(index, item, external, type, list, listName) {
+            if(list[0]) {
+                $scope.models.fillInTheBlanklLists.questionPanel.push(list[0]);
+            }
+            document.getElementById('drag-panel'+ index).className = "panel panel-info";
+            $scope.models.answer['answer' + listName][listName] = [item];
+            // Return false here to cancel drop. Return true if you insert the item yourself.
+            return item;
+        };
+
+        function movedCallback(index, list, listName) {
+            list.splice(index, 1)
+        };
     }
 })();
