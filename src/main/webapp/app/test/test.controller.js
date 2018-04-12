@@ -56,11 +56,10 @@
 //    			audio[0].addEventListener('ended', callBackAudioEnded);
 //    		}
 //    	}
-    	
+
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
-
     		vm.counter = 5;
     		var interval = setInterval(function() {
     			vm.counter--;
@@ -232,7 +231,7 @@
 
 	    		// Play mp3 audio
   				playAudio(vm.selectedQuestion.audioLink, 3000);
-  				
+
   				vm.countdownToRecording();
   			}
   		}

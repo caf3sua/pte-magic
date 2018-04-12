@@ -38,12 +38,12 @@
 		vm.updateQuestionInfo = updateQuestionInfo;
 		vm.countdownToRecording = countdownToRecording;
     	vm.startRecording = startRecording;
-		
+
     	function resetStatus() {
     		vm.showProgressBar = false;
-    		vm.countdownPercent = 0;    		
+    		vm.countdownPercent = 0;
     	}
-    	
+
     	function calProgress() {
     		vm.timeProgress = 0;
     		var intervalProgress = setInterval(function() {
@@ -56,11 +56,11 @@
     		    }
     		}, 1000);
     	}
-    	
+
 		function startRecording() {
 			// Reset
 	        resetStatus();
-	        
+
     		// start recording
 	        if (!audioRecorder)
 	            return;
@@ -68,23 +68,24 @@
 	        audioRecorder.record();
 	        vm.btnEnable = true;
 	        vm.txtInfoCountdown = "Recording ..."
+            document.getElementById('pteBlockRecord').className = "pte-block-record";
         	vm.isRecording = true;
-	        
-	        if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' 
-	        		|| vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'
-        			|| vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' 
-	        		|| vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+
+	        if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'
+                || vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'
+                || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'
+                || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
 	        	vm.showProgressBar = true;
 	        	calProgress();
 	        }
     	}
-		
+
 		function countdownToRecording() {
     		if (vm.questionGroup == 'SPEAKING') {
     			if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
     				return;
     			}
-    			
+
     			console.log('countdownToRecording!');
         		vm.showRecording = true;
 
@@ -100,7 +101,7 @@
         		}, 1000);
     		}
     	}
-		
+
 		function buildSelectElement(answer) {
   			var arrAnswer = answer.split('/');
 			var optTmp = '';
@@ -162,7 +163,7 @@
                     $scope.models.fillInTheBlankPartialTexts[$scope.models.fillInTheBlankPartialTexts.length] = '';
                 }
             }
-            
+
             if (selQuestion.type == 'LISTENING_FIB_L') {
                 selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
                 //selQuestion.description.split('@Blank@').join('xxxxxxx');
