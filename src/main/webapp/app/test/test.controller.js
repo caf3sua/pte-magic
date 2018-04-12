@@ -24,7 +24,6 @@
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
     	vm.countdown = 130; // 2min10second
     	vm.audio;
-    	vm.questionGroup;
     	vm.fileUpload;
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
@@ -69,7 +68,7 @@
 //    			audio[0].addEventListener('ended', callBackAudioEnded);
 //    		}
 //    	}
-
+    	
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
@@ -200,58 +199,6 @@
   			xhr.send();
   		}
 
-  		function updateQuestionInfo(selQuestion) {
-            $scope.models.selected = null;
-
-  			// Replace @Blank@
-  			if (selQuestion.type == 'READING_FIB_R') {
-  				selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
-  				//selQuestion.description.split('@Blank@').join('xxxxxxx');
-                $scope.models.fillInTheBlanklLists.questionPanel = [];
-
-                var count = (vm.selectedQuestion.text.match(/@Blank@/g) || []).length;
-
-                for (var i = 0; i < count; i++) {
-                    var name = "answer" + i;
-                    // $scope.models.answer[i] = {"answer": []};
-                    $scope.models.answer[name] = {};
-                    $scope.models.answer[name][i] = [];
-                    $scope.models.fillInTheBlankQuestionArr.push($scope.models.answer[name]);
-                }
-
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerA, key: "A"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerB, key: "B"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
-                $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
-  			}
-
-  			// Update re-order
-  			if (selQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
-  				$scope.models.lists.A = [];
-  				$scope.models.lists.B = [];
-  				// Build models
-  				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerA, key: "A"});
-  				}
-  				if (selQuestion.answerB != "" && selQuestion.answerB != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerB, key: "B"});
-  				}
-  				if (selQuestion.answerC != "" && selQuestion.answerC != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerC, key: "C"});
-  				}
-  				if (selQuestion.answerD != "" && selQuestion.answerD != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerD, key: "D"});
-  				}
-  				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerE, key: "E"});
-  				}
-  			}
-  			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
-  				vm.showRecording = false;
-  			}
-  		}
-
   		function nextQuestion() {
   			$('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
@@ -297,6 +244,8 @@
 
 	    		// Play mp3 audio
   				playAudio(vm.selectedQuestion.audioLink, 3000);
+  				
+  				vm.countdownToRecording();
   			}
   		}
 

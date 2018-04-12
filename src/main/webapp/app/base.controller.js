@@ -14,6 +14,8 @@
 
 
 		// Attribute
+		vm.questionGroup;
+		vm.counter;
 		vm.showRecording = true;
 		vm.answers = [];
 		vm.selectedQuestion;
@@ -32,7 +34,31 @@
 		vm.getUserAnswer = getUserAnswer;
 		vm.closeExam = closeExam;
 		vm.updateQuestionInfo = updateQuestionInfo;
+		vm.countdownToRecording = countdownToRecording;
 
+		
+		function countdownToRecording() {
+    		if (vm.questionGroup == 'SPEAKING') {
+    			if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+    				return;
+    			}
+    			
+    			console.log('countdownToRecording!');
+        		vm.showRecording = true;
+
+        		vm.counter = 5;
+        		var interval = setInterval(function() {
+        			vm.counter--;
+        		    // Display 'counter' wherever you want to display it.
+        		    if (vm.counter == 0) {
+        		        // Display a login box
+        		        clearInterval(interval);
+        		        startRecording();
+        		    }
+        		}, 1000);
+    		}
+    	}
+		
 		function buildSelectElement(answer) {
   			var arrAnswer = answer.split('/');
 			var optTmp = '';
@@ -54,7 +80,7 @@
 
 		function updateQuestionInfo(selQuestion) {
             // Replace @Blank@
-            if (selQuestion.type == 'READING_FIB_R') {
+            if (selQuestion.type == 'LISTENING_FIB_L') {
                 $scope.models.selected = null;
                 selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
                 //selQuestion.description.split('@Blank@').join('xxxxxxx');
