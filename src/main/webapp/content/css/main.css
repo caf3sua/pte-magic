@@ -1467,6 +1467,12 @@ textarea {
 .pte-block-record>div>div>div {
    padding: 0;
 }
+.pte-position-top10{
+    top: 10px !important;
+}
+.progress {
+    border:1px solid  #f5f5f5;
+}
 @media (min-width:992px) and (max-width:1200px) {
     #override {
         width: 65%;

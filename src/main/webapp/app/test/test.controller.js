@@ -68,7 +68,7 @@
     		    if (vm.counter == 0) {
     		        // Display a login box
     		        clearInterval(interval);
-    		        startRecording();
+    		        vm.startRecording();
     		    }
     		}, 1000);
     	}
@@ -336,17 +336,20 @@
         }
 
         function dropCallback(index, item, external, type, list, listName) {
+            var parentIndex = parseInt(listName);
             if(list[0]) {
                 $scope.models.fillInTheBlanklLists.questionPanel.push(list[0]);
             }
-            document.getElementById('drag-panel'+ index).className = "panel panel-info";
+            document.getElementById('drag-panel'+ parentIndex).className = "panel panel-info ";
             $scope.models.answer['answer' + listName][listName] = [item];
             // Return false here to cancel drop. Return true if you insert the item yourself.
             return item;
         };
 
         function movedCallback(index, list, listName) {
+            var parentIndex = parseInt(listName);
             list.splice(index, 1)
+            document.getElementById('drag-panel'+ parentIndex).className = "panel panel-info pte-position-top10";
         };
     }
 })();

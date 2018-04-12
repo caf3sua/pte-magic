@@ -46,7 +46,7 @@
 
     	function startNewPart() {
     		initAnswer();
-    		
+
     		nextQuestion();
     	}
 
@@ -67,7 +67,7 @@
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
-    		
+
     		vm.counter = 5;
     		var interval = setInterval(function() {
     			vm.counter--;
@@ -75,7 +75,7 @@
     		    if (vm.counter == 0) {
     		        // Display a login box
     		        clearInterval(interval);
-    		        startRecording();
+    		        vm.startRecording();
     		    }
     		}, 1000);
     	}
@@ -84,7 +84,7 @@
     		if (link == null || link == "") {
     			return;
     		}
-    		
+
     		var audio = $("#player");
     		if (audio[0] != undefined) {
     			audio[0].addEventListener('ended', callBackAudioEnded);
@@ -136,7 +136,7 @@
   		(function initController() {
   			// instantiate base controller
   		    $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
-  		    
+
   			// Load player
     		initPlayer();
 
@@ -226,7 +226,7 @@
   	  				id: vm.exam.examDTO.id
   	            }, onSuccessFinish, onErrorFinish);
   	            function onSuccessFinish(data, headers) {
-  	            	
+
   	            	console.log('Finish exam');
   	            	return;
   	            }
@@ -256,7 +256,7 @@
   				} else {
   					vm.btnEnable = true;
   				}
-  				
+
 	    		// Load player
 	    		initPlayer();
 
@@ -266,7 +266,7 @@
 	    		$timeout(function(){
 	    			playAudio(vm.selectedQuestion.audioLink, 3000);
                 }, 1000 );
-	    		
+
 	    		vm.countdownToRecording();
   			}
   		}

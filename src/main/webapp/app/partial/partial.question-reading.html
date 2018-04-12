@@ -37,7 +37,7 @@
                 <label id="startText">{{models.startText}}</label>
                 <div ng-repeat="(index, value) in models.fillInTheBlankQuestionArr" class="pte-display-inline-block">
                     <div ng-repeat="(listName, list) in value"  class="pte-display-inline-block">
-                        <div class="panel panel-info" id="drag-panel{{index}}">
+                        <div class="panel panel-info pte-position-top10" id="drag-panel{{index}}">
                             <div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div>
                         </div>
                     </div>
