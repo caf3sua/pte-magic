@@ -7,9 +7,9 @@
       .module('pteMagicApp')
       .controller('PteMagicBaseController', PteMagicBaseController);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile){
+    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 
@@ -40,7 +40,6 @@
     	vm.startRecording = startRecording;
         vm.dropCallback = dropCallback;
         vm.movedCallback = movedCallback;
-        vm.hightlight = hightlight;
 
     	function resetStatus() {
     		vm.showProgressBar = false;
@@ -246,6 +245,13 @@
   				$('.select_READING_FIB_R_W').each(function(){
   					vm.answers.push($(this).find('option:selected').text());
   				});
+  			} else if (vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
+  				$('.word-hightlight').each(function(){
+  					if ($(this).hasClass('hightlight')) {
+  						var answer = $.trim($(this).text());
+  						vm.answers.push(answer);
+  					}
+  				});
   			} else {
   				angular.forEach(vm.listItemAnswer, function(value, key){
   	  				if ($('#answer' + value).is(":checked")) {
@@ -272,28 +278,9 @@
 
             // generate words with ids to change their future css
             for ( var i = 0, l = words.length; i < l; i++ ) {
-                var word = $('<span onclick="vm.hightlight(this)"/>').attr({'id':'word'+i }).html(" "+words[i]);
+                var word = $('<span onclick="hightlight(this)" class="word-hightlight"/>').attr({'id':'word'+i }).html(" "+words[i]);
                 word.css('color','black');
-                // word.appendTo('#pte-text-question');
-                // $compile(word)($scope);
-                // $('.clearText').append(word);
                 vm.selectedQuestion.description += word.prop('outerHTML');
-
-                // $('#word'+i).click(function() {
-                //     if($(this).css('color') == "rgb(0, 0, 0)"){
-                //         $(this).css('color','red');
-                //     }else{
-                //         $(this).css('color','black');
-                //     }
-                // });
-            }
-        }
-
-        function hightlight(activeSpan) {
-            if(activeSpan.css('color') == "rgb(0, 0, 0)"){
-                activeSpan.css('color','red');
-            }else{
-                activeSpan.css('color','black');
             }
         }
 

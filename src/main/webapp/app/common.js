@@ -7,3 +7,13 @@ function getQuestionGroup(selQuestion) {
 	console.log(type);
 	return type;
 }
+
+function hightlight(activeSpan) {
+    if($(activeSpan).css('color') == "rgb(0, 0, 0)"){
+    	$(activeSpan).css('color','red');
+    	$(activeSpan).addClass("hightlight");
+    }else{
+    	$(activeSpan).css('color','black');
+    	$(activeSpan).removeClass("hightlight");
+    }
+}
