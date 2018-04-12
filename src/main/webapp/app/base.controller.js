@@ -126,8 +126,19 @@
 		function updateQuestionInfo(selQuestion) {
             // Replace @Blank@
             if (selQuestion.type == 'READING_FIB_R') {
+            	$scope.models = {
+            	        selected: null,
+            	        lists: {"A": [], "B": []},
+                        fillInTheBlankQuestionArr: [],
+                        answer: [],
+                        fillInTheBlanklLists: {"questionPanel": []},
+                        startText: '',
+                        fillInTheBlankPartialTexts: []
+            	    };
+            	
+            	$scope.models.answer = {};
                 $scope.models.selected = null;
-                selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
+                // selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
                 //selQuestion.description.split('@Blank@').join('xxxxxxx');
                 $scope.models.fillInTheBlanklLists.questionPanel = [];
 
@@ -236,7 +247,6 @@
   				 });
   			} else if (vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
   				var arrAnswer = $scope.models.lists.B;
-  				console.log(arrAnswer);
   				angular.forEach(arrAnswer, function(value, key){
   	  				vm.answers.push(value.key);
   	            });
@@ -245,6 +255,17 @@
   				$('.select_READING_FIB_R_W').each(function(){
   					vm.answers.push($(this).find('option:selected').text());
   				});
+  			} else if (vm.selectedQuestion.type == 'READING_FIB_R') {
+  				var count = 0;
+  				for (var name in $scope.models.answer) {
+  				  if ($scope.models.answer.hasOwnProperty(name)) {
+  					  var item = $scope.models.answer[name]
+  					  console.log(item[count][0].key);
+  					  vm.answers.push(item[count][0].key);
+  					  count++;
+  				  }
+  				}
+  				
   			} else if (vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
   				$('.word-hightlight').each(function(){
   					if ($(this).hasClass('hightlight')) {
