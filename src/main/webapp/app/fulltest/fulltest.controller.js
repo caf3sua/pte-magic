@@ -47,6 +47,8 @@
     	vm.btnTxt = 'Next';
 
     	function startNewPart() {
+    		initAnswer();
+    		
     		nextQuestion();
     	}
 
@@ -92,10 +94,15 @@
     	}
 
     	function playAudio(link, timeout) {
+    		if (link == null || link == "") {
+    			return;
+    		}
+    		
     		var audio = $("#player");
     		if (audio[0] != undefined) {
     			audio[0].addEventListener('ended', callBackAudioEnded);
-    			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
+        		console.log('Play audio: ' + link);
+    			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic-2018/1523480876666_HCS1.mp3
                 audio[0].pause();
                 audio[0].load();
 
@@ -113,10 +120,6 @@
     			audio[0].pause();
     		}
 
-
-            // Stop timer
-            $scope.$broadcast('timer-stop');
-  			$scope.$broadcast('timer-reset');
 
   			vm.txtInfoCountdown = "Begining in ";
   	    	vm.isRecording = false;
@@ -230,17 +233,17 @@
   			vm.selectedQuestion = vm.questions.shift();
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
+  				$scope.$broadcast('timer-stop');
   				// Service finish exam
   				Exam.finishExam({
   	  				id: vm.exam.examDTO.id
   	            }, onSuccessFinish, onErrorFinish);
   	            function onSuccessFinish(data, headers) {
-  	            	$scope.$broadcast('timer-stop');
+  	            	
   	            	console.log('Finish exam');
   	            	return;
   	            }
   	            function onErrorFinish(error) {
-  	            	$scope.$broadcast('timer-stop');
   	            	console.log('Finish exam error');
   	            	return;
   	            }
@@ -266,9 +269,16 @@
   				} else {
   					vm.btnEnable = true;
   				}
+  				
+	    		// Load player
+	    		initPlayer();
 
-  				$scope.$broadcast('timer-start');
-  				playAudio(vm.selectedQuestion.audioLink, 3000);
+	    		// Load record audio
+	    		initAudio();
+
+	    		$timeout(function(){
+	    			playAudio(vm.selectedQuestion.audioLink, 3000);
+                }, 1000 );
   			}
   		}
 

@@ -54,7 +54,7 @@
 
 		function updateQuestionInfo(selQuestion) {
             // Replace @Blank@
-            if (selQuestion.type == 'READING_FIB_R') {
+            if (selQuestion.type == 'LISTENING_FIB_L') {
                 $scope.models.selected = null;
                 selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
                 //selQuestion.description.split('@Blank@').join('xxxxxxx');
