@@ -3,7 +3,8 @@
          ng-class="(
          vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' ||
          vm.selectedQuestion.type == 'LISTENING_FIB_L' ||
-         vm.selectedQuestion.type == 'LISTENING_DICTATION'
+         vm.selectedQuestion.type == 'LISTENING_DICTATION' ||
+         vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD'
           ? 'col-md-12':'col-md-6')"
         >
         <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
