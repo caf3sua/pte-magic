@@ -1444,7 +1444,28 @@ textarea {
 }
 .pte-progress{
     margin: 0 auto;
+    width: 100%;
+}
+.pte-block-record{
     width: 400px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    padding: 5px;
+    background: #fff;
+}
+
+.pte-block-record>div>div>div>canvas {
+    display: inline-block;
+    background: #fff;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 0px 1px #ccc;
+    margin: 0 auto;
+    padding: 0;
+}
+.pte-block-record>div>div>div {
+   padding: 0;
 }
 @media (min-width:992px) and (max-width:1200px) {
     #override {
@@ -1945,6 +1966,13 @@ textarea {
     }
 }
 @media (max-width:479px){
+    .pte-block-record{
+        width: 100%;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 5px;
+        background: #fff;
+    }
     .pte-width-audio-speaking {
         width: 380px;
     }
@@ -2197,6 +2225,13 @@ textarea {
     }
 }
 @media (max-width:420px){
+    .pte-block-record{
+        width: 100%;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 5px;
+        background: #fff;
+    }
     .pte-width-audio-speaking {
         width: 333px;
     }
@@ -2214,6 +2249,13 @@ textarea {
     }
 }
 @media (min-width:320px) and (max-width:380px){
+    .pte-block-record{
+        width: 100%;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 5px;
+        background: #fff;
+    }
     #dragInput label{
         margin-top: 10px;
         margin-bottom: 0;

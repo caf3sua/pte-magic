@@ -61,7 +61,6 @@
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
-
     		vm.counter = 5;
     		var interval = setInterval(function() {
     			vm.counter--;

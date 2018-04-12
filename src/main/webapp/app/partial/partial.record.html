@@ -3,12 +3,12 @@
 		<span>{{vm.txtInfoCountdown}}</span>
 		<timer countdown="vm.countdownRecording" interval="1000" finish-callback="vm.startRecording()" ng-show="!vm.isRecording">{{sseconds}} seconds</timer></span>
 	</div>
-	
+
 	<div class="col-md-12 text-center" ng-switch-when="true">
 		<span>{{vm.txtInfoCountdown}}</span>
 		<span ng-show="!vm.isRecording">{{vm.counter}} seconds</span>
 	</div>
-	
+
 	<div class="col-md-12 text-center" >
 		<canvas id="analyser"></canvas>
 	</div>
@@ -24,12 +24,12 @@
 </div> -->
 
 <div ng-show="vm.showRecording">
-	<div class="col-md-12 text-center" >
+	<div class="text-center" >
 		<span>{{vm.txtInfoCountdown}}</span>
 		<span ng-show="!vm.isRecording">{{vm.counter}} seconds</span>
 	</div>
-	
-	<div class="col-md-12 text-center" >
+
+	<div class="text-center" >
 		<canvas id="analyser"></canvas>
 	</div>
 	<div class="col-md-4" ng-show="false">
