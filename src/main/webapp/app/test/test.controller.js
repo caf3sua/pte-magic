@@ -346,7 +346,7 @@
             return item;
         };
 
-        function movedCallback(index, list) {
+        function movedCallback(index, list, listName) {
             list.splice(index, 1)
         };
     }
