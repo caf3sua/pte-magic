@@ -26,7 +26,6 @@
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
     	vm.countdown = 5400; // 2min10second
     	vm.audio;
-    	vm.questionGroup;
     	vm.fileUpload;
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
@@ -279,6 +278,8 @@
 	    		$timeout(function(){
 	    			playAudio(vm.selectedQuestion.audioLink, 3000);
                 }, 1000 );
+	    		
+	    		vm.countdownToRecording();
   			}
   		}
 

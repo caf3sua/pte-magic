@@ -24,7 +24,6 @@
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
     	vm.countdown = 130; // 2min10second
     	vm.audio;
-    	vm.questionGroup;
     	vm.fileUpload;
     	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
@@ -69,7 +68,7 @@
 //    			audio[0].addEventListener('ended', callBackAudioEnded);
 //    		}
 //    	}
-
+    	
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
@@ -245,6 +244,8 @@
 
 	    		// Play mp3 audio
   				playAudio(vm.selectedQuestion.audioLink, 3000);
+  				
+  				vm.countdownToRecording();
   			}
   		}
 

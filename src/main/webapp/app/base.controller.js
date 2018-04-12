@@ -14,6 +14,8 @@
 
 
 		// Attribute
+		vm.questionGroup;
+		vm.counter;
 		vm.showRecording = true;
 		vm.answers = [];
 		vm.selectedQuestion;
@@ -32,7 +34,31 @@
 		vm.getUserAnswer = getUserAnswer;
 		vm.closeExam = closeExam;
 		vm.updateQuestionInfo = updateQuestionInfo;
+		vm.countdownToRecording = countdownToRecording;
 
+		
+		function countdownToRecording() {
+    		if (vm.questionGroup == 'SPEAKING') {
+    			if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+    				return;
+    			}
+    			
+    			console.log('countdownToRecording!');
+        		vm.showRecording = true;
+
+        		vm.counter = 5;
+        		var interval = setInterval(function() {
+        			vm.counter--;
+        		    // Display 'counter' wherever you want to display it.
+        		    if (vm.counter == 0) {
+        		        // Display a login box
+        		        clearInterval(interval);
+        		        startRecording();
+        		    }
+        		}, 1000);
+    		}
+    	}
+		
 		function buildSelectElement(answer) {
   			var arrAnswer = answer.split('/');
 			var optTmp = '';

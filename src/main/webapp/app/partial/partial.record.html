@@ -1,4 +1,4 @@
-<div ng-show="vm.showRecording" ng-switch="vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'">
+<!-- <div ng-show="vm.showRecording" ng-switch="vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'">
 	<div class="col-md-12 text-center" ng-switch-when="false">
 		<span>{{vm.txtInfoCountdown}}</span>
 		<timer countdown="vm.countdownRecording" interval="1000" finish-callback="vm.startRecording()" ng-show="!vm.isRecording">{{sseconds}} seconds</timer></span>
@@ -17,8 +17,26 @@
 	</div>
 	<div class="col-md-2">
 		<div id="controls">
-	        <!-- <i id="record" ng-click="vm.toggleRecording(this);"  class="fas fa-microphone"></i> -->
-			<!--<img id="record" src="content/audio_recorder/mic128.png" ng-click="vm.toggleRecording(this);" class="">-->
+			<a id="save" href="blob:http://localhost:8080/4c60ff1d-2bbf-421a-964b-d88cdd0a153a" download="myRecording00.wav" ng-show="false">
+			<img src="content/audio_recorder/save.svg"></a>
+		</div>
+	</div>
+</div> -->
+
+<div ng-show="vm.showRecording">
+	<div class="col-md-12 text-center" >
+		<span>{{vm.txtInfoCountdown}}</span>
+		<span ng-show="!vm.isRecording">{{vm.counter}} seconds</span>
+	</div>
+	
+	<div class="col-md-12 text-center" >
+		<canvas id="analyser"></canvas>
+	</div>
+	<div class="col-md-4" ng-show="false">
+		<canvas id="wavedisplay"></canvas>
+	</div>
+	<div class="col-md-2">
+		<div id="controls">
 			<a id="save" href="blob:http://localhost:8080/4c60ff1d-2bbf-421a-964b-d88cdd0a153a" download="myRecording00.wav" ng-show="false">
 			<img src="content/audio_recorder/save.svg"></a>
 		</div>
