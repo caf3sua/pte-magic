@@ -16,7 +16,7 @@
 </div>
 
 <div ng-class="(vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE') ? 'col-md-6' : 'col-md-12'">
-    <div class="" id="pteBlockRecord">
+    <div ng-show="vm.showRecording" class="pte-block-record" id="pteBlockRecord">
         <div  ng-include="'app/partial/partial.record.html'"></div>
         <div  ng-show="vm.showProgressBar">
             <div class="progress pte-progress">
