@@ -1411,6 +1411,8 @@ textarea {
     max-height: 35px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-top: 5px;
+    top: 5px;
 }
 .simpleDemo #dragInput ul[dnd-list] li {
     background-color: #f9db01;
@@ -1979,6 +1981,10 @@ textarea {
         top: 25px;
         left: 50px;
     }
+}
+#dragInput{
+    margin: 0 auto;
+    text-align: center;
 }
 @media (min-width:480px) and (max-width:630px) {
     .pte-margin-top100{
