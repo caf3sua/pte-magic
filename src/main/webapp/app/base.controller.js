@@ -40,10 +40,12 @@
     	vm.startRecording = startRecording;
         vm.dropCallback = dropCallback;
         vm.movedCallback = movedCallback;
+        vm.resetProgressStatus = resetProgressStatus;
 
-    	function resetStatus() {
+    	function resetProgressStatus() {
     		vm.showProgressBar = false;
     		vm.countdownPercent = 0;
+    		vm.timeProgress = 0;
     	}
 
     	function calProgress() {
@@ -52,7 +54,9 @@
     			vm.timeProgress++;
     			vm.countdownPercent = vm.timeProgress / 40 * 100;
     		    // Display 'counter' wherever you want to display it.
+    			console.log('countdownPercent:' + vm.countdownPercent);
     		    if (vm.timeProgress == 40) {
+    		    	console.log('timeProgress:' + vm.timeProgress);
     		        // Display a login box
     		        clearInterval(intervalProgress);
     		    }
@@ -61,7 +65,7 @@
 
 		function startRecording() {
 			// Reset
-	        resetStatus();
+			resetProgressStatus();
 
     		// start recording
 	        if (!audioRecorder)

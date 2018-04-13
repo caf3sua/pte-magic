@@ -26,6 +26,7 @@
             "LISTENING_SELECT_MISSING_WORD":"LISTENING_SELECT_MISSING_WORD",
             "LISTENING_HIGHLIGHT_INCORRECT_WORD":"LISTENING_HIGHLIGHT_INCORRECT_WORD",
             "LISTENING_DICTATION":"LISTENING_DICTATION",
+            "TIME_BREAK": "TIME_BREAK",
             "title" : {
             	"SPEAKING_READ_ALOUD":"READ ALOUD",
 	            "SPEAKING_REPEAT_SENTENCE":"REPEAT SENTENCE",
@@ -46,7 +47,8 @@
 	            "LISTENING_HIGHLIGHT_CORRECT_SUMMARY":"HIGHLIGHT CORRECT SUMMARY",
 	            "LISTENING_SELECT_MISSING_WORD":"SELECT MISSING WORD",
 	            "LISTENING_HIGHLIGHT_INCORRECT_WORD":"HIGHLIGHT INCORRECT WORDS",
-	            "LISTENING_DICTATION":"WRITE FROM DICTATION"
+	            "LISTENING_DICTATION":"WRITE FROM DICTATION",
+	            "TIME_BREAK": "Breaking Time"
             },
             "description" : {
 	            "SPEAKING_READ_ALOUD":"Look at the text below. In 30 seconds, you must read this text aloud as naturally and clearly as possible.You have 30 seconds to read aloud.",
