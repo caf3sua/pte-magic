@@ -80,7 +80,9 @@
 	        if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'
                 || vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'
                 || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'
-                || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+                || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'
+                || vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'
+            ) {
 	        	vm.showProgressBar = true;
 	        	calProgress();
 	        }
@@ -139,7 +141,7 @@
                         startText: '',
                         fillInTheBlankPartialTexts: []
             	    };
-            	
+
             	$scope.models.answer = {};
                 $scope.models.selected = null;
                 // selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
@@ -269,7 +271,7 @@
   					  count++;
   				  }
   				}
-  				
+
   			} else if (vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
   				$('.word-hightlight').each(function(){
   					if ($(this).hasClass('hightlight')) {
