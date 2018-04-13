@@ -1209,7 +1209,7 @@ audio::-webkit-media-controls-panel {
     position: absolute;
     z-index: 99;
     top: 25px;
-    left: 50px;
+    left: 26px;
 }
 .margin-top130{
     margin-top: 130px;
@@ -1489,7 +1489,7 @@ textarea {
     position: absolute;
     z-index: 99;
     top: 25px;
-    left: 50px;
+    left: 26px;
 }
 @media (min-width:992px) and (max-width:1200px) {
     .col-md-12>div>div>#override {
@@ -1499,7 +1499,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     #override {
         width: 50%;
@@ -1508,7 +1508,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 
     .pte-mock-test-item-footer-btn {
@@ -1627,7 +1627,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 @media (min-width:768px) and (max-width:991px) {
@@ -1638,7 +1638,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     .pte-margin-top100{
         margin-top:100px;
@@ -1656,7 +1656,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     .pte-body-content-text {
         position: absolute;
@@ -1804,7 +1804,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     #override {
         width: 72%;
@@ -1813,7 +1813,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 @media (min-width:768px) and (max-width:786px) {
@@ -1830,7 +1830,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 @media (min-width:480px) and (max-width:767px) {
@@ -1841,7 +1841,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     .pte-margin-top100{
         margin-top:130px;
@@ -1856,7 +1856,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #f9db01;
@@ -1988,7 +1988,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 #dragInput{
@@ -2009,7 +2009,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 @media (min-width:480px) and (max-width:560px) {
@@ -2026,7 +2026,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 @media (max-width:479px){
@@ -2037,7 +2037,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     .pte-block-record{
         width: 100%;
@@ -2073,7 +2073,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     .pte-text-answer{
         font-family: 'Roboto';
@@ -2318,7 +2318,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 @media (min-width:320px) and (max-width:380px){
@@ -2329,7 +2329,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
     .pte-block-record{
         width: 100%;
@@ -2352,7 +2352,7 @@ textarea {
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 50px;
+        left: 26px;
     }
 }
 canvas {
