@@ -1205,7 +1205,7 @@ audio::-webkit-media-controls-panel {
 #override{
     width: 60%;
     height: 20px;
-    background: #fff;
+    background: transparent;
     position: absolute;
     z-index: 99;
     top: 25px;
@@ -1485,7 +1485,7 @@ textarea {
 .col-md-12>div>div>#override{
     width: 83%;
     height: 20px;
-    background:#fff;
+    background:transparent;
     position: absolute;
     z-index: 99;
     top: 25px;
@@ -1495,7 +1495,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 78%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1504,7 +1504,7 @@ textarea {
     #override {
         width: 50%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1623,7 +1623,7 @@ textarea {
     #override {
         width: 50%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1634,7 +1634,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 75%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1652,7 +1652,7 @@ textarea {
     #override {
         width: 75%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1800,7 +1800,7 @@ textarea {
     .pte-width-audio-speaking>#override{
         width: 50%;
         height: 20px;
-        background: #fff;
+        background:transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1809,7 +1809,7 @@ textarea {
     #override {
         width: 72%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1826,7 +1826,7 @@ textarea {
     #override {
         width: 68%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1837,7 +1837,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 69%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1852,7 +1852,7 @@ textarea {
     #override {
         width: 66%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1978,7 +1978,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 59%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -1993,7 +1993,7 @@ textarea {
     #override {
         width: 63%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2008,7 +2008,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 65%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2023,7 +2023,7 @@ textarea {
     #override {
         width: 58%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2034,7 +2034,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 60%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2049,7 +2049,7 @@ textarea {
     #override {
         width: 52%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2060,7 +2060,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 58%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2069,7 +2069,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 49%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2105,7 +2105,7 @@ textarea {
     #override {
         width: 48%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2350,7 +2350,7 @@ textarea {
     #override {
         width: 47%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2361,7 +2361,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 69%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2370,7 +2370,7 @@ textarea {
     .col-md-12>div>div>#override {
         width: 49%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
@@ -2393,7 +2393,7 @@ textarea {
     #override {
         width: 41%;
         height: 20px;
-        background: #fff;
+        background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
