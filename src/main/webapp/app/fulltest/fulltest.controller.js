@@ -218,6 +218,7 @@
   		function nextQuestion() {
             $('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
+  			vm.resetProgressStatus();
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
   				$scope.$broadcast('timer-stop');

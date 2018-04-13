@@ -1411,6 +1411,8 @@ textarea {
     max-height: 35px;
     margin-left: 10px;
     margin-right: 10px;
+    margin-top: 5px;
+    top: 5px;
 }
 .simpleDemo #dragInput ul[dnd-list] li {
     background-color: #f9db01;
@@ -1500,13 +1502,13 @@ textarea {
         left: 50px;
     }
     #override {
-        width: 65%;
+        width: 50%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 
     .pte-mock-test-item-footer-btn {
@@ -1795,6 +1797,15 @@ textarea {
     .pte-margin-left-user{
         margin-left: 0px !important;
     }
+    .pte-width-audio-speaking>#override{
+        width: 50%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 50px;
+    }
     #override {
         width: 72%;
         height: 20px;
@@ -1979,6 +1990,10 @@ textarea {
         top: 25px;
         left: 50px;
     }
+}
+#dragInput{
+    margin: 0 auto;
+    text-align: center;
 }
 @media (min-width:480px) and (max-width:630px) {
     .pte-margin-top100{
