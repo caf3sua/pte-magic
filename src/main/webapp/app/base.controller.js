@@ -135,7 +135,7 @@
                         startText: '',
                         fillInTheBlankPartialTexts: []
             	    };
-            	
+
             	$scope.models.answer = {};
                 $scope.models.selected = null;
                 // selQuestion.description = selQuestion.description.replace(/@Blank@/g, '<input type="text" name="input" class="input_answer pte-writing-input"/>');
@@ -260,12 +260,14 @@
   				for (var name in $scope.models.answer) {
   				  if ($scope.models.answer.hasOwnProperty(name)) {
   					  var item = $scope.models.answer[name]
-  					  console.log(item[count][0].key);
-  					  vm.answers.push(item[count][0].key);
-  					  count++;
+                      if(item[count] && item[count][0]) {
+                          console.log(item[count][0].key);
+                          vm.answers.push(item[count][0].key);
+                          count++;
+                      }
   				  }
   				}
-  				
+
   			} else if (vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
   				$('.word-hightlight').each(function(){
   					if ($(this).hasClass('hightlight')) {
