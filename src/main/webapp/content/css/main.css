@@ -1502,13 +1502,13 @@ textarea {
         left: 50px;
     }
     #override {
-        width: 65%;
+        width: 50%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 
     .pte-mock-test-item-footer-btn {
@@ -1796,6 +1796,15 @@ textarea {
     }
     .pte-margin-left-user{
         margin-left: 0px !important;
+    }
+    .pte-width-audio-speaking>#override{
+        width: 50%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 50px;
     }
     #override {
         width: 72%;
