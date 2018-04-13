@@ -70,10 +70,11 @@
     		    }
     		}, 1000);
     	}
-
+        vm.checkDisabled = false;
     	function playAudio(link, timeout) {
             $timeout(function(){
             	var audio = $("#player");
+
         		if (audio[0] != undefined) {
         			audio[0].addEventListener('ended', callBackAudioEnded);
         			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
@@ -84,7 +85,6 @@
             }, timeout );
 
     	}
-
     	function initAnswer() {
     		// Stop audio
     		var audio = $("#player");
@@ -118,7 +118,8 @@
 
   		function answer() {
   			initAnswer();
-  			var selectedQuestionId = vm.selectedQuestion.id;
+            vm.countdownPercent = 0;
+            var selectedQuestionId = vm.selectedQuestion.id;
 
   			// Upload if questionGroup == SPEAKING
   			if (vm.questionGroup == 'SPEAKING') {
@@ -332,5 +333,8 @@
             }
             return false;
         }
+
+
+
     }
 })();

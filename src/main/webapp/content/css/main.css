@@ -1203,13 +1203,13 @@ audio::-webkit-media-controls-panel {
 }
 
 #override{
-    width: 65%;
+    width: 60%;
     height: 20px;
     background: transparent;
     position: absolute;
     z-index: 99;
     top: 25px;
-    left: 26px;
+    left: 50px;
 }
 .margin-top130{
     margin-top: 130px;
@@ -1480,7 +1480,25 @@ textarea {
 #pte-re-order-paragraph-ul{
     min-height: 345px;
 }
+.col-md-12>div>div>#override{
+    width: 80%;
+    height: 20px;
+    background:transparent;
+    position: absolute;
+    z-index: 99;
+    top: 25px;
+    left: 50px;
+}
 @media (min-width:992px) and (max-width:1200px) {
+    .col-md-12>div>div>#override {
+        width: 76%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 50px;
+    }
     #override {
         width: 65%;
         height: 20px;
@@ -1601,16 +1619,25 @@ textarea {
         margin-top:100px;
     }
     #override {
-        width: 55%;
+        width: 50%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 @media (min-width:768px) and (max-width:991px) {
+    .col-md-12>div>div>#override {
+        width: 67%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 50px;
+    }
     .pte-margin-top100{
         margin-top:100px;
     }
@@ -1621,13 +1648,13 @@ textarea {
         top: 1px;
     }
     #override {
-        width: 79%;
+        width: 75%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
     .pte-body-content-text {
         position: absolute;
@@ -1769,13 +1796,13 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 75%;
+        width: 72%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 @media (min-width:768px) and (max-width:786px) {
@@ -1786,16 +1813,25 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 72%;
+        width: 68%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 @media (min-width:480px) and (max-width:767px) {
+    .col-md-12>div>div>#override {
+        width: 49%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 50px;
+    }
     .pte-margin-top100{
         margin-top:130px;
     }
@@ -1803,13 +1839,13 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 72%;
+        width: 66%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #f9db01;
@@ -1935,13 +1971,13 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 69%;
+        width: 63%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 @media (min-width:480px) and (max-width:630px) {
@@ -1952,13 +1988,13 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 64%;
+        width: 58%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 @media (min-width:480px) and (max-width:560px) {
@@ -1969,16 +2005,25 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 60%;
+        width: 52%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 @media (max-width:479px){
+    .col-md-12>div>div>#override {
+        width: 49%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 50px;
+    }
     .pte-block-record{
         width: 100%;
         margin: 0 auto;
@@ -2007,13 +2052,13 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 61%;
+        width: 48%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
     .pte-text-answer{
         font-family: 'Roboto';
@@ -2252,16 +2297,25 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 61%;
+        width: 47%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 @media (min-width:320px) and (max-width:380px){
+    .col-md-12>div>div>#override {
+        width: 49%;
+        height: 20px;
+        background: transparent;
+        position: absolute;
+        z-index: 99;
+        top: 25px;
+        left: 50px;
+    }
     .pte-block-record{
         width: 100%;
         margin: 0 auto;
@@ -2277,13 +2331,13 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 70%;
+        width: 41%;
         height: 20px;
         background: transparent;
         position: absolute;
         z-index: 99;
         top: 25px;
-        left: 26px;
+        left: 50px;
     }
 }
 canvas {
