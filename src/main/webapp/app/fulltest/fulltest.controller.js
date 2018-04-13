@@ -240,7 +240,7 @@
   				if (vm.selectedQuestion.type == 'TIME_BREAK') {
   					vm.btnTxt = 'Skip Timebreak';
   				} else {
-  					vm.btnTxt = 'Answer';
+  					vm.btnTxt = 'Next';
   				}
 
   				// Get question group
@@ -252,11 +252,11 @@
   				console.log(vm.questionGroup);
 
   				// Enable/disable button Answer
-  				if (vm.questionGroup == 'SPEAKING') {
-  					vm.btnEnable = false;
-  				} else {
-  					vm.btnEnable = true;
-  				}
+  				// if (vm.questionGroup == 'SPEAKING') {
+  				// 	vm.btnEnable = false;
+  				// } else {
+  				// 	vm.btnEnable = true;
+  				// }
 
 	    		// Load player
 	    		initPlayer();

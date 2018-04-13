@@ -216,11 +216,11 @@
   				console.log(vm.questionGroup);
 
   				// Enable/disable button Answer
-  				if (vm.questionGroup == 'SPEAKING') {
-  					vm.btnEnable = false;
-  				} else {
-  					vm.btnEnable = true;
-  				}
+  				// if (vm.questionGroup == 'SPEAKING') {
+  				// 	vm.btnEnable = false;
+  				// } else {
+  				// 	vm.btnEnable = true;
+  				// }
 
   				$scope.$broadcast('timer-start');
 

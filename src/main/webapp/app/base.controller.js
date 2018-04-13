@@ -266,9 +266,11 @@
   				for (var name in $scope.models.answer) {
   				  if ($scope.models.answer.hasOwnProperty(name)) {
   					  var item = $scope.models.answer[name]
-  					  console.log(item[count][0].key);
-  					  vm.answers.push(item[count][0].key);
-  					  count++;
+                      if(item[count] && item[count][0]) {
+                          console.log(item[count][0].key);
+                          vm.answers.push(item[count][0].key);
+                          count++;
+                      }
   				  }
   				}
 
