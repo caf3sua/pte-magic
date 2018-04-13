@@ -7,21 +7,18 @@ function getQuestionGroup(selQuestion) {
 	console.log(type);
 	return type;
 }
-var checkColor = false;
 function hightlight(activeSpan) {
-    if(checkColor == false){
-    	$(activeSpan).css('color','#000');
+    if($(activeSpan).css('color') == "rgb(0, 0, 0)"){
+    	$(activeSpan).css('color','red');
         $(activeSpan).css('background','#f9db01');
         $(activeSpan).css('padding','2px 5px');
         $(activeSpan).css('border-radius','4px');
     	$(activeSpan).addClass("hightlight");
-        checkColor = true;
     }else{
     	$(activeSpan).css('color','black');
         $(activeSpan).css('background','#fff');
         $(activeSpan).css('padding','0px 0px');
         $(activeSpan).css('border-radius','0px');
     	$(activeSpan).removeClass("hightlight");
-        checkColor == false
     }
 }
