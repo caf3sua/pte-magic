@@ -114,6 +114,24 @@ public class MailService {
     }
     
     @Async
+    public void sendScoreEmailPartB(ScoreInfoDTO score) {
+        log.debug("Sending score part B email to '{}'", score.getUser().getEmail());
+        sendEmailFromTemplate(score, "scoreEmailPartB", "email.score.title");
+    }
+    
+    @Async
+    public void sendScoreEmailPartA(ScoreInfoDTO score) {
+        log.debug("Sending score part A email to '{}'", score.getUser().getEmail());
+        sendEmailFromTemplate(score, "scoreEmailPartA", "email.score.title");
+    }
+    
+    @Async
+    public void sendScoreEmailMockTestFull(ScoreInfoDTO score) {
+        log.debug("Sending score part B email to '{}'", score.getUser().getEmail());
+        sendEmailFromTemplate(score, "scoreEmailMockTestFull", "email.score.title");
+    }
+    
+    @Async
     public void sendCreationEmail(User user) {
         log.debug("Sending creation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "creationEmail", "email.activation.title");
