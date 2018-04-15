@@ -470,9 +470,11 @@ public class ExamResource {
         for (ExamDTO examDTO : page.getContent()) {
 			// Find user
         	User user = userService.getUserWithAuthorities(examDTO.getUserId());
-        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
         	examDTO.setEmail(user.getEmail());
-        	examDTO.setExamTypeName(examTypeDTO.getName());
+        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+        	if (null != examTypeDTO) {
+        		examDTO.setExamTypeName(examTypeDTO.getName());
+        	}
 		}
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -498,6 +500,10 @@ public class ExamResource {
         ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
         examInfoDTO.setExamTypeDTO(examTypeDTO);
         
+        // User
+        User user = userService.getUserWithAuthorities(examDTO.getUserId());
+    	examDTO.setEmail(user.getEmail());
+    	
         // Get all question 
 		// Get list exam question
 		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(id);
