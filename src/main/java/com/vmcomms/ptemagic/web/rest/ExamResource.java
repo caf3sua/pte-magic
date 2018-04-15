@@ -304,16 +304,17 @@ public class ExamResource {
 		//    	18. Select Missing Words (2)
 		//    	19. Highlight Incorrect Words (2)
 		//    	20. Dictation (4)
-//    		selectQuestionByType(questions, 3, QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_FIB_L);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_SINGLE_ANSWER);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_MULTIPLE_ANSWER);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_CORRECT_SUMMARY);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_SELECT_MISSING_WORD);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD);
-//    		selectQuestionByType(questions, 4, QuestionType.LISTENING_DICTATION);
-    		
     		selectQuestionByType(questions, 3, QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_FIB_L);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_SINGLE_ANSWER);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_MULTIPLE_ANSWER);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_CORRECT_SUMMARY);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_SELECT_MISSING_WORD);
+    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD);
+    		selectQuestionByType(questions, 4, QuestionType.LISTENING_DICTATION);
+    		
+    	// DUMP
+//    		selectQuestionByType(questions, 3, QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
     }
     
     private void selectMockTestExamQuestionReading(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
@@ -323,17 +324,14 @@ public class ExamResource {
 		//    	10. Re-order Paragraph (3)
 		//    	11. MCQ Single Answer (2)
 		//    	12. MCQ Multiple Answer (3)
-//		selectQuestionByType(questions, 7, QuestionType.READING_FIB_R_W);
-//		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
-//		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
-//		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
-//		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
-		
+		selectQuestionByType(questions, 7, QuestionType.READING_FIB_R_W);
+		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
+		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
+		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
+		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
+
+    	// DUMP
 		selectQuestionByType(questions, 2, QuestionType.READING_FIB_R_W);
-//		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
-//		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
-//		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
-//		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
     }
     
     private void selectMockTestExamQuestionWriting(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
