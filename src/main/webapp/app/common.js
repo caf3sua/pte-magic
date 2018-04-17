@@ -8,7 +8,7 @@ function getQuestionGroup(selQuestion) {
 	return type;
 }
 function hightlight(activeSpan) {
-    if($(activeSpan).css('color') == "rgb(0, 0, 0)"){
+    if(!$(activeSpan).hasClass('hightlight')){
     	$(activeSpan).css('color','#000');
         $(activeSpan).css('background','#f9db01');
         $(activeSpan).css('padding','2px 5px');
