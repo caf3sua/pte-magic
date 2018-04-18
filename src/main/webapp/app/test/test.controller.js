@@ -22,12 +22,11 @@
     	vm.questions = entity.questions;
     	vm.isFinish = false;
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
-        // if(vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.questionGroup == 'WRITING'){
+        // if(vm.exam.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.questionGroup == 'WRITING'){
         //
         // }else{
         //     vm.countdown = 130; // 2min10second
         // }
-        vm.countdown = 130; // 2min10second
     	vm.audio;
     	vm.fileUpload;
     	vm.btnEnable = true;
@@ -122,7 +121,13 @@
   			// instantiate base controller
   		    $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
 
-
+            for (var i = 0; i < vm.questions.length; i++) {
+                if(vm.questions[i].type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'){
+                    vm.countdown = 600; // 10min
+                }else{
+                    vm.countdown = 130; // 2min10second
+                }
+            }
         	// Next question
         	nextQuestion();
   		})();
