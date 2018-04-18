@@ -122,7 +122,10 @@
   		    $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
 
             for (var i = 0; i < vm.questions.length; i++) {
-                if(vm.questions[i].type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'){
+                if(vm.questions[i].type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
+                    || vm.questions[i].type == 'WRITING_SUMMARIZE_WRITTEN_TEXT'
+                    || vm.questions[i].type == 'WRITING_ESSAY'
+                ){
                     vm.countdown = 600; // 10min
                 }else{
                     vm.countdown = 130; // 2min10second
