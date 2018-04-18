@@ -40,6 +40,10 @@
         vm.WORDS_MAXIMUM = 10; // changeable
         vm.WordsLength=0;
         vm.Text = "";
+        vm.countAudio = 3;
+        vm.txtStatusAudio = 'Playing';
+        vm.checkAudioSeconds = true;
+        vm.checkStatusPlay = false;
     	vm.countdownTimebreak = 600;
 
     	vm.btnTxt = 'Next';
@@ -67,7 +71,7 @@
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
-
+            vm.txtStatusAudio = 'Completed';
     		vm.counter = 5;
     		var interval = setInterval(function() {
     			vm.counter--;
@@ -84,7 +88,8 @@
     		if (link == null || link == "") {
     			return;
     		}
-
+            vm.checkAudioSeconds = false;
+            vm.checkStatusPlay = true;
     		var audio = $("#player");
     		if (audio[0] != undefined) {
     			audio[0].addEventListener('ended', callBackAudioEnded);
@@ -263,11 +268,14 @@
 
 	    		// Load record audio
 	    		initAudio();
+                var interval = setInterval(function() {
+                    vm.countAudio--;
+                    // Display 'counter' wherever you want to display it.
+                    if (vm.countAudio == 0) {
 
-	    		$timeout(function(){
-	    			playAudio(vm.selectedQuestion.audioLink, 3000);
-                }, 1000 );
-
+                        playAudio(vm.selectedQuestion.audioLink, 1000);
+                    }
+                }, 1000);
 	    		vm.countdownToRecording();
   			}
   		}

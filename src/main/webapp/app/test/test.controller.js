@@ -22,7 +22,12 @@
     	vm.questions = entity.questions;
     	vm.isFinish = false;
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
-    	vm.countdown = 130; // 2min10second
+        // if(vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.questionGroup == 'WRITING'){
+        //
+        // }else{
+        //     vm.countdown = 130; // 2min10second
+        // }
+        vm.countdown = 130; // 2min10second
     	vm.audio;
     	vm.fileUpload;
     	vm.btnEnable = true;
@@ -38,7 +43,10 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-
+    	vm.txtStatusAudio = 'Playing';
+        vm.checkAudioSeconds = true;
+        vm.checkStatusPlay = false;
+        vm.countAudio = 3;
     	vm.countdownSpeaking = 5;
 
     	function stopRecording() {
@@ -59,6 +67,7 @@
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
+            vm.txtStatusAudio = 'Completed';
     		vm.counter = 5;
     		var interval = setInterval(function() {
     			vm.counter--;
@@ -72,6 +81,8 @@
     	}
         vm.checkDisabled = false;
     	function playAudio(link, timeout) {
+            vm.checkAudioSeconds = false;
+            vm.checkStatusPlay = true;
             $timeout(function(){
             	var audio = $("#player");
 
@@ -231,7 +242,15 @@
 	    		initAudio();
 
 	    		// Play mp3 audio
-  				playAudio(vm.selectedQuestion.audioLink, 3000);
+                var interval = setInterval(function() {
+                    vm.countAudio--;
+                    // Display 'counter' wherever you want to display it.
+                    if (vm.countAudio == 0) {
+
+                        playAudio(vm.selectedQuestion.audioLink, 1000);
+                    }
+                }, 1000);
+
 
   				vm.countdownToRecording();
   			}
@@ -334,8 +353,6 @@
             }
             return false;
         }
-
-
 
     }
 })();

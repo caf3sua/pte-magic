@@ -1062,7 +1062,7 @@ table>thead>tr{
     font-size: 15px;
     font-family: 'Roboto';
     font-weight: normal;
-    font-style: normal;
+    font-style: italic;
     text-transform: uppercase;
 }
 .pte-test-type-question-two-des{
@@ -1070,18 +1070,13 @@ table>thead>tr{
     font-size: 13px;
     font-family: 'Roboto';
     font-weight: normal;
-    font-style: normal;
+    font-style: italic;
 }
 .pte-test-type-question-three{
     padding: 25px 0;
 }
 .pte-test-type-question-three-background{
-    padding: 18px 12px;
-    background: #ececec;
-    width: 277px;
-    border-radius: 10px 0px 0px 10px;
-    border-right: 0 !important;
-    border: 1px solid #b0b0b0;
+    color: #fff;
 }
 .pte-test-type-question-three-icon{
     font-size: 13px;
@@ -1355,6 +1350,7 @@ textarea {
     float: right;
     display: inline-block;
     position: relative;
+    top: 5px;
 }
 .pte-inline-block{
     display: inline-block;
@@ -1450,8 +1446,9 @@ textarea {
     width: 400px;
     margin: 0 auto;
     border: 1px solid #ccc;
-    padding: 5px;
+    padding: 15px;
     background: #fff;
+    border-radius: 5px;
 }
 
 .pte-block-record>div>div>div>canvas {
@@ -1489,6 +1486,20 @@ textarea {
     top: 25px;
     left: 26px;
 }
+.pte-word-count{
+    position: absolute;
+    bottom: 6px;
+    left: 10px;
+}
+/*.preventcopy {*/
+    /*-webkit-touch-callout: none; iOS Safari*/
+    /*-webkit-user-select: none; Chrome/Safari/Opera*/
+    /*-khtml-user-select: none; Konqueror*/
+    /*-moz-user-select: none; Firefox*/
+    /*-ms-user-select: none; Internet Explorer/Edge*/
+        /*user-select: none; Non-prefixed version, currently*/
+    /*not supported by any browser*/
+/*}*/
 @media (min-width:992px) and (max-width:1200px) {
     .col-md-12>div>div>#override {
         width: 78%;
@@ -2129,13 +2140,6 @@ textarea {
         font-family: 'Roboto';
         font-weight: normal;
         font-style: normal;
-    }
-    .pte-test-type-question-three-background {
-        padding: 10px 10px;
-        background: #ececec;
-        border-radius: 10px 0px 0px 10px;
-        /* text-align: right; */
-        border: 1px solid #b0b0b0;
     }
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #f9db01;

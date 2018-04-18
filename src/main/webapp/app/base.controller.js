@@ -52,14 +52,36 @@
     		vm.timeProgress = 0;
     		var intervalProgress = setInterval(function() {
     			vm.timeProgress++;
-    			vm.countdownPercent = vm.timeProgress / 40 * 100;
+    			if( vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
+                    vm.countdownPercent = vm.timeProgress / 30 * 100;
+                    console.log('countdownPercent:' + vm.countdownPercent);
+                    if (vm.timeProgress == 30) {
+                        console.log('timeProgress:' + vm.timeProgress);
+                        // Display a login box
+                        clearInterval(intervalProgress);
+                        vm.answer();
+                    }
+                }else if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
+                    vm.countdownPercent = vm.timeProgress / 10 * 100;
+                    console.log('countdownPercent:' + vm.countdownPercent);
+                    if (vm.timeProgress == 10) {
+                        console.log('timeProgress:' + vm.timeProgress);
+                        // Display a login box
+                        clearInterval(intervalProgress);
+                        vm.answer();
+                    }
+                }else{
+                    vm.countdownPercent = vm.timeProgress / 40 * 100;
+                    console.log('countdownPercent:' + vm.countdownPercent);
+                    if (vm.timeProgress == 40) {
+                        console.log('timeProgress:' + vm.timeProgress);
+                        // Display a login box
+                        clearInterval(intervalProgress);
+                        vm.answer();
+                    }
+                }
     		    // Display 'counter' wherever you want to display it.
-    			console.log('countdownPercent:' + vm.countdownPercent);
-    		    if (vm.timeProgress == 40) {
-    		    	console.log('timeProgress:' + vm.timeProgress);
-    		        // Display a login box
-    		        clearInterval(intervalProgress);
-    		    }
+
     		}, 1000);
     	}
 
@@ -96,8 +118,11 @@
 
     			console.log('countdownToRecording!');
         		vm.showRecording = true;
-
-        		vm.counter = 5;
+                if(vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'){
+                    vm.counter = 25;
+                }else{
+                    vm.counter = 5;
+                }
         		var interval = setInterval(function() {
         			vm.counter--;
         		    // Display 'counter' wherever you want to display it.

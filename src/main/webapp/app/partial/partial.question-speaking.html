@@ -3,7 +3,13 @@
 </div>
 <div class="col-md-12 text-center" ng-show="vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'">
     <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
+
     <div class="container-audio pte-width-audio-speaking" >
+        <div class="text-left pte-margin-bottom-10">
+            <span>Status : </span>
+            <span ng-show="vm.checkAudioSeconds">Begining in {{vm.countAudio}} seconds</span>
+            <span ng-show="vm.checkStatusPlay">{{vm.txtStatusAudio}}</span>
+        </div>
         <div id="override"></div>
         <audio id="player" controls autoplay preload >
             <source id="mp3_src" src="" type="audio/mp3"  />
@@ -16,9 +22,10 @@
 </div>
 
 <div ng-class="(vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE') ? 'col-md-6' : 'col-md-12'">
-    <div ng-show="vm.showRecording" class="pte-block-record" id="pteBlockRecord">
+    <div  class="pte-block-record" id="pteBlockRecord">
+        <p class="text-center pte-font-weight600">Recordered Answer</p>
         <div  ng-include="'app/partial/partial.record.html'"></div>
-        <div  ng-show="vm.showProgressBar">
+        <div>
             <div class="progress pte-progress">
                 <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.countdownPercent | number: 1}}%">
                 </div>

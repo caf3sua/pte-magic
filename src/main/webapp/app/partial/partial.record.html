@@ -24,7 +24,10 @@
 </div> -->
 
 <div ng-show="vm.showRecording">
-	<div class="text-center" >
+    <div class="text-left" >
+        <span>Current Status:</span>
+    </div>
+	<div class="text-left pte-margin-bottom-10" >
 		<span>{{vm.txtInfoCountdown}}</span>
 		<span ng-show="!vm.isRecording">{{vm.counter}} seconds</span>
 	</div>

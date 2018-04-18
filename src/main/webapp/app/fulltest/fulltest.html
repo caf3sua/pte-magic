@@ -4,11 +4,21 @@
     <!-- Angular views -->
     <div class="pte-test-type-question" ng-show="!vm.isFinish">
         <div class="container">
-            <ul class="margin-0">
+            <ul class="margin-0 pte-display-inline-block">
                 <li>
                     <span data-translate="pteMagicApp.TestType.description.{{vm.exam.examTypeDTO.type}}" ng-cloak>Sample question - reading</span>
                 </li>
             </ul>
+            <div class="pull-right">
+                <div class="pte-test-type-question-three-background ">
+	            <span>
+	                 <i class="far fa-clock pte-test-type-question-three-icon"></i>
+	                <span class="pte-test-type-question-three-timeName">TIME REMANING</span>
+	                <span class="pte-test-type-question-three-time"><!-- autostart="false" -->
+	                <timer countdown="vm.countdown" interval="1000" finish-callback="vm.answer()">{{hhours}}:{{mminutes}}:{{sseconds}}</timer></span>
+	            </span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="pte-test-type-question-two" ng-show="!vm.isFinish">
@@ -20,17 +30,8 @@
         </div>
     </div>
     <div ng-show="!vm.isFinish" class="">
-    	<div class="pte-test-type-question-three">
-	        <div class="pte-test-type-question-three-background pull-right">
-	            <span>
-	                 <i class="far fa-clock pte-test-type-question-three-icon"></i>
-	                <span class="pte-test-type-question-three-timeName">TIME REMANING</span>
-	                <span class="pte-test-type-question-three-time"><!-- autostart="false" -->
-	                <timer countdown="vm.countdown" interval="1000" finish-callback="vm.answer()">{{hhours}}:{{mminutes}}:{{sseconds}}</timer></span>
-	            </span>
-	        </div>
-	    </div>
-	    <div class="container">
+
+	    <div class="container margin-top30">
 	        <div class="col-md-12 padding0">
 				<div  class="col-md-12" ng-show="vm.selectedQuestion.type == 'TIME_BREAK'">
 			        <div ng-include="'app/partial/partial.timebreak.html'"></div>

@@ -12,6 +12,11 @@
         <div ng-show="vm.selectedQuestion.audioLink">
             <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
             <div class="container-audio">
+                <div class="text-left pte-margin-bottom-10">
+                    <span>Status : </span>
+                    <span ng-show="vm.checkAudioSeconds">Begining in {{vm.countAudio}} seconds</span>
+                    <span ng-show="vm.checkStatusPlay">{{vm.txtStatusAudio}}</span>
+                </div>
                 <div id="override"></div>
                 <audio id="player" controls autoplay preload >
                     <source id="mp3_src" src="" type="audio/mp3"  />
@@ -20,22 +25,12 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12" ng-show="vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'">
-        <div class="pte-row-check-spell">
-            <div class="pte-inline-block">
-                <!--<label><input class="pte-checkbot-spell" ng-click="vm.spellCheck()" type="checkbox" value="">Spell check</label>-->
-            </div>
-            <div class="text-right pte-wordLimit-writing">
-            <span ng-model="vm.WordsLength">
-                <!--{{300 - vm.writing.length}} Word Limit-->
-                {{vm.WordsLength}}/70 Word Limit
-            </span>
-            </div>
-        </div>
-    </div>
     <div class="col-md-12" ng-show="vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.selectedQuestion.type == 'LISTENING_DICTATION'" >
-        <div class="">
+        <div class="position-relative">
             <textarea  ng-model="vm.Text" maxlength="300"  ng-change="vm.UpdateLengths()" id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
+            <span class="pte-word-count" ng-model="vm.WordsLength">
+               Word count ({{vm.WordsLength}})
+            </span>
         </div>
         <div class="text-right">
             <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
@@ -63,31 +58,31 @@
 
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">
                 <input type="checkbox" name="answerA" id="answerA" value="true" >
-                <label for="answerA" class="line-height-30">
+                <label for="answerA" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerA}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerB">
                 <input type="checkbox" name="answerB" id="answerB" value="true">
-                <label for="answerB" class="line-height-30">
+                <label for="answerB" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerB}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerC">
                 <input type="checkbox" name="answerC" id="answerC" value="true">
-                <label for="answerC" class="line-height-30">
+                <label for="answerC" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerC}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerD">
                 <input type="checkbox" name="answerD" id="answerD" value="true">
-                <label for="answerD" class="line-height-30">
+                <label for="answerD" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerD}}</p>
                 </label>
             </div>
 			<div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerE">
                    <input type="checkbox" name="answerE" id="answerE" value="true">
-                   <label for="answerE" class="line-height-30">
+                   <label for="answerE" class="line-height-30 pte-checkBox-multiple">
                        <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerE}}</p>
                    </label>
            </div>
