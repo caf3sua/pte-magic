@@ -30,8 +30,8 @@ public class Exam implements Serializable {
     @Column(name = "user_id")
     private Long userId;
 
-//    @Column(name = "exam_type_id")
-//    private Long examTypeId;
+    @Column(name = "exam_type_id")
+    private Long examTypeId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "result")
@@ -49,9 +49,9 @@ public class Exam implements Serializable {
     @Column(name = "score_speaking")
     private Integer scoreSpeaking;
 
-    @OneToOne
-    @JoinColumn(unique = true)
-    private ExamType examType;
+//    @OneToOne
+//    @JoinColumn(unique = true)
+//    private ExamType examType;
 
     @OneToMany(mappedBy = "exam")
     @JsonIgnore
@@ -63,12 +63,22 @@ public class Exam implements Serializable {
 //    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 //    private Set<Answer> answes = new HashSet<>();
 
+    
+    
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Long getExamTypeId() {
+		return examTypeId;
+	}
+
+	public void setExamTypeId(Long examTypeId) {
+		this.examTypeId = examTypeId;
+	}
+
+	public void setId(Long id) {
         this.id = id;
     }
 
@@ -163,18 +173,18 @@ public class Exam implements Serializable {
         this.scoreSpeaking = scoreSpeaking;
     }
 
-    public ExamType getExamType() {
-        return examType;
-    }
-
-    public Exam examType(ExamType examType) {
-        this.examType = examType;
-        return this;
-    }
-
-    public void setExamType(ExamType examType) {
-        this.examType = examType;
-    }
+//    public ExamType getExamType() {
+//        return examType;
+//    }
+//
+//    public Exam examType(ExamType examType) {
+//        this.examType = examType;
+//        return this;
+//    }
+//
+//    public void setExamType(ExamType examType) {
+//        this.examType = examType;
+//    }
 
     public Set<Question> getQuestions() {
         return questions;

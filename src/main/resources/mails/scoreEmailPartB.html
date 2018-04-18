@@ -269,7 +269,127 @@
                         <td>
                             <h3  th:text="#{email.score.greeting(${user.login})}">Hi,</h3>
                             <p class="lead" th:text="#{email.score.exam.title(${score.examTitle})}">Your score: ${score.examTitle}</p>
-                            <p class="lead" th:text="#{email.score.text1(${score.score}, ${score.totalQuestion})}">Your score: ${score.score}/${score.totalQuestion}</p>
+                            
+                            <table class="social" width="100%">
+                            	<!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>READING_FIB_R_W</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType8.score}, ${score.scoreType8.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 9 -->
+                                <tr>
+                                    <td>
+                                        <p>READING_FIB_R</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType9.score}, ${score.scoreType9.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>READING_RE_ORDER_PARAGRAPH</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType10.score}, ${score.scoreType10.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>READING_MCQ_R_SINGLE_ANSWER</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType11.score}, ${score.scoreType11.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>READING_MCQ_R_MULTIPLE_ANSWER</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType12.score}, ${score.scoreType12.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_SUMMARIZE_SPOKEN_TEXT</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType13.score}, ${score.scoreType13.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_FIB_L</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType14.score}, ${score.scoreType14.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_MCQ_L_SINGLE_ANSWER</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType15.score}, ${score.scoreType15.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_MCQ_L_MULTIPLE_ANSWER</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType16.score}, ${score.scoreType16.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_HIGHLIGHT_CORRECT_SUMMARY</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType17.score}, ${score.scoreType17.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_SELECT_MISSING_WORD</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType18.score}, ${score.scoreType18.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_HIGHLIGHT_INCORRECT_WORD</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType19.score}, ${score.scoreType19.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                                <!-- Type 8 -->
+                                <tr>
+                                    <td>
+                                        <p>LISTENING_DICTATION</p>
+                                    </td>
+                                    <td>
+                                        <p class="lead" th:text="#{email.score.item(${score.scoreType20.score}, ${score.scoreType20.totalScore})}">4/4</p>
+                                    </td>
+                                </tr>
+                            </table>
+                            
                             <p>Regards</p>
                             <p>Team.</p>
                             <!-- Callout Panel -->

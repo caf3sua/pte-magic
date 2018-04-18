@@ -312,6 +312,9 @@ public class ExamResource {
     		selectQuestionByType(questions, 2, QuestionType.LISTENING_SELECT_MISSING_WORD);
     		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD);
     		selectQuestionByType(questions, 4, QuestionType.LISTENING_DICTATION);
+    		
+    	// DUMP
+//    		selectQuestionByType(questions, 3, QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
     }
     
     private void selectMockTestExamQuestionReading(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
@@ -326,6 +329,9 @@ public class ExamResource {
 		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
 		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
 		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
+
+    	// DUMP
+		selectQuestionByType(questions, 2, QuestionType.READING_FIB_R_W);
     }
     
     private void selectMockTestExamQuestionWriting(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
@@ -470,9 +476,11 @@ public class ExamResource {
         for (ExamDTO examDTO : page.getContent()) {
 			// Find user
         	User user = userService.getUserWithAuthorities(examDTO.getUserId());
-        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
         	examDTO.setEmail(user.getEmail());
-        	examDTO.setExamTypeName(examTypeDTO.getName());
+        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+        	if (null != examTypeDTO) {
+        		examDTO.setExamTypeName(examTypeDTO.getName());
+        	}
 		}
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -498,6 +506,10 @@ public class ExamResource {
         ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
         examInfoDTO.setExamTypeDTO(examTypeDTO);
         
+        // User
+        User user = userService.getUserWithAuthorities(examDTO.getUserId());
+    	examDTO.setEmail(user.getEmail());
+    	
         // Get all question 
 		// Get list exam question
 		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(id);
