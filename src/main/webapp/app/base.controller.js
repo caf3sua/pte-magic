@@ -121,7 +121,7 @@
                 if(vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'){
                     vm.counter = 25;
                 }else{
-                    vm.counter = 5;
+                    vm.counter = 30;
                 }
         		var interval = setInterval(function() {
         			vm.counter--;
