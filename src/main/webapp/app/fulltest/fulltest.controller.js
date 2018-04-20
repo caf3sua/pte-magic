@@ -72,7 +72,11 @@
     		console.log('play audio ended!');
     		vm.showRecording = true;
             vm.txtStatusAudio = 'Completed';
-    		vm.counter = 5;
+    		vm.counter = 5
+
+            // Beep sound
+            $("#player1")[0].play();
+
     		var interval = setInterval(function() {
     			vm.counter--;
     		    // Display 'counter' wherever you want to display it.

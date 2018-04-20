@@ -123,8 +123,15 @@
                 }else{
                     vm.counter = 30;
                 }
+
         		var interval = setInterval(function() {
         			vm.counter--;
+
+                    // Beep sound
+                    if (vm.counter == 1) {
+                        $("#player1")[0].play();
+                    }
+
         		    // Display 'counter' wherever you want to display it.
         		    if (vm.counter == 0) {
         		        // Display a login box
