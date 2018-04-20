@@ -58,6 +58,7 @@
             audioRecorder.stop();
             audioRecorder.getBuffers( gotBuffers );
             vm.btnEnable = true;
+            clearInterval(vm.intervalProgress);
         }
 
         function initPlayer() {

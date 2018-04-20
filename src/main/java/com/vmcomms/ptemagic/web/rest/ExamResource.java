@@ -372,7 +372,7 @@ public class ExamResource {
 		selectQuestionByType(questions, 10, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
 		
 		// DUMP
-//		selectQuestionByType(questions, 2, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
+//		selectQuestionByType(questions, 2, QuestionType.SPEAKING_DESCRIBE_IMAGE);
     }
     
     private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {
