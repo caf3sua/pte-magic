@@ -23,14 +23,14 @@
 
         <div class="col-md-12">
             <div class="row" id="dragInput">
-                <label id="startText">{{models.startText}}</label>
+                <span><label id="startText">{{models.startText}}</label></span>
                 <div ng-repeat="(index, value) in models.fillInTheBlankQuestionArr" class="pte-display-inline-block">
                     <div ng-repeat="(listName, list) in value"  class="pte-display-inline-block">
                         <div class="panel panel-info pte-position-top10" id="drag-panel{{index}}">
-                            <div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div>
+                            <span><div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div></span>
                         </div>
                     </div>
-                    <label id="centerText">{{models.fillInTheBlankPartialTexts[$index]}}</label>
+                    <span><label id="centerText">{{models.fillInTheBlankPartialTexts[$index]}}</label></span>
                 </div>
             </div>
 
