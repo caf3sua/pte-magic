@@ -154,6 +154,8 @@
 
         	// Init mocktest
         	initMockTest();
+        	
+        	vm.initCountQuestion();
 
         	// Next question
         	nextQuestion();
@@ -248,9 +250,14 @@
   				// update button lable
   				if (vm.selectedQuestion.type == 'TIME_BREAK') {
   					vm.btnTxt = 'Skip Timebreak';
+  					vm.initCountQuestion();
+  					return;
   				} else {
   					vm.btnTxt = 'Next';
   				}
+  				
+  				// Count question
+  				vm.currentQuestion++;
 
   				// Get question group
   				vm.updateQuestionInfo(vm.selectedQuestion);

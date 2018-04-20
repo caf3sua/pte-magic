@@ -166,10 +166,25 @@ public class ExamResource {
         examInfoDTO.setExamDTO(result);
         examInfoDTO.setQuestions(question);
         examInfoDTO.setExamTypeDTO(examTypeService.findOne(examVM.getExamTypeId()));
+        calculateNumberQuestion(examInfoDTO);
         
         return ResponseEntity.created(new URI("/api/exams/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(examInfoDTO);
+    }
+    
+    private void calculateNumberQuestion(ExamInfoDTO examInfoDTO) {
+    	for (QuestionDTO q : examInfoDTO.getQuestions()) {
+			if (q.getType().toString().contains("SPEAKING")) {
+				examInfoDTO.setNumberQuestionSpeaking(examInfoDTO.getNumberQuestionSpeaking() + 1);
+			} else if (q.getType().toString().contains("WRITING")) {
+				examInfoDTO.setNumberQuestionWriting(examInfoDTO.getNumberQuestionWriting() + 1);
+			} else if (q.getType().toString().contains("READING")) {
+				examInfoDTO.setNumberQuestionReading(examInfoDTO.getNumberQuestionReading() + 1);
+			} else if (q.getType().toString().contains("LISTENING")) {
+				examInfoDTO.setNumberQuestionListening(examInfoDTO.getNumberQuestionListening() + 1);
+			}
+		}
     }
 
     private List<QuestionDTO> generateMockTestQuestionExam(ExamDTO examDTO) {
@@ -331,7 +346,7 @@ public class ExamResource {
 		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
 
     	// DUMP
-		selectQuestionByType(questions, 2, QuestionType.READING_FIB_R_W);
+//		selectQuestionByType(questions, 2, QuestionType.READING_FIB_R_W);
     }
     
     private void selectMockTestExamQuestionWriting(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
@@ -354,6 +369,9 @@ public class ExamResource {
 		selectQuestionByType(questions, 6, QuestionType.SPEAKING_DESCRIBE_IMAGE);
 		selectQuestionByType(questions, 4, QuestionType.SPEAKING_RETELL_LECTURE);
 		selectQuestionByType(questions, 10, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
+		
+		// DUMP
+//		selectQuestionByType(questions, 2, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
     }
     
     private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {

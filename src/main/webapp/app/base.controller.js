@@ -14,6 +14,10 @@
 
 
 		// Attribute
+		vm.currentQuestion = 0;
+		vm.totalQuestion = 0;
+		vm.currentSKill = '';
+		
 		vm.showProgressBar = false;
 		vm.countdownPercent = 0;
 		vm.questionGroup;
@@ -41,11 +45,68 @@
         vm.dropCallback = dropCallback;
         vm.movedCallback = movedCallback;
         vm.resetProgressStatus = resetProgressStatus;
+        vm.initCountQuestion = initCountQuestion;
 
     	function resetProgressStatus() {
     		vm.showProgressBar = false;
     		vm.countdownPercent = 0;
     		vm.timeProgress = 0;
+    	}
+    	
+    	function initCountQuestion() {
+    		// Speaking -> Writing -> Reading -> Listening
+    		// init
+    		if (vm.currentSKill == '') {
+    			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
+    				vm.currentSKill = 'SPEAKING'; // writing
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionSpeaking;
+    			} else if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
+    				vm.currentSKill = 'READING'; // listening
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionReading;
+    			} else {
+    				vm.currentSKill = 'SPEAKING';
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionSpeaking;
+    			}
+    		} else if (vm.currentSKill == 'SPEAKING') {
+    			// Part A + Full
+    			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
+    				vm.currentSKill = 'WRITING'; // writing
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionWriting;
+    			} else {
+    				vm.currentSKill = 'WRITING';
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionWriting;
+    			}
+    		} else if (vm.currentSKill == 'WRITING') {
+    			// Part A + Full
+    			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
+    				vm.currentSKill = 'END'; // writing
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionWriting;
+    			} else {
+    				vm.currentSKill = 'READING';
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionReading;
+    			}
+    		} else if (vm.currentSKill == 'READING') {
+    			// Part B + Full
+    			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
+    				vm.currentSKill = 'LISTENING'; // writing
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionListening;
+    			} else {
+    				vm.currentSKill = 'LISTENING';
+    				vm.currentQuestion = 0;
+    				vm.totalQuestion = vm.exam.numberQuestionListening;
+    			}
+//    		} else if (vm.currentSKill == 'LISTENING') {
+    			// Part B + Full
+    			
+    		}
     	}
 
     	function calProgress() {

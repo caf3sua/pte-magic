@@ -27,6 +27,9 @@
                 <p class="pte-test-type-question-two-title" data-translate="pteMagicApp.QuestionType.title.{{vm.selectedQuestion.type}}">MULTIPLE CHOICE, CHOOSE SINGLE ANSWER</p>
                 <p class="pte-test-type-question-two-des" data-translate="pteMagicApp.QuestionType.description.{{vm.selectedQuestion.type}}" ng-show="vm.selectedQuestion.type != 'TIME_BREAK'">Description</p>
             </div>
+            <div class="col-md-12" s>
+                <span class="pte-test-type-question-two-title">{{vm.currentQuestion}}/{{vm.totalQuestion}}</span>
+            </div>
         </div>
     </div>
     <div ng-show="!vm.isFinish" class="">
