@@ -1488,8 +1488,6 @@ textarea {
 }
 .pte-word-count{
     position: absolute;
-    bottom: 6px;
-    left: 10px;
 }
 /*.preventcopy {*/
     /*-webkit-touch-callout: none; iOS Safari*/
