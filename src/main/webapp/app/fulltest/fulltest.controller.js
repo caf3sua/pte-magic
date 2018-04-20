@@ -313,6 +313,8 @@
                 // Load record audio
                 initAudio();
                 vm.countAudio = 3;
+                vm.checkAudioSeconds = true;
+	            vm.checkStatusPlay = false;
                 var interval = setInterval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.
