@@ -1199,12 +1199,12 @@ audio::-webkit-media-controls-panel {
 
 #override{
     width: 60%;
-    height: 20px;
+    height: 35px;
     background: transparent;
     position: absolute;
     z-index: 99;
-    top: 56px;
-    left: 26px;
+    top: 48px;
+    left: 18px;
 }
 .margin-top130{
     margin-top: 130px;
@@ -1479,15 +1479,12 @@ textarea {
 }
 .col-md-12>div>div>#override{
     width: 83%;
-    height: 20px;
+    height: 35px;
     background:transparent;
     position: absolute;
     z-index: 99;
-    top: 56px;
-    left: 26px;
-}
-.pte-word-count{
-    position: absolute;
+    top: 48px;
+    left: 18px;
 }
 /*.preventcopy {*/
     /*-webkit-touch-callout: none; iOS Safari*/
@@ -1501,21 +1498,21 @@ textarea {
 @media (min-width:992px) and (max-width:1200px) {
     .col-md-12>div>div>#override {
         width: 78%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     #override {
         width: 50%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 
     .pte-mock-test-item-footer-btn {
@@ -1629,23 +1626,23 @@ textarea {
     }
     #override {
         width: 60%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 @media (min-width:768px) and (max-width:991px) {
     .col-md-12>div>div>#override {
         width: 75%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-margin-top100{
         margin-top:100px;
@@ -1658,12 +1655,12 @@ textarea {
     }
     #override {
         width: 75%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-body-content-text {
         position: absolute;
@@ -1806,21 +1803,21 @@ textarea {
     }
     .pte-width-audio-speaking>#override{
         width: 55%;
-        height: 20px;
+        height: 35px;
         background:transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     #override {
         width: 72%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 @media (min-width:768px) and (max-width:786px) {
@@ -1832,23 +1829,23 @@ textarea {
     }
     #override {
         width: 68%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 @media (min-width:480px) and (max-width:767px) {
     .col-md-12>div>div>#override {
         width: 69%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-margin-top100{
         margin-top:130px;
@@ -1858,12 +1855,12 @@ textarea {
     }
     #override {
         width: 66%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
         color: #f9db01;
@@ -1984,12 +1981,12 @@ textarea {
 @media (min-width:480px) and (max-width:700px) {
     .col-md-12>div>div>#override {
         width: 70%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-margin-top100{
         margin-top:130px;
@@ -1999,12 +1996,12 @@ textarea {
     }
     #override {
         width: 63%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 #dragInput{
@@ -2014,12 +2011,12 @@ textarea {
 @media (min-width:480px) and (max-width:630px) {
     .col-md-12>div>div>#override {
         width: 65%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-margin-top100{
         margin-top:130px;
@@ -2029,23 +2026,23 @@ textarea {
     }
     #override {
         width: 58%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 @media (min-width:480px) and (max-width:560px) {
     .col-md-12>div>div>#override {
         width: 60%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-margin-top100{
         margin-top:130px;
@@ -2055,32 +2052,32 @@ textarea {
     }
     #override {
         width: 55%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 @media (max-width:479px){
     .col-md-12>div>div>#override {
         width: 58%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .col-md-12>div>div>#override {
         width: 58%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-block-record{
         width: 100%;
@@ -2111,12 +2108,12 @@ textarea {
     }
     #override {
         width: 55%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-text-answer{
         font-family: 'Roboto';
@@ -2349,32 +2346,32 @@ textarea {
     }
     #override {
         width: 47%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 @media (min-width:320px) and (max-width:380px){
     .col-md-12>div>div>#override {
         width: 69%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .col-md-12>div>div>#override {
         width: 70%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
     .pte-block-record{
         width: 100%;
@@ -2392,12 +2389,12 @@ textarea {
     }
     #override {
         width: 55%;
-        height: 20px;
+        height: 35px;
         background: transparent;
         position: absolute;
         z-index: 99;
-        top: 56px;
-        left: 26px;
+        top: 48px;
+        left: 18px;
     }
 }
 canvas {

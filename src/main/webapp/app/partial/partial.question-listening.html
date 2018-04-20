@@ -7,7 +7,7 @@
          vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD'
           ? 'col-md-12':'col-md-6')"
         >
-        <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
+        <p class="pte-test-content-question" ng-show="vm.selectedQuestion.type != 'LISTENING_FIB_L'">{{vm.selectedQuestion.text}}</p>
         <!-- Record audio -->
         <div ng-show="vm.selectedQuestion.audioLink">
             <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
