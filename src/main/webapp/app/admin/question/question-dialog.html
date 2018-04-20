@@ -71,7 +71,9 @@
             <label class="control-label"  ng-show="vm.question.type == 'SPEAKING_DESCRIBE_IMAGE'" for="field_audioLink">Upload image</label>
             <input type="text" class="form-control" name="audioLink" id="field_audioLink" ng-model="vm.question.audioLink" readonly="readonly"/>
         </div>
-        <div class="form-group">
+        <div class="form-group"
+             ng-show="vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT' && vm.question.type != 'WRITING_ESSAY'"
+        >
             <label class="control-label" data-translate="pteMagicApp.question.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
                     ng-model="vm.question.description"
