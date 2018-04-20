@@ -1628,7 +1628,7 @@ textarea {
         margin-top:100px;
     }
     #override {
-        width: 50%;
+        width: 60%;
         height: 20px;
         background: transparent;
         position: absolute;
@@ -1805,7 +1805,7 @@ textarea {
         margin-left: 0px !important;
     }
     .pte-width-audio-speaking>#override{
-        width: 50%;
+        width: 55%;
         height: 20px;
         background:transparent;
         position: absolute;
@@ -1983,7 +1983,7 @@ textarea {
 }
 @media (min-width:480px) and (max-width:700px) {
     .col-md-12>div>div>#override {
-        width: 59%;
+        width: 70%;
         height: 20px;
         background: transparent;
         position: absolute;
@@ -2054,7 +2054,7 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 52%;
+        width: 55%;
         height: 20px;
         background: transparent;
         position: absolute;
@@ -2074,7 +2074,7 @@ textarea {
         left: 26px;
     }
     .col-md-12>div>div>#override {
-        width: 49%;
+        width: 58%;
         height: 20px;
         background: transparent;
         position: absolute;
@@ -2110,7 +2110,7 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 48%;
+        width: 55%;
         height: 20px;
         background: transparent;
         position: absolute;
@@ -2368,7 +2368,7 @@ textarea {
         left: 26px;
     }
     .col-md-12>div>div>#override {
-        width: 49%;
+        width: 70%;
         height: 20px;
         background: transparent;
         position: absolute;
@@ -2391,7 +2391,7 @@ textarea {
         margin-left: 0px !important;
     }
     #override {
-        width: 41%;
+        width: 55%;
         height: 20px;
         background: transparent;
         position: absolute;
