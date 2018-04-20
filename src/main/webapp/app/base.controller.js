@@ -7,9 +7,9 @@
       .module('pteMagicApp')
       .controller('PteMagicBaseController', PteMagicBaseController);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout){
+    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 
@@ -35,7 +35,8 @@
             startText: '',
             fillInTheBlankPartialTexts: []
 	    };
-
+        vm.intervalProgress;
+        
 		// Function
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
@@ -122,7 +123,7 @@
 
     	function calProgress() {
     		vm.timeProgress = 0;
-    		var intervalProgress = setInterval(function() {
+    		vm.intervalProgress = setInterval(function() {
     			vm.timeProgress++;
     			if( vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
                     vm.countdownPercent = vm.timeProgress / 30 * 100;
@@ -130,7 +131,7 @@
                     if (vm.timeProgress == 30) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
-                        clearInterval(intervalProgress);
+                        clearInterval(vm.intervalProgress);
                         vm.answer();
                     }
                 }else if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
@@ -139,7 +140,7 @@
                     if (vm.timeProgress == 10) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
-                        clearInterval(intervalProgress);
+                        clearInterval(vm.intervalProgress);
                         vm.answer();
                     }
                 }else{
@@ -148,7 +149,7 @@
                     if (vm.timeProgress == 40) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
-                        clearInterval(intervalProgress);
+                        clearInterval(vm.intervalProgress);
                         vm.answer();
                     }
                 }
@@ -191,9 +192,9 @@
     			console.log('countdownToRecording!');
         		vm.showRecording = true;
                 if(vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'){
-                    vm.counter = 25;
+                    vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_DESCRIBE_IMAGE; // 25
                 }else{
-                    vm.counter = 30;
+                    vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_OTHER; // 30
                 }
 
         		var interval = setInterval(function() {

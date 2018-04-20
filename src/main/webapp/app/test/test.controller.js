@@ -53,6 +53,7 @@
 	        audioRecorder.stop();
 	        audioRecorder.getBuffers( gotBuffers );
 	        vm.btnEnable = true;
+	        clearInterval(vm.intervalProgress);
     	}
 
 //    	function initPlayer() {
@@ -263,6 +264,8 @@
 
 	    		// Play mp3 audio
 	    		vm.countAudio = 3;
+	    		vm.checkAudioSeconds = true;
+	            vm.checkStatusPlay = false;
                 var interval = setInterval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.
