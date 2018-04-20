@@ -18,6 +18,7 @@
 		vm.totalQuestion = 0;
 		vm.currentSKill = '';
 		
+		vm.countdown = 60; // 2min10second
 		vm.showProgressBar = false;
 		vm.countdownPercent = 0;
 		vm.questionGroup;
@@ -55,6 +56,8 @@
     	
     	function initCountQuestion() {
     		// Speaking -> Writing -> Reading -> Listening
+    		// A: Speaking/Writing
+    		// B: Reading/Listening
     		// init
     		if (vm.currentSKill == '') {
     			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
@@ -70,6 +73,10 @@
     				vm.currentQuestion = 0;
     				vm.totalQuestion = vm.exam.numberQuestionSpeaking;
     			}
+    			
+    			vm.countdown = 40 * 60;
+				$scope.$broadcast('timer-stop');
+				$scope.$broadcast('timer-start');
     		} else if (vm.currentSKill == 'SPEAKING') {
     			// Part A + Full
     			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
@@ -94,6 +101,10 @@
     			}
     		} else if (vm.currentSKill == 'READING') {
     			// Part B + Full
+    			vm.countdown = 40 * 60;
+				$scope.$broadcast('timer-stop');
+				$scope.$broadcast('timer-start');
+				
     			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
     				vm.currentSKill = 'LISTENING'; // writing
     				vm.currentQuestion = 0;

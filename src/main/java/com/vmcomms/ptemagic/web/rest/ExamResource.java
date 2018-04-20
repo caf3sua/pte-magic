@@ -330,6 +330,7 @@ public class ExamResource {
     		
     	// DUMP
 //    		selectQuestionByType(questions, 3, QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
+//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_FIB_L);
     }
     
     private void selectMockTestExamQuestionReading(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
@@ -354,7 +355,7 @@ public class ExamResource {
 		//    	6. Summarize Written Text (3)
 		//    	7. Essay (1-2)
 		selectQuestionByType(questions, 3, QuestionType.WRITING_SUMMARIZE_WRITTEN_TEXT);
-		selectQuestionByType(questions, 2, QuestionType.WRITING_ESSAY);
+		selectQuestionByType(questions, 1, QuestionType.WRITING_ESSAY);
     }
     
     private void selectMockTestExamQuestionSpeaking(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
