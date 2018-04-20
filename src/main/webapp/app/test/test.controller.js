@@ -72,6 +72,8 @@
             }else{
                 vm.counter = 30;
             }
+            // Beep sound
+            $("#player1")[0].play();
 
     		var interval = setInterval(function() {
     			vm.counter--;
@@ -256,6 +258,7 @@
 	    		initAudio();
 
 	    		// Play mp3 audio
+	    		vm.countAudio = 3;
                 var interval = setInterval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.

@@ -24,7 +24,6 @@
     	vm.answers = [];
     	vm.isFinish = false;
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
-    	vm.countdown = 5400; // 2min10second
     	vm.audio;
     	vm.fileUpload;
     	vm.btnEnable = true;
@@ -72,7 +71,11 @@
     		console.log('play audio ended!');
     		vm.showRecording = true;
             vm.txtStatusAudio = 'Completed';
-    		vm.counter = 5;
+    		vm.counter = 5
+
+            // Beep sound
+            $("#player1")[0].play();
+
     		var interval = setInterval(function() {
     			vm.counter--;
     		    // Display 'counter' wherever you want to display it.
@@ -130,8 +133,10 @@
     	function initMockTest() {
     		if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
     			vm.countdown = 110 * 60;
+    			vm.countdown = 30;
     		} else if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
     			vm.countdown = 90 * 60;
+    			vm.countdown = 50;
     		} else {
     			vm.countdown = 200 * 60;
     		}
@@ -149,7 +154,9 @@
     		initAudio();
 
         	// Init mocktest
-        	initMockTest();
+        	// initMockTest();
+        	
+        	vm.initCountQuestion();
 
         	// Next question
         	nextQuestion();
@@ -219,6 +226,45 @@
   			};
   			xhr.send();
   		}
+  		
+  		vm.listeningTimerRunningFlag = false;
+  		vm.readingTimerRunningFlag = true;
+  		function setCountdownTimer() {
+    		if (vm.selectedQuestion.type == 'TIME_BREAK') {
+				vm.countdown = 10 * 60; 
+				$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+				return;
+			}
+    		
+    		if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A' || vm.exam.examTypeDTO.type == 'MOCK_TEST_B' || vm.exam.examTypeDTO.type == 'MOCK_TEST_FULL') {
+    			if (vm.questionGroup == 'LISTENING') {
+    				if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT') {
+        				vm.countdown = 10 * 60; 
+        				$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+        			} else {
+        				if (vm.listeningTimerRunningFlag == false) {
+        					vm.countdown = 16 * 2 * 60 + 2 * 60; 
+            				$scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
+            				vm.listeningTimerRunningFlag == true;
+        				}
+        			}
+    			} else if (vm.questionGroup == 'WRITING') {
+    				if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT') {
+        				vm.countdown = 10 * 60; 
+        				$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+        			} else if (vm.selectedQuestion.type == 'WRITING_ESSAY') {
+    					vm.countdown = 20 * 60; 
+        				$scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
+        			}
+    			} else if (vm.questionGroup == 'READING') {
+    				if (vm.listeningTimerRunningFlag == false) {
+        				vm.countdown = 40 * 60; 
+        				$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+        				vm.readingTimerRunningFlag = true;
+        			}
+    			}
+    		}
+    	}
 
   		function nextQuestion() {
             $('#areaTextWriting').val("");
@@ -244,10 +290,13 @@
   				// update button lable
   				if (vm.selectedQuestion.type == 'TIME_BREAK') {
   					vm.btnTxt = 'Skip Timebreak';
+  					vm.initCountQuestion();
   				} else {
   					vm.btnTxt = 'Next';
+  	  				// Count question
+  	  				vm.currentQuestion++;
   				}
-
+  				
   				// Get question group
   				vm.updateQuestionInfo(vm.selectedQuestion);
 
@@ -255,25 +304,22 @@
 
   				vm.questionGroup = getQuestionGroup(vm.selectedQuestion.type);
   				console.log(vm.questionGroup);
-
-  				// Enable/disable button Answer
-  				// if (vm.questionGroup == 'SPEAKING') {
-  				// 	vm.btnEnable = false;
-  				// } else {
-  				// 	vm.btnEnable = true;
-  				// }
+  				
+				setCountdownTimer();
 
 	    		// Load player
 	    		initPlayer();
 
 	    		// Load record audio
 	    		initAudio();
+	    		vm.countAudio = 3;
                 var interval = setInterval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.
                     if (vm.countAudio == 0) {
 
                         playAudio(vm.selectedQuestion.audioLink, 1000);
+                        clearInterval(interval);
                     }
                 }, 1000);
 	    		vm.countdownToRecording();
