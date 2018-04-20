@@ -66,6 +66,7 @@
     	function callBackAudioEnded() {
     		console.log('play audio ended!');
     		vm.showRecording = true;
+            vm.checkStatusPlay = false;
             vm.txtStatusAudio = 'Completed';
             if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'){
                 vm.counter = 2;
@@ -115,6 +116,9 @@
 
   			vm.txtInfoCountdown = "Begining in ";
   	    	vm.isRecording = false;
+            // vm.txtStatusAudio = 'Playing';
+            vm.checkAudioSeconds = true;
+            vm.checkStatusPlay = false;
     	}
 
     	angular.element(document).ready(function () {
