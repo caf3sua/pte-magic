@@ -11,16 +11,20 @@
             </ul>
             <div class="pull-right">
                 <div class="pte-test-type-question-three-background ">
-	            <span>
-	                 <i class="far fa-clock pte-test-type-question-three-icon"></i>
-	                <span class="pte-test-type-question-three-timeName">TIME REMANING</span>
-	                <span class="pte-test-type-question-three-time"><!-- autostart="false" -->
-	                <timer countdown="vm.countdown" interval="1000" finish-callback="vm.answer()">{{hhours}}:{{mminutes}}:{{sseconds}}</timer></span>
-	            </span>
+                    <span>
+                         <i class="far fa-clock pte-test-type-question-three-icon"></i>
+                        <span class="pte-test-type-question-three-timeName">TIME REMANING</span>
+                        <span class="pte-test-type-question-three-time"><!-- autostart="false" -->
+                        <timer countdown="vm.countdown" interval="1000" finish-callback="vm.answer()">{{hhours}}:{{mminutes}}:{{sseconds}}</timer></span>
+                    </span>
+                </div>
+                <div>
+                    <span class="pte-test-type-question-three-timeName">1 Of <span>10</span></span>
                 </div>
             </div>
         </div>
     </div>
+    {{vm.selectedQuestion.type}}
     <div class="pte-test-type-question-two" ng-show="!vm.isFinish">
         <div class="container">
             <div class="col-md-12">
