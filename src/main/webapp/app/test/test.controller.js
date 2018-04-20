@@ -68,8 +68,11 @@
     		console.log('play audio ended!');
     		vm.showRecording = true;
             vm.txtStatusAudio = 'Completed';
-    		vm.counter = 5;
-
+            if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'){
+                vm.counter = 2;
+            }else{
+                vm.counter = 30;
+            }
             // Beep sound
             $("#player1")[0].play();
 
