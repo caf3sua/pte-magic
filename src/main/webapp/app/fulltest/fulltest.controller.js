@@ -73,6 +73,8 @@
             vm.txtStatusAudio = 'Completed';
             if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'){
                 vm.counter = 2;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
+                vm.counter = 1;
             }else{
                 vm.counter = 30;
             }
@@ -319,6 +321,7 @@
                 vm.countAudio = 3;
                 vm.checkAudioSeconds = true;
 	            vm.checkStatusPlay = false;
+                vm.txtStatusAudio = 'Playing';
                 var interval = setInterval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.
