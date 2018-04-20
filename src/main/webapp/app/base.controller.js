@@ -23,7 +23,7 @@
 		vm.selectedQuestion;
         $scope.models = {
 	        selected: null,
-	        lists: {"A": [], "B": []},
+	        lists: {"Source": [], "Target": []},
             fillInTheBlankQuestionArr: [],
             answer: [],
             fillInTheBlanklLists: {"questionPanel": []},
@@ -159,7 +159,7 @@
             if (selQuestion.type == 'READING_FIB_R') {
             	$scope.models = {
             	        selected: null,
-            	        lists: {"A": [], "B": []},
+            	        lists: {"Source": [], "Target": []},
                         fillInTheBlankQuestionArr: [],
                         answer: [],
                         fillInTheBlanklLists: {"questionPanel": []},
@@ -238,24 +238,24 @@
 
   			// Update re-order
   			if (selQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
-  				$scope.models.lists.A = [];
-  				$scope.models.lists.B = [];
+  				$scope.models.lists.Source = [];
+  				$scope.models.lists.Target = [];
   				$scope.models.selected = null;
   				// Build models
   				if (selQuestion.answerA != "" && selQuestion.answerA != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerA, key: "A"});
+  					$scope.models.lists.Source.push({label: selQuestion.answerA, key: "A"});
   				}
   				if (selQuestion.answerB != "" && selQuestion.answerB != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerB, key: "B"});
+  					$scope.models.lists.Source.push({label: selQuestion.answerB, key: "B"});
   				}
   				if (selQuestion.answerC != "" && selQuestion.answerC != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerC, key: "C"});
+  					$scope.models.lists.Source.push({label: selQuestion.answerC, key: "C"});
   				}
   				if (selQuestion.answerD != "" && selQuestion.answerD != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerD, key: "D"});
+  					$scope.models.lists.Source.push({label: selQuestion.answerD, key: "D"});
   				}
   				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
-  					$scope.models.lists.A.push({label: selQuestion.answerE, key: "E"});
+  					$scope.models.lists.Source.push({label: selQuestion.answerE, key: "E"});
   				}
   			}
   			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
@@ -277,7 +277,7 @@
   					vm.answers.push($(this).val());
   				 });
   			} else if (vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
-  				var arrAnswer = $scope.models.lists.B;
+  				var arrAnswer = $scope.models.lists.Target;
   				angular.forEach(arrAnswer, function(value, key){
   	  				vm.answers.push(value.key);
   	            });
