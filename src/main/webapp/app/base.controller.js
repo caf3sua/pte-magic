@@ -5,7 +5,20 @@
     '';
     angular
       .module('pteMagicApp')
-      .controller('PteMagicBaseController', PteMagicBaseController);
+      .controller('PteMagicBaseController', PteMagicBaseController)
+        .directive( 'elemReady', ['$parse', function( $parse ) {
+            return {
+                restrict: 'A',
+                link: function( $scope, elem, attrs ) {
+                    elem.ready(function(){
+                        $scope.$apply(function(){
+                            var func = $parse(attrs.elemReady);
+                            func($scope);
+                        })
+                    })
+                }
+            }
+        }]);
 
     PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'];
 
@@ -23,7 +36,6 @@
 		vm.intervalAudio;
 		vm.intervalCounter;
 		vm.intervalToRecording;
-		
 		vm.countdown = 60; // 2min10second
 		vm.showProgressBar = false;
 		vm.countdownPercent = 0;
@@ -42,7 +54,7 @@
             fillInTheBlankPartialTexts: []
 	    };
         vm.intervalProgress;
-        
+
 		// Function
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
@@ -54,13 +66,57 @@
         vm.movedCallback = movedCallback;
         vm.resetProgressStatus = resetProgressStatus;
         vm.initCountQuestion = initCountQuestion;
+        vm.prepareFillInTheBlanks = prepareFillInTheBlanks;
+
+        function prepareFillInTheBlanks() {
+            var dragInput = $("#dragInput")[0];
+            var selQuestion = vm.selectedQuestion;
+            var count = (selQuestion.text.match(/@Blank@/g) || []).length;
+
+            var partialTexts = selQuestion.text.split('@Blank@');
+            if(partialTexts.length > count) {
+                var startTextSpan = document.createElement('span');
+                startTextSpan.innerHTML = partialTexts[0];
+                dragInput.insertBefore(startTextSpan, dragInput.children[0]);
+
+                for (var i = 1; i <= count; i++) {
+                    var textSpan = document.createElement('span');
+                    textSpan.innerHTML = partialTexts[i];
+                    dragInput.insertBefore(textSpan, dragInput.children[i*2]);
+                }
+            } else if(partialTexts.length == count) {
+                if(selQuestion.text.indexOf('@Blank@') > 0) {
+                    var startTextSpan = document.createElement('span');
+                    startTextSpan.innerHTML = partialTexts[0];
+                    dragInput.insertBefore(startTextSpan, dragInput.children[0]);
+
+                    for (var i = 1; i <= count; i++) {
+                        var textSpan = document.createElement('span');
+                        textSpan.innerHTML = partialTexts[i];
+                        insertAfter(textSpan, dragInput.children[i*2]);
+                    }
+                } else {
+                    for (var i = 0; i < count; i++) {
+                        var textSpan = document.createElement('span');
+                        textSpan.innerHTML = partialTexts[i];
+                        insertAfter(textSpan, dragInput.children[i*2]);
+                    }
+                }
+            } else {
+                for (var i = 0; i < count; i++) {
+                    var textSpan = document.createElement('span');
+                    textSpan.innerHTML = partialTexts[i];
+                    insertAfter(textSpan, dragInput.children[i*2]);
+                }
+            }
+        }
 
     	function resetProgressStatus() {
     		vm.showProgressBar = false;
     		vm.countdownPercent = 0;
     		vm.timeProgress = 0;
     	}
-    	
+
     	function initCountQuestion() {
     		// Speaking -> Writing -> Reading -> Listening
     		// A: Speaking/Writing
@@ -80,7 +136,7 @@
     				vm.currentQuestion = 0;
     				vm.totalQuestion = vm.exam.numberQuestionSpeaking;
     			}
-    			
+
     			vm.countdown = 40 * 60;
 				$scope.$broadcast('timer-stop');
 				$scope.$broadcast('timer-start');
@@ -111,7 +167,7 @@
     			vm.countdown = 40 * 60;
 				$scope.$broadcast('timer-stop');
 				$scope.$broadcast('timer-start');
-				
+
     			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
     				vm.currentSKill = 'LISTENING'; // writing
     				vm.currentQuestion = 0;
@@ -123,7 +179,7 @@
     			}
 //    		} else if (vm.currentSKill == 'LISTENING') {
     			// Part B + Full
-    			
+
     		}
     	}
 
@@ -274,24 +330,6 @@
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
-
-                var partialTexts = selQuestion.text.split('@Blank@');
-                if(partialTexts.length > count) {
-                    $scope.models.startText = partialTexts[0];
-                    partialTexts.splice(0, 1);
-                    $scope.models.fillInTheBlankPartialTexts = partialTexts;
-                } else if(partialTexts.length == count) {
-                    if(selQuestion.text.indexOf('@Blank@') > 0) {
-                        $scope.models.startText = partialTexts[0];
-                        partialTexts.splice(0, 1);
-                        $scope.models.fillInTheBlankPartialTexts = partialTexts;
-                    } else {
-                        $scope.models.fillInTheBlankPartialTexts = partialTexts;
-                    }
-                } else {
-                    $scope.models.fillInTheBlankPartialTexts = partialTexts;
-                    $scope.models.fillInTheBlankPartialTexts[$scope.models.fillInTheBlankPartialTexts.length] = '';
-                }
             }
 
             if (selQuestion.type == 'LISTENING_FIB_L') {
