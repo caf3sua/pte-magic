@@ -4,7 +4,11 @@
          vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' ||
          vm.selectedQuestion.type == 'LISTENING_FIB_L' ||
          vm.selectedQuestion.type == 'LISTENING_DICTATION' ||
-         vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD'
+         vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD' ||
+         vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY' ||
+         vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER' ||
+         vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER' ||
+         vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD'
           ? 'col-md-12':'col-md-6')"
         >
         <p class="pte-test-content-question" ng-show="vm.selectedQuestion.type != 'LISTENING_FIB_L'">{{vm.selectedQuestion.text}}</p>
@@ -36,9 +40,6 @@
                Word count ({{vm.WordsLength}})
             </span>
         </div>
-        <div class="text-right">
-            <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
-        </div>
     </div>
     <div
          ng-show="
@@ -54,7 +55,11 @@
          && vm.selectedQuestion.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'"
          ng-class="
          vm.selectedQuestion.type == 'LISTENING_FIB_L' ||
-         vm.selectedQuestion.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'  ? 'col-md-12':'col-md-6'"
+         vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER' ||
+         vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD' ||
+         vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY' ||
+         vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD' ||
+         vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'  ? 'col-md-12':'col-md-6'"
     >
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
 
@@ -91,12 +96,10 @@
                    </label>
            </div>
        </div>
-       <div class="text-right">
-           <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
-       </div>
+
 
     </div>
-    <div class="col-md-6 "
+    <div class=" "
          ng-show="
          ( vm.questionGroup == 'LISTENING'
          || vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
@@ -108,7 +111,14 @@
          && vm.selectedQuestion.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
          && vm.selectedQuestion.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
          && vm.selectedQuestion.type != 'LISTENING_HIGHLIGHT_INCORRECT_WORD'"
-         ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
+         ng-class="
+            vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER' ||
+            vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY' ||
+            vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD' ||
+            vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD' ||
+            vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'  ? 'col-md-12':'col-md-6'"
+         >
+
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
 
@@ -143,8 +153,9 @@
                 </label>
             </div>
         </div>
+    </div>
+    <div class="col-md-12">
         <div class="text-right">
             <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
         </div>
-
     </div>

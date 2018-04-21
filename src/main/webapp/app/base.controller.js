@@ -67,7 +67,6 @@
             var dragInput = $("#dragInput")[0];
             var selQuestion = vm.selectedQuestion;
             var count = (selQuestion.text.match(/@Blank@/g) || []).length;
-
             var partialTexts = selQuestion.text.split('@Blank@');
             if(partialTexts.length > count) {
                 var startTextSpan = document.createElement('span');
