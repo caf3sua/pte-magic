@@ -47,7 +47,14 @@
                 <tr ng-repeat="answerQuestion in vm.exam.answerQuestions">
                     <td class="text-right">{{answerQuestion.answer.id}}</td>
                     <td  class="text-left">{{answerQuestion.answer.status}}</td>
-                    <td  class="text-left">{{answerQuestion.question.text}}</td>
+                    <td  class="text-left">
+                    	<div ng-show="answerQuestion.question.type == 'SPEAKING_DESCRIBE_IMAGE'">
+                    		<img class="pte-width-100 pte-margin-bottom-10" alt="" src="{{answerQuestion.question.audioLink}}">
+                    	</div>
+						<div ng-show="answerQuestion.question.type != 'SPEAKING_DESCRIBE_IMAGE'">
+                    		{{answerQuestion.question.text}}
+                    	</div>
+                    </td>
                     <!-- Audio/Writing -->
                     <td >
                         <div ng-show="answerQuestion.answer.answer">{{answerQuestion.answer.answer}}</div>

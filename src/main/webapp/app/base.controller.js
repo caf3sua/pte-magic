@@ -30,7 +30,12 @@
 		vm.currentQuestion = 0;
 		vm.totalQuestion = 0;
 		vm.currentSKill = '';
-
+		vm.countAudio = 3;
+		
+		// inteval
+		vm.intervalAudio;
+		vm.intervalCounter;
+		vm.intervalToRecording;
 		vm.countdown = 60; // 2min10second
 		vm.showProgressBar = false;
 		vm.countdownPercent = 0;
@@ -253,7 +258,7 @@
                     vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_OTHER; // 30
                 }
 
-        		var interval = setInterval(function() {
+        		vm.intervalToRecording = setInterval(function() {
         			vm.counter--;
 
                     // Beep sound
@@ -264,7 +269,7 @@
         		    // Display 'counter' wherever you want to display it.
         		    if (vm.counter == 0) {
         		        // Display a login box
-        		        clearInterval(interval);
+        		        clearInterval(vm.intervalToRecording);
         		        startRecording();
         		    }
         		}, 1000);
