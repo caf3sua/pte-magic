@@ -45,7 +45,6 @@
     	vm.txtStatusAudio = 'Playing';
         vm.checkAudioSeconds = true;
         vm.checkStatusPlay = false;
-        vm.countAudio = 3;
     	vm.countdownSpeaking = 5;
 
     	function stopRecording() {
@@ -78,15 +77,17 @@
             // Beep sound
             $("#player1")[0].play();
 
-    		var interval = setInterval(function() {
-    			vm.counter--;
-    		    // Display 'counter' wherever you want to display it.
-    		    if (vm.counter == 0) {
-    		        // Display a login box
-    		        clearInterval(interval);
-    		        vm.startRecording();
-    		    }
-    		}, 1000);
+            if (!vm.intervalCounter) {
+	            vm.intervalCounter = setInterval(function() {
+	    			vm.counter--;
+	    		    // Display 'counter' wherever you want to display it.
+	    		    if (vm.counter == 0) {
+	    		        // Display a login box
+	    		        clearInterval(vm.intervalCounter);
+	    		        vm.startRecording();
+	    		    }
+	    		}, 1000);
+            }
     	}
         vm.checkDisabled = false;
     	function playAudio(link, timeout) {
@@ -150,6 +151,20 @@
   		})();
 
   		function answer() {
+  			if(vm.intervalAudio) {
+  				clearInterval(vm.intervalAudio);
+            }
+        	
+        	if (vm.intervalProgress) {
+        		clearInterval(vm.intervalProgress);
+        	}
+        	if (vm.intervalCounter) {
+        		clearInterval(vm.intervalCounter);
+        	}
+        	if (vm.intervalToRecording) {
+        		clearInterval(vm.intervalToRecording);
+        	}
+
   			initAnswer();
             vm.countdownPercent = 0;
             var selectedQuestionId = vm.selectedQuestion.id;
@@ -268,12 +283,13 @@
 	    		vm.checkAudioSeconds = true;
 	            vm.checkStatusPlay = false;
                 vm.txtStatusAudio = 'Playing';
-                var interval = setInterval(function() {
+                vm.intervalAudio = setInterval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.
                     if (vm.countAudio == 0) {
 
                         playAudio(vm.selectedQuestion.audioLink, 1000);
+                        clearInterval(vm.intervalAudio);
                     }
                 }, 1000);
 
