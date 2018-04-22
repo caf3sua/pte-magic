@@ -1407,6 +1407,7 @@ textarea {
     margin-left: 10px;
     margin-right: 10px;
     margin-top: 5px;
+    margin-bottom: 5px;
 }
 .simpleDemo #dragInput ul[dnd-list] li {
     background-color: #f9db01;
@@ -1495,6 +1496,10 @@ textarea {
         /*user-select: none; Non-prefixed version, currently*/
     /*not supported by any browser*/
 /*}*/
+.pte-span-fill{
+    position: relative;
+    top: 10px;
+}
 @media (min-width:992px) and (max-width:1200px) {
     .col-md-12>div>div>#override {
         width: 78%;
