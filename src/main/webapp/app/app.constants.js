@@ -9,6 +9,7 @@
         .constant('PTE_SETTINGS', {
         	"COUNT_DOWN_TIME_SPEAKING_DESCRIBE_IMAGE" : 25
         	, "COUNT_DOWN_TIME_SPEAKING_OTHER" : 30
+        	, "COUNT_DOWN_TIME_BREAK" : 600 // 10p
         })
 ;
 })();

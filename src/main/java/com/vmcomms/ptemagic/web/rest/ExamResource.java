@@ -372,7 +372,11 @@ public class ExamResource {
 		selectQuestionByType(questions, 10, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
 		
 		// DUMP
-//		selectQuestionByType(questions, 2, QuestionType.SPEAKING_RETELL_LECTURE);
+//    	selectQuestionByType(questions, 1, QuestionType.SPEAKING_READ_ALOUD);
+//		selectQuestionByType(questions, 1, QuestionType.SPEAKING_REPEAT_SENTENCE);
+//		selectQuestionByType(questions, 1, QuestionType.SPEAKING_DESCRIBE_IMAGE);
+//		selectQuestionByType(questions, 1, QuestionType.SPEAKING_RETELL_LECTURE);
+//		selectQuestionByType(questions, 1, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
     }
     
     private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {

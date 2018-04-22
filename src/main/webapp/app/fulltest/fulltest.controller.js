@@ -6,10 +6,10 @@
         .controller('FullTestController', FullTestController);
 
     FullTestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
-        , '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity', '$interval'];
+        , '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity', '$interval', 'PTE_SETTINGS'];
 
     function FullTestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
-        , $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, $interval) {
+        , $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, $interval, PTE_SETTINGS) {
 
         var vm = this;
         
@@ -186,18 +186,20 @@
         	
             initAnswer();
 
-            // Upload if questionGroup == SPEAKING
-            if (vm.questionGroup == 'SPEAKING') {
-                stopRecording();
-                uploadRecording(vm.selectedQuestion.id);
-            } else {
-                console.log(vm.selectedQuestion);
-                // Get answer
-                vm.getUserAnswer();
-                console.log(vm.answers);
+            if (vm.selectedQuestion.type != 'TIME_BREAK') {
+                // Upload if questionGroup == SPEAKING
+                if (vm.questionGroup == 'SPEAKING') {
+                    stopRecording();
+                    uploadRecording(vm.selectedQuestion.id);
+                } else {
+                    console.log(vm.selectedQuestion);
+                    // Get answer
+                    vm.getUserAnswer();
+                    console.log(vm.answers);
 
-                // Save answer
-                saveAnswer();
+                    // Save answer
+                    saveAnswer();
+                }
             }
 
             // Next question
@@ -252,7 +254,7 @@
         vm.readingTimerRunningFlag = true;
         function setCountdownTimer() {
             if (vm.selectedQuestion.type == 'TIME_BREAK') {
-                vm.countdown = 10 * 60;
+                vm.countdown = PTE_SETTINGS.COUNT_DOWN_TIME_BREAK;
                 $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                 return;
             }
@@ -291,6 +293,7 @@
             $('#areaTextWriting').val("");
             vm.selectedQuestion = vm.questions.shift();
             vm.resetProgressStatus();
+            
             if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
                 vm.isFinish = true;
                 $scope.$broadcast('timer-stop');
@@ -346,6 +349,8 @@
                     }
                 }, 1000);
                 vm.countdownToRecording();
+                
+                $scope.$broadcast('timer-start');
             }
         }
 
