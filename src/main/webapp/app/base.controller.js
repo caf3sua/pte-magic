@@ -57,6 +57,7 @@
             fillInTheBlankPartialTexts: []
 	    };
         vm.intervalProgress;
+        vm.readingFIBRCount = 0;
 
 		// Function
 		vm.initBase = initBase;
@@ -72,35 +73,40 @@
         vm.prepareFillInTheBlanks = prepareFillInTheBlanks;
 
         function prepareFillInTheBlanks() {
-            if (vm.selectedQuestion.type == 'READING_FIB_R') {
+            if (vm.selectedQuestion.type == 'READING_FIB_R' && vm.readingFIBRCount == 0) {
                 var dragInput = $("#dragInput")[0];
                 var selQuestion = vm.selectedQuestion;
                 var count = (selQuestion.text.match(/@Blank@/g) || []).length;
                 var partialTexts = selQuestion.text.split('@Blank@');
                 if(partialTexts.length > count) {
                     var startTextSpan = document.createElement('span');
+                    startTextSpan.className = "dragArea";
                     startTextSpan.innerHTML = partialTexts[0];
                     dragInput.insertBefore(startTextSpan, dragInput.children[0]);
 
                     for (var i = 1; i <= count; i++) {
                         var textSpan = document.createElement('span');
+                        textSpan.className = "dragArea";
                         textSpan.innerHTML = partialTexts[i];
                         dragInput.insertBefore(textSpan, dragInput.children[i*2]);
                     }
                 } else if(partialTexts.length == count) {
                     if(selQuestion.text.indexOf('@Blank@') > 0) {
                         var startTextSpan = document.createElement('span');
+                        startTextSpan.className = "dragArea";
                         startTextSpan.innerHTML = partialTexts[0];
                         dragInput.insertBefore(startTextSpan, dragInput.children[0]);
 
                         for (var i = 1; i <= count; i++) {
                             var textSpan = document.createElement('span');
+                            textSpan.className = "dragArea";
                             textSpan.innerHTML = partialTexts[i];
                             insertAfter(textSpan, dragInput.children[i*2]);
                         }
                     } else {
                         for (var i = 0; i < count; i++) {
                             var textSpan = document.createElement('span');
+                            textSpan.className = "dragArea";
                             textSpan.innerHTML = partialTexts[i];
                             insertAfter(textSpan, dragInput.children[i*2]);
                         }
@@ -108,10 +114,12 @@
                 } else {
                     for (var i = 0; i < count; i++) {
                         var textSpan = document.createElement('span');
+                        textSpan.className = "dragArea";
                         textSpan.innerHTML = partialTexts[i];
                         insertAfter(textSpan, dragInput.children[i*2]);
                     }
                 }
+                vm.readingFIBRCount++;
             }
         }
 
@@ -334,6 +342,10 @@
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
+
+                vm.readingFIBRCount = 0;
+                var dragInput = $("#dragInput")[0];
+                $(".dragArea").remove();
             }
 
             if (selQuestion.type == 'LISTENING_FIB_L') {

@@ -22,8 +22,8 @@
     <div class="simpleDemo row" ng-show="vm.selectedQuestion.type == 'READING_FIB_R'">
 
         <div class="col-md-12">
-            <div class="row" id="dragInput" elem-ready="vm.prepareFillInTheBlanks()">
-                <div ng-repeat="(index, value) in models.fillInTheBlankQuestionArr" class="pte-display-inline-block">
+            <div class="row" id="dragInput">
+                <div ng-repeat="(index, value) in models.fillInTheBlankQuestionArr" class="pte-display-inline-block" elem-ready="vm.prepareFillInTheBlanks()">
                     <div ng-repeat="(listName, list) in value"  class="pte-display-inline-block">
                         <div class="panel panel-info pte-position-top10" id="drag-panel{{index}}">
                             <div><div class="panel-body" ng-include="'app/partial/draggable.replace-panel.html'"></div></div>
