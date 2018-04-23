@@ -31,10 +31,10 @@
 		vm.totalQuestion = 0;
 		vm.currentSKill = '';
 		vm.countAudio = 3;
-		
+
 		vm.listeningTimerRunningFlag = false;
         vm.readingTimerRunningFlag = false;
-		
+
 		// inteval
 		vm.intervalAudio;
 		vm.intervalCounter;
@@ -72,22 +72,12 @@
         vm.prepareFillInTheBlanks = prepareFillInTheBlanks;
 
         function prepareFillInTheBlanks() {
-            var dragInput = $("#dragInput")[0];
-            var selQuestion = vm.selectedQuestion;
-            var count = (selQuestion.text.match(/@Blank@/g) || []).length;
-            var partialTexts = selQuestion.text.split('@Blank@');
-            if(partialTexts.length > count) {
-                var startTextSpan = document.createElement('span');
-                startTextSpan.innerHTML = partialTexts[0];
-                dragInput.insertBefore(startTextSpan, dragInput.children[0]);
-
-                for (var i = 1; i <= count; i++) {
-                    var textSpan = document.createElement('span');
-                    textSpan.innerHTML = partialTexts[i];
-                    dragInput.insertBefore(textSpan, dragInput.children[i*2]);
-                }
-            } else if(partialTexts.length == count) {
-                if(selQuestion.text.indexOf('@Blank@') > 0) {
+            if (vm.selectedQuestion.type == 'READING_FIB_R') {
+                var dragInput = $("#dragInput")[0];
+                var selQuestion = vm.selectedQuestion;
+                var count = (selQuestion.text.match(/@Blank@/g) || []).length;
+                var partialTexts = selQuestion.text.split('@Blank@');
+                if(partialTexts.length > count) {
                     var startTextSpan = document.createElement('span');
                     startTextSpan.innerHTML = partialTexts[0];
                     dragInput.insertBefore(startTextSpan, dragInput.children[0]);
@@ -95,7 +85,25 @@
                     for (var i = 1; i <= count; i++) {
                         var textSpan = document.createElement('span');
                         textSpan.innerHTML = partialTexts[i];
-                        insertAfter(textSpan, dragInput.children[i*2]);
+                        dragInput.insertBefore(textSpan, dragInput.children[i*2]);
+                    }
+                } else if(partialTexts.length == count) {
+                    if(selQuestion.text.indexOf('@Blank@') > 0) {
+                        var startTextSpan = document.createElement('span');
+                        startTextSpan.innerHTML = partialTexts[0];
+                        dragInput.insertBefore(startTextSpan, dragInput.children[0]);
+
+                        for (var i = 1; i <= count; i++) {
+                            var textSpan = document.createElement('span');
+                            textSpan.innerHTML = partialTexts[i];
+                            insertAfter(textSpan, dragInput.children[i*2]);
+                        }
+                    } else {
+                        for (var i = 0; i < count; i++) {
+                            var textSpan = document.createElement('span');
+                            textSpan.innerHTML = partialTexts[i];
+                            insertAfter(textSpan, dragInput.children[i*2]);
+                        }
                     }
                 } else {
                     for (var i = 0; i < count; i++) {
@@ -103,12 +111,6 @@
                         textSpan.innerHTML = partialTexts[i];
                         insertAfter(textSpan, dragInput.children[i*2]);
                     }
-                }
-            } else {
-                for (var i = 0; i < count; i++) {
-                    var textSpan = document.createElement('span');
-                    textSpan.innerHTML = partialTexts[i];
-                    insertAfter(textSpan, dragInput.children[i*2]);
                 }
             }
         }
