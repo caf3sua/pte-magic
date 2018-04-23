@@ -251,8 +251,9 @@
         }
 
         vm.listeningTimerRunningFlag = false;
-        vm.readingTimerRunningFlag = true;
+        vm.readingTimerRunningFlag = false;
         function setCountdownTimer() {
+        	console.log('setCountdownTimer');
             if (vm.selectedQuestion.type == 'TIME_BREAK') {
                 vm.countdown = PTE_SETTINGS.COUNT_DOWN_TIME_BREAK;
                 $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
@@ -280,7 +281,7 @@
                         $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
                     }
                 } else if (vm.questionGroup == 'READING') {
-                    if (vm.listeningTimerRunningFlag == false) {
+                    if (vm.readingTimerRunningFlag == false) {
                         vm.countdown = 40 * 60;
                         $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                         vm.readingTimerRunningFlag = true;
