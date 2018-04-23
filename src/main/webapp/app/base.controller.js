@@ -32,6 +32,9 @@
 		vm.currentSKill = '';
 		vm.countAudio = 3;
 		
+		vm.listeningTimerRunningFlag = false;
+        vm.readingTimerRunningFlag = false;
+		
 		// inteval
 		vm.intervalAudio;
 		vm.intervalCounter;

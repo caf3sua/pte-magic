@@ -250,8 +250,6 @@
             xhr.send();
         }
 
-        vm.listeningTimerRunningFlag = false;
-        vm.readingTimerRunningFlag = false;
         function setCountdownTimer() {
         	console.log('setCountdownTimer');
             if (vm.selectedQuestion.type == 'TIME_BREAK') {
@@ -269,7 +267,7 @@
                         if (vm.listeningTimerRunningFlag == false) {
                             vm.countdown = 16 * 2 * 60 + 2 * 60;
                             $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
-                            vm.listeningTimerRunningFlag == true;
+                            vm.listeningTimerRunningFlag = true;
                         }
                     }
                 } else if (vm.questionGroup == 'WRITING') {
