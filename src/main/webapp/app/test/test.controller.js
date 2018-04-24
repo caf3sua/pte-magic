@@ -71,6 +71,10 @@
                 vm.counter = 2;
             }else if(vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
                 vm.counter = 1;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'){
+                vm.counter = 10;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
+                vm.counter = 40;
             }else{
                 vm.counter = 30;
             }
@@ -97,7 +101,7 @@
             	var audio = $("#player");
 
         		if (audio[0] != undefined) {
-        			audio[0].addEventListener('ended', callBackAudioEnded);
+        			audio[0].addEventListener('ended', countercallBackAudioEnded);
         			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
                     audio[0].pause();
                     audio[0].load();
@@ -154,7 +158,7 @@
   			if(vm.intervalAudio) {
   				clearInterval(vm.intervalAudio);
             }
-        	
+
         	if (vm.intervalProgress) {
         		clearInterval(vm.intervalProgress);
         	}

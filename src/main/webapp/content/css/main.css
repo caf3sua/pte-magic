@@ -1144,6 +1144,7 @@ table>thead>tr{
     background: #393939;
     color: #f9db01;
     border: 1px solid #393939;
+    margin-bottom: 20px;
 }
 .pte-test-answer:hover{
     background: #f9db01;

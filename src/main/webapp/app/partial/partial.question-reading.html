@@ -50,8 +50,6 @@
         vm.selectedQuestion.type != 'READING_RE_ORDER_PARAGRAPH' &&
         vm.selectedQuestion.type != 'READING_FIB_R')"
          ng-class="(
-         vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER'  ||
-         vm.selectedQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER'  ||
          vm.selectedQuestion.type == 'READING_FIB_R_W' ? 'col-md-12':'col-md-6')"
     >
         <p class="pte-test-content-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.text)"></p>
@@ -72,12 +70,8 @@
         </div>
     </div>
 
-    <div class=" "
+    <div class=" col-md-6"
          ng-show="vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' || vm.selectedQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER'"
-         ng-class="
-         vm.selectedQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER'  ||
-         vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER'  ? 'col-md-12':'col-md-6'"
-
             >
         <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">

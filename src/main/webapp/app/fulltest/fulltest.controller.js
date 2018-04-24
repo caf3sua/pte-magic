@@ -12,7 +12,7 @@
         , $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, $interval, PTE_SETTINGS) {
 
         var vm = this;
-        
+
         // Function
         vm.answer = answer;
         vm.trustAsHtml = $sce.trustAsHtml;
@@ -76,6 +76,10 @@
                 vm.counter = 2;
             }else if(vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
                 vm.counter = 1;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'){
+                vm.counter = 10;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
+                vm.counter = 40;
             }else{
                 vm.counter = 30;
             }
@@ -182,8 +186,8 @@
         	if (vm.intervalToRecording) {
         		clearInterval(vm.intervalToRecording);
         	}
-        	
-        	
+
+
             initAnswer();
 
             if (vm.selectedQuestion.type != 'TIME_BREAK') {
@@ -292,7 +296,7 @@
             $('#areaTextWriting').val("");
             vm.selectedQuestion = vm.questions.shift();
             vm.resetProgressStatus();
-            
+
             if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
                 vm.isFinish = true;
                 $scope.$broadcast('timer-stop');
@@ -348,7 +352,7 @@
                     }
                 }, 1000);
                 vm.countdownToRecording();
-                
+
                 $scope.$broadcast('timer-start');
             }
         }

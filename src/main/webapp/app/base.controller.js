@@ -192,7 +192,7 @@
     		vm.intervalProgress = setInterval(function() {
     			vm.timeProgress++;
     			if( vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
-                    vm.countdownPercent = vm.timeProgress / 30 * 100;
+                    vm.countdownPercent = vm.timeProgress / 40 * 100;
                     console.log('countdownPercent:' + vm.countdownPercent);
                     if (vm.timeProgress == 30) {
                         console.log('timeProgress:' + vm.timeProgress);
@@ -259,6 +259,8 @@
         		vm.showRecording = true;
                 if(vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'){
                     vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_DESCRIBE_IMAGE; // 25
+                }else if(vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
+                    vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_READ_ALOUD; // 40
                 }else{
                     vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_OTHER; // 30
                 }
