@@ -51,10 +51,10 @@
 	            "TIME_BREAK": "Breaking Time"
             },
             "description" : {
-	            "SPEAKING_READ_ALOUD":"Look at the text below. In 40 seconds, you must read this text aloud as naturally and clearly as possible.You have 40 seconds to read aloud.",
+	            "SPEAKING_READ_ALOUD":"Look at the text below. In 40 seconds, you must read this text aloud as naturally and clearly as possible. You have 40 seconds to read aloud.",
 	            "SPEAKING_REPEAT_SENTENCE":"You will hear a sentence. Please repeat the sentence exactly as you hear it. You will hear the sentence only once.",
-	            "SPEAKING_DESCRIBE_IMAGE":"Look at the graph below. In 25 seconds, please speak into the microphone and describe in detail what the graph is showing.You will have 40 seconds to give your response.",
-	            "SPEAKING_RETELL_LECTURE":"You will hear an Interview/Lecture. After listening to it, in 10 seconds, please speak into the microphone and retell what you have just heard from the lecture in your own words.You will have 40 seconds to give your response.",
+	            "SPEAKING_DESCRIBE_IMAGE":"Look at the graph below. In 25 seconds, please speak into the microphone and describe in detail what the graph is showing. You will have 40 seconds to give your response.",
+	            "SPEAKING_RETELL_LECTURE":"You will hear an Interview/Lecture. After listening to it, in 10 seconds, please speak into the microphone and retell what you have just heard from the lecture in your own words. You will have 40 seconds to give your response.",
 	            "SPEAKING_ANSWER_SHORT_QUESTION":"You will hear a question. Please give a simple and short answer. Often just one or a few words in enough.",
 	            "WRITING_SUMMARIZE_WRITTEN_TEXT":"Read the passage below and summarize it using one sentence. Type your response in the box at the bottom of the screen. You have 10 minutes to finish this task. Your response will be judged on the quality of your writing and on how well your response presents the key points in the passage.",
 	            "WRITING_ESSAY":"You will have 20 minutes to plan, write and revise an essay about the topic below. Your response will be judged on how well you develop a position, organize your ideas, present supporting details, and control the elements of standard written English. You should write 200-300 words.",
@@ -65,7 +65,7 @@
 	            "READING_MCQ_R_MULTIPLE_ANSWER":"Read the text and answer the question by selecting all the correct responses. You will need to select more than one response.",
 	            "LISTENING_SUMMARIZE_SPOKEN_TEXT":"You will hear a short audio. Write a summary for a fellow student who was not present at the Interview/Lecture. You should write 50-70 words. You have 10 minutes to finish this task. Your responsive will be judged on the quality of your writing and on how well your response presents the key points presented in the interview.",
 	            "LISTENING_FIB_L":"You will hear a recording. Type the missing words in each blank.",
-	            "LISTENING_MCQ_L_SINGLE_ANSWER":"Listen to the recording and answer the multiple-choice question by selecting the correct response.Only one response is correct.",
+	            "LISTENING_MCQ_L_SINGLE_ANSWER":"Listen to the recording and answer the multiple-choice question by selecting the correct response. Only one response is correct.",
 	            "LISTENING_MCQ_L_MULTIPLE_ANSWER":"Listen to the recording and answer the question by selecting the correct. You will need to select more than one response.",
 	            "LISTENING_HIGHLIGHT_CORRECT_SUMMARY":"You will hear a recording. Click on the paragraph that best relates to the recording.",
 	            "LISTENING_SELECT_MISSING_WORD":"You will hear a recording of a lecture. At the end of the recording the last word or group of words has been replaced by a beep. Select the correct option to complete the recording.",
