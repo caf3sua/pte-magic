@@ -35,7 +35,7 @@
         vm.UpdateLengths = UpdateLengths;
         vm.checkClickspell = true;
         vm.CharacterLength = 0;
-        vm.WORDS_MAXIMUM = 10; // changeable
+        vm.WORDS_MAXIMUM = 1000; // changeable
         vm.WordsLength=0;
         vm.Text = "";
     	vm.txtInfoCountdown = "Begining in ";

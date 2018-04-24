@@ -37,7 +37,7 @@
         vm.countdownRecording = 5;
         vm.isRecording = false;
         vm.CharacterLength = 0;
-        vm.WORDS_MAXIMUM = 10; // changeable
+        vm.WORDS_MAXIMUM = 1000; // changeable
         vm.WordsLength=0;
         vm.Text = "";
         vm.txtStatusAudio = 'Playing';
