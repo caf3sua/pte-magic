@@ -81,17 +81,15 @@
             // Beep sound
             $("#player1")[0].play();
 
-            if (!vm.intervalCounter) {
-	            vm.intervalCounter = setInterval(function() {
-	    			vm.counter--;
-	    		    // Display 'counter' wherever you want to display it.
-	    		    if (vm.counter == 0) {
-	    		        // Display a login box
-	    		        clearInterval(vm.intervalCounter);
-	    		        vm.startRecording();
-	    		    }
-	    		}, 1000);
-            }
+            vm.intervalCounter = setInterval(function() {
+    			vm.counter--;
+    		    // Display 'counter' wherever you want to display it.
+    		    if (vm.counter == 0) {
+    		        // Display a login box
+    		        clearInterval(vm.intervalCounter);
+    		        vm.startRecording();
+    		    }
+    		}, 1000);
     	}
         vm.checkDisabled = false;
     	function playAudio(link, timeout) {
