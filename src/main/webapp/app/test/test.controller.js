@@ -101,7 +101,7 @@
             	var audio = $("#player");
 
         		if (audio[0] != undefined) {
-        			audio[0].addEventListener('ended', countercallBackAudioEnded);
+        			audio[0].addEventListener('ended', callBackAudioEnded);
         			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
                     audio[0].pause();
                     audio[0].load();
