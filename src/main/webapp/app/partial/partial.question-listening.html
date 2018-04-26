@@ -1,4 +1,7 @@
-    <div
+<div class="col-md-12 pte-margin-bottom-10">
+    <p class="pte-test-type-question-two-des-down" data-translate="pteMagicApp.QuestionType.description.{{vm.selectedQuestion.type}}">Description</p>
+</div>
+<div
          ng-show="vm.questionGroup == 'READING' || vm.questionGroup == 'LISTENING'"
          ng-class="(
          vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' ||
@@ -61,7 +64,7 @@
          vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD' ||
          vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'  ? 'col-md-12':'col-md-6'"
     >
-        <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
+        <div class="pte-test-content-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
 
         <div class="padding-left30">
 
@@ -119,7 +122,7 @@
             vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'  ? 'col-md-12':'col-md-6'"
          >
 
-        <div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
+        <div class="pte-test-content-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
         <div class="padding-left30">
 
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">

@@ -1054,16 +1054,17 @@ table>thead>tr{
     margin: 0;
 }
 .pte-test-type-question-two{
-    background: #3b3b3b;
-    padding: 18px 0;
+    background: #f9db01;
+    padding: 10px 0;
 }
 .pte-test-type-question-two-title{
-    color: #fff;
+    color: #000;
     font-size: 15px;
     font-family: 'Roboto';
     font-weight: normal;
     font-style: italic;
     text-transform: uppercase;
+    margin: 0;
 }
 .pte-test-type-question-two-des{
     color: #fff;
@@ -1510,6 +1511,13 @@ textarea {
 }
 .pte-scroll-popup{
    padding-bottom: 100px;
+}
+.pte-test-type-question-two-des-down{
+    color: #000;
+    font-size: 16px;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-style: italic;
 }
 @media (min-width:1200px) and (max-width:1300px) {
     .pte-button-next-postion{

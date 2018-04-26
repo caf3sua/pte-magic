@@ -1,5 +1,10 @@
 <div class="col-md-12" ng-show="vm.selectedQuestion.type != 'SPEAKING_DESCRIBE_IMAGE'">
-    <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
+    <p class="pte-test-content-question" ng-show="vm.selectedQuestion.type != 'SPEAKING_READ_ALOUD'">{{vm.selectedQuestion.text}}</p>
+</div>
+<div class="col-md-12 pte-margin-bottom-10"
+     ng-show="vm.questionGroup == 'SPEAKING'">
+    <p class="pte-test-type-question-two-des-down" data-translate="pteMagicApp.QuestionType.description.{{vm.selectedQuestion.type}}">Description</p>
+
 </div>
 <div class="col-md-12 text-center" ng-show="vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'">
     <!-- https://storage.googleapis.com/pte-magic/WFD1.mp3 -->
@@ -58,7 +63,9 @@
 
     </div>
 </div>
-
+<div class="col-md-12 margin-top30"  ng-show="vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'">
+    <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
+</div>
 <div class="col-md-12"  ng-class="vm.selectedQuestion.type == 'TIME_BREAK' ? 'pte-timeBreak':''">
     <!--<div class="text-center pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>-->
     <!--<div class="text-right">-->
