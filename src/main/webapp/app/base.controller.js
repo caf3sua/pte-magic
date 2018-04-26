@@ -35,6 +35,7 @@
 		vm.listeningTimerRunningFlag = false;
         vm.readingTimerRunningFlag = false;
 
+        vm.txtStatusAudio = 'Playing';
 		// inteval
 		vm.intervalAudio;
 		vm.intervalCounter;
@@ -59,6 +60,12 @@
         vm.intervalProgress;
         vm.readingFIBRCount = 0;
 
+        vm.checkClickspell = true;
+        vm.CharacterLength = 0;
+        vm.WORDS_MAXIMUM = 1000; // changeable
+        vm.WordsLength=0;
+        vm.Text = "";
+        
 		// Function
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
@@ -71,7 +78,152 @@
         vm.resetProgressStatus = resetProgressStatus;
         vm.initCountQuestion = initCountQuestion;
         vm.prepareFillInTheBlanks = prepareFillInTheBlanks;
+        vm.callBackAudioEnded = callBackAudioEnded;
+        vm.saveAnswer = saveAnswer;
+        vm.saveAnswerSpeaking = saveAnswerSpeaking;
+        vm.IsAlphabet = IsAlphabet;
+        vm.spellCheck = spellCheck;
+        vm.UpdateLengths = UpdateLengths;
+        
+        function spellCheck() {
+            if(vm.checkClickspell == true){
+                document.getElementById("areaTextWriting").setAttribute("spellcheck", "true");
+                vm.checkClickspell = false;
+            }else {
+                document.getElementById("areaTextWriting").removeAttribute("spellcheck");
+                vm.checkClickspell = true;
+            }
+        }
 
+        function UpdateLengths($event) {
+            vm.CharacterLength = vm.Text.length;
+            vm.WordsLength=0;
+            if(vm.Text.length == 1 && vm.Text[0]!='')
+            {
+                vm.WordsLength = 1;
+            }
+
+            for( var i=1; i< vm.Text.length; i++)
+            {
+                if( vm.IsAlphabet(vm.Text[i])  && !vm.IsAlphabet(vm.Text[i-1]))
+                {
+                    vm.WordsLength++;
+                    if(vm.WordsLength == vm.WORDS_MAXIMUM + 1)// WORDS_MAXIMUM = 10
+                    {
+                        vm.WordsLength--;
+                        vm.Text = vm.Text.substring(0, i);
+                        return;
+                    }
+                }else if (vm.IsAlphabet(vm.Text[i]) && vm.IsAlphabet(vm.Text[i-1]) )
+                {
+                    if(vm.WordsLength==0)
+                    {
+                        vm.WordsLength=1;
+                    }
+                }else if(!vm.IsAlphabet(vm.Text[i]) && !vm.IsAlphabet(vm.Text[i-1]))
+                {
+                    continue;
+                }else if(!vm.IsAlphabet(vm.Text[i]) && vm.IsAlphabet(vm.Text[i-1]))
+                {
+                    continue;
+                }
+            }
+        }
+        function IsAlphabet(character)
+        {
+            var numeric_char = character.charCodeAt(character);
+
+            if(numeric_char>64 && numeric_char<91)// A-Z
+            {
+                return true;
+            }
+            if(numeric_char>96 && numeric_char<123)// a-z
+            {
+                return true;
+            }
+            return false;
+        }
+        
+        function saveAnswerSpeaking(selectedQuestionId, audioLink) {
+            var answer = {};
+            answer.examId = vm.exam.examDTO.id;
+            answer.questionId = selectedQuestionId;
+            answer.audioLink = audioLink;
+            answer.status = 'MARKING';
+            // answer.description;
+
+            Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
+
+            function onSaveAnswerSuccess() {
+            }
+
+            function onSaveAnswerError() {
+            }
+        }
+        
+        function saveAnswer() {
+        	// Skip if time break
+            if (vm.selectedQuestion.type == 'TIME_BREAK') {
+                return;
+            }
+            
+  			// Save result
+  			var answer = {};
+  		    answer.examId = vm.exam.examDTO.id;
+  		    answer.questionId = vm.selectedQuestion.id;
+  		    
+  		    if (answer.examId == null || answer.examId == '' || answer.questionId == null || answer.questionId == '') {
+  		    	alert("examID or questionID is null or invalid");
+  		    	console.log("examID or questionID is null or invalid, examID: " + answer.examId + ", questionID: " + answer.questionId);
+  		    	return;
+  		    }
+  		    
+  		    answer.answer = vm.answers.join(',');
+  		    if (vm.questionGroup == 'WRITING' || vm.questionGroup == 'SPEAKING') {
+		    	answer.status = 'MARKING';
+		    }
+  		    // answer.audioLink;
+  		    // answer.description;
+
+  			Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
+
+  			function onSaveAnswerSuccess() {
+  	  		}
+
+  	  		function onSaveAnswerError() {
+  	  		}
+  		}
+        
+        function callBackAudioEnded() {
+            console.log('play audio ended!');
+            vm.showRecording = true;
+            vm.txtStatusAudio = 'Completed';
+            if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'){
+                vm.counter = 2;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
+                vm.counter = 1;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'){
+                vm.counter = 10;
+            }else if(vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
+                vm.counter = 40;
+            }else{
+                vm.counter = 30;
+            }
+
+            // Beep sound
+            $("#player1")[0].play();
+
+        	vm.intervalCounter = setInterval(function() {
+                vm.counter--;
+                // Display 'counter' wherever you want to display it.
+                if (vm.counter == 0) {
+                    // Display a login box
+                    clearInterval(vm.intervalCounter);
+                    vm.startRecording();
+                }
+            }, 1000);
+        }
+        
         function prepareFillInTheBlanks() {
             if (vm.selectedQuestion.type == 'READING_FIB_R' && vm.readingFIBRCount == 0) {
                 var dragInput = $("#dragInput")[0];
