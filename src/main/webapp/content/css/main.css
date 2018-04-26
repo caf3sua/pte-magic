@@ -1501,6 +1501,25 @@ textarea {
     position: relative;
     top: 10px;
 }
+.pte-button-next-postion{
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    left: 0;
+    text-align: right;
+}
+.pte-scroll-popup{
+   padding-bottom: 100px;
+}
+@media (min-width:1200px) and (max-width:1300px) {
+    .pte-button-next-postion{
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        left: 0;
+        text-align: right;
+    }
+}
 @media (min-width:992px) and (max-width:1200px) {
     .col-md-12>div>div>#override {
         width: 78%;

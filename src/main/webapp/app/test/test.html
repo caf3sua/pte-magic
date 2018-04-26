@@ -30,7 +30,7 @@
     </div>
     <div ng-show="!vm.isFinish" class="">
 
-	    <div class="container margin-top30">
+	    <div class="container margin-top30 position-relative">
 	        <div class="col-md-12 padding0">
 
 	        	<!-- WRITING -->
@@ -45,6 +45,7 @@
 	        	<!-- LISTENING -->
 	        	<div ng-if="vm.questionGroup == 'LISTENING'" ng-include="'app/partial/partial.question-listening.html'"></div>
 	        </div>
+
 	    </div>
     </div>
     <div ng-show="vm.isFinish" style="margin-top: 100px;">
@@ -53,8 +54,12 @@
            <button class="pte-test-answer" ng-click="vm.closeExam()">Finish</button>
        </div>
     </div>
+
 </div>
 
 <noscript>
     <h1>You must enable javascript to view this page.</h1>
 </noscript>
+<div ng-show="!vm.isFinish && vm.selectedQuestion.type != 'TIME_BREAK'" class="container text-right pte-button-next-postion">
+    <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
+</div>
