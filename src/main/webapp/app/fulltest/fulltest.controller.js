@@ -30,17 +30,10 @@
         vm.btnEnable = true;
         vm.toggleRecording = toggleRecording;
         vm.startNewPart = startNewPart;
-        vm.checkClickspell = true;
-        vm.spellCheck = spellCheck;
-        vm.UpdateLengths = UpdateLengths;
+        
         vm.txtInfoCountdown = "Begining in ";
         vm.countdownRecording = 5;
         vm.isRecording = false;
-        vm.CharacterLength = 0;
-        vm.WORDS_MAXIMUM = 1000; // changeable
-        vm.WordsLength=0;
-        vm.Text = "";
-        vm.txtStatusAudio = 'Playing';
         vm.checkAudioSeconds = true;
         vm.checkStatusPlay = false;
         vm.countdownTimebreak = 600;
@@ -64,38 +57,8 @@
         function initPlayer() {
             var audio = $("#player");
             if (audio[0] != undefined) {
-                audio[0].addEventListener('ended', callBackAudioEnded);
+                audio[0].addEventListener('ended', vm.callBackAudioEnded);
             }
-        }
-
-        function callBackAudioEnded() {
-            console.log('play audio ended!');
-            vm.showRecording = true;
-            vm.txtStatusAudio = 'Completed';
-            if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'){
-                vm.counter = 2;
-            }else if(vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
-                vm.counter = 1;
-            }else if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'){
-                vm.counter = 10;
-            }else if(vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
-                vm.counter = 40;
-            }else{
-                vm.counter = 30;
-            }
-
-            // Beep sound
-            $("#player1")[0].play();
-
-        	vm.intervalCounter = setInterval(function() {
-                vm.counter--;
-                // Display 'counter' wherever you want to display it.
-                if (vm.counter == 0) {
-                    // Display a login box
-                    clearInterval(vm.intervalCounter);
-                    vm.startRecording();
-                }
-            }, 1000);
         }
 
         function playAudio(link, timeout) {
@@ -106,7 +69,7 @@
             vm.checkStatusPlay = true;
             var audio = $("#player");
             if (audio[0] != undefined) {
-                audio[0].addEventListener('ended', callBackAudioEnded);
+                audio[0].addEventListener('ended', vm.callBackAudioEnded);
                 console.log('Play audio: ' + link);
                 $("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic-2018/1523480876666_HCS1.mp3
                 audio[0].pause();
@@ -132,13 +95,6 @@
         }
 
         angular.element(document).ready(function () {
-//    		$timeout(function(){
-//	    		// Load player
-//	    		initPlayer();
-//
-//	    		// Load record audio
-//	    		initAudio();
-//    		}, 1000 );
         });
 
         function initMockTest() {
@@ -202,7 +158,7 @@
                     console.log(vm.answers);
 
                     // Save answer
-                    saveAnswer();
+                    vm.saveAnswer();
                 }
             }
 
@@ -248,7 +204,7 @@
                     vm.fileUpload = new File([blob], filename);
 
                     // save answer
-                    saveAnswerSpeaking(selectedQuestionId, filename);
+                    vm.saveAnswerSpeaking(selectedQuestionId, filename);
                 }
             };
             xhr.send();
@@ -355,108 +311,6 @@
 
                 $scope.$broadcast('timer-start');
             }
-        }
-
-        function saveAnswer() {
-            // Skip if time break
-            if (vm.selectedQuestion.type == 'TIME_BREAK') {
-                return;
-            }
-
-            // Save result
-            var answer = {};
-            answer.examId = vm.exam.examDTO.id;
-            answer.questionId = vm.selectedQuestion.id;
-            answer.answer = vm.answers.join(',');
-            if (vm.questionGroup == 'WRITING' || vm.questionGroup == 'SPEAKING') {
-                answer.status = 'MARKING';
-            }
-            // answer.audioLink;
-            // answer.description;
-
-            Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
-
-            function onSaveAnswerSuccess() {
-            }
-
-            function onSaveAnswerError() {
-            }
-        }
-
-        function saveAnswerSpeaking(selectedQuestionId, audioLink) {
-            var answer = {};
-            answer.examId = vm.exam.examDTO.id;
-            answer.questionId = selectedQuestionId;
-            answer.audioLink = audioLink;
-            answer.status = 'MARKING';
-            // answer.description;
-
-            Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
-
-            function onSaveAnswerSuccess() {
-            }
-
-            function onSaveAnswerError() {
-            }
-        }
-
-        function spellCheck() {
-            if(vm.checkClickspell == true){
-                document.getElementById("areaTextWriting").setAttribute("spellcheck", "true");
-                vm.checkClickspell = false;
-            }else {
-                document.getElementById("areaTextWriting").removeAttribute("spellcheck");
-                vm.checkClickspell = true;
-            }
-        }
-
-        function UpdateLengths($event) {
-            vm.CharacterLength = vm.Text.length;
-            vm.WordsLength=0;
-            if(vm.Text.length == 1 && vm.Text[0]!='')
-            {
-                vm.WordsLength = 1;
-            }
-
-            for( var i=1; i< vm.Text.length; i++)
-            {
-                if( vm.IsAlphabet(vm.Text[i])  && !vm.IsAlphabet(vm.Text[i-1]))
-                {
-                    vm.WordsLength++;
-                    if(vm.WordsLength == vm.WORDS_MAXIMUM + 1)// WORDS_MAXIMUM = 10
-                    {
-                        vm.WordsLength--;
-                        vm.Text = vm.Text.substring(0, i);
-                        return;
-                    }
-                }else if (vm.IsAlphabet(vm.Text[i]) && vm.IsAlphabet(vm.Text[i-1]) )
-                {
-                    if(vm.WordsLength==0)
-                    {
-                        vm.WordsLength=1;
-                    }
-                }else if(!vm.IsAlphabet(vm.Text[i]) && !vm.IsAlphabet(vm.Text[i-1]))
-                {
-                    continue;
-                }else if(!vm.IsAlphabet(vm.Text[i]) && vm.IsAlphabet(vm.Text[i-1]))
-                {
-                    continue;
-                }
-            }
-        }
-        vm.IsAlphabet = function(character)
-        {
-            var numeric_char = character.charCodeAt(character);
-
-            if(numeric_char>64 && numeric_char<91)// A-Z
-            {
-                return true;
-            }
-            if(numeric_char>96 && numeric_char<123)// a-z
-            {
-                return true;
-            }
-            return false;
         }
     }
 })();

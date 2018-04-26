@@ -27,6 +27,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 /**
  * REST controller for managing Answer.
  */
@@ -56,7 +58,7 @@ public class AnswerResource {
      */
     @PostMapping("/answers")
     @Timed
-    public ResponseEntity<AnswerDTO> createAnswer(@RequestBody AnswerDTO answerDTO) throws URISyntaxException {
+    public ResponseEntity<AnswerDTO> createAnswer(@Valid @RequestBody AnswerDTO answerDTO) throws URISyntaxException {
         log.debug("REST request to save Answer : {}", answerDTO);
         if (answerDTO.getId() != null) {
             throw new BadRequestAlertException("A new answer cannot already have an ID", ENTITY_NAME, "idexists");

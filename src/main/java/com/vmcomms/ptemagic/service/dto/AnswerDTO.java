@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
 
 import java.util.Objects;
 
@@ -16,8 +17,10 @@ public class AnswerDTO implements Serializable {
 
     private Long id;
 
+    @NotNull
     private Long examId;
 
+    @NotNull
     private Long questionId;
 
     private String answer;
