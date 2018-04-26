@@ -69,3 +69,6 @@
 <noscript>
     <h1>You must enable javascript to view this page.</h1>
 </noscript>
+<div ng-show="!vm.isFinish && vm.selectedQuestion.type != 'TIME_BREAK'" class="container text-right pte-button-next-postion">
+    <button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>
+</div>
