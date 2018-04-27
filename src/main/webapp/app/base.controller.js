@@ -65,7 +65,7 @@
         vm.WORDS_MAXIMUM = 1000; // changeable
         vm.WordsLength=0;
         vm.Text = "";
-        
+
 		// Function
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
@@ -84,7 +84,7 @@
         vm.IsAlphabet = IsAlphabet;
         vm.spellCheck = spellCheck;
         vm.UpdateLengths = UpdateLengths;
-        
+
         function spellCheck() {
             if(vm.checkClickspell == true){
                 document.getElementById("areaTextWriting").setAttribute("spellcheck", "true");
@@ -143,7 +143,7 @@
             }
             return false;
         }
-        
+
         function saveAnswerSpeaking(selectedQuestionId, audioLink) {
             var answer = {};
             answer.examId = vm.exam.examDTO.id;
@@ -160,24 +160,24 @@
             function onSaveAnswerError() {
             }
         }
-        
+
         function saveAnswer() {
         	// Skip if time break
             if (vm.selectedQuestion.type == 'TIME_BREAK') {
                 return;
             }
-            
+
   			// Save result
   			var answer = {};
   		    answer.examId = vm.exam.examDTO.id;
   		    answer.questionId = vm.selectedQuestion.id;
-  		    
+
   		    if (answer.examId == null || answer.examId == '' || answer.questionId == null || answer.questionId == '') {
   		    	alert("examID or questionID is null or invalid");
   		    	console.log("examID or questionID is null or invalid, examID: " + answer.examId + ", questionID: " + answer.questionId);
   		    	return;
   		    }
-  		    
+
   		    answer.answer = vm.answers.join(',');
   		    if (vm.questionGroup == 'WRITING' || vm.questionGroup == 'SPEAKING') {
 		    	answer.status = 'MARKING';
@@ -193,7 +193,7 @@
   	  		function onSaveAnswerError() {
   	  		}
   		}
-        
+
         function callBackAudioEnded() {
             console.log('play audio ended!');
             vm.showRecording = true;
@@ -210,8 +210,12 @@
                 vm.counter = 30;
             }
 
-            // Beep sound
-            $("#player1")[0].play();
+            // Beep
+            if(vm.selectedQuestion.type != 'SPEAKING_REPEAT_SENTENCE') {
+                setTimeout(function (){
+                    $("#player1")[0].play();
+                }, 1000);
+            }
 
         	vm.intervalCounter = setInterval(function() {
                 vm.counter--;
@@ -223,7 +227,7 @@
                 }
             }, 1000);
         }
-        
+
         function prepareFillInTheBlanks() {
             if (vm.selectedQuestion.type == 'READING_FIB_R' && vm.readingFIBRCount == 0) {
                 var dragInput = $("#dragInput")[0];
