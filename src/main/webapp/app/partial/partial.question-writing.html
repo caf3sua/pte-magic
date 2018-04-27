@@ -1,10 +1,12 @@
 <div class="col-md-12"  ng-show="vm.questionGroup == 'SPEAKING'">
         <div ng-include="'app/partial/partial.record.html'"></div>
 </div>
-<div class="col-md-12">
-    <p class="pte-test-content-question">{{vm.selectedQuestion.text}}</p>
 
-	<div class="pte-text-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
+<div class="col-md-12 pte-margin-bottom-10">
+    <p class="pte-test-type-question-two-des-down" data-translate="pteMagicApp.QuestionType.description.{{vm.selectedQuestion.type}}">Description</p>
+</div>
+<div class="col-md-12">
+    <div class="pte-test-content-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
 </div>
 <div class="col-md-12">
         <div class="position-relative margin-top30">
