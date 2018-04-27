@@ -358,7 +358,11 @@
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
-                        vm.answer();
+                        
+                        // answer
+                        $timeout(function(){
+                        	vm.answer();
+                        }, 1000 );
                     }
                 }else if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
                     vm.countdownPercent = vm.timeProgress / 10 * 100;
@@ -367,7 +371,10 @@
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
-                        vm.answer();
+                        // answer
+                        $timeout(function(){
+                        	vm.answer();
+                        }, 1000 );
                     }
                 }else{
                     vm.countdownPercent = vm.timeProgress / 40 * 100;
@@ -376,7 +383,10 @@
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
-                        vm.answer();
+                        // answer
+                        $timeout(function(){
+                        	vm.answer();
+                        }, 1000 );
                     }
                 }
     		    // Display 'counter' wherever you want to display it.
