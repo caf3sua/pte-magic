@@ -20,9 +20,9 @@
             }
         }]);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS', 'Answer'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS){
+    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS, Answer){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 
@@ -358,11 +358,15 @@
     			if( vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
                     vm.countdownPercent = vm.timeProgress / 40 * 100;
                     console.log('countdownPercent:' + vm.countdownPercent);
-                    if (vm.timeProgress == 30) {
+                    if (vm.timeProgress == 40) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
-                        vm.answer();
+                        
+                        // answer
+                        $timeout(function(){
+                        	vm.answer();
+                        }, 1000 );
                     }
                 }else if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
                     vm.countdownPercent = vm.timeProgress / 10 * 100;
@@ -371,7 +375,10 @@
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
-                        vm.answer();
+                        // answer
+                        $timeout(function(){
+                        	vm.answer();
+                        }, 1000 );
                     }
                 }else{
                     vm.countdownPercent = vm.timeProgress / 40 * 100;
@@ -380,7 +387,10 @@
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
-                        vm.answer();
+                        // answer
+                        $timeout(function(){
+                        	vm.answer();
+                        }, 1000 );
                     }
                 }
     		    // Display 'counter' wherever you want to display it.
