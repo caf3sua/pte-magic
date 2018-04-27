@@ -20,9 +20,9 @@
             }
         }]);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS', 'Answer'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS){
+    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS, Answer){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 
