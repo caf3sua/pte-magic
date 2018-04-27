@@ -211,7 +211,7 @@
             }
 
             // Beep
-            if(vm.selectedQuestion.type != 'SPEAKING_REPEAT_SENTENCE') {
+            if(vm.selectedQuestion.type != 'SPEAKING_REPEAT_SENTENCE' && vm.selectedQuestion.type != 'SPEAKING_ANSWER_SHORT_QUESTION') {
                 setTimeout(function (){
                     $("#player1")[0].play();
                 }, 1000);
@@ -362,7 +362,7 @@
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
-                        
+
                         // answer
                         $timeout(function(){
                         	vm.answer();
