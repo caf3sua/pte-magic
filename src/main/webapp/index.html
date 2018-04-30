@@ -37,7 +37,7 @@
         <div ui-view="navbar" ng-cloak></div>
         <!--<div class="content-wrapper" ui-view="content" ng-style="style()" resize ng-show="(vm.isAuthenticated() && vm.user.authorities.indexOf('ROLE_ADMIN') > 0)">-->
         <!--</div>-->
-        <div ui-view="content"  ng-style="style()" resize ng-show="!vm.isAuthenticated() || (vm.isAuthenticated() && vm.account.authorities.indexOf('ROLE_ADMIN') == -1)">
+        <div ui-view="content" class="position-relative"  ng-style="style()" resize ng-show="!vm.isAuthenticated() || (vm.isAuthenticated() && vm.account.authorities.indexOf('ROLE_ADMIN') == -1)">
         </div>
 
         <div class="footer" ng-cloak >
