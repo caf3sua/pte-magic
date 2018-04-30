@@ -211,7 +211,7 @@
             }
 
             // Beep
-            if(vm.selectedQuestion.type != 'SPEAKING_REPEAT_SENTENCE' && vm.selectedQuestion.type != 'SPEAKING_ANSWER_SHORT_QUESTION') {
+            if(vm.selectedQuestion.type != 'SPEAKING_REPEAT_SENTENCE' && vm.selectedQuestion.type != 'SPEAKING_ANSWER_SHORT_QUESTION' && vm.selectedQuestion.type != 'SPEAKING_RETELL_LECTURE') {
                 setTimeout(function (){
                     $("#player1")[0].play();
                 }, 1000);
@@ -219,6 +219,13 @@
 
         	vm.intervalCounter = setInterval(function() {
                 vm.counter--;
+
+                if (vm.counter == 1) {
+                    if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE') {
+                        $("#player1")[0].play();
+                    }
+                }
+
                 // Display 'counter' wherever you want to display it.
                 if (vm.counter == 0) {
                     // Display a login box
