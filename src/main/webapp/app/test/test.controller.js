@@ -6,10 +6,10 @@
         .controller('TestController', TestController);
 
     TestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
-    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity'];
+    	, '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity', 'ngAudio'];
 
     function TestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
-    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity) {
+    		, $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, ngAudio) {
 
     	var vm = this;
     	// Function
@@ -45,28 +45,13 @@
     	}
 
         vm.checkDisabled = false;
-    	function playAudio(link, timeout) {
-            vm.checkAudioSeconds = false;
-            vm.checkStatusPlay = true;
-            $timeout(function(){
-            	var audio = $("#player");
 
-        		if (audio[0] != undefined) {
-        			audio[0].addEventListener('ended', vm.callBackAudioEnded);
-        			$("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic/CHINA_1.mp3
-                    audio[0].pause();
-                    audio[0].load();
-                    audio[0].play();
-        		}
-            }, timeout );
-
-    	}
-    	function initAnswer() {
+        function initAnswer() {
     		// Stop audio
-    		var audio = $("#player");
-    		if (audio[0] != undefined) {
-    			audio[0].pause();
-    		}
+//    		var audio = $("#player");
+//    		if (audio[0] != undefined) {
+//    			audio[0].pause();
+//    		}
 
             // Stop timer
             $scope.$broadcast('timer-stop');
@@ -243,7 +228,7 @@
                     // Display 'counter' wherever you want to display it.
                     if (vm.countAudio == 0) {
 
-                        playAudio(vm.selectedQuestion.audioLink, 1000);
+                        vm.playAudio(vm.selectedQuestion.audioLink, 1000);
                         clearInterval(vm.intervalAudio);
                     }
                 }, 1000);

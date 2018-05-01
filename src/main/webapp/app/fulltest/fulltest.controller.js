@@ -54,33 +54,33 @@
             clearInterval(vm.intervalProgress);
         }
 
-        function initPlayer() {
-            var audio = $("#player");
-            if (audio[0] != undefined) {
-                audio[0].addEventListener('ended', vm.callBackAudioEnded);
-            }
-        }
+//        function initPlayer() {
+//            var audio = $("#player");
+//            if (audio[0] != undefined) {
+//                audio[0].addEventListener('ended', vm.callBackAudioEnded);
+//            }
+//        }
 
-        function playAudio(link, timeout) {
-            if (link == null || link == "") {
-                return;
-            }
-            vm.checkAudioSeconds = false;
-            vm.checkStatusPlay = true;
-            var audio = $("#player");
-            if (audio[0] != undefined) {
-                audio[0].addEventListener('ended', vm.callBackAudioEnded);
-                console.log('Play audio: ' + link);
-                $("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic-2018/1523480876666_HCS1.mp3
-                audio[0].pause();
-                audio[0].load();
-
-                $timeout(function(){
-                    audio[0].play();
-                }, timeout );
-            }
-
-        }
+//        function playAudio(link, timeout) {
+//            if (link == null || link == "") {
+//                return;
+//            }
+//            vm.checkAudioSeconds = false;
+//            vm.checkStatusPlay = true;
+//            var audio = $("#player");
+//            if (audio[0] != undefined) {
+//                audio[0].addEventListener('ended', vm.callBackAudioEnded);
+//                console.log('Play audio: ' + link);
+//                $("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic-2018/1523480876666_HCS1.mp3
+//                audio[0].pause();
+//                audio[0].load();
+//
+//                $timeout(function(){
+//                    audio[0].play();
+//                }, timeout );
+//            }
+//
+//        }
 
         function initAnswer() {
             // Stop audio
@@ -115,7 +115,7 @@
             $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
 
             // Load player
-            initPlayer();
+//            initPlayer();
 
             // Load record audio
             initAudio();
@@ -291,7 +291,7 @@
                 setCountdownTimer();
 
                 // Load player
-                initPlayer();
+//                initPlayer();
 
                 // Load record audio
                 initAudio();
@@ -303,7 +303,7 @@
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.
                     if (vm.countAudio == 0) {
-                        playAudio(vm.selectedQuestion.audioLink, 1000);
+                        vm.playAudio(vm.selectedQuestion.audioLink, 1000);
                         clearInterval(vm.intervalAudio);
                     }
                 }, 1000);

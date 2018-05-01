@@ -1,0 +1,37 @@
+<div class="container-audio">
+    <div id="override"></div>
+    
+    <div class=col-md-offset-4>
+	    <p ng-if=vm.audio.error>
+	        Error playing this sound.
+	    </p>
+	    <p ng-if=!vm.audio.canPlay>
+	        Sound is loading ..
+	    </p>
+	</div>
+	<div ng-if='!vm.audio.error'>
+		<form class='form-horizontal'>
+			<div>
+		        <label class="col-md-4 control-label" for="prependedtext">Volume</label>
+		        <div class="col-md-8">
+	                <input type=range min=0 max=1 step=0.01 ng-model='vm.audio.volume'>
+		        </div>
+		    </div>
+		    <div>
+	            <div class="progress pte-progress">
+	                <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: {{vm.audio.progress * 100 | number: 1}}%">
+	                </div>
+	            </div>
+	        </div>
+		</form>
+	</div>
+    
+    <audio id="player" preload>
+        <source id="mp3_src" src="" type="audio/mp3"  />
+        Your browser dose not Support the audio Tag
+    </audio>
+    <audio id="player1" preload >
+        <source id="mp3_src1" src="../content/audio/beep-01a.mp3" type="audio/mp3"  />
+        Your browser dose not Support the audio Tag
+    </audio>
+</div>

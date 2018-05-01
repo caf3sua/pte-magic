@@ -20,9 +20,9 @@
             }
         }]);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS', 'Answer'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS', 'Answer', 'ngAudio'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS, Answer){
+    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS, Answer, ngAudio){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 
@@ -65,6 +65,7 @@
         vm.WORDS_MAXIMUM = 1000; // changeable
         vm.WordsLength=0;
         vm.Text = "";
+        vm.audio;
 
 		// Function
 		vm.initBase = initBase;
@@ -84,7 +85,28 @@
         vm.IsAlphabet = IsAlphabet;
         vm.spellCheck = spellCheck;
         vm.UpdateLengths = UpdateLengths;
-
+        vm.playAudio = playAudio;
+        
+        function playAudio(link, timeout) {
+            vm.checkAudioSeconds = false;
+            vm.checkStatusPlay = true;
+            
+            vm.audio = ngAudio.load(link);
+            $timeout(function(){
+//            	vm.audio.addEventListener('ended', vm.callBackAudioEnded);
+            	vm.audio.complete(function(audio){
+            		if (vm.questionGroup == 'SPEAKING') {
+            			console.log('callBackAudioEnded, recording ...');
+            			vm.callBackAudioEnded();
+            		}
+                    vm.audio.destroy();
+                    console.log('audio done');
+                })
+            	vm.audio.play();
+            	vm.audio.volume = 0.5;
+            }, timeout );
+    	}
+        
         function spellCheck() {
             if(vm.checkClickspell == true){
                 document.getElementById("areaTextWriting").setAttribute("spellcheck", "true");

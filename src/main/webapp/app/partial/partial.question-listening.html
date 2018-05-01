@@ -24,15 +24,7 @@
                     <span ng-show="vm.checkAudioSeconds">Begining in {{vm.countAudio}} seconds</span>
                     <span ng-show="vm.checkStatusPlay">{{vm.txtStatusAudio}}</span>
                 </div>
-                <div id="override"></div>
-                <audio id="player" controls autoplay preload >
-                    <source id="mp3_src" src="" type="audio/mp3"  />
-                    Your browser dose not Support the audio Tag
-                </audio>
-                <audio id="player1" preload >
-                    <source id="mp3_src1" src="../content/audio/beep-01a.mp3" type="audio/mp3"  />
-                    Your browser dose not Support the audio Tag
-                </audio>
+                <div ng-include="'app/partial/partial.audio.html'"></div>
             </div>
         </div>
     </div>
