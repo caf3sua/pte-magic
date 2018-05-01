@@ -47,7 +47,10 @@
              && vm.question.type != 'LISTENING_SELECT_MISSING_WORD'
              && vm.question.type != 'LISTENING_DICTATION'
              && vm.question.type != 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
-             && vm.question.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'"
+             && vm.question.type != 'LISTENING_MCQ_L_SINGLE_ANSWER'
+             && vm.question.type != 'READING_RE_ORDER_PARAGRAPH'
+            && vm.question.type != 'LISTENING_FIB_L'
+             && vm.question.type != 'LISTENING_HIGHLIGHT_INCORRECT_WORD'"
         >
             <label class="control-label" data-translate="pteMagicApp.question.text" for="field_text">Text</label>
             <input type="text" class="form-control" name="text" id="field_text"
@@ -72,7 +75,21 @@
             <input type="text" class="form-control" name="audioLink" id="field_audioLink" ng-model="vm.question.audioLink" readonly="readonly"/>
         </div>
         <div class="form-group"
-             ng-show="vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT' && vm.question.type != 'WRITING_ESSAY'"
+             ng-show="vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT' &&
+              vm.question.type != 'WRITING_ESSAY' &&
+              vm.question.type != 'SPEAKING_READ_ALOUD' &&
+              vm.question.type != 'SPEAKING_REPEAT_SENTENCE'&&
+              vm.question.type != 'SPEAKING_DESCRIBE_IMAGE'&&
+              vm.question.type != 'SPEAKING_RETELL_LECTURE'&&
+              vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION'&&
+              vm.question.type != 'READING_RE_ORDER_PARAGRAPH' &&
+              vm.question.type != 'READING_FIB_R' &&
+              vm.question.type != 'READING_FIB_R_W' &&
+              vm.question.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT' &&
+              vm.question.type != 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY' &&
+              vm.question.type != 'LISTENING_SELECT_MISSING_WORD' &&
+              vm.question.type != 'LISTENING_DICTATION'
+"
         >
             <label class="control-label" data-translate="pteMagicApp.question.description" for="field_description">Description</label>
             <input type="text" class="form-control" name="description" id="field_description"
@@ -88,7 +105,8 @@
             && vm.question.type != 'LISTENING_FIB_L'
             && vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT'
             && vm.question.type != 'LISTENING_DICTATION'
-            && vm.question.type != 'WRITING_ESSAY'"
+            && vm.question.type != 'WRITING_ESSAY'
+            && vm.question.type != 'LISTENING_HIGHLIGHT_INCORRECT_WORD'"
         >
 	        <div class="form-group">
 	            <label class="control-label" data-translate="pteMagicApp.question.answerA" for="field_answerA">Answer A</label>
@@ -120,7 +138,9 @@
               vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION' &&
               vm.question.type != 'SPEAKING_READ_ALOUD' &&
               vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT' &&
-              vm.question.type != 'WRITING_ESSAY'"
+              vm.question.type != 'WRITING_ESSAY'&&
+               vm.question.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT' &&
+              vm.question.type != 'LISTENING_DICTATION'"
         >
             <label class="control-label" data-translate="pteMagicApp.question.expectAnswer" for="field_expectAnswer">Expect answer</label>
             <input type="text" class="form-control" name="expectAnswer" id="field_expectAnswer" ng-model="vm.question.expectAnswer" />
