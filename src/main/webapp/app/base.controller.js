@@ -86,25 +86,68 @@
         vm.spellCheck = spellCheck;
         vm.UpdateLengths = UpdateLengths;
         vm.playAudio = playAudio;
+//        vm.getAudioProgress = getAudioProgress;
+        
+        vm.audioProgressing = 0;
+        
+        $scope.$watch('vm.audio.progress', function () {
+        	console.log('watch progress:' + vm.audio.progress);
+        	if (vm.audioProgressing == 100) {
+        		return;
+        	}
+        	
+        	if (vm.audio.progress > 0) {
+        		vm.audioProgressing = vm.audio.progress * 100;
+        	}
+        });
+//        function getAudioProgress() {
+//        	var progress = 0;
+//        	if (vm.completedProgress == 100) {
+//        		return 100;
+//        	}
+//        	
+//        	if (vm.audio.progress < 1) {
+//        		return vm.audio.progress * 100;
+//        	} else {
+//        		vm.completedProgress = 100;
+//        	}
+//        	return 100;
+//        }
+        
+        function resetProgressStatus() {
+    		vm.showProgressBar = false;
+    		vm.countdownPercent = 0;
+    		vm.timeProgress = 0;
+    		
+    		if (vm.audio) {
+    			vm.audio.destroy();
+    			vm.audio.progress = 0;
+    		}
+    	}
         
         function playAudio(link, timeout) {
             vm.checkAudioSeconds = false;
             vm.checkStatusPlay = true;
             
+            if (link == null || link == '') {
+            	return;
+            }
+            
             vm.audio = ngAudio.load(link);
+            vm.audio.volume = 0.5;
             $timeout(function(){
 //            	vm.audio.addEventListener('ended', vm.callBackAudioEnded);
-            	vm.audio.complete(function(audio){
-            		if (vm.questionGroup == 'SPEAKING') {
-            			console.log('callBackAudioEnded, recording ...');
-            			vm.callBackAudioEnded();
-            		}
-                    vm.audio.destroy();
-                    console.log('audio done');
-                })
             	vm.audio.play();
-            	vm.audio.volume = 0.5;
             }, timeout );
+            
+            vm.audio.complete(function(audio){
+        		if (vm.questionGroup == 'SPEAKING') {
+        			console.log('callBackAudioEnded, recording ...');
+        			vm.callBackAudioEnded();
+        		}
+//                vm.audio.destroy();
+                console.log('audio done');
+            })
     	}
         
         function spellCheck() {
@@ -308,12 +351,6 @@
             }
         }
 
-    	function resetProgressStatus() {
-    		vm.showProgressBar = false;
-    		vm.countdownPercent = 0;
-    		vm.timeProgress = 0;
-    	}
-
     	function initCountQuestion() {
     		// Speaking -> Writing -> Reading -> Listening
     		// A: Speaking/Writing
@@ -386,7 +423,6 @@
     			vm.timeProgress++;
     			if( vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
                     vm.countdownPercent = vm.timeProgress / 40 * 100;
-                    console.log('countdownPercent:' + vm.countdownPercent);
                     if (vm.timeProgress == 40) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
@@ -399,7 +435,6 @@
                     }
                 }else if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
                     vm.countdownPercent = vm.timeProgress / 10 * 100;
-                    console.log('countdownPercent:' + vm.countdownPercent);
                     if (vm.timeProgress == 10) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
@@ -411,7 +446,6 @@
                     }
                 }else{
                     vm.countdownPercent = vm.timeProgress / 40 * 100;
-                    console.log('countdownPercent:' + vm.countdownPercent);
                     if (vm.timeProgress == 40) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box

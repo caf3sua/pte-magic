@@ -251,6 +251,7 @@
         function nextQuestion() {
             $('#areaTextWriting').val("");
             vm.selectedQuestion = vm.questions.shift();
+            vm.audioProgressing = 0;
             vm.resetProgressStatus();
 
             if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {

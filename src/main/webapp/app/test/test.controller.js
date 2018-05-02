@@ -178,6 +178,8 @@
   			$('#areaTextWriting').val("");
   			vm.selectedQuestion = vm.questions.shift();
   			vm.resetProgressStatus();
+  			vm.audioProgressing = 0;
+  			
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
   				// Service finish exam
