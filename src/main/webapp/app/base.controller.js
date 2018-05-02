@@ -86,12 +86,9 @@
         vm.spellCheck = spellCheck;
         vm.UpdateLengths = UpdateLengths;
         vm.playAudio = playAudio;
-//        vm.getAudioProgress = getAudioProgress;
         
         vm.audioProgressing = 0;
-        
         $scope.$watch('vm.audio.progress', function () {
-        	console.log('watch progress:' + vm.audio.progress);
         	if (vm.audioProgressing == 100) {
         		return;
         	}
@@ -100,19 +97,6 @@
         		vm.audioProgressing = vm.audio.progress * 100;
         	}
         });
-//        function getAudioProgress() {
-//        	var progress = 0;
-//        	if (vm.completedProgress == 100) {
-//        		return 100;
-//        	}
-//        	
-//        	if (vm.audio.progress < 1) {
-//        		return vm.audio.progress * 100;
-//        	} else {
-//        		vm.completedProgress = 100;
-//        	}
-//        	return 100;
-//        }
         
         function resetProgressStatus() {
     		vm.showProgressBar = false;

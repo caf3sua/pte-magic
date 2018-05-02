@@ -1,19 +1,19 @@
-<div class="container-audio">
+<div class="">
     <div id="override"></div>
-    
-    <!-- <div class=col-md-offset-4>
-	    <p ng-if=vm.audio.error>
-	        Error playing this sound.
-	    </p>
-	    <p ng-if=!vm.audio.canPlay>
-	        Sound is loading ..
-	    </p>
-	</div> -->
+
+    <!--<div >-->
+	    <!--<p ng-if=vm.audio.error>-->
+	        <!--Error playing this sound.-->
+	    <!--</p>-->
+	    <!--<p ng-if=!vm.audio.canPlay>-->
+	        <!--Sound is loading ..-->
+	    <!--</p>-->
+	<!--</div>-->
 	<div ng-if='!vm.audio.error'>
 		<form class='form-horizontal'>
-			<div>
-		        <label class="col-md-4 control-label" for="prependedtext">Volume</label>
-		        <div class="col-md-8">
+			<div class="pte-row-volume">
+		        <label class="pte-text-volume" for="prependedtext">Volume</label>
+		        <div class="pte-width-100">
 	                <input type=range min=0 max=1 step=0.01 ng-model='vm.audio.volume'>
 		        </div>
 		    </div>
@@ -25,7 +25,7 @@
 	        </div>
 		</form>
 	</div>
-    
+
     <audio id="player" preload>
         <source id="mp3_src" src="" type="audio/mp3"  />
         Your browser dose not Support the audio Tag
