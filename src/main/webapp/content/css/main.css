@@ -1552,8 +1552,8 @@ textarea {
     font-weight: normal;
     color: #000;
 }
-.pte-margin-bottom-20{
-    margin-bottom: 20px;
+.pte-margin-bottom-30{
+    margin-bottom: 30px;
 }
 @media (min-width:1200px) and (max-width:1300px) {
     .pte-button-next-postion{
