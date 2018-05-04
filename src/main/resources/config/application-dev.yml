@@ -29,6 +29,13 @@ spring:
         url: jdbc:postgresql://database.myitsol.com:5432/pte_magic
         username: blast
         password: 12345678
+        hikari:
+              idleTimeout: 60000
+              minimumIdle: 2
+              maximumPoolSize: 20
+              connectionTimeout: 30000
+              poolName: MyPoolName
+              connectionTestQuery: SELECT 1
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL
@@ -80,13 +87,13 @@ liquibase:
 #        keyAlias: PteMagic
 # ===================================================================
 server:
-    port: 8080
-#     port: 8443
-#     ssl:
-#         key-store: D:/pte.p12
-#         key-store-password: pte123
-#         keyStoreType: PKCS12
-#         keyAlias: pte
+#    port: 8080
+     port: 8092
+     ssl:
+         key-store: /home/thuyvv/java_apps/pte_magic/pte.p12
+         key-store-password: pte123
+         keyStoreType: PKCS12
+         keyAlias: pte
 
 # ===================================================================
 # JHipster specific properties
