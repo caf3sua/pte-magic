@@ -88,8 +88,23 @@
         vm.playAudio = playAudio;
         
         vm.audioProgressing = 0;
-        $scope.$watch('vm.audio.progress', function () {
+        $scope.$watch('vm.audioProgressing', function () {
         	if (vm.audioProgressing == 100) {
+        		if (vm.questionGroup == 'SPEAKING') {
+        			console.log('callBackAudioEnded, recording ...');
+        			vm.callBackAudioEnded();
+        		}
+                console.log('audio done');
+        	}
+        });
+        
+        $scope.$watch('vm.audio.progress', function () {
+        	if (vm.audio == undefined) {
+        		return;
+        	}
+        	
+        	if (vm.audio.progress == 1) {
+        		vm.audioProgressing = 100;
         		return;
         	}
         	
@@ -110,6 +125,7 @@
     	}
         
         function playAudio(link, timeout) {
+        	console.log('play audio:' + link);
             vm.checkAudioSeconds = false;
             vm.checkStatusPlay = true;
             
@@ -124,14 +140,13 @@
             	vm.audio.play();
             }, timeout );
             
-            vm.audio.complete(function(audio){
-        		if (vm.questionGroup == 'SPEAKING') {
-        			console.log('callBackAudioEnded, recording ...');
-        			vm.callBackAudioEnded();
-        		}
-//                vm.audio.destroy();
-                console.log('audio done');
-            })
+//            vm.audio.complete(function(audio){
+//        		if (vm.questionGroup == 'SPEAKING') {
+//        			console.log('callBackAudioEnded, recording ...');
+//        			vm.callBackAudioEnded();
+//        		}
+//                console.log('audio done');
+//            })
     	}
         
         function spellCheck() {
@@ -267,6 +282,7 @@
             }
 
         	vm.intervalCounter = setInterval(function() {
+        		console.log('vm.counter recording:' + vm.counter);
                 vm.counter--;
 
                 if (vm.counter == 1) {
