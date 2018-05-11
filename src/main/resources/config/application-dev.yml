@@ -90,7 +90,7 @@ server:
 #    port: 8080
      port: 8092
      ssl:
-         key-store: /home/thuyvv/java_apps/pte_magic/pte.p12
+         key-store: C:\Users\Admin\Documents\pte-magic1\pte.p12
          key-store-password: pte123
          keyStoreType: PKCS12
          keyAlias: pte
