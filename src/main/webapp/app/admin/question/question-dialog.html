@@ -53,7 +53,7 @@
              && vm.question.type != 'LISTENING_HIGHLIGHT_INCORRECT_WORD'"
         >
             <label class="control-label" data-translate="pteMagicApp.question.text" for="field_text">Text</label>
-            <input type="text" class="form-control" name="text" id="field_text"
+            <textarea type="text" class="form-control" rows="5"  name="text" id="field_text"
                     ng-model="vm.question.text"
                     />
         </div>
@@ -92,7 +92,7 @@
 "
         >
             <label class="control-label" data-translate="pteMagicApp.question.description" for="field_description">Description</label>
-            <input type="text" class="form-control" name="description" id="field_description"
+            <textarea type="text" class="form-control" rows="5"  name="description" id="field_description"
                     ng-model="vm.question.description"
                     />
         </div>
