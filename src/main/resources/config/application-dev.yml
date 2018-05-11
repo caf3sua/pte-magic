@@ -26,8 +26,8 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://database.myitsol.com:5432/pte_magic
-        username: blast
+        url: jdbc:postgresql://35.184.54.244:5432/pte_magic
+        username: ptemagic
         password: 12345678
         hikari:
               idleTimeout: 60000
@@ -87,13 +87,13 @@ liquibase:
 #        keyAlias: PteMagic
 # ===================================================================
 server:
-#    port: 8080
-     port: 8092
-     ssl:
-         key-store: /home/thuyvv/java_apps/pte_magic/pte.p12
-         key-store-password: pte123
-         keyStoreType: PKCS12
-         keyAlias: pte
+    port: 8080
+#     port: 8092
+#     ssl:
+#         key-store: /home/thuyvv/java_apps/pte_magic/pte.p12
+#         key-store-password: pte123
+#         keyStoreType: PKCS12
+#         keyAlias: pte
 
 # ===================================================================
 # JHipster specific properties
