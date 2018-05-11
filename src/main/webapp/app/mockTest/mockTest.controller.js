@@ -60,8 +60,9 @@
             vm.selectedType = type;
         }
 
-        function startTest(examId) {
-        	var url = '/#/fulltest?type=' + examId;
+        function startTest(exam) {
+        	exam.remainTest--;
+        	var url = '/#/fulltest?type=' + exam.id;
         	$window.open(url,"_blank", "toolbar=no,scrollbars=no, resizable=no, width=1200, height=700");
         }
 

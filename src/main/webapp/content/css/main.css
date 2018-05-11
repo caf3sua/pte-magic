@@ -965,6 +965,11 @@ ui bootstrap tweaks
     line-height: 30px;
     float: none;
 }
+.btn-disabled {
+    background: #c7bfbf !important;;
+    color: #f4f4f4 !important;
+}
+
 .pte-table-user{
     padding: 10px 30px;
     background-color: #fff;

@@ -39,6 +39,7 @@ import com.vmcomms.ptemagic.service.ExamService;
 import com.vmcomms.ptemagic.service.ExamTypeService;
 import com.vmcomms.ptemagic.service.MarkScoreService;
 import com.vmcomms.ptemagic.service.QuestionService;
+import com.vmcomms.ptemagic.service.UserLimitExamService;
 import com.vmcomms.ptemagic.service.UserService;
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
@@ -86,6 +87,9 @@ public class ExamResource {
     
     @Autowired
     private MarkScoreService markScoreService;
+    
+    @Autowired
+    private UserLimitExamService userLimitExamService;
     
     @PostMapping("/finish-exam")
     @Timed
@@ -140,6 +144,14 @@ public class ExamResource {
         
         if (examVM.getExamTypeId() == null) {
             throw new BadRequestAlertException("A new exam cannot start by exam type null", ENTITY_NAME, "idexists");
+        }
+        
+        // Check remain test
+        int remainTest = userLimitExamService.getRemainTest(userDTO.getId(), examVM.getExamTypeId());
+        if (remainTest == 0) {
+        	throw new BadRequestAlertException("Limit exam test", ENTITY_NAME, "limit_exam");
+        } else {
+        	userLimitExamService.updateCountRemainTest(userDTO.getId(), examVM.getExamTypeId());
         }
         
         ExamDTO examDTO = new ExamDTO();

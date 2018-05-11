@@ -21,14 +21,6 @@ public class ExamTypeDTO implements Serializable {
 
     private TestType type;
 
-//    private Integer numberQuestionWriting;
-//
-//    private Integer numberQuestionReading;
-//
-//    private Integer numberQuestionListening;
-//
-//    private Integer numberQuestionSpeaking;
-    
     private Integer totalQuestion;
 
     private String description;
@@ -72,6 +64,8 @@ public class ExamTypeDTO implements Serializable {
     private Integer numQuestion19;
     
     private Integer numQuestion20;
+    
+    private int remainTest;
     
     public Integer getNumQuestion1() {
 		return numQuestion1;
@@ -303,5 +297,13 @@ public class ExamTypeDTO implements Serializable {
 
 	public void setTotalQuestion(Integer totalQuestion) {
 		this.totalQuestion = totalQuestion;
+	}
+
+	public int getRemainTest() {
+		return remainTest;
+	}
+
+	public void setRemainTest(int remainTest) {
+		this.remainTest = remainTest;
 	}
 }

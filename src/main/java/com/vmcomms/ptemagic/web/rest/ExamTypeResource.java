@@ -1,15 +1,24 @@
 package com.vmcomms.ptemagic.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.vmcomms.ptemagic.domain.User;
+import com.vmcomms.ptemagic.repository.UserRepository;
+import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.ExamTypeService;
+import com.vmcomms.ptemagic.service.UserLimitExamService;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
+import com.vmcomms.ptemagic.web.rest.errors.EmailAlreadyUsedException;
+import com.vmcomms.ptemagic.web.rest.errors.InternalServerErrorException;
 import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
 import com.vmcomms.ptemagic.web.rest.util.PaginationUtil;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+
+import org.apache.commons.codec.binary.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -35,11 +44,14 @@ public class ExamTypeResource {
 
     private static final String ENTITY_NAME = "examType";
 
-    private final ExamTypeService examTypeService;
+    @Autowired
+    private ExamTypeService examTypeService;
 
-    public ExamTypeResource(ExamTypeService examTypeService) {
-        this.examTypeService = examTypeService;
-    }
+    @Autowired
+    private UserLimitExamService userLimitExamService;
+    
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * POST  /exam-types : Create a new examType.
@@ -103,9 +115,31 @@ public class ExamTypeResource {
     public ResponseEntity<List<ExamTypeDTO>> getAllExamTypesByType(@PathVariable String type) {
         log.debug("REST request to getAllExamTypesByType");
         List<ExamTypeDTO> data = examTypeService.findAllByType(type);
+        
+        // update type incase of MOCK TEST
+        if (type.contains("MOCK_TEST")) {
+        	updateRemainTest(data);
+        }
+        
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
+    private void updateRemainTest(List<ExamTypeDTO> data) {
+    	// Get current user
+    	final String userLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> user = userRepository.findOneByLogin(userLogin);
+        if (!user.isPresent()) {
+            throw new InternalServerErrorException("User could not be found");
+        }
+        
+        Long userId = user.get().getId();
+        
+    	for (ExamTypeDTO examTypeDTO : data) {
+			// Get remain test
+    		int remainTest = userLimitExamService.getRemainTest(userId, examTypeDTO.getId());
+    		examTypeDTO.setRemainTest(remainTest);
+		}
+    }
     /**
      * GET  /exam-types/:id : get the "id" examType.
      *
