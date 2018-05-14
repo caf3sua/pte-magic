@@ -1,15 +1,25 @@
 package com.vmcomms.ptemagic.domain;
 
-import io.swagger.annotations.ApiModel;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.vmcomms.ptemagic.domain.enumeration.TestType;
+
+import io.swagger.annotations.ApiModel;
 
 /**
  * The Employee entity.
@@ -34,18 +44,6 @@ public class ExamType implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "jhi_type")
     private TestType type;
-
-//    @Column(name = "number_question_writing")
-//    private Integer numberQuestionWriting;
-//
-//    @Column(name = "number_question_reading")
-//    private Integer numberQuestionReading;
-//
-//    @Column(name = "number_question_listening")
-//    private Integer numberQuestionListening;
-//
-//    @Column(name = "number_question_speaking")
-//    private Integer numberQuestionSpeaking;
 
     @Column(name = "total_question")
     private Integer totalQuestion;
@@ -113,9 +111,53 @@ public class ExamType implements Serializable {
     @Column(name = "num_question_20")
     private Integer numQuestion20;
     
+    @Column(name = "total_time")
+    private Long totalTime;
+    
+    @Column(name = "limit_test_silver")
+    private Integer limitTesSilver;
+    
+    @Column(name = "limit_test_gold")
+    private Integer limitTestGold;
+    
+    @Column(name = "limit_test_platinum")
+    private Integer limitTestPlatinum;
+    
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     
-    public Long getId() {
+    public Long getTotalTime() {
+		return totalTime;
+	}
+
+	public Integer getLimitTesSilver() {
+		return limitTesSilver;
+	}
+
+	public void setLimitTesSilver(Integer limitTesSilver) {
+		this.limitTesSilver = limitTesSilver;
+	}
+
+	public Integer getLimitTestGold() {
+		return limitTestGold;
+	}
+
+	public void setLimitTestGold(Integer limitTestGold) {
+		this.limitTestGold = limitTestGold;
+	}
+
+	public Integer getLimitTestPlatinum() {
+		return limitTestPlatinum;
+	}
+
+	public void setLimitTestPlatinum(Integer limitTestPlatinum) {
+		this.limitTestPlatinum = limitTestPlatinum;
+	}
+
+	public void setTotalTime(Long totalTime) {
+		this.totalTime = totalTime;
+	}
+
+	public Long getId() {
         return id;
     }
 

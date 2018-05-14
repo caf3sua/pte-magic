@@ -170,9 +170,14 @@ public class UserResource {
     @Timed
     public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
-        return ResponseUtil.wrapOrNotFound(
-            userService.getUserWithAuthoritiesByLogin(login)
-                .map(UserDTO::new));
+        Optional<UserDTO> userOpt = userService.getUserWithAuthoritiesByLogin(login)
+        .map(UserDTO::new);
+        
+        if (userOpt.get() != null) {
+        	// Get user_limit_exam
+        }
+        
+        return ResponseUtil.wrapOrNotFound(userOpt);
     }
 
     /**

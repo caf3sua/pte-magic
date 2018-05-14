@@ -1,6 +1,7 @@
 package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
+import com.vmcomms.ptemagic.service.dto.MockExamDTO;
 
 import java.util.List;
 
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
  */
 public interface ExamTypeService {
 
+	MockExamDTO saveMockTest(MockExamDTO mockExamDTO);
+	
     /**
      * Save a examType.
      *

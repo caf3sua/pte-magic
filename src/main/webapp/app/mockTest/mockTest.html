@@ -49,26 +49,6 @@
                 </div>
             </div>
         </div>
-        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg"  id="pastAMobile" ng-click="vm.pastA()">-->
-            <!--<div class="pte-free-sample-mobile">-->
-                <!--<span class="icon-headset"></span>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg">-->
-            <!--<div class="pte-free-sample-mobile">-->
-                <!--<span class="icon-open-book"></span>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg">-->
-            <!--<div class="pte-free-sample-mobile">-->
-                <!--<span class="icon-icon"></span>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="col-sm-3 col-xs-3 hidden-md hidden-lg">-->
-            <!--<div class="pte-free-sample-mobile">-->
-                <!--<span class="icon-checkbox-pen-outline2"></span>-->
-            <!--</div>-->
-        <!--</div>-->
         <div class="col-md-12 pte-free-mock-mobile" ng-show="vm.examShowFlag">
             <div class="col-md-12 pte-pre-sample-listQuestion">
                 <div class="col-md-4 margin-top30" ng-repeat="exam in vm.selectedExams">
@@ -80,8 +60,8 @@
                                 </li>
                             </ul>
                             <ul class="pte-block-item-mocktest-content">
-                                <li><a>Question amount: <span>{{vm.totalQuestion | number}}</span></a></li>
-                                <li><a>Test Duration: <span>{{vm.duration}}</span></a></li>
+                                <li><a>Question amount: <span>{{exam.totalQuestion | number}}</span></a></li>
+                                <li><a>Test Duration: <span>{{exam.totalTime | secondsToDateTime | date:'HH:mm:ss'}}</span></a></li>
                                 <li><a>Unsubscribe</a></li>
                                 <li><a>Remain exam: <span>{{exam.remainTest}}</span></a></li>
                             </ul>

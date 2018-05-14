@@ -2,10 +2,23 @@
     <h2 class="" data-translate="pteMagicApp.examType.home.title">Exam Types</h2>
     <jhi-alert></jhi-alert>
     <div class="col-md-12 text-right no-padding-left">
+        <button class="btn btn-info" ng-click="vm.downloadTemplate()">
+            <span class="glyphicon glyphicon-download-alt"></span>
+            <span>
+                Download template
+            </span>
+        </button>
+        <button ngf-select="vm.uploadFile($file, $invalidFiles)" class="btn btn-success" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+          ngf-max-size="1MB">
+      		<span class="glyphicon glyphicon-cloud-upload"></span>
+            <span>
+                Create mock test
+            </span>
+      	</button>
         <button class="btn btn-primary" ui-sref="exam-type.new" >
             <span class="glyphicon glyphicon-plus"></span>
-            <span  data-translate="pteMagicApp.examType.home.createLabel">
-                Create new Exam Type
+            <span>
+                Create Free/User question exam
             </span>
         </button>
     </div>

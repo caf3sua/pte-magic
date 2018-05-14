@@ -5,9 +5,9 @@
         .module('pteMagicApp')
         .controller('ExamTypeController', ExamTypeController);
 
-    ExamTypeController.$inject = ['$state', 'ExamType', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    ExamTypeController.$inject = ['$scope', '$http', '$window', '$state', 'ExamType', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Upload'];
 
-    function ExamTypeController($state, ExamType, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function ExamTypeController($scope, $http, $window, $state, ExamType, ParseLinks, AlertService, paginationConstants, pagingParams, Upload) {
 
         var vm = this;
 
@@ -16,9 +16,43 @@
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
-
+        vm.uploadFile = uploadFile;
+        vm.downloadTemplate = downloadTemplate;
+        
         loadAll();
 
+        function downloadTemplate() {
+        	var templateRoute = '/api/file/download_template';
+            $window.location = templateRoute;
+        }
+        
+        
+        function uploadFile(file, errFiles) {
+            vm.f = file;
+            vm.errFile = errFiles && errFiles[0];
+            if (file) {
+                file.upload = Upload.upload({
+                    url: '/api/file/create_mock_test',
+                    data: {file: file},
+                    ignoreLoadingBar: true
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                    	console.log(response);
+                    	vm.question.audioLink = response.data.filename;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                                             evt.loaded / evt.total));
+                });
+            }
+        }
+        
+        
         function loadAll () {
             ExamType.query({
                 page: pagingParams.page - 1,

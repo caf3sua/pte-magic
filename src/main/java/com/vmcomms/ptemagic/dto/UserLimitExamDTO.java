@@ -16,6 +16,8 @@ public class UserLimitExamDTO implements Serializable {
     private Long examTypeId;
 
     private Integer remainTest;
+    
+    private String examTypeName;
 
 	public Long getId() {
 		return id;
@@ -47,6 +49,14 @@ public class UserLimitExamDTO implements Serializable {
 
 	public void setRemainTest(Integer remainTest) {
 		this.remainTest = remainTest;
+	}
+
+	public String getExamTypeName() {
+		return examTypeName;
+	}
+
+	public void setExamTypeName(String examTypeName) {
+		this.examTypeName = examTypeName;
 	}
 
     

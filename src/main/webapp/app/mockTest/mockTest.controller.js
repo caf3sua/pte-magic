@@ -3,7 +3,14 @@
 
     angular
         .module('pteMagicApp')
-        .controller('MockTestController', MockTestController);
+        .controller('MockTestController', MockTestController)
+    	.filter('secondsToDateTime', secondsToDateTime);
+
+    function secondsToDateTime() {
+    	return function(seconds){
+    		return new Date(1970, 0, 1).setSeconds(seconds);
+        };
+    }
 
     MockTestController.$inject = ['$scope', '$window', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType'];
 

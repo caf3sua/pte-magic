@@ -4,7 +4,6 @@ package com.vmcomms.ptemagic.service.dto;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
 import com.vmcomms.ptemagic.domain.enumeration.TestType;
@@ -14,7 +13,9 @@ import com.vmcomms.ptemagic.domain.enumeration.TestType;
  */
 public class ExamTypeDTO implements Serializable {
 
-    private Long id;
+	private static final long serialVersionUID = -2645519244808522357L;
+
+	private Long id;
 
     @NotNull
     private String name;
@@ -64,6 +65,46 @@ public class ExamTypeDTO implements Serializable {
     private Integer numQuestion19;
     
     private Integer numQuestion20;
+    
+    private Long totalTime;
+    
+    private Integer limitTesSilver;
+    
+    private Integer limitTestGold;
+    
+    private Integer limitTestPlatinum;
+    
+    public Integer getLimitTesSilver() {
+		return limitTesSilver;
+	}
+
+	public void setLimitTesSilver(Integer limitTesSilver) {
+		this.limitTesSilver = limitTesSilver;
+	}
+
+	public Integer getLimitTestGold() {
+		return limitTestGold;
+	}
+
+	public void setLimitTestGold(Integer limitTestGold) {
+		this.limitTestGold = limitTestGold;
+	}
+
+	public Integer getLimitTestPlatinum() {
+		return limitTestPlatinum;
+	}
+
+	public void setLimitTestPlatinum(Integer limitTestPlatinum) {
+		this.limitTestPlatinum = limitTestPlatinum;
+	}
+
+	public Long getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(Long totalTime) {
+		this.totalTime = totalTime;
+	}
     
     private int remainTest;
     
