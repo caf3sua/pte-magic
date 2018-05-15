@@ -104,13 +104,13 @@ public class FileController {
 	
 	private File convert(MultipartFile file) throws IOException
 	{    
-	    File convFile = new File(file.getOriginalFilename());
-	    convFile.createNewFile(); 
+//	    File convFile = new File(file.getOriginalFilename());
+//	    convFile.createNewFile(); 
+		File convFile = File.createTempFile("tmp", ".xlsx");
 	    FileOutputStream fos = new FileOutputStream(convFile); 
 	    fos.write(file.getBytes());
 	    fos.close();
 	    
-	    convFile.delete();
 	    return convFile;
 	}
 
