@@ -8,4 +8,6 @@ public interface UserLimitExamService {
 	public int getRemainTest(Long userId, Long examTypeId);
 	
 	public boolean updateCountRemainTest(Long userId, Long examTypeId);
+	
+	public boolean resetRemainTest(Long userId);
 }

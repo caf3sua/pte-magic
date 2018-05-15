@@ -11,6 +11,7 @@
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
+            'resetLimitTest': {url: 'api/reset-limit-exam/:userId', method: 'GET'},
             'startExams': {url: 'api/start-exam', method: 'POST'},
             'finishExam': {url: 'api/finish-exam', method: 'POST'},
             'finishMarkingExam': {url: 'api/finish-marking-exam', method: 'POST'},

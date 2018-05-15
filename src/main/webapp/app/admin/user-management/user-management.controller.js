@@ -5,9 +5,9 @@
         .module('pteMagicApp')
         .controller('UserManagementController', UserManagementController);
 
-    UserManagementController.$inject = ['Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants', 'JhiLanguageService'];
+    UserManagementController.$inject = ['Principal', 'User', 'ParseLinks', 'AlertService', '$state', 'pagingParams', 'paginationConstants', 'JhiLanguageService', 'Exam'];
 
-    function UserManagementController(Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants, JhiLanguageService) {
+    function UserManagementController(Principal, User, ParseLinks, AlertService, $state, pagingParams, paginationConstants, JhiLanguageService, Exam) {
         var vm = this;
 
         vm.authorities = ['ROLE_USER', 'ROLE_ADMIN'];
@@ -25,6 +25,7 @@
         vm.reverse = pagingParams.ascending;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.transition = transition;
+        vm.resetLimitTest = resetLimitTest;
 
         vm.loadAll();
         JhiLanguageService.getAll().then(function (languages) {
@@ -34,6 +35,17 @@
             vm.currentAccount = account;
         });
 
+        function resetLimitTest(userId) {
+        	debugger
+        	Exam.resetLimitTest({userId : userId}, onResetLimitTestSuccess, onResetLimitTestError);
+
+            function onResetLimitTestSuccess() {
+            }
+
+            function onResetLimitTestError() {
+            }
+        }
+        
         function setActive (user, isActivated) {
             user.activated = isActivated;
             User.update(user, function () {

@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +34,7 @@ import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.AnswerQuestionDTO;
 import com.vmcomms.ptemagic.dto.ConfigMockExamDTO;
 import com.vmcomms.ptemagic.dto.ExamInfoDTO;
+import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.AnswerService;
 import com.vmcomms.ptemagic.service.ConfigMockExamService;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
@@ -109,6 +112,19 @@ public class ExamResource {
         
         return ResponseEntity.ok().headers(HeaderUtil. createEntityUpdateAlert(ENTITY_NAME, examVM.getId().toString())).build();
     }
+    
+    
+    @GetMapping("/reset-limit-exam/{userId}")
+    @Timed
+    public ResponseEntity<Void> resetLimitExam(@PathVariable Long userId) throws URISyntaxException {
+    	log.debug("REST request to resetLimitExam");
+        
+        // Check input
+        userLimitExamService.resetRemainTest(userId);
+        
+        return ResponseEntity.ok().headers(HeaderUtil. createEntityUpdateAlert(ENTITY_NAME, String.valueOf(userId))).build();
+    }
+    
     
     @PostMapping("/finish-marking-exam")
     @Timed
@@ -244,44 +260,6 @@ public class ExamResource {
 		
 		return questions;
     }
-    
-//    private List<QuestionDTO> generateMockTestQuestionExam(ExamDTO examDTO) {
-//    	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
-//    	List<QuestionDTO> questions = new ArrayList<>();
-//    	
-//    	if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A)) {
-//    		// Speaking/writing
-//    		selectMockTestExamQuestionSpeaking(examTypeDTO, questions);
-//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-//    		selectMockTestExamQuestionWriting(examTypeDTO, questions);
-//        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
-//        	// Reading/listening
-//        	selectMockTestExamQuestionReading(examTypeDTO, questions);
-//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-//        	selectMockTestExamQuestionListening(examTypeDTO, questions);
-//        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
-//        	// full
-//        	selectMockTestExamQuestionSpeaking(examTypeDTO, questions);
-//        	addTimeBreak(questions, QuestionType.TIME_BREAK);
-//    		selectMockTestExamQuestionWriting(examTypeDTO, questions);
-//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-//    		selectMockTestExamQuestionReading(examTypeDTO, questions);
-//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-//        	selectMockTestExamQuestionListening(examTypeDTO, questions);
-//        }
-//    	
-//    	int order = 0;
-//		for (QuestionDTO questionDTO : questions) {
-//			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
-//			eqDTO.setExamId(examDTO.getId());
-//			eqDTO.setQuestionId(questionDTO.getId());
-//			eqDTO.setOrderId(order);
-//			examQuestionService.save(eqDTO);
-//			order++;
-//		}
-//		
-//		return questions;
-//    }
     
     private List<QuestionDTO> generateQuestionExam(ExamDTO examDTO) {
     	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());

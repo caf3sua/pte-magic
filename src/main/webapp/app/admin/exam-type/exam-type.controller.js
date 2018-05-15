@@ -5,9 +5,9 @@
         .module('pteMagicApp')
         .controller('ExamTypeController', ExamTypeController);
 
-    ExamTypeController.$inject = ['$scope', '$http', '$window', '$state', 'ExamType', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Upload'];
+    ExamTypeController.$inject = ['$scope', '$http', '$timeout', '$window', '$state', 'ExamType', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams', 'Upload'];
 
-    function ExamTypeController($scope, $http, $window, $state, ExamType, ParseLinks, AlertService, paginationConstants, pagingParams, Upload) {
+    function ExamTypeController($scope, $http, $timeout, $window, $state, ExamType, ParseLinks, AlertService, paginationConstants, pagingParams, Upload) {
 
         var vm = this;
 
@@ -39,8 +39,8 @@
 
                 file.upload.then(function (response) {
                     $timeout(function () {
-                    	console.log(response);
-                    	vm.question.audioLink = response.data.filename;
+                    	alert("Import success");
+                    	loadAll();
                     });
                 }, function (response) {
                     if (response.status > 0)

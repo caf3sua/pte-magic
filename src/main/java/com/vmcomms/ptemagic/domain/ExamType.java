@@ -115,7 +115,7 @@ public class ExamType implements Serializable {
     private Long totalTime;
     
     @Column(name = "limit_test_silver")
-    private Integer limitTesSilver;
+    private Integer limitTestSilver;
     
     @Column(name = "limit_test_gold")
     private Integer limitTestGold;
@@ -129,12 +129,12 @@ public class ExamType implements Serializable {
 		return totalTime;
 	}
 
-	public Integer getLimitTesSilver() {
-		return limitTesSilver;
+	public Integer getLimitTestSilver() {
+		return limitTestSilver;
 	}
 
-	public void setLimitTesSilver(Integer limitTesSilver) {
-		this.limitTesSilver = limitTesSilver;
+	public void setLimitTestSilver(Integer limitTestSilver) {
+		this.limitTestSilver = limitTestSilver;
 	}
 
 	public Integer getLimitTestGold() {

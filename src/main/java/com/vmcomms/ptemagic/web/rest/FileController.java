@@ -108,7 +108,9 @@ public class FileController {
 	    convFile.createNewFile(); 
 	    FileOutputStream fos = new FileOutputStream(convFile); 
 	    fos.write(file.getBytes());
-	    fos.close(); 
+	    fos.close();
+	    
+	    convFile.delete();
 	    return convFile;
 	}
 
@@ -167,7 +169,7 @@ public class FileController {
 					// Limit Exam SILVER
 				} else if (currentRow.getRowNum() == 3) {
 					Cell currentCell = currentRow.getCell(1); 
-                	examType.setLimitTesSilver((int)currentCell.getNumericCellValue());
+                	examType.setLimitTestSilver((int)currentCell.getNumericCellValue());
 					// Limit Exam GOLD 
 				} else if (currentRow.getRowNum() == 4) {
 					Cell currentCell = currentRow.getCell(1); 

@@ -68,20 +68,12 @@ public class ExamTypeDTO implements Serializable {
     
     private Long totalTime;
     
-    private Integer limitTesSilver;
+    private Integer limitTestSilver;
     
     private Integer limitTestGold;
     
     private Integer limitTestPlatinum;
     
-    public Integer getLimitTesSilver() {
-		return limitTesSilver;
-	}
-
-	public void setLimitTesSilver(Integer limitTesSilver) {
-		this.limitTesSilver = limitTesSilver;
-	}
-
 	public Integer getLimitTestGold() {
 		return limitTestGold;
 	}
@@ -346,5 +338,13 @@ public class ExamTypeDTO implements Serializable {
 
 	public void setRemainTest(int remainTest) {
 		this.remainTest = remainTest;
+	}
+
+	public Integer getLimitTestSilver() {
+		return limitTestSilver;
+	}
+
+	public void setLimitTestSilver(Integer limitTestSilver) {
+		this.limitTestSilver = limitTestSilver;
 	}
 }
