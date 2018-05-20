@@ -33,8 +33,8 @@
             if (file) {
                 file.upload = Upload.upload({
                     url: '/api/file/create_mock_test',
-                    data: {file: file},
-                    ignoreLoadingBar: true
+                    data: {file: file}
+                    //ignoreLoadingBar: true
                 });
 
                 file.upload.then(function (response) {

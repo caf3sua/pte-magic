@@ -12,9 +12,9 @@ import java.util.Iterator;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.codec.binary.StringUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -210,19 +210,22 @@ public class FileController {
         Cell typeCell = currentRow.getCell(1);
         Cell questionCell = currentRow.getCell(2);
 
-        configMock.setOrderId(orderId);
-        configMock.setQuestionGroup(groupCell.getStringCellValue());
-        configMock.setQuestionType(typeCell.getStringCellValue());
-        configMock.setQuestionId((long) questionCell.getNumericCellValue());
+        // Check null
+        if (groupCell != null && typeCell != null && questionCell != null) {
+        	configMock.setOrderId(orderId);
+            configMock.setQuestionGroup(groupCell.getStringCellValue());
+            configMock.setQuestionType(typeCell.getStringCellValue());
+            configMock.setQuestionId((long) questionCell.getNumericCellValue());
 
-        if (StringUtils.equals("SPEAKING", configMock.getQuestionGroup())) {
-            mock.getLstSpeaking().add(configMock);
-        } else if (StringUtils.equals("WRITING", configMock.getQuestionGroup())) {
-            mock.getLstWriting().add(configMock);
-        } else if (StringUtils.equals("READING", configMock.getQuestionGroup())) {
-            mock.getLstReading().add(configMock);
-        } else if (StringUtils.equals("LISTENING", configMock.getQuestionGroup())) {
-            mock.getLstListening().add(configMock);
+            if (StringUtils.equals("SPEAKING", configMock.getQuestionGroup())) {
+                mock.getLstSpeaking().add(configMock);
+            } else if (StringUtils.equals("WRITING", configMock.getQuestionGroup())) {
+                mock.getLstWriting().add(configMock);
+            } else if (StringUtils.equals("READING", configMock.getQuestionGroup())) {
+                mock.getLstReading().add(configMock);
+            } else if (StringUtils.equals("LISTENING", configMock.getQuestionGroup())) {
+                mock.getLstListening().add(configMock);
+            }
         }
     }
 }

@@ -58,12 +58,37 @@
             vm.transition();
         }
 
+        function searchAllTransition () {
+        	Question.queryBySkill({
+                  page: vm.page - 1,
+                  size: vm.itemsPerPage,
+                  sort: sort(),
+                  skill: vm.selectedSkill
+              }, onSuccess, onError);
+              function sort() {
+                  var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                  if (vm.predicate !== 'id') {
+                      result.push('id');
+                  }
+                  return result;
+              }
+              function onSuccess(data, headers) {
+                  vm.questions = data;
+              }
+              function onError(error) {
+                  AlertService.error(error.data.message);
+              }
+        }
+        
         function transition() {
-            $state.transitionTo($state.$current, {
-                page: vm.page,
-                sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
-                search: vm.currentSearch
-            });
+        	console.log('transition query, skill:' + vm.selectedSkill);
+        	searchAllTransition();
+//            $state.transitionTo($state.$current, {
+//                page: vm.page,
+//                sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
+//                skill: vm.selectedSkill,
+//                search: vm.currentSearch
+//            });
         }
     }
 })();
