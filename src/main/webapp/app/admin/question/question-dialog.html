@@ -106,7 +106,13 @@
             && vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT'
             && vm.question.type != 'LISTENING_DICTATION'
             && vm.question.type != 'WRITING_ESSAY'
-            && vm.question.type != 'LISTENING_HIGHLIGHT_INCORRECT_WORD'"
+            && vm.question.type != 'LISTENING_HIGHLIGHT_INCORRECT_WORD'
+            || vm.question.type == 'READING_FIB_R_W'
+            || vm.question.type == 'READING_FIB_R'
+            || vm.question.type == 'READING_RE_ORDER_PARAGRAPH'
+            || vm.question.type == 'READING_MCQ_R_SINGLE_ANSWER'
+            || vm.question.type == 'READING_MCQ_R_MULTIPLE_ANSWER'
+        "
         >
 	        <div class="form-group">
 	            <label class="control-label" data-translate="pteMagicApp.question.answerA" for="field_answerA">Answer A</label>
