@@ -21,4 +21,6 @@ public interface ExamQuestionService {
     void delete(Long id);
     
     List<ExamQuestionDTO> findAllByExamId(Long examId);
+    
+    List<ExamQuestionDTO> save(List<ExamQuestionDTO> answerDTOs);
 }

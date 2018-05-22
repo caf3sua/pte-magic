@@ -2,19 +2,27 @@ package com.vmcomms.ptemagic.service.impl;
 
 import com.vmcomms.ptemagic.service.ConfigMockExamService;
 import com.vmcomms.ptemagic.service.ExamTypeService;
+import com.vmcomms.ptemagic.service.UserLimitExamService;
 import com.vmcomms.ptemagic.domain.ExamType;
+import com.vmcomms.ptemagic.domain.User;
 import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.ConfigMockExamDTO;
 import com.vmcomms.ptemagic.repository.ExamTypeRepository;
+import com.vmcomms.ptemagic.repository.UserRepository;
+import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.MockExamDTO;
 import com.vmcomms.ptemagic.service.mapper.ExamTypeMapper;
+import com.vmcomms.ptemagic.web.rest.errors.InternalServerErrorException;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +34,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "exam")
 public class ExamTypeServiceImpl implements ExamTypeService{
 
     private final Logger log = LoggerFactory.getLogger(ExamTypeServiceImpl.class);
@@ -39,6 +48,12 @@ public class ExamTypeServiceImpl implements ExamTypeService{
     @Autowired
     private ConfigMockExamService configMockExamService;
 
+    @Autowired
+    private UserLimitExamService userLimitExamService;
+    
+    @Autowired
+    private UserRepository userRepository;
+    
     /**
      * Save a examType.
      *
@@ -75,6 +90,7 @@ public class ExamTypeServiceImpl implements ExamTypeService{
      */
     @Override
     @Transactional(readOnly = true)
+    @Cacheable
     public ExamTypeDTO findOne(Long id) {
         log.debug("Request to get ExamType : {}", id);
         ExamType examType = examTypeRepository.findOne(id);
@@ -92,6 +108,7 @@ public class ExamTypeServiceImpl implements ExamTypeService{
         examTypeRepository.delete(id);
     }
     
+    @Cacheable
     public List<ExamTypeDTO> findAllByType(String type) {
     	log.debug("Request to findAllByType : {}", type);
         List<ExamType> data = examTypeRepository.findAllByType(TestType.valueOf(type));
@@ -142,4 +159,34 @@ public class ExamTypeServiceImpl implements ExamTypeService{
 		
 		return mockExamDTO;
 	}
+
+	@Override
+	@Cacheable
+	public List<ExamTypeDTO> getAllExamTypesByType(String type) {
+        List<ExamTypeDTO> data = this.findAllByType(type);
+        
+        // update type incase of MOCK TEST
+        if (type.contains("MOCK_TEST")) {
+        	updateRemainTest(data);
+        }
+        
+        return data;
+	}
+	
+	private void updateRemainTest(List<ExamTypeDTO> data) {
+    	// Get current user
+    	final String userLogin = SecurityUtils.getCurrentUserLogin();
+        Optional<User> user = userRepository.findOneByLogin(userLogin);
+        if (!user.isPresent()) {
+            throw new InternalServerErrorException("User could not be found");
+        }
+        
+        Long userId = user.get().getId();
+        
+    	for (ExamTypeDTO examTypeDTO : data) {
+			// Get remain test
+    		int remainTest = userLimitExamService.getRemainTest(userId, examTypeDTO.getId());
+    		examTypeDTO.setRemainTest(remainTest);
+		}
+    }
 }

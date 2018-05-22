@@ -19,6 +19,8 @@ import org.apache.commons.codec.binary.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -46,12 +48,6 @@ public class ExamTypeResource {
 
     @Autowired
     private ExamTypeService examTypeService;
-
-    @Autowired
-    private UserLimitExamService userLimitExamService;
-    
-    @Autowired
-    private UserRepository userRepository;
 
     /**
      * POST  /exam-types : Create a new examType.
@@ -114,32 +110,11 @@ public class ExamTypeResource {
     @Timed
     public ResponseEntity<List<ExamTypeDTO>> getAllExamTypesByType(@PathVariable String type) {
         log.debug("REST request to getAllExamTypesByType");
-        List<ExamTypeDTO> data = examTypeService.findAllByType(type);
-        
-        // update type incase of MOCK TEST
-        if (type.contains("MOCK_TEST")) {
-        	updateRemainTest(data);
-        }
+        List<ExamTypeDTO> data = examTypeService.getAllExamTypesByType(type);
         
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
-    private void updateRemainTest(List<ExamTypeDTO> data) {
-    	// Get current user
-    	final String userLogin = SecurityUtils.getCurrentUserLogin();
-        Optional<User> user = userRepository.findOneByLogin(userLogin);
-        if (!user.isPresent()) {
-            throw new InternalServerErrorException("User could not be found");
-        }
-        
-        Long userId = user.get().getId();
-        
-    	for (ExamTypeDTO examTypeDTO : data) {
-			// Get remain test
-    		int remainTest = userLimitExamService.getRemainTest(userId, examTypeDTO.getId());
-    		examTypeDTO.setRemainTest(remainTest);
-		}
-    }
     /**
      * GET  /exam-types/:id : get the "id" examType.
      *

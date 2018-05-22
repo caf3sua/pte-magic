@@ -12,7 +12,9 @@ import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
  */
 public class QuestionDTO implements Serializable {
 
-    private Long id;
+	private static final long serialVersionUID = -6155814844464620154L;
+
+	private Long id;
 
     private QuestionType type;
 

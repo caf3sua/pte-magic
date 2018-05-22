@@ -15,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,11 +30,8 @@ import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.AnswerQuestionDTO;
-import com.vmcomms.ptemagic.dto.ConfigMockExamDTO;
 import com.vmcomms.ptemagic.dto.ExamInfoDTO;
-import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.AnswerService;
-import com.vmcomms.ptemagic.service.ConfigMockExamService;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.ExamService;
 import com.vmcomms.ptemagic.service.ExamTypeService;
@@ -94,8 +89,8 @@ public class ExamResource {
     @Autowired
     private UserLimitExamService userLimitExamService;
     
-    @Autowired
-    private ConfigMockExamService configMockExamService;
+//    @Autowired
+//    private ConfigMockExamService configMockExamService;
     
     @PostMapping("/finish-exam")
     @Timed
@@ -190,7 +185,7 @@ public class ExamResource {
         // , MOCK_TEST_A, MOCK_TEST_B, MOCK_TEST_FULL
         if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A) || examTypeDTO.getType().equals(TestType.MOCK_TEST_B) || 
         		examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
-        	question = buildMockTestQuestionExam(result);
+        	question = questionService.buildMockTestQuestionExam(examTypeDTO, result);
         } else {
             // Random to create/choice question for exam
             question = generateQuestionExam(result);
@@ -223,43 +218,42 @@ public class ExamResource {
     }
 
     
-    private List<QuestionDTO> buildMockTestQuestionExam(ExamDTO examDTO) {
-    	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
-    	List<QuestionDTO> questions = new ArrayList<>();
-    	
-    	if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A)) {
-    		// Speaking/writing
-    		buildMockTestExamQuestion(examTypeDTO, questions, "SPEAKING");
-    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-    		buildMockTestExamQuestion(examTypeDTO, questions, "WRITING");
-        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
-        	// Reading/listening
-        	buildMockTestExamQuestion(examTypeDTO, questions, "READING");
-    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-    		buildMockTestExamQuestion(examTypeDTO, questions, "LISTENING");
-        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
-        	// full
-        	buildMockTestExamQuestion(examTypeDTO, questions, "SPEAKING");
-    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-    		buildMockTestExamQuestion(examTypeDTO, questions, "WRITING");
-    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-        	buildMockTestExamQuestion(examTypeDTO, questions, "READING");
-    		addTimeBreak(questions, QuestionType.TIME_BREAK);
-    		buildMockTestExamQuestion(examTypeDTO, questions, "LISTENING");
-        }
-    	
-    	int order = 0;
-		for (QuestionDTO questionDTO : questions) {
-			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
-			eqDTO.setExamId(examDTO.getId());
-			eqDTO.setQuestionId(questionDTO.getId());
-			eqDTO.setOrderId(order);
-			examQuestionService.save(eqDTO);
-			order++;
-		}
-		
-		return questions;
-    }
+//    private List<QuestionDTO> buildMockTestQuestionExam(ExamTypeDTO examTypeDTO, ExamDTO examDTO) {
+//    	List<QuestionDTO> questions = new ArrayList<>();
+//    	
+//    	if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A)) {
+//    		// Speaking/writing
+//    		buildMockTestExamQuestion(examTypeDTO, questions, "SPEAKING");
+//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+//    		buildMockTestExamQuestion(examTypeDTO, questions, "WRITING");
+//        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
+//        	// Reading/listening
+//        	buildMockTestExamQuestion(examTypeDTO, questions, "READING");
+//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+//    		buildMockTestExamQuestion(examTypeDTO, questions, "LISTENING");
+//        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
+//        	// full
+//        	buildMockTestExamQuestion(examTypeDTO, questions, "SPEAKING");
+//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+//    		buildMockTestExamQuestion(examTypeDTO, questions, "WRITING");
+//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+//        	buildMockTestExamQuestion(examTypeDTO, questions, "READING");
+//    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+//    		buildMockTestExamQuestion(examTypeDTO, questions, "LISTENING");
+//        }
+//    	
+//    	int order = 0;
+//		for (QuestionDTO questionDTO : questions) {
+//			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
+//			eqDTO.setExamId(examDTO.getId());
+//			eqDTO.setQuestionId(questionDTO.getId());
+//			eqDTO.setOrderId(order);
+//			examQuestionService.save(eqDTO);
+//			order++;
+//		}
+//		
+//		return questions;
+//    }
     
     private List<QuestionDTO> generateQuestionExam(ExamDTO examDTO) {
     	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
@@ -268,14 +262,17 @@ public class ExamResource {
     	selectExamQuestion(examTypeDTO, questions);
     	
     	int order = 0;
+    	List<ExamQuestionDTO> examQuestionDTOs = new ArrayList<>();
 		for (QuestionDTO questionDTO : questions) {
 			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
 			eqDTO.setExamId(examDTO.getId());
 			eqDTO.setQuestionId(questionDTO.getId());
 			eqDTO.setOrderId(order);
-			examQuestionService.save(eqDTO);
 			order++;
+			examQuestionDTOs.add(eqDTO);
 		}
+		// Save
+		examQuestionService.save(examQuestionDTOs);
 		
 		return questions;
     }
@@ -345,80 +342,29 @@ public class ExamResource {
     }
     
     
-//    private void selectMockTestExamQuestionListening(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
-//    	// Select question listening
-//		//    	13. Summarize Spoken Text (3)
-//		//    	14. Fill in the Blank (2)
-//		//    	15. MCQ Single Answer (2)
-//		//    	16. MCQs Multiple Answer (2)
-//		//    	17. Highlight Correct Summary (2)
-//		//    	18. Select Missing Words (2)
-//		//    	19. Highlight Incorrect Words (2)
-//		//    	20. Dictation (4)
-//    		selectQuestionByType(questions, 3, QuestionType.LISTENING_SUMMARIZE_SPOKEN_TEXT);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_FIB_L);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_SINGLE_ANSWER);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_MCQ_L_MULTIPLE_ANSWER);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_CORRECT_SUMMARY);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_SELECT_MISSING_WORD);
-//    		selectQuestionByType(questions, 2, QuestionType.LISTENING_HIGHLIGHT_INCORRECT_WORD);
-//    		selectQuestionByType(questions, 4, QuestionType.LISTENING_DICTATION);
+//    private void buildMockTestExamQuestion(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions, String questionGroup) {
+//		// Get from config_mock_exam by question_group (exam_type_id, question_group)
+//    	List<ConfigMockExamDTO> data = configMockExamService.getMockExamByExamTypeAndGroup(examTypeDTO.getId(), questionGroup);
+//    	
+//    	// Find questionDTO
+//    	List<Long> ids = new ArrayList<>();
+//    	for (ConfigMockExamDTO configMockExamDTO : data) {
+//    		if (configMockExamDTO.getQuestionId() != null && configMockExamDTO.getQuestionId() > 0) {
+//    			ids.add(configMockExamDTO.getQuestionId());
+//    		}
+//    		List<QuestionDTO> listQuestionDTO = questionService.findByIdIn(ids);
+//    		
+//    		if (listQuestionDTO != null && listQuestionDTO.size() > 0) {
+//    			questions.addAll(listQuestionDTO);
+//    		}
+//		}
 //    }
     
-//    private void selectMockTestExamQuestionReading(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
-//    	// Select question reading
-//		//    	8. Fill in the Blank: R+W (7)
-//		//    	9. Fill in the Blank: R (5)
-//		//    	10. Re-order Paragraph (3)
-//		//    	11. MCQ Single Answer (2)
-//		//    	12. MCQ Multiple Answer (3)
-//		selectQuestionByType(questions, 7, QuestionType.READING_FIB_R_W);
-//		selectQuestionByType(questions, 5, QuestionType.READING_FIB_R);
-//		selectQuestionByType(questions, 3, QuestionType.READING_RE_ORDER_PARAGRAPH);
-//		selectQuestionByType(questions, 2, QuestionType.READING_MCQ_R_SINGLE_ANSWER);
-//		selectQuestionByType(questions, 3, QuestionType.READING_MCQ_R_MULTIPLE_ANSWER);
+//    private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {
+//    	QuestionDTO timeBreak = new QuestionDTO();
+//    	timeBreak.setType(type);
+//    	questions.add(timeBreak);
 //    }
-    
-//    private void selectMockTestExamQuestionWriting(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
-//    	// Select question writing
-//		//    	6. Summarize Written Text (3)
-//		//    	7. Essay (1-2)
-//		selectQuestionByType(questions, 3, QuestionType.WRITING_SUMMARIZE_WRITTEN_TEXT);
-//		selectQuestionByType(questions, 1, QuestionType.WRITING_ESSAY);
-//    }
-    
-    private void buildMockTestExamQuestion(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions, String questionGroup) {
-		// Get from config_mock_exam by question_group (exam_type_id, question_group)
-    	List<ConfigMockExamDTO> data = configMockExamService.getMockExamByExamTypeAndGroup(examTypeDTO.getId(), questionGroup);
-    	
-    	// Find questionDTO
-    	for (ConfigMockExamDTO configMockExamDTO : data) {
-    		QuestionDTO qDTO = questionService.findOne(configMockExamDTO.getQuestionId());
-    		if (qDTO !=  null) {
-    			questions.add(qDTO);
-    		}
-		}
-    }
-    
-//    private void selectMockTestExamQuestionSpeaking(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions) {
-//    	// Select question Speaking
-//		//    	1. Read Aloud (6)
-//		//    	2. Repeat Sentence (10)
-//		//    	3. Describe Image (6)
-//		//    	4. Retell Lecture (4)
-//		//    	5. Answer Short Question (10)
-//		selectQuestionByType(questions, 6, QuestionType.SPEAKING_READ_ALOUD);
-//		selectQuestionByType(questions, 10, QuestionType.SPEAKING_REPEAT_SENTENCE);
-//		selectQuestionByType(questions, 6, QuestionType.SPEAKING_DESCRIBE_IMAGE);
-//		selectQuestionByType(questions, 4, QuestionType.SPEAKING_RETELL_LECTURE);
-//		selectQuestionByType(questions, 10, QuestionType.SPEAKING_ANSWER_SHORT_QUESTION);
-//    }
-    
-    private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {
-    	QuestionDTO timeBreak = new QuestionDTO();
-    	timeBreak.setType(type);
-    	questions.add(timeBreak);
-    }
     
     private void selectQuestionByType(List<QuestionDTO> questions, int number, QuestionType type) {
     	List<QuestionDTO> questionDTOs = questionService.findAllByType(type);
@@ -433,48 +379,10 @@ public class ExamResource {
     	questions.addAll(questionDTOs);
     }
     
-//    private SkillType getSkillTypeByExamType(ExamTypeDTO examTypeDTO) {
-//    	String testType = examTypeDTO.getType().toString();
-//    	
-//    	String skillTypeStr = testType.substring(testType.lastIndexOf("_") + 1);
-//    	return SkillType.valueOf(skillTypeStr);
-//    }
-//    
-//    private void selectQuestionBySkill(List<QuestionDTO> questions, int number, SkillType skill) {
-//    	List<QuestionDTO> questionDTOs = questionService.findAllBySkill(skill);
-//    	// sub 
-//    	if (questionDTOs != null && questionDTOs.size() > number) {
-//    		Collections.shuffle(questionDTOs);
-//    		 List<QuestionDTO> data = questionDTOs.subList(0, number);
-//    		 questions.addAll(data);
-//    		 return;
-//    	}
-//    	
-//    	questions.addAll(questionDTOs);
-//    }
-    
     @PostMapping("/exams/resume")
     @Timed
     public ResponseEntity<ExamInfoDTO> resumeExam(@RequestBody ExamVM examVM) throws URISyntaxException {
         log.debug("REST request to start Exam : {}", examVM);
-        
-//        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
-//                .map(UserDTO::new)
-//                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
-//        
-//        if (examVM.getExamTypeId() != null) {
-//            throw new BadRequestAlertException("A new exam cannot already have an ID", ENTITY_NAME, "idexists");
-//        }
-//        
-//        ExamDTO examDTO = new ExamDTO();
-//        examDTO.setUserId(userDTO.getId());
-//        examDTO.setResult(ProgressType.INPROGRESS);
-//        examDTO.setExamTypeId(examVM.getExamTypeId());
-//         
-//        ExamDTO result = examService.save(examDTO);
-//        
-//        // Random to create/choice question for exam
-//        List<QuestionDTO> question = generateQuestionExam(examDTO);
         
         
         ExamInfoDTO examInfoDTO = new ExamInfoDTO();

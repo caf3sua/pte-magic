@@ -2,6 +2,8 @@ package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
+import com.vmcomms.ptemagic.service.dto.ExamDTO;
+import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 
 import java.util.List;
@@ -47,6 +49,8 @@ public interface QuestionService {
      *  @return the entity
      */
     QuestionDTO findOne(Long id);
+    
+    List<QuestionDTO> findByIdIn(List<Long> ids);
 
     /**
      *  Delete the "id" question.
@@ -54,4 +58,6 @@ public interface QuestionService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+    
+    List<QuestionDTO> buildMockTestQuestionExam(ExamTypeDTO examTypeDTO, ExamDTO examDTO);
 }

@@ -1,17 +1,28 @@
 package com.vmcomms.ptemagic.service.impl;
 
+import com.vmcomms.ptemagic.service.ConfigMockExamService;
+import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.domain.Question;
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
+import com.vmcomms.ptemagic.domain.enumeration.TestType;
+import com.vmcomms.ptemagic.dto.ConfigMockExamDTO;
 import com.vmcomms.ptemagic.repository.QuestionRepository;
+import com.vmcomms.ptemagic.service.dto.ExamDTO;
+import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
+import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 import com.vmcomms.ptemagic.service.mapper.QuestionMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -23,18 +34,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "exam")
 public class QuestionServiceImpl implements QuestionService{
 
     private final Logger log = LoggerFactory.getLogger(QuestionServiceImpl.class);
 
-    private final QuestionRepository questionRepository;
+    @Autowired
+    private QuestionRepository questionRepository;
 
-    private final QuestionMapper questionMapper;
-
-    public QuestionServiceImpl(QuestionRepository questionRepository, QuestionMapper questionMapper) {
-        this.questionRepository = questionRepository;
-        this.questionMapper = questionMapper;
-    }
+    @Autowired
+    private QuestionMapper questionMapper;
+    
+    @Autowired
+    private ConfigMockExamService configMockExamService;
+    
+    @Autowired
+    private ExamQuestionService examQuestionService;
 
     /**
      * Save a question.
@@ -120,4 +135,85 @@ public class QuestionServiceImpl implements QuestionService{
 		Page<Question> data = questionRepository.findByTypeIn(lstQuestionEnum, pageable);
 		return data.map(questionMapper::toDto);
 	}
+
+	@Override
+	@Cacheable
+	public List<QuestionDTO> findByIdIn(List<Long> ids) {
+		List<Question> data = questionRepository.findByIdIn(ids);
+		return questionMapper.toDto(data);
+	}
+
+	@Override
+	//@Cacheable
+	public List<QuestionDTO> buildMockTestQuestionExam(ExamTypeDTO examTypeDTO, ExamDTO examDTO) {
+		List<QuestionDTO> questions = new ArrayList<>();
+    	
+    	if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A)) {
+    		// Speaking/writing
+    		List<QuestionDTO> dataS = configMockExamService.getMockExam(examTypeDTO.getId(), "SPEAKING");
+    		questions.addAll(dataS);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+    		List<QuestionDTO> dataW = configMockExamService.getMockExam(examTypeDTO.getId(), "WRITING");
+    		questions.addAll(dataW);
+        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
+        	// Reading/listening
+        	List<QuestionDTO> dataR = configMockExamService.getMockExam(examTypeDTO.getId(), "READING");
+        	questions.addAll(dataR);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+    		List<QuestionDTO> dataL = configMockExamService.getMockExam(examTypeDTO.getId(), "LISTENING");
+    		questions.addAll(dataL);
+        } else if (examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
+        	// full
+        	List<QuestionDTO> dataS = configMockExamService.getMockExam(examTypeDTO.getId(), "SPEAKING");
+        	questions.addAll(dataS);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+    		List<QuestionDTO> dataW = configMockExamService.getMockExam(examTypeDTO.getId(), "WRITING");
+    		questions.addAll(dataW);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+    		List<QuestionDTO> dataR = configMockExamService.getMockExam(examTypeDTO.getId(), "READING");
+    		questions.addAll(dataR);
+    		addTimeBreak(questions, QuestionType.TIME_BREAK);
+    		List<QuestionDTO> dataL = configMockExamService.getMockExam(examTypeDTO.getId(), "LISTENING");
+    		questions.addAll(dataL);
+        }
+    	
+    	int order = 0;
+    	List<ExamQuestionDTO> examQuestionDTOs = new ArrayList<>();
+		for (QuestionDTO questionDTO : questions) {
+			ExamQuestionDTO eqDTO = new ExamQuestionDTO();
+			eqDTO.setExamId(examDTO.getId());
+			eqDTO.setQuestionId(questionDTO.getId());
+			eqDTO.setOrderId(order);
+			order++;
+			examQuestionDTOs.add(eqDTO);
+		}
+		// Save
+		examQuestionService.save(examQuestionDTOs);
+		
+		return questions;
+	}
+	
+//	@Cacheable
+//	public List<QuestionDTO> buildMockTestExamQuestionByGroup(long examTypeId, String questionGroup) {
+//		// Get from config_mock_exam by question_group (exam_type_id, question_group)
+//    	List<ConfigMockExamDTO> data = configMockExamService.getMockExamByExamTypeAndGroup(examTypeId, questionGroup);
+//    	
+//    	// Find questionDTO
+//    	List<Long> ids = new ArrayList<>();
+//    	for (ConfigMockExamDTO configMockExamDTO : data) {
+//    		if (configMockExamDTO.getQuestionId() != null && configMockExamDTO.getQuestionId() > 0) {
+//    			ids.add(configMockExamDTO.getQuestionId());
+//    		}
+//		}
+//    	
+//    	List<QuestionDTO> listQuestionDTO = this.findByIdIn(ids);
+//		
+//		return listQuestionDTO;
+//    }
+	
+	private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {
+    	QuestionDTO timeBreak = new QuestionDTO();
+    	timeBreak.setType(type);
+    	questions.add(timeBreak);
+    }
 }

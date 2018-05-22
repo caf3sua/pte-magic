@@ -47,4 +47,6 @@ public interface ExamTypeService {
     void delete(Long id);
     
     List<ExamTypeDTO> findAllByType(String type);
+    
+    List<ExamTypeDTO> getAllExamTypesByType(String type);
 }

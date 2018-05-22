@@ -97,4 +97,12 @@ public class ExamQuestionServiceImpl implements ExamQuestionService{
         List<ExamQuestion> data = examQuestionRepository.findAllByExamId(examId);
         return examQuestionMapper.toDto(data);
 	}
+
+	@Override
+	public List<ExamQuestionDTO> save(List<ExamQuestionDTO> answerDTOs) {
+		log.debug("Request to save ExamQuestion : {}", answerDTOs);
+        List<ExamQuestion> answers = examQuestionMapper.toEntity(answerDTOs);
+        answers = examQuestionRepository.save(answers);
+        return examQuestionMapper.toDto(answers);
+	}
 }
