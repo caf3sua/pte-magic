@@ -67,7 +67,25 @@ public class ConfigMockExamServiceImpl implements ConfigMockExamService {
     	
     	List<QuestionDTO> listQuestionDTO = questionService.findByIdIn(ids);
     	
-    	return listQuestionDTO;
+    	// Order by
+    	List<QuestionDTO> qResult = new ArrayList<>();
+    	for (ConfigMockExamDTO item : result) {
+    		QuestionDTO q = findQuestionById(listQuestionDTO, item.getQuestionId());
+    		if (q != null) {
+    			qResult.add(q);
+    		}
+		}
+    	
+    	return qResult;
+	}
+	
+	private QuestionDTO findQuestionById(List<QuestionDTO> listQuestionDTO, Long questionId) {
+		for (QuestionDTO questionDTO : listQuestionDTO) {
+			if (questionDTO.getId().longValue() == questionId.longValue()) {
+				return questionDTO;
+			}
+		}
+		return null;
 	}
 
 	@Override

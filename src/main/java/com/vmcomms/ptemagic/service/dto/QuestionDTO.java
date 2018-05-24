@@ -2,6 +2,7 @@ package com.vmcomms.ptemagic.service.dto;
 
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -183,3 +184,13 @@ public class QuestionDTO implements Serializable {
             "}";
     }
 }
+
+//class SortQuestion implements Comparator<QuestionDTO>
+//{
+//    // Used for sorting in ascending order of
+//    // roll number
+//    public int compare(QuestionDTO a, QuestionDTO b)
+//    {
+//        return a.get
+//    }
+//}
