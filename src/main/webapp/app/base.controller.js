@@ -86,7 +86,7 @@
         vm.spellCheck = spellCheck;
         vm.UpdateLengths = UpdateLengths;
         vm.playAudio = playAudio;
-        
+
         vm.audioProgressing = 0;
         $scope.$watch('vm.audioProgressing', function () {
         	if (vm.audioProgressing == 100) {
@@ -97,49 +97,49 @@
                 console.log('audio done');
         	}
         });
-        
+
         $scope.$watch('vm.audio.progress', function () {
         	if (vm.audio == undefined) {
         		return;
         	}
-        	
+
         	if (vm.audio.progress == 1) {
         		vm.audioProgressing = 100;
         		return;
         	}
-        	
+
         	if (vm.audio.progress > 0) {
         		vm.audioProgressing = vm.audio.progress * 100;
         	}
         });
-        
+
         function resetProgressStatus() {
     		vm.showProgressBar = false;
     		vm.countdownPercent = 0;
     		vm.timeProgress = 0;
-    		
+
     		if (vm.audio) {
     			vm.audio.destroy();
     			vm.audio.progress = 0;
     		}
     	}
-        
+
         function playAudio(link, timeout) {
         	console.log('play audio:' + link);
             vm.checkAudioSeconds = false;
             vm.checkStatusPlay = true;
-            
+
             if (link == null || link == '') {
             	return;
             }
-            
+
             vm.audio = ngAudio.load(link);
             vm.audio.volume = 0.5;
             $timeout(function(){
 //            	vm.audio.addEventListener('ended', vm.callBackAudioEnded);
             	vm.audio.play();
             }, timeout );
-            
+
 //            vm.audio.complete(function(audio){
 //        		if (vm.questionGroup == 'SPEAKING') {
 //        			console.log('callBackAudioEnded, recording ...');
@@ -148,7 +148,7 @@
 //                console.log('audio done');
 //            })
     	}
-        
+
         function spellCheck() {
             if(vm.checkClickspell == true){
                 document.getElementById("areaTextWriting").setAttribute("spellcheck", "true");
@@ -643,6 +643,8 @@
   			if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' || vm.selectedQuestion.type == 'WRITING_ESSAY') {
   				var answer = $('#areaTextWriting').val();
   				vm.answers.push(answer);
+  				// Reset
+                $('#areaTextWriting').val('');
   			} else if (vm.selectedQuestion.type == 'LISTENING_FIB_L') {
   				$('.input_answer').each(function(){
   					vm.answers.push($(this).val());
