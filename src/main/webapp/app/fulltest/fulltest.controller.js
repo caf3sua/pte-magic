@@ -250,6 +250,7 @@
 
         function nextQuestion() {
             $('#areaTextWriting').val("");
+            vm.WordsLength = 0;
             vm.selectedQuestion = vm.questions.shift();
             vm.audioProgressing = 0;
             vm.resetProgressStatus();

@@ -176,6 +176,7 @@
 
   		function nextQuestion() {
   			$('#areaTextWriting').val("");
+  			vm.WordsLength = 0;
   			vm.selectedQuestion = vm.questions.shift();
   			vm.resetProgressStatus();
   			vm.audioProgressing = 0;

@@ -1,6 +1,9 @@
 package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 public interface AnswerService {
 
     AnswerDTO findOneByExamIdAndQuestionId(Long examId, Long questionId);
+    
+    List<AnswerDTO> findByExamId(Long examId);
+    
     /**
      * Save a answer.
      *

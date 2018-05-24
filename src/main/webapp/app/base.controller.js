@@ -684,6 +684,8 @@
   	  	  			}
   	  				$("#answer" + value).prop( "checked", false );
   	            });
+  				// Remove
+  				$('input[type="radio"]').prop('checked', false);
   			}
   		}
 

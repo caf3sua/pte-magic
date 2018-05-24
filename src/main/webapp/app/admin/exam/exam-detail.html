@@ -48,6 +48,7 @@
                     <td class="text-right">{{answerQuestion.answer.id}}</td>
                     <td  class="text-left">{{answerQuestion.answer.status}}</td>
                     <td  class="text-left">
+                    	<p>{{answerQuestion.question.type}}</p>
                     	<div ng-show="answerQuestion.question.type == 'SPEAKING_DESCRIBE_IMAGE'">
                     		<img class="pte-width-100 pte-margin-bottom-10" alt="" src="{{answerQuestion.question.audioLink}}">
                     	</div>

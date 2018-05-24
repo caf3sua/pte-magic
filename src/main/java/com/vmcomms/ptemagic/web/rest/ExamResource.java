@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.poi.xwpf.usermodel.XWPFRun.FontCharRange;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -480,22 +481,59 @@ public class ExamResource {
 		// Get list exam question
 		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(id);
 
-		for (ExamQuestionDTO examQuestionDTO : examQuestions) {
+//		for (ExamQuestionDTO examQuestionDTO : examQuestions) {
+//			AnswerQuestionDTO item = new AnswerQuestionDTO();
+//			// Get question to compare
+//			if (examQuestionDTO.getQuestionId() != null) {
+//				QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
+//				item.setQuestion(questionDTO);
+//			}
+//			
+//			// Get answer
+//			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(id, examQuestionDTO.getQuestionId());
+//			
+//			item.setAnswer(answerDTO);
+//			lstAnswerQuestion.add(item);
+//		}
+		
+		// Get list answer by examID
+		List<AnswerDTO> answerDTOs = answerService.findByExamId(id);
+		
+		// Get list questionDTO
+		List<QuestionDTO> questionDTOs = questionService.findByIdIn(getQuestionIds(examQuestions));
+		for (QuestionDTO questionDTO : questionDTOs) {
 			AnswerQuestionDTO item = new AnswerQuestionDTO();
-			// Get question to compare
-			if (examQuestionDTO.getQuestionId() != null) {
-				QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
-				item.setQuestion(questionDTO);
-			}
+			item.setQuestion(questionDTO);
 			
 			// Get answer
-			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(id, examQuestionDTO.getQuestionId());
+			AnswerDTO answerDTO = findAnswerInListByQuestionId(answerDTOs, questionDTO.getId());
 			
 			item.setAnswer(answerDTO);
 			lstAnswerQuestion.add(item);
 		}
-        
+		
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(examInfoDTO));
+    }
+    
+    private AnswerDTO findAnswerInListByQuestionId(List<AnswerDTO> answerDTOs, Long questionId) {
+    	for (AnswerDTO answerDTO : answerDTOs) {
+			if (answerDTO != null && answerDTO.getQuestionId().longValue() == questionId.longValue()) {
+				return answerDTO;
+			}
+		}
+    	return null;
+    }
+    
+    private List<Long> getQuestionIds(List<ExamQuestionDTO> examQuestions) {
+    	List<Long> ids = new ArrayList<>();
+    	
+    	for (ExamQuestionDTO examQuestionDTO : examQuestions) {
+    		if (examQuestionDTO.getQuestionId() != null) {
+				ids.add(examQuestionDTO.getQuestionId());
+			}
+		}
+    	
+    	return ids;
     }
 
     /**

@@ -87,6 +87,7 @@ public class QuestionServiceImpl implements QuestionService{
      */
     @Override
     @Transactional(readOnly = true)
+    @Cacheable
     public QuestionDTO findOne(Long id) {
         log.debug("Request to get Question : {}", id);
         Question question = questionRepository.findOne(id);

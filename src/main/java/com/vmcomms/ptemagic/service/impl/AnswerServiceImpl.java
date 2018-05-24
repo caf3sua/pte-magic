@@ -5,8 +5,13 @@ import com.vmcomms.ptemagic.domain.Answer;
 import com.vmcomms.ptemagic.repository.AnswerRepository;
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
 import com.vmcomms.ptemagic.service.mapper.AnswerMapper;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -18,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "exam")
 public class AnswerServiceImpl implements AnswerService{
 
     private final Logger log = LoggerFactory.getLogger(AnswerServiceImpl.class);
@@ -85,9 +91,17 @@ public class AnswerServiceImpl implements AnswerService{
     }
 
 	@Override
+	@Cacheable
 	public AnswerDTO findOneByExamIdAndQuestionId(Long examId, Long questionId) {
 		log.debug("Request to delete findOneByExamIdAndQuestionId : examId {} questionId {}", examId, questionId);
 		Answer answer = answerRepository.findOneByExamIdAndQuestionId(examId, questionId);
 		return answerMapper.toDto(answer);
+	}
+
+	@Override
+	public List<AnswerDTO> findByExamId(Long examId) {
+		log.debug("Request to delete findByExamId : examId {}", examId);
+		List<Answer> answers = answerRepository.findByExamId(examId);
+		return answerMapper.toDto(answers);
 	}
 }
