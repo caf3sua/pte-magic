@@ -644,7 +644,7 @@
   				var answer = $('#areaTextWriting').val();
   				vm.answers.push(answer);
   				// Reset
-                $('#areaTextWriting').val('');
+                $('#areaTextWriting').html('');
   			} else if (vm.selectedQuestion.type == 'LISTENING_FIB_L') {
   				$('.input_answer').each(function(){
   					vm.answers.push($(this).val());
