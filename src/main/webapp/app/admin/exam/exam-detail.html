@@ -55,6 +55,12 @@
 						<div ng-show="answerQuestion.question.type != 'SPEAKING_DESCRIBE_IMAGE'">
                     		{{answerQuestion.question.text}}
                     	</div>
+                        <div class="container-audio" ng-show="answerQuestion.question.audioLink">
+                            <input type="hidden" value="{{answerQuestion.question.audioLink}}">
+                            <audio id="player-{{answerQuestion.question.id}}" controls preload ng-src="{{answerQuestion.question.audioLink | trusted}}">
+                                Your browser dose not Support the audio Tag
+                            </audio>
+                        </div>
                     </td>
                     <!-- Audio/Writing -->
                     <td >
