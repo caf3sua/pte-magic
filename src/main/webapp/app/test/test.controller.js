@@ -111,11 +111,11 @@
 
   			// Upload if questionGroup == SPEAKING
   			if (vm.questionGroup == 'SPEAKING') {
-  				stopRecording();
-  				$timeout(function(){
-  					uploadRecording(selectedQuestionId);
-  	    		}, 1000 );
-
+  				var questionId = vm.selectedQuestion.id;
+            	stopRecording();
+            	$timeout(function(){
+            		uploadRecording(questionId);
+            	}, 1000 );
   			} else {
   				console.log(vm.selectedQuestion);
   	  			// Get answer

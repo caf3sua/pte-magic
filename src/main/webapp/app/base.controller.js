@@ -209,6 +209,7 @@
         }
 
         function saveAnswerSpeaking(selectedQuestionId, audioLink) {
+        	console.log('saveAnswerSpeaking, selectedQuestionId:' + selectedQuestionId + ", audioLink:" + audioLink);
             var answer = {};
             answer.examId = vm.exam.examDTO.id;
             answer.questionId = selectedQuestionId;
@@ -218,10 +219,11 @@
 
             Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
 
-            function onSaveAnswerSuccess() {
+            function onSaveAnswerSuccess(result) {
             }
 
-            function onSaveAnswerError() {
+            function onSaveAnswerError(result) {
+            	console.log(result);
             }
         }
 
