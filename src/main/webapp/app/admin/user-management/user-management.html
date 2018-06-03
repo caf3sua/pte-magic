@@ -14,7 +14,7 @@
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                 <th jh-sort-by="id" class="text-center"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
-                <!-- <th jh-sort-by="login"><span data-translate="userManagement.login">Login</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+                <!-- <th jh-sort-by="login"><span data-translate="userManagement.email">Login</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                 <th jh-sort-by="email"  class="text-center"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
                 <!-- <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>   -->
                 <th  class="text-center"><span data-translate="userManagement.profiles">Profiles</span></th>
@@ -27,7 +27,7 @@
             <tbody>
             <tr ng-repeat="user in vm.users track by user.id">
                 <td class="text-right"><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
-                <!-- <td>{{user.login}}</td> -->
+                <!-- <td>{{user.email}}</td> -->
                 <td class="text-center">{{user.email}}</td>
                 <!-- <td>{{user.langKey}}</td> -->
                 <td>
@@ -41,25 +41,25 @@
                 <td class="text-center">
                     <div class="btn-group flex-btn-group-container">
                     	<button type="button" ng-click="vm.resetLimitTest(user.id)"
-                                class="btn btn-success btn-sm" ng-disabled="vm.currentAccount.login === user.login">
+                                class="btn btn-success btn-sm" ng-disabled="vm.currentAccount.email === user.email">
                             <span class="glyphicon glyphicon-refresh"></span>
                             <span class="hidden-xs hidden-sm">Reset Test</span>
                         </button>
                         <button type="submit"
-                                ui-sref="user-management-detail({login:user.login})"
+                                ui-sref="user-management-detail({login:user.id})"
                                 class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-eye-open"></span>
                             <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
                         </button>
                         <button type="submit"
-                                ui-sref="user-management.edit({login:user.login})"
+                                ui-sref="user-management.edit({login:user.id})"
                                 class="btn btn-primary btn-sm">
                             <span class="glyphicon glyphicon-pencil"></span>
                             <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
                         </button>
                         <button type="submit"
                                 ui-sref="user-management.delete({login:user.login})"
-                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.login === user.login">
+                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.email === user.email">
                             <span class="glyphicon glyphicon-remove-circle"></span>
                             <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
                         </button>
