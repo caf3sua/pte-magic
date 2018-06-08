@@ -99,7 +99,7 @@ body {
     font-family: 'Roboto';
     font-weight: normal;
     font-style: normal;
-
+    background-color: #222d32;
     color: #333;
 }
 
@@ -1560,6 +1560,17 @@ textarea {
 }
 .pte-margin-bottom-30{
     margin-bottom: 30px;
+}
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+}
+.table-responsive {
+    min-height: .01%;
+    overflow-x: auto;
 }
 @media (min-width:1200px) and (max-width:1300px) {
     .pte-button-next-postion{
