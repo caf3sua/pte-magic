@@ -120,6 +120,7 @@ public class UserService {
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(userDTO.getPassword());
         newUser.setLogin(userDTO.getEmail());
+//        newUser.setLogin("user" + System.currentTimeMillis());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
         newUser.setFullName(userDTO.getFullName());
@@ -229,7 +230,12 @@ public class UserService {
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);
     }
-
+    
+    @Transactional(readOnly = true)
+    public Optional<User> getUserWithAuthoritiesByEmail(String email) {
+        return userRepository.findOneWithAuthoritiesByEmailIgnoreCase(email);
+    }
+    
     @Transactional(readOnly = true)
     public User getUserWithAuthorities(Long id) {
         return userRepository.findOneWithAuthoritiesById(id);

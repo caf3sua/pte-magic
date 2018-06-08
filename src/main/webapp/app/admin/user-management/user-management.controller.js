@@ -36,7 +36,6 @@
         });
 
         function resetLimitTest(userId) {
-        	debugger
         	Exam.resetLimitTest({userId : userId}, onResetLimitTestSuccess, onResetLimitTestError);
 
             function onResetLimitTestSuccess() {

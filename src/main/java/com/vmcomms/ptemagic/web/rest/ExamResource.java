@@ -481,38 +481,34 @@ public class ExamResource {
 		// Get list exam question
 		List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(id);
 
-//		for (ExamQuestionDTO examQuestionDTO : examQuestions) {
-//			AnswerQuestionDTO item = new AnswerQuestionDTO();
-//			// Get question to compare
-//			if (examQuestionDTO.getQuestionId() != null) {
-//				QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
-//				item.setQuestion(questionDTO);
-//			}
-//			
-//			// Get answer
-//			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(id, examQuestionDTO.getQuestionId());
-//			
-//			item.setAnswer(answerDTO);
-//			lstAnswerQuestion.add(item);
-//		}
-		
 		// Get list answer by examID
 		List<AnswerDTO> answerDTOs = answerService.findByExamId(id);
 		
 		// Get list questionDTO
 		List<QuestionDTO> questionDTOs = questionService.findByIdIn(getQuestionIds(examQuestions));
-		for (QuestionDTO questionDTO : questionDTOs) {
-			AnswerQuestionDTO item = new AnswerQuestionDTO();
-			item.setQuestion(questionDTO);
-			
-			// Get answer
-			AnswerDTO answerDTO = findAnswerInListByQuestionId(answerDTOs, questionDTO.getId());
-			
-			item.setAnswer(answerDTO);
-			lstAnswerQuestion.add(item);
+		for (ExamQuestionDTO eq : examQuestions) {
+			if (eq.getQuestionId() != null) {
+				AnswerQuestionDTO item = new AnswerQuestionDTO();
+				item.setQuestion(findQuestionInListByQuestionId(questionDTOs, eq.getQuestionId()));
+				
+				// Get answer
+				AnswerDTO answerDTO = findAnswerInListByQuestionId(answerDTOs, eq.getQuestionId());
+				
+				item.setAnswer(answerDTO);
+				lstAnswerQuestion.add(item);
+			}
 		}
 		
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(examInfoDTO));
+    }
+    
+    private QuestionDTO findQuestionInListByQuestionId(List<QuestionDTO> questionDTOs, Long questionId) {
+    	for (QuestionDTO q : questionDTOs) {
+			if (q != null && q.getId().longValue() == questionId.longValue()) {
+				return q;
+			}
+		}
+    	return null;
     }
     
     private AnswerDTO findAnswerInListByQuestionId(List<AnswerDTO> answerDTOs, Long questionId) {

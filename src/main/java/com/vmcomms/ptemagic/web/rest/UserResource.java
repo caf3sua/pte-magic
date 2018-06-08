@@ -166,18 +166,16 @@ public class UserResource {
      * @param login the login of the user to find
      * @return the ResponseEntity with status 200 (OK) and with body the "login" user, or with status 404 (Not Found)
      */
-    @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
+//    @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
+    @GetMapping("/users/{login}")
     @Timed
-    public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
+    public ResponseEntity<UserDTO> getUser(@PathVariable Long login) {
         log.debug("REST request to get User : {}", login);
-        Optional<UserDTO> userOpt = userService.getUserWithAuthoritiesByLogin(login)
-        .map(UserDTO::new);
+        User user = userService.getUserWithAuthorities(login);
         
-        if (userOpt.get() != null) {
-        	// Get user_limit_exam
-        }
-        
-        return ResponseUtil.wrapOrNotFound(userOpt);
+        UserDTO userDTO = new UserDTO(user);
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
+//        return ResponseUtil.wrapOrNotFound(userOpt);
     }
 
     /**

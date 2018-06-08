@@ -149,8 +149,11 @@
             if (vm.selectedQuestion.type != 'TIME_BREAK') {
                 // Upload if questionGroup == SPEAKING
                 if (vm.questionGroup == 'SPEAKING') {
-                    stopRecording();
-                    uploadRecording(vm.selectedQuestion.id);
+                	var questionId = vm.selectedQuestion.id;
+                	stopRecording();
+                	$timeout(function(){
+                		uploadRecording(questionId);
+                	}, 2000 );
                 } else {
                     console.log(vm.selectedQuestion);
                     // Get answer
@@ -190,6 +193,7 @@
         });
 
         function uploadRecording(selectedQuestionId) {
+        	console.log('uploadRecording, questionId:' + selectedQuestionId);
             var blobUrl = $("#save").attr('href');
             console.log(blobUrl);
             var xhr = new XMLHttpRequest();
