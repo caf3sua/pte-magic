@@ -162,6 +162,14 @@
         function UpdateLengths($event) {
             vm.CharacterLength = vm.Text.length;
             vm.WordsLength=0;
+
+            if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' && vm.Text.length > 75) {
+                alert("The maximum words are only 75!");
+            }
+            if (vm.selectedQuestion.type == 'WRITING_ESSAY' && vm.Text.length > 300) {
+                alert("The maximum words are only 300!");
+            }
+
             if(vm.Text.length == 1 && vm.Text[0]!='')
             {
                 vm.WordsLength = 1;
@@ -276,7 +284,7 @@
                 vm.counter = 30;
             }
 
-            // Beep
+            // Beep sound
             if(vm.selectedQuestion.type != 'SPEAKING_REPEAT_SENTENCE' && vm.selectedQuestion.type != 'SPEAKING_ANSWER_SHORT_QUESTION' && vm.selectedQuestion.type != 'SPEAKING_RETELL_LECTURE') {
                 setTimeout(function (){
                     $("#player1")[0].play();
@@ -287,14 +295,13 @@
         		console.log('vm.counter recording:' + vm.counter);
                 vm.counter--;
 
-                if (vm.counter == 1) {
+                // Display 'counter' wherever you want to display it.
+                if (vm.counter == 0) {
+                    // Beep sound
                     if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE') {
                         $("#player1")[0].play();
                     }
-                }
 
-                // Display 'counter' wherever you want to display it.
-                if (vm.counter == 0) {
                     // Display a login box
                     clearInterval(vm.intervalCounter);
                     vm.startRecording();
@@ -507,13 +514,11 @@
         		vm.intervalToRecording = setInterval(function() {
         			vm.counter--;
 
-                    // Beep sound
-                    if (vm.counter == 1) {
-                        $("#player1")[0].play();
-                    }
-
         		    // Display 'counter' wherever you want to display it.
         		    if (vm.counter == 0) {
+                        // Beep sound
+                        $("#player1")[0].play();
+
         		        // Display a login box
         		        clearInterval(vm.intervalToRecording);
         		        startRecording();

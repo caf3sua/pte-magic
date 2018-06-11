@@ -28,6 +28,13 @@
             </div>
         </div>
     </div>
+    <div class="col-md-12" ng-show="vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'">
+        <div class="pte-row-check-spell">
+            <div class="pte-inline-block">
+                <label><input class="pte-checkbot-spell" ng-click="vm.spellCheck()" type="checkbox" value="">Spell check</label>
+            </div>
+        </div>
+    </div>
     <div class="col-md-12" ng-show="vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.selectedQuestion.type == 'LISTENING_DICTATION'" >
         <div class="position-relative">
             <textarea  ng-model="vm.Text" spellcheck="false"   ng-change="vm.UpdateLengths()" id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>

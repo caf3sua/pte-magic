@@ -9,14 +9,20 @@
     <div class="pte-test-content-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.text)"></div>
 </div>
 <div class="col-md-12">
-        <div class="position-relative margin-top30">
-            <textarea  ng-model="vm.Text" spellcheck="false"   ng-change="vm.UpdateLengths()" id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
-            <span class="pte-word-count" ng-model="vm.WordsLength">
-               Word count ({{vm.WordsLength}})
-            </span>
+    <div class="pte-row-check-spell">
+        <div class="pte-inline-block">
+            <label><input class="pte-checkbot-spell" ng-click="vm.spellCheck()" type="checkbox" value="">Spell check</label>
         </div>
-
-       <!--<div class="text-right">-->
-           <!--<button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>-->
-       <!--</div>-->
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="position-relative margin-top30">
+        <textarea  ng-model="vm.Text" spellcheck="false" ng-change="vm.UpdateLengths()" id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
+        <span class="pte-word-count" ng-model="vm.WordsLength">
+           Word count ({{vm.WordsLength}})
+        </span>
+    </div>
+    <!--<div class="text-right">-->
+        <!--<button class="pte-test-answer" ng-click="vm.answer()" ng-show="vm.btnEnable">{{vm.btnTxt}}</button>-->
+    <!--</div>-->
 </div>
