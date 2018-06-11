@@ -1,6 +1,28 @@
 {
     "pteMagicApp": {
         "QuestionType" : {
+        	"short" : {
+        		"SPEAKING_READ_ALOUD":"S_RA",
+	            "SPEAKING_REPEAT_SENTENCE":"S_RS",
+	            "SPEAKING_DESCRIBE_IMAGE":"S_DI",
+	            "SPEAKING_RETELL_LECTURE":"S_RL",
+	            "SPEAKING_ANSWER_SHORT_QUESTION":"S_ASQ",
+	            "WRITING_SUMMARIZE_WRITTEN_TEXT":"W_SWT",
+	            "WRITING_ESSAY":"W_E",
+	            "READING_FIB_R_W":"R_FRW",
+	            "READING_FIB_R":"R_FR",
+	            "READING_RE_ORDER_PARAGRAPH":"R_ROP",
+	            "READING_MCQ_R_SINGLE_ANSWER":"R_MRSA",
+	            "READING_MCQ_R_MULTIPLE_ANSWER":"R_MRMA",
+	            "LISTENING_SUMMARIZE_SPOKEN_TEXT":"L_SST",
+	            "LISTENING_FIB_L":"L_FL",
+	            "LISTENING_MCQ_L_SINGLE_ANSWER":"L_MLSA",
+	            "LISTENING_MCQ_L_MULTIPLE_ANSWER":"L_MKMA",
+	            "LISTENING_HIGHLIGHT_CORRECT_SUMMARY":"L_HCS",
+	            "LISTENING_SELECT_MISSING_WORD":"L_SMW",
+	            "LISTENING_HIGHLIGHT_INCORRECT_WORD":"L_HIW",
+	            "LISTENING_DICTATION":"L_D"
+        	},
             "null": "",
             "SINGLE_CHOICE": "SINGLE_CHOICE",
             "MULTI_CHOICE": "MULTI_CHOICE",

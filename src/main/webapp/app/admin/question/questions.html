@@ -24,17 +24,16 @@
         <table class="h-table table table-striped  table-bordered table-hover">
             <col width="5%">
             <col width="5%">
-            <col width="35%">
-            <col width="10%">
-            <col width="35%">
-            <col width="10%">
+            <col width="45%">
+            <col width="40%">
+            <col width="5%">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id" class="text-center"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="type" class="text-center"><span data-translate="pteMagicApp.question.type">Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="text" class="text-center"><span data-translate="pteMagicApp.question.text">Text</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <!-- <th jh-sort-by="audioLink" class="text-center"><span data-translate="pteMagicApp.question.audioLink">Audio Link</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-                    <th jh-sort-by="description" class="text-center"><span data-translate="pteMagicApp.question.description">Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th class="text-center"><span>Answer</span> </th>
                     <!-- <th jh-sort-by="answerA"><span data-translate="pteMagicApp.question.answerA">Answer A</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="answerB"><span data-translate="pteMagicApp.question.answerB">Answer B</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="answerC"><span data-translate="pteMagicApp.question.answerC">Answer C</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -49,10 +48,16 @@
             <tbody>
                 <tr ng-repeat="question in vm.questions track by question.id">
                     <td class="text-right"><a ui-sref="question-detail({id:question.id})">{{question.id}}</a></td>
-                    <td class="text-left" data-translate="{{'pteMagicApp.QuestionType.' + question.type}}">{{question.type}}</td>
-                    <td class="text-left">{{question.text}}</td>
+                    <td class="text-left" data-translate="{{'pteMagicApp.QuestionType.short.' + question.type}}">Question type</td>
+                    <td class="text-justify">{{question.text}}</td>
                     <!-- <td class="text-left">{{question.audioLink}}</td> -->
-                    <td class="text-left">{{question.description}}</td>
+                    <td class="text-left">
+                    	<span>{{question.answerA}} </span>
+	                    <span>{{question.answerB}} </span>
+	                    <span>{{question.answerC}} </span>
+	                    <span>{{question.answerD}} </span>
+	                    <span>{{question.answerE}} </span>
+                    </td>
                     <!-- <td>{{question.answerA}}</td>
                     <td>{{question.answerB}}</td>
                     <td>{{question.answerC}}</td>
@@ -69,19 +74,19 @@
                                     ui-sref="question-detail({id:question.id,selectedSkill: vm.selectedSkill})"
                                     class="btn btn-info btn-sm">
                                 <span class="glyphicon glyphicon-eye-open"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                                <!-- <span class="hidden-sm-down" data-translate="entity.action.view"></span> -->
                             </button>
                             <button type="submit"
                                     ui-sref="question.edit({id:question.id})"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                                <!-- <span class="hidden-sm-down" data-translate="entity.action.edit"></span> -->
                             </button>
                             <button type="submit"
                                     ui-sref="question.delete({id:question.id})"
                                     class="btn btn-danger btn-sm">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                                <!-- <span class="hidden-sm-down" data-translate="entity.action.delete"></span> -->
                             </button>
                         </div>
                     </td>
