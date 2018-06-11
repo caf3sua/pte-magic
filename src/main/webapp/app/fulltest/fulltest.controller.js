@@ -30,7 +30,7 @@
         vm.btnEnable = true;
         vm.toggleRecording = toggleRecording;
         vm.startNewPart = startNewPart;
-        
+
         vm.txtInfoCountdown = "Begining in ";
         vm.countdownRecording = 5;
         vm.isRecording = false;
@@ -253,6 +253,7 @@
         }
 
         function nextQuestion() {
+            vm.Text = "";
             $('#areaTextWriting').val("");
             $('#areaTextWriting').html('');
             vm.WordsLength = 0;
