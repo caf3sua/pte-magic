@@ -29,6 +29,26 @@
             vm.f = file;
             vm.errFile = errFiles && errFiles[0];
             if (file) {
+            	// validate
+            	if (vm.question.type == 'SPEAKING_DESCRIBE_IMAGE') {
+                	// Check image
+                	if (vm.f.type == 'image/png' || vm.f.type == 'image/bmp' || vm.f.type == 'image/gif'
+                		 || vm.f.type == 'image/jpeg') {
+                		console.log('Upload image');
+                	} else {
+                		alert('Only allow image upload (png, jpeg, bmp)');
+                		return;
+                	}
+                } else {
+                	// Check audio
+                	if (vm.f.type == 'audio/mpeg' || vm.f.type == 'audio/x-wav') {
+    	           		console.log('Upload audio');
+    	           	} else {
+    	           		alert('Only allow audio upload (mp3, wav)');
+    	           		return;
+    	           	}
+                }
+            	
                 file.upload = Upload.upload({
                     url: '/api/file/upload/question',
                     data: {file: file},

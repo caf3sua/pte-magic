@@ -67,7 +67,7 @@
              vm.question.type == 'SPEAKING_ANSWER_SHORT_QUESTION')
              "
         >
-        	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)" accept="audio/*,image/*" ngf-max-size="4MB">
+        	<button type="file" ngf-select="vm.uploadFiles($file, $invalidFiles)" accept="audio/*,image/*" ngf-max-size="10MB">
 		      Select File</button>
 
             <label class="control-label" ng-show="vm.question.type != 'SPEAKING_DESCRIBE_IMAGE'" data-translate="pteMagicApp.question.audioLink" for="field_audioLink">Audio/Image Link</label>
