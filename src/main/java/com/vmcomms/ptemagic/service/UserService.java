@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
-@CacheConfig(cacheNames = "exam")
+//@CacheConfig(cacheNames = "exam")
 public class UserService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
@@ -245,7 +245,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable
+//    @Cacheable
     public User getUserWithAuthorities() {
         //return userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
     	return userRepository.findOneWithAuthoritiesByEmail(SecurityUtils.getCurrentUserLogin()).orElse(null);
