@@ -154,7 +154,7 @@
                 document.getElementById("areaTextWriting").setAttribute("spellcheck", "true");
                 vm.checkClickspell = false;
             }else {
-                document.getElementById("areaTextWriting").removeAttribute("spellcheck");
+                document.getElementById("areaTextWriting").setAttribute("spellcheck", "false");
                 vm.checkClickspell = true;
             }
         }
@@ -162,13 +162,6 @@
         function UpdateLengths($event) {
             vm.CharacterLength = vm.Text.length;
             vm.WordsLength=0;
-
-            if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' && vm.Text.length > 75) {
-                alert("The maximum words are only 75!");
-            }
-            if (vm.selectedQuestion.type == 'WRITING_ESSAY' && vm.Text.length > 300) {
-                alert("The maximum words are only 300!");
-            }
 
             if(vm.Text.length == 1 && vm.Text[0]!='')
             {
@@ -199,6 +192,13 @@
                 {
                     continue;
                 }
+            }
+
+            if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' && vm.WordsLength > 75) {
+                alert("The maximum words are only 75!");
+            }
+            if (vm.selectedQuestion.type == 'WRITING_ESSAY' && vm.WordsLength > 300) {
+                alert("The maximum words are only 300!");
             }
         }
         function IsAlphabet(character)
