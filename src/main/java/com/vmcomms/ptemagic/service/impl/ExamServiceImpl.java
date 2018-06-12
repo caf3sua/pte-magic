@@ -101,7 +101,7 @@ public class ExamServiceImpl implements ExamService{
 
 	@Override
 	@Transactional(readOnly = true)
-	@Cacheable
+//	@Cacheable
 	public List<ExamDTO> findAllByResult(ProgressType result) {
 		log.debug("Request to get all Exams by result");
         return examMapper.toDto(examRepository.findByResult(result));

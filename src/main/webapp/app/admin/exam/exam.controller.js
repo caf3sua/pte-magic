@@ -52,6 +52,10 @@
         }
 
         function loadAll () {
+        	vm.exams = [];
+        	vm.examsInit = [];
+        	vm.selectedExamIds = [];
+        	
         	Exam.getAll({
             }, onSuccess, onError);
             function onSuccess(data, headers) {
