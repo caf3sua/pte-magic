@@ -15,6 +15,8 @@ import com.vmcomms.ptemagic.web.rest.vm.RegisterUserVM;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -32,6 +34,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
+@CacheConfig(cacheNames = "exam")
 public class UserService {
 
     private final Logger log = LoggerFactory.getLogger(UserService.class);
@@ -242,6 +245,7 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
+    @Cacheable
     public User getUserWithAuthorities() {
         //return userRepository.findOneWithAuthoritiesByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
     	return userRepository.findOneWithAuthoritiesByEmail(SecurityUtils.getCurrentUserLogin()).orElse(null);

@@ -2,6 +2,9 @@ package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
+
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -42,4 +45,6 @@ public interface ExamService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+    
+    List<ExamDTO> findAllByResult(ProgressType result);
 }

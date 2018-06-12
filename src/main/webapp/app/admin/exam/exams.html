@@ -1,17 +1,81 @@
-<div  class="content-wrapper pte-table-user">
+<div  class="content-wrapper pte-table-user" style="height: 750px;">
     <h2 class="col-md-12" data-translate="pteMagicApp.exam.home.title">Exams</h2>
     <jhi-alert></jhi-alert>
+    
     <div class="col-md-12 table-responsive">
+        <!-- Table content -->
+        <table st-table="vm.examsInit" st-safe-src="vm.exams" class="jh-table table">
+		      	<thead>
+			      	<tr>
+			      		<th colspan="6">
+				      		<div class="">
+				                <span class=""><span class="fas fa-search"></span></span>
+				                <input st-search="" type="text" placeholder="Tìm kiếm" class="" id="form-name" style="width:80%">
+				            </div>
+			            </th>
+					</tr>
+					<tr>
+			      		<th colspan="6">
+				      		<button type="button" ng-click="vm.deleteAll()"
+                                    class="btn btn-danger btn-sm" ng-disabled="vm.selectedExamIds.length == 0">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+			            </th>
+					</tr>
+			        <tr>
+			        	<th></th>
+			          	<th class="text-center" st-sort="id">#</th>
+			          	<th class="text-center" st-sort="userId">Username</th>
+			          	<th class="text-center" st-sort="result">Result</th>
+			          	<th class="text-center" st-sort="examTypeId">Exam Type</th>
+			          	<th class="text-center">Action</th>
+			        </tr>
+				</thead>
+		      	<tbody>
+			        <tr ng-repeat="exam in vm.examsInit track by $index">
+			        	<td class="text-center"><input type="checkbox" name="examId" value="{{exam.id}}" ng-click="vm.selectExam(exam.id)"></td>
+	                    <td class="text-right"><a ui-sref="exam-detail({id:exam.id})">{{exam.id}}</a></td>
+	                    <td class="text-left">{{exam.email}}</td>
+	                    <td class="text-left" data-translate="{{'pteMagicApp.ProgressType.' + exam.result}}">{{exam.result}}</td>
+	                    <td class="text-left">
+	                        <a ui-sref="exam-type-detail({id:exam.examTypeId})">{{exam.examTypeName}}</a>
+	                    </td>
+	                    <td class="text-right">
+	                        <div class="btn-group flex-btn-group-container">
+	                            <button type="submit"
+	                                    ui-sref="exam-detail({id:exam.id})"
+	                                    class="btn btn-info btn-sm">
+	                                <span class="glyphicon glyphicon-eye-open"></span>
+	                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+	                            </button>
+	                            <button type="submit"
+	                                    ui-sref="exam.delete({id:exam.id})"
+	                                    class="btn btn-danger btn-sm">
+	                                <span class="glyphicon glyphicon-remove-circle"></span>
+	                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+	                            </button>
+	                        </div>
+	                    </td>
+	                </tr>
+		      	</tbody>
+		      	<tfoot>
+			        <tr>
+			          <td colspan="5" class="text-center">
+			            <div st-pagination="" st-items-by-page="10" st-displayed-pages="7" class="m-a-0"></div>
+			          </td>
+			        </tr>
+				</tfoot>
+	    </table>
+       </div>
+    
+    <!-- <div class="col-md-12 table-responsive">
         <table class="jh-table table table-striped  table-bordered table-hover">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th class="text-center" jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th class="text-center" jh-sort-by="userId">Username</span></th>
                     <th class="text-center" jh-sort-by="result"><span data-translate="pteMagicApp.exam.result">Result</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <!-- <th jh-sort-by="scoreWriting"><span data-translate="pteMagicApp.exam.scoreWriting">Score Writing</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="scoreListening"><span data-translate="pteMagicApp.exam.scoreListening">Score Listening</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="scoreReading"><span data-translate="pteMagicApp.exam.scoreReading">Score Reading</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="scoreSpeaking"><span data-translate="pteMagicApp.exam.scoreSpeaking">Score Speaking</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th class="text-center" jh-sort-by="examTypeId"><span data-translate="pteMagicApp.exam.examType">Exam Type</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th  class="text-center" ><span  data-translate="pteMagicApp.exam.action">Action</span></th>
                 </tr>
@@ -21,10 +85,6 @@
                     <td class="text-right"><a ui-sref="exam-detail({id:exam.id})">{{exam.id}}</a></td>
                     <td class="text-left">{{exam.email}}</td>
                     <td class="text-left" data-translate="{{'pteMagicApp.ProgressType.' + exam.result}}">{{exam.result}}</td>
-                    <!-- <td>{{exam.scoreWriting}}</td>
-                    <td>{{exam.scoreListening}}</td>
-                    <td>{{exam.scoreReading}}</td>
-                    <td>{{exam.scoreSpeaking}}</td> -->
                     <td class="text-left">
                         <a ui-sref="exam-type-detail({id:exam.examTypeId})">{{exam.examTypeName}}</a>
                     </td>
@@ -47,9 +107,9 @@
                 </tr>
             </tbody>
         </table>
-    </div>
-    <div class="text-center">
+    </div> -->
+    <!-- <div class="text-center">
         <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
         <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
-    </div>
+    </div> -->
 </div>

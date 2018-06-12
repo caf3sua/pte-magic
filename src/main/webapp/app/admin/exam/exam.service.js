@@ -24,6 +24,12 @@
                     return data;
                 }
             },
+            'getAll': {
+                method: 'GET',
+                url: 'api/exams-all',
+                isArray: true
+            },
+            'removeAll': {url: 'api/exams-remove-all', method: 'POST'},
             'update': { method:'PUT' }
         });
     }

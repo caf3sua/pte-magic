@@ -20,7 +20,8 @@
             'angular-loading-bar',
             'timer',
             'ngAudio',
-            'dndLists'
+            'dndLists',
+            'smart-table'
         ])
         .run(run);
 

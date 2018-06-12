@@ -41,6 +41,7 @@ import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.service.UserLimitExamService;
 import com.vmcomms.ptemagic.service.UserService;
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
+import com.vmcomms.ptemagic.service.dto.DeleteExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
@@ -343,30 +344,6 @@ public class ExamResource {
     }
     
     
-//    private void buildMockTestExamQuestion(ExamTypeDTO examTypeDTO, List<QuestionDTO> questions, String questionGroup) {
-//		// Get from config_mock_exam by question_group (exam_type_id, question_group)
-//    	List<ConfigMockExamDTO> data = configMockExamService.getMockExamByExamTypeAndGroup(examTypeDTO.getId(), questionGroup);
-//    	
-//    	// Find questionDTO
-//    	List<Long> ids = new ArrayList<>();
-//    	for (ConfigMockExamDTO configMockExamDTO : data) {
-//    		if (configMockExamDTO.getQuestionId() != null && configMockExamDTO.getQuestionId() > 0) {
-//    			ids.add(configMockExamDTO.getQuestionId());
-//    		}
-//    		List<QuestionDTO> listQuestionDTO = questionService.findByIdIn(ids);
-//    		
-//    		if (listQuestionDTO != null && listQuestionDTO.size() > 0) {
-//    			questions.addAll(listQuestionDTO);
-//    		}
-//		}
-//    }
-    
-//    private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {
-//    	QuestionDTO timeBreak = new QuestionDTO();
-//    	timeBreak.setType(type);
-//    	questions.add(timeBreak);
-//    }
-    
     private void selectQuestionByType(List<QuestionDTO> questions, int number, QuestionType type) {
     	List<QuestionDTO> questionDTOs = questionService.findAllByType(type);
     	// sub 
@@ -451,6 +428,25 @@ public class ExamResource {
 		}
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    
+    @GetMapping("/exams-all")
+    @Timed
+    public ResponseEntity<List<ExamDTO>> getAllExamsList() {
+        log.debug("REST request to get a page of Exams");
+        List<ExamDTO> data = examService.findAllByResult(ProgressType.MARKING);
+        
+        // Get email
+        for (ExamDTO examDTO : data) {
+			// Find user
+        	User user = userService.getUserWithAuthorities(examDTO.getUserId());
+        	examDTO.setEmail(user.getEmail());
+        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+        	if (null != examTypeDTO) {
+        		examDTO.setExamTypeName(examTypeDTO.getName());
+        	}
+		}
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
 
     /**
      * GET  /exams/:id : get the "id" exam.
@@ -531,7 +527,22 @@ public class ExamResource {
     	
     	return ids;
     }
+    
+    
+    @PostMapping("/exams-remove-all")
+    @Timed
+    public ResponseEntity<Void> removeALl(@RequestBody DeleteExamDTO delDTO) throws URISyntaxException {
+        log.debug("REST request to removeAll : {}", delDTO);
 
+        for (Long id : delDTO.getIds()) {
+        	ExamDTO examDTO = examService.findOne(id);
+            examDTO.setResult(ProgressType.DONE);
+            examService.save(examDTO);
+		}
+        
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, delDTO.getIds().toString())).build();
+    }
+    
     /**
      * DELETE  /exams/:id : delete the "id" exam.
      *

@@ -6,6 +6,9 @@ import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.repository.ExamRepository;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.mapper.ExamMapper;
+
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
@@ -95,4 +98,12 @@ public class ExamServiceImpl implements ExamService{
         log.debug("Request to delete Exam : {}", id);
         examRepository.delete(id);
     }
+
+	@Override
+	@Transactional(readOnly = true)
+	@Cacheable
+	public List<ExamDTO> findAllByResult(ProgressType result) {
+		log.debug("Request to get all Exams by result");
+        return examMapper.toDto(examRepository.findByResult(result));
+	}
 }

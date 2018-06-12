@@ -100,7 +100,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private Integer remainDays;
     
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL, targetEntity = Authority.class)
     @JoinTable(
         name = "jhi_user_authority",
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
