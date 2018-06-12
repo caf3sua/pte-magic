@@ -38,7 +38,7 @@
         <!--<div class="content-wrapper" ui-view="content" ng-style="style()" resize ng-show="(vm.isAuthenticated() && vm.user.authorities.indexOf('ROLE_ADMIN') > 0)">-->
         <!--</div>-->
         <div ui-view="content" class="position-relative"  ng-style="style()" resize ng-show="!vm.isAuthenticated() || (vm.isAuthenticated() && vm.account.authorities.indexOf('ROLE_ADMIN') == -1)"
-             ng-class="(vm.isAuthenticated() && vm.account.authorities.indexOf('ROLE_ADMIN') == -1) ? '':'background-color-222d32'"
+             ng-class="(vm.isAuthenticated() && vm.account.authorities.indexOf('ROLE_ADMIN') == -1) ? '':'background-color-222d32'" id="content"
         >
         </div>
 
