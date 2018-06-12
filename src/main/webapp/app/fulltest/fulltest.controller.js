@@ -113,7 +113,9 @@
         (function initController() {
             // instantiate base controller
             $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
-
+            $timeout(function (){
+                angular.element(document.getElementById("content")).removeClass("background-color-222d32");
+            });
             // Load player
 //            initPlayer();
 

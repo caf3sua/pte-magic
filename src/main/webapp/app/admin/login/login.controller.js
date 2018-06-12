@@ -20,16 +20,15 @@
 
         function login (event) {
             event.preventDefault();
-            
+
             Auth.logout();
-            
+
             Auth.login({
                 username: vm.username,
                 password: vm.password,
                 role: 'ROLE_ADMIN'
             }).then(function () {
                 vm.authenticationError = false;
-
                 $rootScope.$broadcast('authenticationSuccess');
 
                 $state.go('user-management');

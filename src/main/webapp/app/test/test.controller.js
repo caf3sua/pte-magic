@@ -31,7 +31,7 @@
     	vm.countdownRecording = 5;
     	vm.isRecording = false;
     	vm.btnTxt = 'Next';
-    	
+
         vm.checkAudioSeconds = true;
         vm.checkStatusPlay = false;
     	vm.countdownSpeaking = 5;
@@ -74,7 +74,9 @@
   		(function initController() {
   			// instantiate base controller
   		    $controller('PteMagicBaseController', { vm: vm, $scope: $scope });
-
+            $timeout(function (){
+                angular.element(document.getElementById("content")).removeClass("background-color-222d32");
+            });
             for (var i = 0; i < vm.questions.length; i++) {
                 if(vm.questions[i].type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
                     || vm.questions[i].type == 'WRITING_SUMMARIZE_WRITTEN_TEXT'
@@ -180,7 +182,7 @@
   			vm.selectedQuestion = vm.questions.shift();
   			vm.resetProgressStatus();
   			vm.audioProgressing = 0;
-  			
+
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
   				// Service finish exam

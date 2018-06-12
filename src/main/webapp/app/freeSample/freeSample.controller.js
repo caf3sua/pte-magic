@@ -19,7 +19,9 @@
 
         vm.totalExamQuestionReading = 0;
         vm.totalExamQuestionListening = 0;
-
+        $timeout(function (){
+            angular.element(document.getElementById("content")).removeClass("background-color-222d32");
+        });
         function showExamList(type) {
             if(type == 'LISTENING'){
                 $timeout(function (){

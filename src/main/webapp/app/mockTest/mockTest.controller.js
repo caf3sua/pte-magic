@@ -30,10 +30,13 @@
         vm.totalExamQuestionListening = 0;
         vm.totalExamQuestionSpeaking = 0;
         vm.totalExamQuestionWriting = 0;
-        
-        vm.totalQuestion; 
+
+        vm.totalQuestion;
         vm.duration; // 00:25:22
 
+        $timeout(function (){
+            angular.element(document.getElementById("content")).removeClass("background-color-222d32");
+        });
         function showExamList(type) {
 
             if(type == 'MOCK_TEST_A'){
@@ -43,7 +46,7 @@
                 });
 
                 vm.selectedExams = vm.partAExams;
-                vm.totalQuestion = 40; 
+                vm.totalQuestion = 40;
                 vm.duration = '00:25:22';
             }else if(type == 'MOCK_TEST_B'){
             	$timeout(function (){
@@ -52,7 +55,7 @@
                   });
 
                 vm.selectedExams = vm.partBExams;
-                vm.totalQuestion = 60; 
+                vm.totalQuestion = 60;
                 vm.duration = '00:60:00';
             }if(type == 'MOCK_TEST_FULL'){
             	$timeout(function (){
@@ -60,7 +63,7 @@
                     angular.element('#fullTest').addClass("active");
                   });
                 vm.selectedExams = vm.fullExams;
-                vm.totalQuestion = 80; 
+                vm.totalQuestion = 80;
                 vm.duration = '01:30:00';
             }
             vm.examShowFlag = true;

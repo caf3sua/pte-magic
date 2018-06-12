@@ -23,7 +23,9 @@
         vm.totalExamQuestionListening = 0;
         vm.totalExamQuestionSpeaking = 0;
         vm.totalExamQuestionWriting = 0;
-
+        $timeout(function (){
+            angular.element(document.getElementById("content")).removeClass("background-color-222d32");
+        });
         function showExamList(type) {
             if(type == 'LISTENING'){
                 $timeout(function (){
@@ -100,7 +102,7 @@
   					function(data, headers) {
   						if (data != null) {
 			  				vm.readingExams = data;
-	
+
 			  				angular.forEach(data, function(value, key){
 		  	            		vm.totalExamQuestionReading += value.totalQuestion;
 			  	            });
@@ -113,7 +115,7 @@
   					function(data, headers) {
   						if (data != null) {
 			  				vm.speakingExams = data;
-	
+
 			  				angular.forEach(data, function(value, key){
 		  	            		vm.totalExamQuestionSpeaking += value.totalQuestion;
 			  	            });
@@ -126,7 +128,7 @@
   					function(data, headers) {
   						if (data != null) {
   							vm.writingExams = data;
-	
+
 			  				angular.forEach(data, function(value, key){
 		  	            		vm.totalExamQuestionWriting += value.totalQuestion;
 			  	            });

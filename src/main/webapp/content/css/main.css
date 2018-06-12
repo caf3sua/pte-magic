@@ -99,7 +99,6 @@ body {
     font-family: 'Roboto';
     font-weight: normal;
     font-style: normal;
-    background-color: #222d32;
     color: #333;
 }
 
@@ -1571,6 +1570,9 @@ textarea {
 .table-responsive {
     min-height: .01%;
     overflow-x: auto;
+}
+.background-color-222d32{
+    background-color: #222d32;
 }
 @media (min-width:1200px) and (max-width:1300px) {
     .pte-button-next-postion{
