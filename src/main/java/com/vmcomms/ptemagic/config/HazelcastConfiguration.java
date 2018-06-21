@@ -24,8 +24,16 @@ public class HazelcastConfiguration {
                 .setMaxIdleSeconds(300)
                 .setTimeToLiveSeconds(600);
         
+        MapConfig questionMapConfig = new MapConfig()
+                .setName("question")
+                .setMaxSizeConfig(new MaxSizeConfig(200, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE))
+                .setEvictionPolicy(EvictionPolicy.LRU)
+                .setMaxIdleSeconds(300)
+                .setTimeToLiveSeconds(600);
+        
         // Add map config
         hazelCastConfig.addMapConfig(examMapConfig);
+        hazelCastConfig.addMapConfig(questionMapConfig);
         
 		return hazelCastConfig;
     }

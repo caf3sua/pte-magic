@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -34,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-@CacheConfig(cacheNames = "exam")
+//@CacheConfig(cacheNames = "question")
 public class QuestionServiceImpl implements QuestionService{
 
     private final Logger log = LoggerFactory.getLogger(QuestionServiceImpl.class);
@@ -58,6 +59,7 @@ public class QuestionServiceImpl implements QuestionService{
      * @return the persisted entity
      */
     @Override
+    //@CacheEvict
     public QuestionDTO save(QuestionDTO questionDTO) {
         log.debug("Request to save Question : {}", questionDTO);
         Question question = questionMapper.toEntity(questionDTO);
@@ -87,7 +89,7 @@ public class QuestionServiceImpl implements QuestionService{
      */
     @Override
     @Transactional(readOnly = true)
-    @Cacheable
+//    @Cacheable
     public QuestionDTO findOne(Long id) {
         log.debug("Request to get Question : {}", id);
         Question question = questionRepository.findOne(id);
@@ -100,6 +102,7 @@ public class QuestionServiceImpl implements QuestionService{
      *  @param id the id of the entity
      */
     @Override
+    //@CacheEvict
     public void delete(Long id) {
         log.debug("Request to delete Question : {}", id);
         questionRepository.delete(id);
@@ -138,7 +141,7 @@ public class QuestionServiceImpl implements QuestionService{
 	}
 
 	@Override
-	@Cacheable
+	//@Cacheable
 	public List<QuestionDTO> findByIdIn(List<Long> ids) {
 		List<Question> data = questionRepository.findByIdIn(ids);
 		return questionMapper.toDto(data);

@@ -218,13 +218,19 @@ public class FileController {
             configMock.setQuestionType(typeCell.getStringCellValue());
             configMock.setQuestionId((long) questionCell.getNumericCellValue());
 
-            if (StringUtils.equals("SPEAKING", configMock.getQuestionGroup())) {
+            // A: Speaking/Writing
+            // B: Reading/Listening
+            if ((mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_A) || mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_FULL)) 
+            		&& StringUtils.equals("SPEAKING", configMock.getQuestionGroup())) {
                 mock.getLstSpeaking().add(configMock);
-            } else if (StringUtils.equals("WRITING", configMock.getQuestionGroup())) {
+            } else if ((mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_A) || mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_FULL)) 
+            		&& StringUtils.equals("WRITING", configMock.getQuestionGroup())) {
                 mock.getLstWriting().add(configMock);
-            } else if (StringUtils.equals("READING", configMock.getQuestionGroup())) {
+            } else if ((mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_B) || mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_FULL)) 
+            		&& StringUtils.equals("READING", configMock.getQuestionGroup())) {
                 mock.getLstReading().add(configMock);
-            } else if (StringUtils.equals("LISTENING", configMock.getQuestionGroup())) {
+            } else if ((mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_B) || mock.getExamTypeDTO().getType().equals(TestType.MOCK_TEST_FULL)) 
+            		&& StringUtils.equals("LISTENING", configMock.getQuestionGroup())) {
                 mock.getLstListening().add(configMock);
             }
         }
