@@ -117,11 +117,11 @@
     		if (vm.intervalDisableBtn) {
         		$interval.cancel(vm.intervalDisableBtn);
         	}
-        	vm.countDisabled = 4;
+        	vm.countDisabled = 3;
         	vm.intervalDisableBtn = $interval(function() {
             	vm.countDisabled--;
                 // Display 'counter' wherever you want to display it.
-                if (vm.countDisabled == 0) {
+                if (vm.countDisabled <= 0) {
                 	vm.btnDisabled = false;
                     clearInterval(vm.intervalDisableBtn);
                 }
@@ -332,7 +332,7 @@
                 vm.counter--;
 
                 // Display 'counter' wherever you want to display it.
-                if (vm.counter == 0) {
+                if (vm.counter <= 0) {
                     // Beep sound
                     if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE') {
                         $("#player1")[0].play();
@@ -553,7 +553,7 @@
         			vm.counter--;
 
         		    // Display 'counter' wherever you want to display it.
-        		    if (vm.counter == 0) {
+        		    if (vm.counter <= 0) {
                         // Beep sound
                         $("#player1")[0].play();
 
