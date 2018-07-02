@@ -4,7 +4,6 @@
 function getQuestionGroup(selQuestion) {
 	var i = selQuestion.indexOf("_");
 	var type = selQuestion.substring(0, i);
-	console.log(type);
 	return type;
 }
 function hightlight(activeSpan) {

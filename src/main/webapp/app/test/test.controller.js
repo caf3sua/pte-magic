@@ -24,7 +24,6 @@
     	vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
     	vm.audio;
     	vm.fileUpload;
-    	vm.btnEnable = true;
     	vm.toggleRecording = toggleRecording;
 
     	vm.txtInfoCountdown = "Begining in ";
@@ -40,7 +39,6 @@
     		// stop recording
 	        audioRecorder.stop();
 	        audioRecorder.getBuffers( gotBuffers );
-	        vm.btnEnable = true;
 	        clearInterval(vm.intervalProgress);
     	}
 
@@ -182,6 +180,9 @@
   			vm.selectedQuestion = vm.questions.shift();
   			vm.resetProgressStatus();
   			vm.audioProgressing = 0;
+  			
+  			// enable button
+            vm.enableNextButton();
 
   			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
   				vm.isFinish = true;
@@ -210,9 +211,7 @@
 
   				// Enable/disable button Answer
   				// if (vm.questionGroup == 'SPEAKING') {
-  				// 	vm.btnEnable = false;
   				// } else {
-  				// 	vm.btnEnable = true;
   				// }
 
   				$scope.$broadcast('timer-start');

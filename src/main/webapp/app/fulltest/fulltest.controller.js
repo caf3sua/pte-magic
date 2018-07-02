@@ -27,7 +27,6 @@
         vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
         vm.audio;
         vm.fileUpload;
-        vm.btnEnable = true;
         vm.toggleRecording = toggleRecording;
         vm.startNewPart = startNewPart;
 
@@ -50,42 +49,13 @@
             // stop recording
             audioRecorder.stop();
             audioRecorder.getBuffers( gotBuffers );
-            vm.btnEnable = true;
             clearInterval(vm.intervalProgress);
         }
-
-//        function initPlayer() {
-//            var audio = $("#player");
-//            if (audio[0] != undefined) {
-//                audio[0].addEventListener('ended', vm.callBackAudioEnded);
-//            }
-//        }
-
-//        function playAudio(link, timeout) {
-//            if (link == null || link == "") {
-//                return;
-//            }
-//            vm.checkAudioSeconds = false;
-//            vm.checkStatusPlay = true;
-//            var audio = $("#player");
-//            if (audio[0] != undefined) {
-//                audio[0].addEventListener('ended', vm.callBackAudioEnded);
-//                console.log('Play audio: ' + link);
-//                $("#mp3_src").attr("src", link); // https://storage.googleapis.com/pte-magic-2018/1523480876666_HCS1.mp3
-//                audio[0].pause();
-//                audio[0].load();
-//
-//                $timeout(function(){
-//                    audio[0].play();
-//                }, timeout );
-//            }
-//
-//        }
 
         function initAnswer() {
             // Stop audio
             var audio = $("#player");
-            if (audio[0] != undefined) {
+            if (audio[0] != undefined && audio[0].duration > 0 && !audio[0].paused) {
                 audio[0].pause();
             }
 
@@ -96,18 +66,6 @@
 
         angular.element(document).ready(function () {
         });
-
-        function initMockTest() {
-            if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
-                vm.countdown = 110 * 60;
-                vm.countdown = 30;
-            } else if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
-                vm.countdown = 90 * 60;
-                vm.countdown = 50;
-            } else {
-                vm.countdown = 200 * 60;
-            }
-        }
 
         // Init controller
         (function initController() {
@@ -144,7 +102,6 @@
         	if (vm.intervalToRecording) {
         		clearInterval(vm.intervalToRecording);
         	}
-
 
             initAnswer();
 
@@ -262,6 +219,9 @@
             vm.selectedQuestion = vm.questions.shift();
             vm.audioProgressing = 0;
             vm.resetProgressStatus();
+            
+            // enable button
+            vm.enableNextButton();
 
             if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
                 vm.isFinish = true;
@@ -309,6 +269,11 @@
                 vm.checkAudioSeconds = true;
 	            vm.checkStatusPlay = false;
                 vm.txtStatusAudio = 'Playing';
+                
+                if(vm.intervalAudio) {
+            		$interval.cancel(vm.intervalAudio);
+                }
+                
                 vm.intervalAudio = $interval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.

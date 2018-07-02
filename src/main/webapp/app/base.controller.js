@@ -20,9 +20,9 @@
             }
         }]);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS', 'Answer', 'ngAudio'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS', 'Answer', 'ngAudio', '$interval'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS, Answer, ngAudio){
+    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS, Answer, ngAudio, $interval){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 
@@ -67,6 +67,18 @@
         vm.Text = "";
         vm.audio;
 
+        var extensionLists = {}; //Create an object for all extension lists
+    	extensionLists.audio = ['mp3', 'mpeg','wav','mp4', 'webm'];  
+    	extensionLists.image = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
+
+    	vm.btnEnable = true;
+    	vm.btnDisabled = true;
+    	
+    	// One validation function for all file types    
+    	function isValidFileType(fName, fType) {
+    	    return extensionLists[fType].indexOf(fName.split('.').pop()) > -1;
+    	}
+    	
 		// Function
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
@@ -86,6 +98,7 @@
         vm.spellCheck = spellCheck;
         vm.UpdateLengths = UpdateLengths;
         vm.playAudio = playAudio;
+        vm.enableNextButton = enableNextButton;
 
         vm.audioProgressing = 0;
         $scope.$watch('vm.audioProgressing', function () {
@@ -97,7 +110,24 @@
                 console.log('audio done');
         	}
         });
-
+        
+        // Disable button and anable
+    	function enableNextButton() {
+    		vm.btnDisabled = true;
+    		if (vm.intervalDisableBtn) {
+        		$interval.cancel(vm.intervalDisableBtn);
+        	}
+        	vm.countDisabled = 4;
+        	vm.intervalDisableBtn = $interval(function() {
+            	vm.countDisabled--;
+                // Display 'counter' wherever you want to display it.
+                if (vm.countDisabled == 0) {
+                	vm.btnDisabled = false;
+                    clearInterval(vm.intervalDisableBtn);
+                }
+            }, 1000);
+    	}
+        
         $scope.$watch('vm.audio.progress', function () {
         	if (vm.audio == undefined) {
         		return;
@@ -125,13 +155,19 @@
     	}
 
         function playAudio(link, timeout) {
+        	if (link == null || link == '') {
+            	return;
+            }
+        	
+        	// valid audio -> play
+        	if (!isValidFileType(link, 'audio')) {
+        		console.log('No aupport audio type, ' + link);
+                return;
+            }
+
         	console.log('play audio:' + link);
             vm.checkAudioSeconds = false;
             vm.checkStatusPlay = true;
-
-            if (link == null || link == '') {
-            	return;
-            }
 
             vm.audio = ngAudio.load(link);
             vm.audio.volume = 0.5;
@@ -479,7 +515,6 @@
 	            return;
 	        audioRecorder.clear();
 	        audioRecorder.record();
-	        vm.btnEnable = true;
 	        vm.txtInfoCountdown = "Recording ..."
             document.getElementById('pteBlockRecord').className = "pte-block-record";
         	vm.isRecording = true;
