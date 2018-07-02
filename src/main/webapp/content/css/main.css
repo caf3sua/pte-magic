@@ -1574,6 +1574,20 @@ textarea {
 .background-color-222d32{
     background-color: #222d32;
 }
+.btn-disabled{
+    opacity: 0.5;
+    padding: 10px 50px;
+    border-radius: 0;
+    margin-top: 20px;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    background: #393939;
+    color: #f9db01;
+    border: 1px solid #393939;
+    margin-bottom: 20px;
+}
 @media (min-width:1200px) and (max-width:1300px) {
     .pte-button-next-postion{
         position: absolute;
