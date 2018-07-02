@@ -515,8 +515,11 @@
 	            return;
 	        audioRecorder.clear();
 	        audioRecorder.record();
-	        vm.txtInfoCountdown = "Recording ..."
-            document.getElementById('pteBlockRecord').className = "pte-block-record";
+	        vm.txtInfoCountdown = "Recording ...";
+	        if (document.getElementById('pteBlockRecord') != null && document.getElementById('pteBlockRecord') != undefined) {
+	        	document.getElementById('pteBlockRecord').className = "pte-block-record";
+	        }
+            
         	vm.isRecording = true;
 
 	        if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'
