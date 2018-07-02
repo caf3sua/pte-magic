@@ -277,7 +277,7 @@
                 vm.intervalAudio = $interval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.
-                    if (vm.countAudio <= 0) {
+                    if (vm.countAudio == 0) {
                         vm.playAudio(vm.selectedQuestion.audioLink, 1000);
                         clearInterval(vm.intervalAudio);
                     }

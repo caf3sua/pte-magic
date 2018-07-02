@@ -121,7 +121,7 @@
         	vm.intervalDisableBtn = $interval(function() {
             	vm.countDisabled--;
                 // Display 'counter' wherever you want to display it.
-                if (vm.countDisabled <= 0) {
+                if (vm.countDisabled == 0) {
                 	vm.btnDisabled = false;
                     clearInterval(vm.intervalDisableBtn);
                 }
@@ -172,17 +172,12 @@
             vm.audio = ngAudio.load(link);
             vm.audio.volume = 0.5;
             $timeout(function(){
-//            	vm.audio.addEventListener('ended', vm.callBackAudioEnded);
-            	vm.audio.play();
-            }, timeout );
-
-//            vm.audio.complete(function(audio){
-//        		if (vm.questionGroup == 'SPEAKING') {
-//        			console.log('callBackAudioEnded, recording ...');
-//        			vm.callBackAudioEnded();
+//        		if (vm.audio.canPlay && vm.audio.error == false) {
+        			vm.audio.play();
+//        		} else {
+//        			alert("Can not play audio");
 //        		}
-//                console.log('audio done');
-//            })
+            }, timeout );
     	}
 
         function spellCheck() {
@@ -332,7 +327,7 @@
                 vm.counter--;
 
                 // Display 'counter' wherever you want to display it.
-                if (vm.counter <= 0) {
+                if (vm.counter == 0) {
                     // Beep sound
                     if(vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE') {
                         $("#player1")[0].play();
@@ -553,7 +548,7 @@
         			vm.counter--;
 
         		    // Display 'counter' wherever you want to display it.
-        		    if (vm.counter <= 0) {
+        		    if (vm.counter == 0) {
                         // Beep sound
                         $("#player1")[0].play();
 
