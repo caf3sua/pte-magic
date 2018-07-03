@@ -96,6 +96,11 @@ function updateAnalysers(time) {
         }
     }
 
+    
+    if (analyserContext == null) {
+    	return;
+    }
+    
     // analyzer draw code here
     {
         var SPACING = 3;
