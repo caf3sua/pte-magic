@@ -296,6 +296,7 @@
   	  		}
 
   	  		function onSaveAnswerError() {
+  	  			console.log('Error saveAnswer');
   	  		}
   		}
 
@@ -462,8 +463,8 @@
     		vm.intervalProgress = setInterval(function() {
     			vm.timeProgress++;
     			if( vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
-                    vm.countdownPercent = vm.timeProgress / 40 * 100;
-                    if (vm.timeProgress == 40) {
+                    vm.countdownPercent = vm.timeProgress / PTE_SETTINGS.RECORDING_TIME_SPEAKING_READ_ALOUD * 100; // 40s
+                    if (vm.timeProgress == PTE_SETTINGS.RECORDING_TIME_SPEAKING_READ_ALOUD) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
@@ -474,8 +475,8 @@
                         }, 1000 );
                     }
                 }else if(vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION'){
-                    vm.countdownPercent = vm.timeProgress / 10 * 100;
-                    if (vm.timeProgress == 10) {
+                    vm.countdownPercent = vm.timeProgress / PTE_SETTINGS.RECORDING_TIME_SPEAKING_REPEAT_SENTENCE_OR_ANSWER_SHORT_QUESTION * 100; // 10
+                    if (vm.timeProgress == PTE_SETTINGS.RECORDING_TIME_SPEAKING_REPEAT_SENTENCE_OR_ANSWER_SHORT_QUESTION) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);
@@ -485,8 +486,8 @@
                         }, 1000 );
                     }
                 }else{
-                    vm.countdownPercent = vm.timeProgress / 40 * 100;
-                    if (vm.timeProgress == 40) {
+                    vm.countdownPercent = vm.timeProgress / PTE_SETTINGS.RECORDING_TIME_SPEAKING_OTHER * 100;
+                    if (vm.timeProgress == PTE_SETTINGS.RECORDING_TIME_SPEAKING_OTHER) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
                         clearInterval(vm.intervalProgress);

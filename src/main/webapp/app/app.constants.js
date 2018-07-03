@@ -6,11 +6,27 @@
         .constant('VERSION', "0.0.1-SNAPSHOT")
         .constant('DEBUG_INFO_ENABLED', true)
         .constant('BUILD_TIMESTAMP', "")
+        // Prop
         .constant('PTE_SETTINGS', {
         	"COUNT_DOWN_TIME_SPEAKING_DESCRIBE_IMAGE" : 25
         	, "COUNT_DOWN_TIME_SPEAKING_OTHER" : 30
             , "COUNT_DOWN_TIME_SPEAKING_READ_ALOUD" : 40
-        	, "COUNT_DOWN_TIME_BREAK" : 600 // 600
+        	, "COUNT_DOWN_TIME_BREAK" : 600
+        	, "RECORDING_TIME_SPEAKING_READ_ALOUD" : 40
+        	, "RECORDING_TIME_SPEAKING_REPEAT_SENTENCE_OR_ANSWER_SHORT_QUESTION" : 10
+        	, "RECORDING_TIME_SPEAKING_OTHER" : 40
+        	
         })
+        // DEV
+//        .constant('PTE_SETTINGS', {
+//        	"COUNT_DOWN_TIME_SPEAKING_DESCRIBE_IMAGE" : 25
+//        	, "COUNT_DOWN_TIME_SPEAKING_OTHER" : 30
+//          , "COUNT_DOWN_TIME_SPEAKING_READ_ALOUD" : 5
+//        	, "COUNT_DOWN_TIME_BREAK" : 600
+//        	, "RECORDING_TIME_SPEAKING_READ_ALOUD" : 5
+//        	, "RECORDING_TIME_SPEAKING_REPEAT_SENTENCE_OR_ANSWER_SHORT_QUESTION" : 10
+//        	, "RECORDING_TIME_SPEAKING_OTHER" : 40
+//        	
+//        })
 ;
 })();

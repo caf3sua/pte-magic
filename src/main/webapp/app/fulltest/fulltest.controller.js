@@ -90,6 +90,7 @@
         })();
 
         function answer() {
+        	console.log('Answer: ' + vm.selectedQuestion.id);
         	if(vm.intervalAudio) {
         		$interval.cancel(vm.intervalAudio);
             }
@@ -231,7 +232,6 @@
                     id: vm.exam.examDTO.id
                 }, onSuccessFinish, onErrorFinish);
                 function onSuccessFinish(data, headers) {
-
                     console.log('Finish exam');
                     return;
                 }
@@ -249,7 +249,10 @@
                     // Count question
                     vm.currentQuestion++;
                 }
-
+                
+                console.log('======== Next question, questionId :' + vm.selectedQuestion.id + ', type: ' + vm.selectedQuestion.type + ' ============');
+                console.log('======== currentSKill :' + vm.currentSKill + ',' + vm.currentQuestion + '/' + vm.totalQuestion + ' ============');
+                
                 // Get question group
                 vm.updateQuestionInfo(vm.selectedQuestion);
 
@@ -259,9 +262,6 @@
                 console.log(vm.questionGroup);
 
                 setCountdownTimer();
-
-                // Load player
-//                initPlayer();
 
                 // Load record audio
                 initAudio();
@@ -273,7 +273,6 @@
                 if(vm.intervalAudio) {
             		$interval.cancel(vm.intervalAudio);
                 }
-                
                 vm.intervalAudio = $interval(function() {
                     vm.countAudio--;
                     // Display 'counter' wherever you want to display it.

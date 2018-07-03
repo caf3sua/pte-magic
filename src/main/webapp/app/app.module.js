@@ -21,7 +21,8 @@
             'timer',
             'ngAudio',
             'dndLists',
-            'smart-table'
+            'smart-table',
+            'cp.ngConfirm'
         ])
         .run(run);
 
