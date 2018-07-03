@@ -37,7 +37,14 @@
         vm.checkStatusPlay = false;
         vm.countdownTimebreak = 600;
 
+        vm.callBackAnswer = callBackAnswer;
+        
         vm.btnTxt = 'Next';
+        
+        function callBackAnswer() {
+        	console.log('WARNING: call back finish');
+        	vm.answer();
+        }
 
         function startNewPart() {
             initAnswer();
@@ -91,18 +98,6 @@
 
         function answer() {
         	console.log('Answer: ' + vm.selectedQuestion.id);
-        	if(vm.intervalAudio) {
-        		$interval.cancel(vm.intervalAudio);
-            }
-        	if (vm.intervalProgress) {
-        		$interval.cancel(vm.intervalProgress);
-        	}
-        	if (vm.intervalCounter) {
-        		$interval.cancel(vm.intervalCounter);
-        	}
-        	if (vm.intervalToRecording) {
-        		clearInterval(vm.intervalToRecording);
-        	}
 
             initAnswer();
 
@@ -220,71 +215,91 @@
             vm.selectedQuestion = vm.questions.shift();
             vm.audioProgressing = 0;
             vm.resetProgressStatus();
+            if(vm.intervalAudio) {
+        		$interval.cancel(vm.intervalAudio);
+            }
+        	if (vm.intervalProgress) {
+        		$interval.cancel(vm.intervalProgress);
+        	}
+        	if (vm.intervalCounter) {
+        		$interval.cancel(vm.intervalCounter);
+        	}
+        	if (vm.intervalToRecording) {
+        		$interval.cancel(vm.intervalToRecording);
+        	}
+        	
+        	console.log(vm.intervalAudio);
+        	console.log(vm.intervalProgress);
+        	console.log(vm.intervalCounter);
+        	console.log(vm.intervalToRecording);
             
             // enable button
             vm.enableNextButton();
 
-            if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
-                vm.isFinish = true;
-                $scope.$broadcast('timer-stop');
-                // Service finish exam
-                Exam.finishExam({
-                    id: vm.exam.examDTO.id
-                }, onSuccessFinish, onErrorFinish);
-                function onSuccessFinish(data, headers) {
-                    console.log('Finish exam');
-                    return;
-                }
-                function onErrorFinish(error) {
-                    console.log('Finish exam error');
-                    return;
-                }
-            } else {
-                // update button lable
-                if (vm.selectedQuestion.type == 'TIME_BREAK') {
-                    vm.btnTxt = 'Skip Timebreak';
-                    vm.initCountQuestion();
-                } else {
-                    vm.btnTxt = 'Next';
-                    // Count question
-                    vm.currentQuestion++;
-                }
-                
-                console.log('======== Next question, questionId :' + vm.selectedQuestion.id + ', type: ' + vm.selectedQuestion.type + ' ============');
-                console.log('======== currentSKill :' + vm.currentSKill + ',' + vm.currentQuestion + '/' + vm.totalQuestion + ' ============');
-                
-                // Get question group
-                vm.updateQuestionInfo(vm.selectedQuestion);
-
-                console.log(vm.selectedQuestion);
-
-                vm.questionGroup = getQuestionGroup(vm.selectedQuestion.type);
-                console.log(vm.questionGroup);
-
-                setCountdownTimer();
-
-                // Load record audio
-                initAudio();
-                vm.countAudio = 3;
-                vm.checkAudioSeconds = true;
-	            vm.checkStatusPlay = false;
-                vm.txtStatusAudio = 'Playing';
-                
-                if(vm.intervalAudio) {
-            		$interval.cancel(vm.intervalAudio);
-                }
-                vm.intervalAudio = $interval(function() {
-                    vm.countAudio--;
-                    // Display 'counter' wherever you want to display it.
-                    if (vm.countAudio == 0) {
-                        vm.playAudio(vm.selectedQuestion.audioLink, 1000);
-                        clearInterval(vm.intervalAudio);
+            // Timeout
+            $timeout(function(){
+            	if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
+                    vm.isFinish = true;
+                    $scope.$broadcast('timer-stop');
+                    // Service finish exam
+                    Exam.finishExam({
+                        id: vm.exam.examDTO.id
+                    }, onSuccessFinish, onErrorFinish);
+                    function onSuccessFinish(data, headers) {
+                        console.log('Finish exam');
+                        return;
                     }
-                }, 1000);
-                vm.countdownToRecording();
+                    function onErrorFinish(error) {
+                        console.log('Finish exam error');
+                        return;
+                    }
+                } else {
+                    // update button lable
+                    if (vm.selectedQuestion.type == 'TIME_BREAK') {
+                        vm.btnTxt = 'Skip Timebreak';
+                        vm.initCountQuestion();
+                    } else {
+                        vm.btnTxt = 'Next';
+                        // Count question
+                        vm.currentQuestion++;
+                    }
+                    
+                    console.log('======== Next question, questionId :' + vm.selectedQuestion.id + ', type: ' + vm.selectedQuestion.type + ' ============');
+                    console.log('======== currentSKill :' + vm.currentSKill + ',' + vm.currentQuestion + '/' + vm.totalQuestion + ' ============');
+                    
+                    // Get question group
+                    vm.updateQuestionInfo(vm.selectedQuestion);
+                    vm.questionGroup = getQuestionGroup(vm.selectedQuestion.type);
 
-                $scope.$broadcast('timer-start');
-            }
+                    setCountdownTimer();
+
+                    // Load record audio
+                    initAudio();
+                    
+                    vm.checkAudioSeconds = true;
+    	            vm.checkStatusPlay = false;
+                    vm.txtStatusAudio = 'Playing';
+                    
+                    // Check
+                    if (vm.selectedQuestion.audioLink != null && vm.selectedQuestion.audioLink != undefined) {
+                    	if(vm.intervalAudio) {
+                    		$interval.cancel(vm.intervalAudio);
+                        }
+                        vm.countAudio = 3;
+                        vm.intervalAudio = $interval(function() {
+                        	console.log("vm.countAudio: " + vm.countAudio);
+                        	if (vm.countAudio > 0) {
+                        		vm.countAudio--;
+                        	} else if (vm.countAudio == 0) {
+                        		vm.playAudio(vm.selectedQuestion.audioLink, 1000);
+                        		$interval.cancel(vm.intervalAudio);
+                        	}
+                        }, 1000);
+                    }
+                    
+                    vm.countdownToRecording();
+                }
+        	}, 2000 );
         }
     }
 })();

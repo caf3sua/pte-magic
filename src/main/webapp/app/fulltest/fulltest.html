@@ -15,7 +15,7 @@
                          <i class="far fa-clock pte-test-type-question-three-icon"></i>
                         <span class="pte-test-type-question-three-timeName">TIME REMANING</span>
                         <span class="pte-test-type-question-three-time"><!-- autostart="false" -->
-                        <timer id="timerPTE" countdown="vm.countdown" interval="1000" finish-callback="vm.answer()">{{hhours}}:{{mminutes}}:{{sseconds}}</timer></span>
+                        <timer id="timerPTE" countdown="vm.countdown" interval="1000" finish-callback="vm.callBackAnswer()">{{hhours}}:{{mminutes}}:{{sseconds}}</timer></span>
                     </span>
                 </div>
                 <div class="" ng-show="vm.selectedQuestion.type != 'TIME_BREAK'">
@@ -69,10 +69,7 @@
 				</div>
 			</div>
 	    </div>
-        <audio id="player1" preload >
-	        <source id="mp3_src1" src="../content/audio/beep-01a.mp3" type="audio/mp3"  />
-	        Your browser dose not Support the audio Tag
-    	</audio>
+
     </div>
     <div ng-show="vm.isFinish" style="margin-top: 100px;">
         <p class="pte-text-finish">Completed ! Check mail to see the result!</p>
@@ -81,7 +78,12 @@
        </div>
     </div>
 </div>
-
+        
+<audio id="player1" preload >
+    <source id="mp3_src1" src="../content/audio/beep-01a.mp3" type="audio/mp3"  />
+    Your browser dose not Support the audio Tag
+</audio>
+    	
 <noscript>
     <h1>You must enable javascript to view this page.</h1>
 </noscript>

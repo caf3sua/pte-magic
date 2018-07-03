@@ -40,6 +40,8 @@
 		vm.intervalAudio;
 		vm.intervalCounter;
 		vm.intervalToRecording;
+		vm.intervalProgress;
+		
 		vm.countdown = 60; // 2min10second
 		vm.showProgressBar = false;
 		vm.countdownPercent = 0;
@@ -57,7 +59,7 @@
             startText: '',
             fillInTheBlankPartialTexts: []
 	    };
-        vm.intervalProgress;
+        
         vm.readingFIBRCount = 0;
 
         vm.checkClickspell = true;
@@ -123,7 +125,7 @@
                 // Display 'counter' wherever you want to display it.
                 if (vm.countDisabled == 0) {
                 	vm.btnDisabled = false;
-                    clearInterval(vm.intervalDisableBtn);
+                	$interval.cancel(vm.intervalDisableBtn);
                 }
             }, 1000);
     	}
@@ -259,10 +261,11 @@
             Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
 
             function onSaveAnswerSuccess(result) {
+            	console.log('saveAnswerSpeaking sucess');
             }
 
             function onSaveAnswerError(result) {
-            	console.log(result);
+            	console.log('saveAnswerSpeaking error,' + result);
             }
         }
 
@@ -323,7 +326,10 @@
                 }, 1000);
             }
 
-        	vm.intervalCounter = setInterval(function() {
+            if(vm.intervalCounter) {
+        		$interval.cancel(vm.intervalCounter);
+            }
+        	vm.intervalCounter = $interval(function() {
         		console.log('vm.counter recording:' + vm.counter);
                 vm.counter--;
 
@@ -335,7 +341,7 @@
                     }
 
                     // Display a login box
-                    clearInterval(vm.intervalCounter);
+                    $interval.cancel(vm.intervalCounter);
                     vm.startRecording();
                 }
             }, 1000);
@@ -460,14 +466,17 @@
 
     	function calProgress() {
     		vm.timeProgress = 0;
-    		vm.intervalProgress = setInterval(function() {
+    		if(vm.intervalProgress) {
+        		$interval.cancel(vm.intervalProgress);
+            }
+    		vm.intervalProgress = $interval(function() {
     			vm.timeProgress++;
     			if( vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'){
                     vm.countdownPercent = vm.timeProgress / PTE_SETTINGS.RECORDING_TIME_SPEAKING_READ_ALOUD * 100; // 40s
                     if (vm.timeProgress == PTE_SETTINGS.RECORDING_TIME_SPEAKING_READ_ALOUD) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
-                        clearInterval(vm.intervalProgress);
+                        $interval.cancel(vm.intervalProgress);
 
                         // answer
                         $timeout(function(){
@@ -479,7 +488,7 @@
                     if (vm.timeProgress == PTE_SETTINGS.RECORDING_TIME_SPEAKING_REPEAT_SENTENCE_OR_ANSWER_SHORT_QUESTION) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
-                        clearInterval(vm.intervalProgress);
+                        $interval.cancel(vm.intervalProgress);
                         // answer
                         $timeout(function(){
                         	vm.answer();
@@ -490,7 +499,7 @@
                     if (vm.timeProgress == PTE_SETTINGS.RECORDING_TIME_SPEAKING_OTHER) {
                         console.log('timeProgress:' + vm.timeProgress);
                         // Display a login box
-                        clearInterval(vm.intervalProgress);
+                        $interval.cancel(vm.intervalProgress);
                         // answer
                         $timeout(function(){
                         	vm.answer();
@@ -503,6 +512,7 @@
     	}
 
 		function startRecording() {
+			console.log('startRecording');
 			// Reset
 			resetProgressStatus();
 
@@ -530,12 +540,13 @@
     	}
 
 		function countdownToRecording() {
+			console.log('countdownToRecording!, type:' + vm.selectedQuestion.type);
+			
     		if (vm.questionGroup == 'SPEAKING') {
     			if (vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE' || vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
     				return;
     			}
-
-    			console.log('countdownToRecording!');
+    			
         		vm.showRecording = true;
                 if(vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'){
                     vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_DESCRIBE_IMAGE; // 25
@@ -545,17 +556,20 @@
                     vm.counter = PTE_SETTINGS.COUNT_DOWN_TIME_SPEAKING_OTHER; // 30
                 }
 
-        		vm.intervalToRecording = setInterval(function() {
-        			vm.counter--;
-
-        		    // Display 'counter' wherever you want to display it.
-        		    if (vm.counter == 0) {
+                if(vm.intervalToRecording) {
+            		$interval.cancel(vm.intervalToRecording);
+                }
+        		vm.intervalToRecording = $interval(function() { //setInterval(function() {
+        			if (vm.counter > 0) {
+        				vm.counter--;
+        			} else if (vm.counter == 0) {
                         // Beep sound
                         $("#player1")[0].play();
 
+                        startRecording();
+                        
         		        // Display a login box
-        		        clearInterval(vm.intervalToRecording);
-        		        startRecording();
+                        $interval.cancel(vm.intervalToRecording);
         		    }
         		}, 1000);
     		}
