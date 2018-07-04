@@ -6,12 +6,15 @@ import com.vmcomms.ptemagic.repository.UserRepository;
 import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.ExamTypeService;
 import com.vmcomms.ptemagic.service.UserLimitExamService;
+import com.vmcomms.ptemagic.service.UserService;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
 import com.vmcomms.ptemagic.web.rest.errors.EmailAlreadyUsedException;
 import com.vmcomms.ptemagic.web.rest.errors.InternalServerErrorException;
 import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
 import com.vmcomms.ptemagic.web.rest.util.PaginationUtil;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
+import com.vmcomms.ptemagic.service.dto.UserDTO;
+
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
 
@@ -48,6 +51,12 @@ public class ExamTypeResource {
 
     @Autowired
     private ExamTypeService examTypeService;
+    
+    @Autowired
+    private UserService userService;
+    
+    @Autowired 
+    private UserLimitExamService userLimitExamService;
 
     /**
      * POST  /exam-types : Create a new examType.
@@ -110,7 +119,17 @@ public class ExamTypeResource {
     @Timed
     public ResponseEntity<List<ExamTypeDTO>> getAllExamTypesByType(@PathVariable String type) {
         log.debug("REST request to getAllExamTypesByType");
+        // User info
+        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
+                .map(UserDTO::new)
+                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+        
         List<ExamTypeDTO> data = examTypeService.getAllExamTypesByType(type);
+        for (ExamTypeDTO examTypeDTO : data) {
+			// Update exam.remainTest
+        	Integer remainTest = userLimitExamService.getRemainTest(userDTO.getId(), examTypeDTO.getId());
+        	examTypeDTO.setRemainTest(remainTest);
+		}
         
         return new ResponseEntity<>(data, HttpStatus.OK);
     }

@@ -299,7 +299,7 @@
                     
                     vm.countdownToRecording();
                 }
-        	}, 2000 );
+        	});
         }
     }
 })();
