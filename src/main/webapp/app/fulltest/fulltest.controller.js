@@ -26,7 +26,6 @@
         vm.isFinish = false;
         vm.listItemAnswer = ['A', 'B', 'C', 'D', 'E'];
         vm.audio;
-        vm.fileUpload;
         vm.toggleRecording = toggleRecording;
         vm.startNewPart = startNewPart;
 
@@ -107,7 +106,7 @@
                 	var questionId = vm.selectedQuestion.id;
                 	stopRecording();
                 	$timeout(function(){
-                		uploadRecording(questionId);
+                		vm.uploadRecording(questionId);
                 	}, 2000 );
                 } else {
                     console.log(vm.selectedQuestion);
@@ -122,51 +121,6 @@
 
             // Next question
             nextQuestion();
-        }
-
-        $scope.$watch('vm.fileUpload', function (file) {
-            var file;
-            if (file) {
-                file.upload = Upload.upload({
-                    url: '/api/file/upload/answer',
-                    data: {file: vm.fileUpload},
-                    ignoreLoadingBar: true
-                });
-
-                file.upload.then(function (response) {
-                    $timeout(function () {
-                        file.result = response.data;
-                    });
-                }, function (response) {
-                    if (response.status > 0)
-                        $scope.errorMsg = response.status + ': ' + response.data;
-                }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 *
-                        evt.loaded / evt.total));
-                });
-            }
-        });
-
-        function uploadRecording(selectedQuestionId) {
-        	console.log('uploadRecording, questionId:' + selectedQuestionId);
-            var blobUrl = $("#save").attr('href');
-            console.log(blobUrl);
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', blobUrl, true);
-            xhr.responseType = 'blob';
-            xhr.onload = function(e) {
-                if (this.status == 200) {
-                    var blob = this.response;
-                    console.log(blob);
-                    // myBlob is now the blob that the object URL pointed to.
-                    var filename = "recording_" + vm.exam.examDTO.id + "_" + selectedQuestionId + ".wav";
-                    vm.fileUpload = new File([blob], filename);
-
-                    // save answer
-                    vm.saveAnswerSpeaking(selectedQuestionId, filename);
-                }
-            };
-            xhr.send();
         }
 
         function setCountdownTimer() {

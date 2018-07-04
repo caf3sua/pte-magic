@@ -2,6 +2,7 @@ package com.vmcomms.ptemagic.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.vmcomms.ptemagic.domain.User;
+import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.repository.UserRepository;
 import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.ExamTypeService;
@@ -125,11 +126,13 @@ public class ExamTypeResource {
                 .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
         
         List<ExamTypeDTO> data = examTypeService.getAllExamTypesByType(type);
-        for (ExamTypeDTO examTypeDTO : data) {
-			// Update exam.remainTest
-        	Integer remainTest = userLimitExamService.getRemainTest(userDTO.getId(), examTypeDTO.getId());
-        	examTypeDTO.setRemainTest(remainTest);
-		}
+        if (TestType.MOCK_TEST_A.equals(type) || TestType.MOCK_TEST_B.equals(type) || TestType.MOCK_TEST_FULL.equals(type)) {
+        	for (ExamTypeDTO examTypeDTO : data) {
+    			// Update exam.remainTest
+            	Integer remainTest = userLimitExamService.getRemainTest(userDTO.getId(), examTypeDTO.getId());
+            	examTypeDTO.setRemainTest(remainTest);
+    		}
+        }
         
         return new ResponseEntity<>(data, HttpStatus.OK);
     }

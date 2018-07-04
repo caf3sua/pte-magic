@@ -23,8 +23,15 @@
             'dndLists',
             'smart-table',
             'cp.ngConfirm'
+//            'angularAudioRecorder'
         ])
         .run(run);
+//        .config(['recorderServiceProvider', function(recorderServiceProvider){
+//        	recorderServiceProvider
+//	        	.forceSwf(false)
+//	            //.setSwfUrl('/lib/recorder.swf')
+//	            .withMp3Conversion(true)
+//        }]);
 
     run.$inject = ['stateHandler', 'translationHandler'];
 

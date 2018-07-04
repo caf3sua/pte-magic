@@ -20,12 +20,15 @@
             }
         }]);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS', 'Answer', 'ngAudio', '$interval'];
+    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'
+    	, 'Answer', 'ngAudio', '$interval', 'Upload'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS, Answer, ngAudio, $interval){
+    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS
+    		, Answer, ngAudio, $interval, Upload){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
-
+		var encoderWorker = new Worker('content/audio_recorder/mp3Worker.js');
+		
 		// Attribute
 		vm.currentQuestion = 0;
 		vm.totalQuestion = 0;
@@ -59,7 +62,7 @@
             startText: '',
             fillInTheBlankPartialTexts: []
 	    };
-        
+        vm.fileUpload;
         vm.readingFIBRCount = 0;
 
         vm.checkClickspell = true;
@@ -82,6 +85,7 @@
     	}
     	
 		// Function
+    	vm.uploadRecording = uploadRecording;
 		vm.initBase = initBase;
 		vm.getUserAnswer = getUserAnswer;
 		vm.closeExam = closeExam;
@@ -111,6 +115,29 @@
         		}
                 console.log('audio done');
         	}
+        });
+        
+        $scope.$watch('vm.fileUpload', function (file) {
+            var file;
+            if (file) {
+                file.upload = Upload.upload({
+                    url: '/api/file/upload/answer',
+                    data: {file: vm.fileUpload},
+                    ignoreLoadingBar: true
+                });
+
+                file.upload.then(function (response) {
+                    $timeout(function () {
+                        file.result = response.data;
+                    });
+                }, function (response) {
+                    if (response.status > 0)
+                        $scope.errorMsg = response.status + ': ' + response.data;
+                }, function (evt) {
+                    file.progress = Math.min(100, parseInt(100.0 *
+                        evt.loaded / evt.total));
+                });
+            }
         });
         
         // Disable button and anable
@@ -784,5 +811,64 @@
             list.splice(index, 1)
             document.getElementById('drag-panel'+ parentIndex).className = "panel panel-info pte-position-top10";
         };
+        
+        
+        // convert wav -> mp3
+        function uploadRecording(selectedQuestionId) {
+        	console.log('uploadRecording, questionId:' + selectedQuestionId);
+            var blobUrl = $("#save").attr('href');
+            console.log(blobUrl);
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', blobUrl, true);
+            xhr.responseType = 'arraybuffer';
+            xhr.onload = function(e) {
+                if (this.status == 200) {
+                    var audioData  = this.response;
+                    console.log(audioData);
+                    
+                    var start = new Date().getTime();
+
+                    var wav = lamejs.WavHeader.readHeader(new DataView(audioData));
+                    console.log('wav:', wav);
+                    var samples = new Int16Array(audioData, wav.dataOffset, wav.dataLen / 2);
+                    encodeMono(wav.channels, wav.sampleRate, samples, selectedQuestionId);
+                    
+                    var end = new Date().getTime();
+                    console.log('convert mp3 done, time:' + (end - start));
+                    
+                    // myBlob is now the blob that the object URL pointed to.
+                }
+            };
+            xhr.send();
+        }
+        
+        function encodeMono(channels, sampleRate, samples, selectedQuestionId) {
+            var buffer = [];
+            var mp3enc = new lamejs.Mp3Encoder(channels, sampleRate, 128);
+            var remaining = samples.length;
+            var maxSamples = 1152;
+            for (var i = 0; remaining >= maxSamples; i += maxSamples) {
+                var mono = samples.subarray(i, i + maxSamples);
+                var mp3buf = mp3enc.encodeBuffer(mono);
+                if (mp3buf.length > 0) {
+                    buffer.push(new Int8Array(mp3buf));
+                }
+                remaining -= maxSamples;
+            }
+            var d = mp3enc.flush();
+            if(d.length > 0){
+                buffer.push(new Int8Array(d));
+            }
+            console.log('done encoding, size=', buffer.length);
+            var blob = new Blob(buffer, {type: 'audio/mp3'});
+            
+            var filename = "recording_" + vm.exam.examDTO.id + "_" + selectedQuestionId + ".mp3";
+            vm.fileUpload = new File([blob], filename);
+
+            // save answer
+            vm.saveAnswerSpeaking(selectedQuestionId, filename);
+        }
+        
+        // http://jsrun.it/Mr.X/fWph
     }
 })();
