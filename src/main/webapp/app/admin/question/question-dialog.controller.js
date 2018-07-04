@@ -41,7 +41,7 @@
                 	}
                 } else {
                 	// Check audio
-                	if (vm.f.type == 'audio/mpeg' || vm.f.type == 'audio/x-wav') {
+                	if (vm.f.type == 'audio/mpeg' || vm.f.type == 'audio/x-wav' || vm.f.type == 'audio/mp3') {
     	           		console.log('Upload audio');
     	           	} else {
     	           		alert('Only allow audio upload (mp3, wav)');

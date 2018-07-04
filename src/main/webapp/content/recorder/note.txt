@@ -1,5 +1,0 @@
-https://higuma.github.io/web-audio-recorder-js/js/RecorderDemo.js
-
-view-source:https://higuma.github.io/web-audio-recorder-js/
-
-https://github.com/higuma/web-audio-recorder-js
