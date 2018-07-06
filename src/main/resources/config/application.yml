@@ -59,11 +59,15 @@ google-cloud:
 security:
     basic:
         enabled: false
+    require-ssl: true
 
 server:
     session:
         cookie:
             http-only: true
+    tomcat:
+        remote-ip-header: x-forwarded-for
+        protocol-header: x-forwarded-proto
 
 info:
     project:
