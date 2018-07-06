@@ -17,8 +17,8 @@
     function MockTestController ($scope, $window, Principal, LoginService, $state, $rootScope, $timeout, ExamType) {
     	var vm = this;
         vm.showExamList = showExamList;
-        vm.testRecorder = testRecorder;
-        vm.recorderCompleted = recorderCompleted;
+        // vm.testRecorder = testRecorder;
+        // vm.recorderCompleted = recorderCompleted;
         vm.startTest = startTest;
         vm.examShowFlag = false;
         vm.partAExams = [];
@@ -37,30 +37,30 @@
         vm.duration; // 00:25:22
         vm.recorder;
         vm.recordedObj;
-        
+
         $timeout(function (){
             angular.element(document.getElementById("content")).removeClass("background-color-222d32");
         });
-        
+
 //        function testRecorder() {
-//        	
+//
 //        	var status = vm.recorder.status;
-//        	vm.recorder.isAvailable;       
+//        	vm.recorder.isAvailable;
 //        	vm.recorder.startRecord();
 //        	$timeout(stopRecorder, 3000);
 //        }
-//        
+//
 //        function stopRecorder() {
 //        	vm.recorder.stopRecord();
 //        	vm.recorder.audioModel;
 //        	vm.recorder.status.isRecording;
 //        }
-//        
+//
 //        function recorderCompleted() {
 //        	vm.recorder.status.isRecording;
 //        	vm.recorder.save();
 //        }
-        
+
         function showExamList(type) {
 
             if(type == 'MOCK_TEST_A'){
