@@ -88,7 +88,7 @@ server:
          key-store: /home/ubuntu/cert/pte.p12
          key-store-password: pte123
          keyStoreType: PKCS12
-         keyAlias: pte
+         keyAlias: ptemagicpractice.com
 
 # ===================================================================
 # JHipster specific properties
