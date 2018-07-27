@@ -1,50 +1,46 @@
 package com.vmcomms.ptemagic.web.rest;
 
-import com.codahale.metrics.annotation.Timed;
-import com.vmcomms.ptemagic.domain.User;
-import com.vmcomms.ptemagic.domain.enumeration.TestType;
-import com.vmcomms.ptemagic.repository.UserRepository;
-import com.vmcomms.ptemagic.security.SecurityUtils;
-import com.vmcomms.ptemagic.service.ExamTypeService;
-import com.vmcomms.ptemagic.service.UserLimitExamService;
-import com.vmcomms.ptemagic.service.UserService;
-import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
-import com.vmcomms.ptemagic.web.rest.errors.EmailAlreadyUsedException;
-import com.vmcomms.ptemagic.web.rest.errors.InternalServerErrorException;
-import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
-import com.vmcomms.ptemagic.web.rest.util.PaginationUtil;
-import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
-import com.vmcomms.ptemagic.service.dto.UserDTO;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-import io.swagger.annotations.ApiParam;
-import io.github.jhipster.web.util.ResponseUtil;
+import javax.validation.Valid;
 
-import org.apache.commons.codec.binary.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
+import com.codahale.metrics.annotation.Timed;
+import com.vmcomms.ptemagic.service.ExamTypeService;
+import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
+import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
+import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
+import com.vmcomms.ptemagic.web.rest.util.PaginationUtil;
 
-import java.util.List;
-import java.util.Optional;
+import io.github.jhipster.web.util.ResponseUtil;
+import io.swagger.annotations.ApiParam;
 
 /**
  * REST controller for managing ExamType.
  */
 @RestController
 @RequestMapping("/api")
-public class ExamTypeResource {
+public class ExamTypeResource extends AbstractPteResource {
 
     private final Logger log = LoggerFactory.getLogger(ExamTypeResource.class);
 
@@ -53,12 +49,6 @@ public class ExamTypeResource {
     @Autowired
     private ExamTypeService examTypeService;
     
-    @Autowired
-    private UserService userService;
-    
-    @Autowired 
-    private UserLimitExamService userLimitExamService;
-
     /**
      * POST  /exam-types : Create a new examType.
      *
@@ -120,21 +110,40 @@ public class ExamTypeResource {
     @Timed
     public ResponseEntity<List<ExamTypeDTO>> getAllExamTypesByType(@PathVariable String type) {
         log.debug("REST request to getAllExamTypesByType");
-        // User info
-        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
-                .map(UserDTO::new)
-                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
-        
-        List<ExamTypeDTO> data = examTypeService.getAllExamTypesByType(type);
-        if (TestType.MOCK_TEST_A.equals(type) || TestType.MOCK_TEST_B.equals(type) || TestType.MOCK_TEST_FULL.equals(type)) {
-        	for (ExamTypeDTO examTypeDTO : data) {
-    			// Update exam.remainTest
-            	Integer remainTest = userLimitExamService.getRemainTest(userDTO.getId(), examTypeDTO.getId());
-            	examTypeDTO.setRemainTest(remainTest);
-    		}
-        }
+
+        List<ExamTypeDTO> data = examTypeService.getAllExamTypesByType(type, getCurrentUserId());
+//        if (TestType.MOCK_TEST_A.equals(type) || TestType.MOCK_TEST_B.equals(type) || TestType.MOCK_TEST_FULL.equals(type)) {
+//        	for (ExamTypeDTO examTypeDTO : data) {
+//    			// Update exam.remainTest
+//            	Integer remainTest = userLimitExamService.getRemainTest(userDTO.getId(), examTypeDTO.getId());
+//            	examTypeDTO.setRemainTest(remainTest);
+//    		}
+//        }
         
         return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+    
+    @GetMapping("/get-all-mock-exam")
+    @Timed
+    public ResponseEntity<List<ExamTypeDTO>> getAllExamTypesByType() {
+        log.debug("REST request to getAllExamTypesByType");
+        
+        List<ExamTypeDTO> dataA = examTypeService.getAllExamTypesByType("MOCK_TEST_A", getCurrentUserId());
+        List<ExamTypeDTO> dataB = examTypeService.getAllExamTypesByType("MOCK_TEST_B", getCurrentUserId());
+        List<ExamTypeDTO> dataFull = examTypeService.getAllExamTypesByType("MOCK_TEST_FULL", getCurrentUserId());
+        
+        List<ExamTypeDTO> result = new ArrayList<ExamTypeDTO>();
+        if (dataA != null && dataA.size() > 0) {
+        	result.addAll(dataA);
+        }
+        if (dataB != null && dataB.size() > 0) {
+        	result.addAll(dataB);
+        }
+        if (dataFull != null && dataFull.size() > 0) {
+        	result.addAll(dataFull);
+        }
+        
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     /**

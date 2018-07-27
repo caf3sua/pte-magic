@@ -3,6 +3,7 @@ package com.vmcomms.ptemagic.service.impl;
 import com.vmcomms.ptemagic.service.ExamService;
 import com.vmcomms.ptemagic.domain.Exam;
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
+import com.vmcomms.ptemagic.dto.QueryExamDTO;
 import com.vmcomms.ptemagic.repository.ExamRepository;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.mapper.ExamMapper;
@@ -105,5 +106,11 @@ public class ExamServiceImpl implements ExamService{
 	public List<ExamDTO> findAllByResult(ProgressType result) {
 		log.debug("Request to get all Exams by result");
         return examMapper.toDto(examRepository.findByResult(result));
+	}
+
+	@Override
+	public List<QueryExamDTO> findAllByResultCustom(ProgressType result) {
+		log.debug("Request to get all findAllByResultCustom");
+        return examRepository.findByResultCustom(result);
 	}
 }

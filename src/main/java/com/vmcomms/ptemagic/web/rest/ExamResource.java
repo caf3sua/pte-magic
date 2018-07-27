@@ -32,6 +32,7 @@ import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.AnswerQuestionDTO;
 import com.vmcomms.ptemagic.dto.ExamInfoDTO;
+import com.vmcomms.ptemagic.dto.QueryExamDTO;
 import com.vmcomms.ptemagic.service.AnswerService;
 import com.vmcomms.ptemagic.service.ExamQuestionService;
 import com.vmcomms.ptemagic.service.ExamService;
@@ -431,20 +432,22 @@ public class ExamResource {
     
     @GetMapping("/exams-all")
     @Timed
-    public ResponseEntity<List<ExamDTO>> getAllExamsList() {
+    public ResponseEntity<List<QueryExamDTO>> getAllExamsList() {
         log.debug("REST request to get a page of Exams");
-        List<ExamDTO> data = examService.findAllByResult(ProgressType.MARKING);
+//        List<ExamDTO> data = examService.findAllByResult(ProgressType.MARKING);
+        
+        List<QueryExamDTO> data = examService.findAllByResultCustom(ProgressType.MARKING);
         
         // Get email
-        for (ExamDTO examDTO : data) {
-			// Find user
-        	User user = userService.getUserWithAuthorities(examDTO.getUserId());
-        	examDTO.setEmail(user.getEmail());
-        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
-        	if (null != examTypeDTO) {
-        		examDTO.setExamTypeName(examTypeDTO.getName());
-        	}
-		}
+//        for (ExamDTO examDTO : data) {
+//			// Find user
+//        	User user = userService.getUserWithAuthorities(examDTO.getUserId());
+//        	examDTO.setEmail(user.getEmail());
+//        	ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+//        	if (null != examTypeDTO) {
+//        		examDTO.setExamTypeName(examTypeDTO.getName());
+//        	}
+//		}
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 

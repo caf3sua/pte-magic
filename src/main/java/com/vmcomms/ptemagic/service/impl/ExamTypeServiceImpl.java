@@ -162,27 +162,19 @@ public class ExamTypeServiceImpl implements ExamTypeService{
 
 	@Override
 	@Cacheable
-	public List<ExamTypeDTO> getAllExamTypesByType(String type) {
+	public List<ExamTypeDTO> getAllExamTypesByType(String type, Long userId) {
+		log.debug("Request to getAllExamTypesByType : {}, userId: {}", type, userId);
         List<ExamTypeDTO> data = this.findAllByType(type);
         
         // update type incase of MOCK TEST
         if (type.contains("MOCK_TEST")) {
-        	updateRemainTest(data);
+        	updateRemainTest(data, userId);
         }
         
         return data;
 	}
 	
-	private void updateRemainTest(List<ExamTypeDTO> data) {
-    	// Get current user
-    	final String userLogin = SecurityUtils.getCurrentUserLogin();
-        Optional<User> user = userRepository.findOneByLogin(userLogin);
-        if (!user.isPresent()) {
-            throw new InternalServerErrorException("User could not be found");
-        }
-        
-        Long userId = user.get().getId();
-        
+	private void updateRemainTest(List<ExamTypeDTO> data, Long userId) {
     	for (ExamTypeDTO examTypeDTO : data) {
 			// Get remain test
     		int remainTest = userLimitExamService.getRemainTest(userId, examTypeDTO.getId());

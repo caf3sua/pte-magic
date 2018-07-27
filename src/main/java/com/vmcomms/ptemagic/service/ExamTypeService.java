@@ -48,5 +48,5 @@ public interface ExamTypeService {
     
     List<ExamTypeDTO> findAllByType(String type);
     
-    List<ExamTypeDTO> getAllExamTypesByType(String type);
+    List<ExamTypeDTO> getAllExamTypesByType(String type, Long userId);
 }

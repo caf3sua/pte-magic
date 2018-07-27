@@ -18,7 +18,7 @@ import org.springframework.data.jpa.repository.*;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ExamRepository extends JpaRepository<Exam, Long>, ExamQuestionRepositoryExtend {
+public interface ExamRepository extends JpaRepository<Exam, Long>, ExamRepositoryExtend {
 	Page<Exam> findByResult(ProgressType result, Pageable pageable);
 	
 	List<Exam> findByResult(ProgressType result);

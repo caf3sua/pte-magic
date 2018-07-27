@@ -12,9 +12,9 @@
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
-    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
+    <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
 	<link rel="stylesheet" href="bower_components/angular-confirm/dist/angular-confirm.min.css" type="text/css" />
     <!-- endinject -->
     <!-- endbuild -->
@@ -57,32 +57,31 @@
         </noscript>
     </div>
 
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/messageformat/messageformat.js"></script>
-    <script src="bower_components/json3/lib/json3.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angular-cache-buster/angular-cache-buster.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
-    <script src="bower_components/ngstorage/ngStorage.js"></script>
-    <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.js"></script>
-    <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
-    <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.js"></script>
-    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
-    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="bower_components/messageformat/messageformat.min.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-aria.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-cache-buster/angular-cache-buster.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-cookies.min.js"></script>
+    <script src="bower_components/angular-dynamic-locale/tmhDynamicLocale.min.js"></script>
+    <script src="bower_components/ngstorage/ngStorage.min.js"></script>
+    <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-resource.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
+    <script src="bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.min.js"></script>
+    <script src="bower_components/angular-translate-loader-partial/angular-translate-loader-partial.min.js"></script>
+    <script src="bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
     <script src="bower_components/angular-timer/build/ng-infinite-scroll.js"></script>
-    <script src="bower_components/angular-timer/dist/assets/js/angular-timer-bower.js"></script>
     <script src="bower_components/angular-timer/dist/assets/js/angular-timer-all.min.js"></script>
     <script src="bower_components/angular-audio/app/angular.audio.js"></script>
-    <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+    <script src="bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
     <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
     <script src="bower_components/angular-confirm/dist/angular-confirm.min.js"></script>
 
@@ -91,7 +90,7 @@
 	<script src="content/audio_recorder/recorder.js"></script>
 	<script src="content/audio_recorder/main.js"></script>
 
-	<script src="content/audio_recorder/lame.all.js"></script>
+	<script src="content/audio_recorder/lame.all.min.js"></script>
 
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
@@ -104,7 +103,6 @@
     <script src="app/services/user/user.service.js"></script>
     <script src="app/services/profiles/profile.service.js"></script>
     <script src="app/services/profiles/page-ribbon.directive.js"></script>
-    <!-- <script src="app/services/auth/register.service.js"></script> -->
     <script src="app/services/auth/principal.service.js"></script>
     <script src="app/services/auth/password-reset-init.service.js"></script>
     <script src="app/services/auth/password-reset-finish.service.js"></script>
@@ -133,15 +131,12 @@
     <script src="app/components/util/capitalize.filter.js"></script>
     <script src="app/components/util/base64.service.js"></script>
     <script src="app/components/util/limitto.filter.js"></script>
-    <!-- <script src="app/components/createAccount/createAccount.controller.js"></script>
-    <script src="app/components/createAccount/createAccount.service.js"></script> -->
     <script src="app/components/register/register.controller.js"></script>
     <script src="app/components/register/register.service.js"></script>
 
     <script src="app/components/login/login.service.js"></script>
     <script src="app/components/login/login.controller.js"></script>
     <script src="app/components/util/resize.directive.js"></script>
-    <!-- <script src="app/components/createAccount/createAccount.state.js"></script> -->
     <script src="app/components/language/language.service.js"></script>
     <script src="app/components/language/language.filter.js"></script>
     <script src="app/components/language/language.controller.js"></script>
@@ -211,8 +206,6 @@
     <script src="app/account/reset/request/reset.request.controller.js"></script>
     <script src="app/account/reset/finish/reset.finish.state.js"></script>
     <script src="app/account/reset/finish/reset.finish.controller.js"></script>
-    <!-- <script src="app/account/register/register.state.js"></script> -->
-    <!-- <script src="app/account/register/register.controller.js"></script> -->
     <script src="app/account/password/password-strength-bar.directive.js"></script>
     <script src="app/account/password/password.state.js"></script>
     <script src="app/account/password/password.controller.js"></script>
