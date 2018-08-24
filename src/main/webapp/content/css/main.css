@@ -1107,6 +1107,7 @@ table>thead>tr{
     font-family: 'Roboto';
     font-weight: normal;
     font-style: normal;
+    text-align: justify;
 }
 .padding-085{
     padding: 0px 85px;
@@ -2572,4 +2573,9 @@ canvas {
 .simpleDemo ul[dnd-list] li.selected {
     background-color: #dff0d8;
     color: #3c763d;
+}
+
+.pte-answer-highlight {
+    color: red;
+    font-weight: bold;
 }

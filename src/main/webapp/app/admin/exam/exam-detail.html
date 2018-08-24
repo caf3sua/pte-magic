@@ -53,7 +53,20 @@
                     		<img class="pte-width-100 pte-margin-bottom-10" alt="" src="{{answerQuestion.question.audioLink}}">
                     	</div>
 						<div ng-show="answerQuestion.question.type != 'SPEAKING_DESCRIBE_IMAGE'">
-                    		{{answerQuestion.question.text}}
+							<div ng-show="answerQuestion.question.type != 'READING_FIB_R_W' && answerQuestion.question.type != 'READING_FIB_R'">
+								<div style="text-align: justify;">
+	                    			{{answerQuestion.question.text}}
+	                    		</div>
+                    		</div>
+                    		<div ng-show="answerQuestion.question.type == 'READING_FIB_R_W' || answerQuestion.question.type == 'READING_FIB_R'">
+	                    		<div style="text-align: justify;" 
+	                    			ng-bind-html="vm.formatFIB(answerQuestion.question.text, answerQuestion.question.expectAnswer)">
+	                    		</div>
+								<p>ANSWER</p>
+								<div style="text-align: justify;">
+	                    			{{vm.formatFIBAnswer(answerQuestion.question)}}
+	                    		</div>
+	                    	</div>
                     	</div>
                         <div class="container-audio" ng-show="answerQuestion.question.audioLink">
                             <input type="hidden" value="{{answerQuestion.question.audioLink}}">

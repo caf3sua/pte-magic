@@ -19,6 +19,8 @@
         vm.previousState = previousState.name;
         vm.updateAnswer = updateAnswer;
         vm.finishMarkingExam = finishMarkingExam;
+        vm.formatFIB = formatFIB;
+        vm.formatFIBAnswer = formatFIBAnswer;
         
         angular.element(document).ready(function () {
     		$timeout(function(){
@@ -27,6 +29,41 @@
   	            });
     		}, 1000 );
         });
+        
+        function formatFIBAnswer(question) {
+        	if (question.expectAnswer == "" || question.expectAnswer == undefined) {
+        		return question.expectAnswer;
+        	}
+        	
+        	if (question.type != 'READING_FIB_R') {
+        		return question.expectAnswer;
+        	}
+        	
+        	
+        	let arrAnswer = question.expectAnswer.split(",");
+        	let newAnswer = [];
+        	angular.forEach(arrAnswer, function(val, key) {
+        		let answerItem = "answer" + val.trim();
+				let item = val.trim() + "(" + question["answer" + val.trim()] + ")";
+				newAnswer.push(item);
+            });
+        	
+        	return newAnswer.join(", ");
+        }
+        
+        function formatFIB(question, answer) {
+        	if (answer == null || answer == undefined || question == null || question == undefined) {
+        		return question;
+        	}
+        	
+        	let arrAnswer = answer.split(",");
+        	angular.forEach(arrAnswer, function(val, key){
+				let item = '<span class="pte-answer-highlight">' + val.trim() + "</span>";
+				question = question.replace('@Blank@', item);
+            });
+        	
+        	return question;
+        }
         
         function finishMarkingExam() {
         	Exam.finishMarkingExam({

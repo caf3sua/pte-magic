@@ -83,6 +83,8 @@ liquibase:
 #        keyAlias: PteMagic
 # ===================================================================
 server:
+     http:
+         port: 80
      port: 443
      ssl:
          key-store: /home/ubuntu/cert/pte.p12

@@ -64,7 +64,7 @@ public class ExamRepositoryImpl implements ExamRepositoryExtend {
 		    item.setResult((String)objects[2]);
 		    item.setExamTypeId(((BigInteger)objects[3]).longValue());
 		    item.setEmail((String)objects[4]);
-		    item.setExamTypeName((String)objects[4]);
+		    item.setExamTypeName((String)objects[5]);
 		    
 			result.add(item);
 		}
