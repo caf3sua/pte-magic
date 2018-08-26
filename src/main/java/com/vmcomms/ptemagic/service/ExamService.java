@@ -47,6 +47,8 @@ public interface ExamService {
      */
     void delete(Long id);
     
+    void deleteByUserId(Long userId);
+    
     List<ExamDTO> findAllByResult(ProgressType result);
     
     List<QueryExamDTO> findAllByResultCustom(ProgressType result);

@@ -18,8 +18,8 @@
             $uibModalInstance.dismiss('cancel');
         }
 
-        function confirmDelete (login) {
-            User.delete({login: login},
+        function confirmDelete () {
+            User.delete({id: vm.user.id},
                 function () {
                     $uibModalInstance.close(true);
                 });

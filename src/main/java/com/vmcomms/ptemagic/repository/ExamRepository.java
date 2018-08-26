@@ -22,4 +22,6 @@ public interface ExamRepository extends JpaRepository<Exam, Long>, ExamRepositor
 	Page<Exam> findByResult(ProgressType result, Pageable pageable);
 	
 	List<Exam> findByResult(ProgressType result);
+	
+	void deleteByUserId(Long userId);
 }

@@ -1,23 +1,22 @@
 package com.vmcomms.ptemagic.service.impl;
 
-import com.vmcomms.ptemagic.service.ExamService;
-import com.vmcomms.ptemagic.domain.Exam;
-import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
-import com.vmcomms.ptemagic.dto.QueryExamDTO;
-import com.vmcomms.ptemagic.repository.ExamRepository;
-import com.vmcomms.ptemagic.service.dto.ExamDTO;
-import com.vmcomms.ptemagic.service.mapper.ExamMapper;
-
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.vmcomms.ptemagic.domain.Exam;
+import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
+import com.vmcomms.ptemagic.dto.QueryExamDTO;
+import com.vmcomms.ptemagic.repository.ExamRepository;
+import com.vmcomms.ptemagic.service.ExamService;
+import com.vmcomms.ptemagic.service.dto.ExamDTO;
+import com.vmcomms.ptemagic.service.mapper.ExamMapper;
 
 
 /**
@@ -112,5 +111,11 @@ public class ExamServiceImpl implements ExamService{
 	public List<QueryExamDTO> findAllByResultCustom(ProgressType result) {
 		log.debug("Request to get all findAllByResultCustom");
         return examRepository.findByResultCustom(result);
+	}
+
+	@Override
+	public void deleteByUserId(Long userId) {
+		log.debug("Request to delete Exam by userId : {}", userId);
+        examRepository.deleteByUserId(userId);
 	}
 }

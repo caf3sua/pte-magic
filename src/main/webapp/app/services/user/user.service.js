@@ -19,7 +19,7 @@
             },
             'save': { method:'POST' },
             'update': { method:'PUT' },
-            'delete':{ method:'DELETE'}
+            'delete':{ url: 'api/users/:id', method:'DELETE'}
         });
 
         return service;
