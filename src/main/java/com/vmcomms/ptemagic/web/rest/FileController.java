@@ -36,6 +36,7 @@ import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.ConfigMockExamDTO;
 import com.vmcomms.ptemagic.dto.FileDTO;
 import com.vmcomms.ptemagic.service.ExamTypeService;
+import com.vmcomms.ptemagic.service.GoogleStorageService;
 import com.vmcomms.ptemagic.service.MarkScoreService;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.MockExamDTO;
@@ -47,14 +48,12 @@ public class FileController {
 
     private final Logger log = LoggerFactory.getLogger(FileController.class);
 
-    // Save the uploaded file to this folder
-    private static String UPLOADED_FOLDER = "D://etc//";
-
-    @Autowired
-    private MarkScoreService markScoreService;
-
     @Autowired
     private ExamTypeService examTypeService;
+    
+    @Autowired
+    private GoogleStorageService googleStorageService;
+    
 
     @PostMapping("/upload/{type}") // //new annotation since 4.3
     public FileDTO singleFileUpload(@RequestParam("file") MultipartFile file, @PathVariable String type) {
@@ -67,7 +66,7 @@ public class FileController {
 
         try {
 
-            String filename = markScoreService.processUploadToCloud(file, type);
+            String filename = googleStorageService.upload(file, type);
 
             fileDTO.setFilename(filename);
 

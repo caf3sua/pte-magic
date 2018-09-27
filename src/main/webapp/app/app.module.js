@@ -22,8 +22,9 @@
             'ngAudio',
             'dndLists',
             'smart-table',
-            'cp.ngConfirm'
-//            'angularAudioRecorder'
+            'cp.ngConfirm',
+            'kendo.directives',
+            'kendo.window'
         ])
         .run(run);
 //        .config(['recorderServiceProvider', function(recorderServiceProvider){

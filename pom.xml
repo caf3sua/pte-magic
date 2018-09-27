@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.vmcomms.ptemagic</groupId>
-    <artifactId>pte-magic</artifactId>
+    <artifactId>pte-magic-v2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Pte Magic</name>

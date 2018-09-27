@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.vmcomms.ptemagic.dto.QueryExamDTO;
+import com.vmcomms.ptemagic.service.dto.UserDTO;
 
 
 /**
@@ -44,6 +45,4 @@ public class UserRepositoryImpl implements UserRepositoryExtend {
 		queryDelAuth.executeUpdate();
 		queryDelUser.executeUpdate();
 	}
-	
-	
 }

@@ -164,6 +164,16 @@ public class UserResource {
     }
 
     /**
+     * GET  /users : get all users for grid.
+     */
+    @GetMapping("/users/get-all")
+    @Timed
+    public ResponseEntity<List<UserDTO>> getAllUsersAdmin() {
+        final List<UserDTO> data = userService.getAllUsers();
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+    
+    /**
      * @return a string list of the all of the roles
      */
     @GetMapping("/users/authorities")

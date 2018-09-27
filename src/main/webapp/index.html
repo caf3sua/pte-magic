@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="content/css/AdminLTE.css">
     <link rel="stylesheet" href="content/css/_all-skins.css">
     <link rel="stylesheet" href="content/css/main.css">
+    
+    <!-- Kendo -->
+    <link rel="stylesheet" href="libs/kendoui/styles/kendo.common-bootstrap.min.css"/>
+	<link rel="stylesheet" href="libs/kendoui/styles/kendo.bootstrap.min.css"/>
+	<link rel="stylesheet" href="libs/kendoui/kendo.custom.css"/>
+	
     <!-- endbuild -->
     <link rel="shortcut icon" sizes="196x196" href="content/images/favicon.png">
     <link rel="manifest" href="manifest.webapp" />
@@ -94,12 +100,18 @@
 
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
+	<!-- Kendo -->
+	<!-- <script	src="libs/kendoui/js/kendo.all.min.js"></script> -->
+	<script src="https://kendo.cdn.telerik.com/2018.3.911/js/kendo.all.min.js"></script>
+	<script	src="libs/kendoui/custom/angular-kendo-window.js"></script>
+
     <!-- endinject -->
     <!-- endbuild -->
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
+   	<script src="app/app.kendoConfig.js"></script>
     <script src="app/services/user/user.service.js"></script>
     <script src="app/services/profiles/profile.service.js"></script>
     <script src="app/services/profiles/page-ribbon.directive.js"></script>

@@ -1,5 +1,8 @@
 package com.vmcomms.ptemagic.service.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.vmcomms.ptemagic.config.Constants;
 
 import com.vmcomms.ptemagic.domain.Authority;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 /**
  * A DTO representing a user, with his authorities.
  */
+@JsonInclude(Include.NON_EMPTY)
 public class UserDTO {
 
     private Long id;
@@ -33,19 +37,23 @@ public class UserDTO {
 
     private boolean activated = false;
 
+    @JsonIgnore
     @Size(min = 2, max = 6)
     private String langKey;
 
+    @JsonIgnore
     private String createdBy;
 
     private Instant createdDate;
 
+//    @JsonIgnore
     private String lastModifiedBy;
     
     private String fullName;
     
     private String phonenumber;
 
+//    @JsonIgnore
     private Instant lastModifiedDate;
 
     private Set<String> authorities;

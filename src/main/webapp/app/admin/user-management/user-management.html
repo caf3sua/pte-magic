@@ -8,36 +8,133 @@
               <span class="glyphicon glyphicon-flash"></span> <span data-translate="userManagement.home.createLabel">Create a new User</span>
           </button>
       </div> -->
+	<!-- Search area -->
+	<div>
+		<form class="form-horizontal row" role="form" kendo-validator="vm.validatorSearch" k-options="vm.validatorOptions" >
+			<div class="form-body">
+				<!-- <div ng-show="vm.searchDetail">
+					<div data-ng-include="'ims/purchaseInvestProposal/view/partial/search-detail.html'"></div>
+				</div> -->
+				<!-- <div ng-show="!vm.searchDetail"> -->
+					<div class="row">
+						<div class="form-group col-md-6" >
+							<label class="col-md-2 control-label" translate></label>
+							<div class="col-md-10 ">
+								<input focus-me="vm.focus" ng-model="vm.searchForm.packageNameOrCode" class="form-control width100 sort-search" style="height: 30px;" maxlength="50" placeholder="UserId or email"/>
+							</div>
+						</div>
+						<div class="form-group col-md-3">
+							<div class="input-icon left">
+								<i class="fa fa-search" style="cursor: pointer"></i>
+								<button type="button" class="btn green btn-outline padding-search-right"  ng-click="vm.doSearch()" translate>Tìm kiếm</button>
+							</div>
+						</div>
+						<div class="searchDetail">
+							<a href="" ng-click="vm.showSearchDetail()"  class="action-button search_plus fixbt">
+								Advance search</a>
+						</div>
+					</div>
+				<!-- </div> -->
+			</div>
+		</form>
+	</div>
+
+	<!-- Table grid -->
+	<div class="row">
+		<div id="userTableGrid" kendo-grid="vm.userTableGrid"  k-options="vm.userTableGridOption"></div>
+	</div>
+      
     <div class="col-md-12 table-responsive ">
-        <table class="jh-table table table-striped  table-bordered table-hover">
+    	<table st-table="vm.usersInit" st-safe-src="vm.users" class="jh-table table">
+		      	<thead>
+			      	<tr>
+			      		<th colspan="6">
+				      		<div class="">
+				                <span class=""><span class="fas fa-search"></span></span>
+				                <input st-search="" type="text" placeholder="Tìm kiếm" class="" id="form-name" style="width:80%">
+				            </div>
+			            </th>
+					</tr>
+			        <tr>
+			          	<th class="text-center">#</th>
+			          	<th class="text-center" st-sort="id">User Id</th>
+			          	<th class="text-center" st-sort="email">Email</th>
+			          	<th class="text-center" st-sort="result">Profiles</th>
+			          	<th class="text-center" st-sort="createdDate">Created Date</th>
+			          	<th class="text-center">Action</th>
+			        </tr>
+				</thead>
+		      	<tbody>
+			        <tr ng-repeat="user in vm.usersInit track by $index">
+			        	<td class="text-right">{{$index + 1}}</td>
+			        	<td class="text-right">{{user.id}}</td>
+			        	<td class="text-center">{{user.email}}</td>
+			        	<td class="text-center">
+			        		<div ng-repeat="authority in user.authorities">
+		                        <span class="label label-info">{{ authority }}</span>
+		                    </div>
+			        	</td>
+			        	<td class="text-left">{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
+			        	<!-- Action -->
+			        	<td class="text-center">
+			        		<div class="btn-group flex-btn-group-container">
+		                    	<button type="button" ng-click="vm.resetLimitTest(user.id)"
+		                                class="btn btn-success btn-sm" ng-disabled="vm.currentAccount.email === user.email">
+		                            <span class="glyphicon glyphicon-refresh"></span>
+		                            <span class="hidden-xs hidden-sm">Reset Test</span>
+		                        </button>
+		                        <button type="submit"
+		                                ui-sref="user-management-detail({login:user.id})"
+		                                class="btn btn-info btn-sm">
+		                            <span class="glyphicon glyphicon-eye-open"></span>
+		                            <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
+		                        </button>
+		                        <button type="submit"
+		                                ui-sref="user-management.edit({login:user.id})"
+		                                class="btn btn-primary btn-sm">
+		                            <span class="glyphicon glyphicon-pencil"></span>
+		                            <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
+		                        </button>
+		                        <button type="submit"
+		                                ui-sref="user-management.delete({login:user.id})"
+		                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.email === user.email">
+		                            <span class="glyphicon glyphicon-remove-circle"></span>
+		                            <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
+		                        </button>
+		                    </div>
+			        	</td>
+	                </tr>
+		      	</tbody>
+		      	<tfoot>
+			        <tr>
+			          <td colspan="6" class="text-center">
+			            <div st-pagination="" st-items-by-page="10" st-displayed-pages="7" class="m-a-0"></div>
+			          </td>
+			        </tr>
+				</tfoot>
+	    </table>
+    
+        <!-- <table class="jh-table table table-striped  table-bordered table-hover">
 
             <thead>
             <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                 <th jh-sort-by="id" class="text-center"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
-                <!-- <th jh-sort-by="login"><span data-translate="userManagement.email">Login</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                 <th jh-sort-by="email"  class="text-center"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <!-- <th  jh-sort-by="langKey"> <span data-translate="userManagement.langKey">Lang Key</span> <span class="glyphicon glyphicon-sort"></span></th>   -->
                 <th  class="text-center"><span data-translate="userManagement.profiles">Profiles</span></th>
                 <th  class="text-center" jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <!-- <th jh-sort-by="lastModifiedBy"><span data-translate="userManagement.lastModifiedBy">Last Modified By</span> <span class="glyphicon glyphicon-sort"></span></th> -->
-                <!-- <th jh-sort-by="lastModifiedDate"><span data-translate="userManagement.lastModifiedDate">Last Modified Date</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                 <th  class="text-center" ><span  data-translate="userManagement.action">Action</span></th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="user in vm.users track by user.id">
                 <td class="text-right"><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
-                <!-- <td>{{user.email}}</td> -->
                 <td class="text-center">{{user.email}}</td>
-                <!-- <td>{{user.langKey}}</td> -->
                 <td>
                     <div ng-repeat="authority in user.authorities">
                         <span class="label label-info">{{ authority }}</span>
                     </div>
                 </td>
                 <td class="text-right">{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
-                <!-- <td>{{user.lastModifiedBy}}</td>
-                <td>{{user.lastModifiedDate | date:'dd/MM/yy HH:mm'}}</td> -->
                 <td class="text-center">
                     <div class="btn-group flex-btn-group-container">
                     	<button type="button" ng-click="vm.resetLimitTest(user.id)"
@@ -67,10 +164,9 @@
                 </td>
             </tr>
             </tbody>
-        </table>
+        </table> -->
     </div>
     <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        ---
     </div>
 </div>

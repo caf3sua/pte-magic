@@ -19,7 +19,7 @@ spring:
         include: swagger,no-liquibase
     devtools:
         restart:
-            enabled: false
+            enabled: true
         livereload:
             enabled: false # we use gulp + BrowserSync for livereload
     jackson:

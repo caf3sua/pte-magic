@@ -9,6 +9,7 @@ import com.vmcomms.ptemagic.security.AuthoritiesConstants;
 import com.vmcomms.ptemagic.security.SecurityUtils;
 import com.vmcomms.ptemagic.service.util.RandomUtil;
 import com.vmcomms.ptemagic.service.dto.UserDTO;
+import com.vmcomms.ptemagic.service.mapper.UserMapper;
 import com.vmcomms.ptemagic.web.rest.vm.ManagedUserVM;
 import com.vmcomms.ptemagic.web.rest.vm.RegisterUserVM;
 
@@ -48,12 +49,16 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
 
     private final CacheManager cacheManager;
+    
+    private final UserMapper userMapper;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository
+    		, CacheManager cacheManager, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
         this.cacheManager = cacheManager;
+        this.userMapper = userMapper;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -229,6 +234,13 @@ public class UserService {
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
 
+    public List<UserDTO> getAllUsers() {
+    	List<User> users = userRepository.findAll();
+    	List<UserDTO> userDTOs = userMapper.usersToUserDTOs(users);
+    	
+    	return userDTOs;
+    }
+    
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
         return userRepository.findOneWithAuthoritiesByLogin(login);

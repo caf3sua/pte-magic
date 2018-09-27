@@ -753,7 +753,6 @@
                       }
   				  }
   				}
-
   			} else if (vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
   				$('.word-hightlight').each(function(){
   					if ($(this).hasClass('hightlight')) {
@@ -761,6 +760,11 @@
   						vm.answers.push(answer);
   					}
   				});
+  			} else if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.selectedQuestion.type == 'LISTENING_DICTATION') { // 06/09/2018
+  				var answer = $('#areaTextWriting').val();
+  				vm.answers.push(answer);
+  				// Reset
+                $('#areaTextWriting').html('');
   			} else {
   				angular.forEach(vm.listItemAnswer, function(value, key){
   	  				if ($('#answer' + value).is(":checked")) {

@@ -53,9 +53,10 @@ spring:
 google-cloud:
     storage:
         credential-file: pte-magic-api.json
-        project-id: namnh
+        project-id: namnh-200002
         bucket-name-question: pte-magic-2018
         bucket-name-answer: pte-magic-2018-answer                       
+        bucket-name-answer-prefix: pte-magic-answer
 security:
     basic:
         enabled: false

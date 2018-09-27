@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.vmcomms.ptemagic.domain.enumeration.ProgressType;
 import com.vmcomms.ptemagic.dto.QueryExamDTO;
+import com.vmcomms.ptemagic.service.dto.UserDTO;
 
 
 /**
