@@ -17,11 +17,11 @@ spring:
     profiles:
         active: dev
         include: swagger,no-liquibase
-    devtools:
-        restart:
-            enabled: true
-        livereload:
-            enabled: false # we use gulp + BrowserSync for livereload
+#    devtools:
+#        restart:
+#            enabled: true
+#        livereload:
+#            enabled: false # we use gulp + BrowserSync for livereload
     jackson:
         serialization.indent_output: true
     datasource:

@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.vmcomms.ptemagic</groupId>
-    <artifactId>pte-magic-v2</artifactId>
+    <artifactId>pte-magic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Pte Magic</name>
@@ -707,11 +707,11 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-undertow</artifactId>
                 </dependency>
-                <dependency>
+                <!-- <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-devtools</artifactId>
                     <optional>false</optional>
-                </dependency>
+                </dependency> -->
             </dependencies>
             <build>
                 <plugins>
@@ -867,11 +867,11 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-undertow</artifactId>
                 </dependency>
-                <dependency>
+                <!-- <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-devtools</artifactId>
                     <optional>true</optional>
-                </dependency>
+                </dependency> -->
             </dependencies>
             <build>
                 <plugins>
