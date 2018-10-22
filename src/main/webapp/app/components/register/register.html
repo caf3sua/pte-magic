@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
     <div class=" text-center pte-padding-login">
-        <span class="pte-text-header-login">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer or <span><a class="pte-text-sign-up">Sign Up</a></span></span>
+        <span class="pte-text-header-login">Welcome to PTE MAGIC! Please register if you have not an account, or <span><a class="pte-text-sign-up">Sign In</a></span></span>
         
         <div class="alert alert-success" ng-show="vm.success">
 	                <strong>Registration success!</strong> Please Please Login to continues.
@@ -20,6 +20,10 @@
 
         <div class="alert alert-danger" ng-show="vm.errorEmailExists" data-translate="register.messages.error.emailexists">
             <strong>Email is already in use!</strong> Please choose another one.
+        </div>
+        
+        <div class="alert alert-danger" ng-show="vm.errorPhoneExists" data-translate="register.messages.error.phoneexists">
+            <strong>Phone is already in use!</strong> Please choose another one.
         </div>
 
         <div class="alert alert-danger" ng-show="vm.doNotMatch" data-translate="global.messages.error.dontmatch">

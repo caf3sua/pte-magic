@@ -1,12 +1,15 @@
 package com.vmcomms.ptemagic.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.google.cloud.storage.Storage;
 import com.vmcomms.ptemagic.service.AnswerService;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
 import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
 import com.vmcomms.ptemagic.web.rest.util.PaginationUtil;
 import com.vmcomms.ptemagic.service.dto.AnswerDTO;
+import com.vmcomms.ptemagic.service.util.DateUtil;
+
 import io.swagger.annotations.ApiParam;
 import liquibase.util.StringUtils;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -65,7 +68,9 @@ public class AnswerResource {
         }
         // Update audio link
         if (StringUtils.isNotEmpty(answerDTO.getAudioLink())) {
-        	String newAudioLink = "https://storage.googleapis.com/" + env.getProperty("google-cloud.storage.bucket-name-answer") + "/" + answerDTO.getAudioLink();
+			String prefixBucketName = env.getProperty("google-cloud.storage.bucket-name-answer-prefix"); 
+			String bucketName = prefixBucketName + "-" + DateUtil.currentMonth();
+        	String newAudioLink = "https://storage.googleapis.com/" + bucketName + "/" + answerDTO.getAudioLink();
             answerDTO.setAudioLink(newAudioLink);
         }
         

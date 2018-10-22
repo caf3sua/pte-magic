@@ -9,13 +9,13 @@
           </button>
       </div> -->
 	<!-- Search area -->
-	<div>
+	<!-- <div>
 		<form class="form-horizontal row" role="form" kendo-validator="vm.validatorSearch" k-options="vm.validatorOptions" >
 			<div class="form-body">
-				<!-- <div ng-show="vm.searchDetail">
+				<div ng-show="vm.searchDetail">
 					<div data-ng-include="'ims/purchaseInvestProposal/view/partial/search-detail.html'"></div>
-				</div> -->
-				<!-- <div ng-show="!vm.searchDetail"> -->
+				</div>
+				<div ng-show="!vm.searchDetail">
 					<div class="row">
 						<div class="form-group col-md-6" >
 							<label class="col-md-2 control-label" translate></label>
@@ -34,15 +34,15 @@
 								Advance search</a>
 						</div>
 					</div>
-				<!-- </div> -->
+				</div>
 			</div>
 		</form>
-	</div>
+	</div> -->
 
 	<!-- Table grid -->
-	<div class="row">
+	<!-- <div class="row">
 		<div id="userTableGrid" kendo-grid="vm.userTableGrid"  k-options="vm.userTableGridOption"></div>
-	</div>
+	</div> -->
       
     <div class="col-md-12 table-responsive ">
     	<table st-table="vm.usersInit" st-safe-src="vm.users" class="jh-table table">
@@ -113,58 +113,6 @@
 			        </tr>
 				</tfoot>
 	    </table>
-    
-        <!-- <table class="jh-table table table-striped  table-bordered table-hover">
-
-            <thead>
-            <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
-                <th jh-sort-by="id" class="text-center"><span data-translate="global.field.id">ID</span><span class="glyphicon glyphicon-sort"></span></th>
-                <th jh-sort-by="email"  class="text-center"><span data-translate="userManagement.email">Email</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th  class="text-center"><span data-translate="userManagement.profiles">Profiles</span></th>
-                <th  class="text-center" jh-sort-by="createdDate"><span data-translate="userManagement.createdDate">Created Date</span> <span class="glyphicon glyphicon-sort"></span></th>
-                <th  class="text-center" ><span  data-translate="userManagement.action">Action</span></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="user in vm.users track by user.id">
-                <td class="text-right"><a ui-sref="user-management-detail({login:user.login})">{{user.id}}</a></td>
-                <td class="text-center">{{user.email}}</td>
-                <td>
-                    <div ng-repeat="authority in user.authorities">
-                        <span class="label label-info">{{ authority }}</span>
-                    </div>
-                </td>
-                <td class="text-right">{{user.createdDate | date:'dd/MM/yy HH:mm'}}</td>
-                <td class="text-center">
-                    <div class="btn-group flex-btn-group-container">
-                    	<button type="button" ng-click="vm.resetLimitTest(user.id)"
-                                class="btn btn-success btn-sm" ng-disabled="vm.currentAccount.email === user.email">
-                            <span class="glyphicon glyphicon-refresh"></span>
-                            <span class="hidden-xs hidden-sm">Reset Test</span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="user-management-detail({login:user.id})"
-                                class="btn btn-info btn-sm">
-                            <span class="glyphicon glyphicon-eye-open"></span>
-                            <span class="hidden-xs hidden-sm" data-translate="entity.action.view"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="user-management.edit({login:user.id})"
-                                class="btn btn-primary btn-sm">
-                            <span class="glyphicon glyphicon-pencil"></span>
-                            <span class="hidden-xs hidden-sm" data-translate="entity.action.edit"></span>
-                        </button>
-                        <button type="submit"
-                                ui-sref="user-management.delete({login:user.id})"
-                                class="btn btn-danger btn-sm" ng-disabled="vm.currentAccount.email === user.email">
-                            <span class="glyphicon glyphicon-remove-circle"></span>
-                            <span class="hidden-xs hidden-sm" data-translate="entity.action.delete"></span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table> -->
     </div>
     <div class="text-center">
         ---

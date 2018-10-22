@@ -3,24 +3,31 @@
 
     angular
         .module('pteMagicApp')
-        .controller('FullTestController', FullTestController);
+        .controller('QuestionBankExamController', QuestionBankExamController);
 
-    FullTestController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
-        , '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', 'entity', '$interval', 'PTE_SETTINGS'];
+    QuestionBankExamController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
+        , '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', '$interval', 'PTE_SETTINGS', 'Question'
+        , 'pagingParams', 'ParseLinks', 'paginationConstants'];
 
-    function FullTestController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
-        , $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, entity, $interval, PTE_SETTINGS) {
+    function QuestionBankExamController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
+        , $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, $interval, PTE_SETTINGS, Question
+        , pagingParams, ParseLinks, paginationConstants) {
 
         var vm = this;
 
         // Function
+        vm.questionType = $stateParams.type;
         vm.answer = answer;
         vm.trustAsHtml = $sce.trustAsHtml;
+        vm.itemsPerPage = 1;
+        vm.predicate = pagingParams.predicate;
+        vm.reverse = pagingParams.ascending;
+        vm.transition = transition;
 
         // Variable, flag
         vm.examTypeId;
-        vm.exam = entity;
-        vm.questions = entity.questions;
+//        vm.exam = entity;
+//        vm.questions = entity.questions;
         vm.selectedQuestion;
         vm.answers = [];
         vm.isFinish = false;
@@ -80,19 +87,32 @@
             $timeout(function (){
                 angular.element(document.getElementById("content")).removeClass("background-color-222d32");
             });
-            // Load player
-//            initPlayer();
 
-            // Load record audio
-            initAudio();
+            Question.queryByType({
+                  page: pagingParams.page - 1,
+                  size: vm.itemsPerPage,
+                  sort: sort(),
+                  type: vm.questionType
+              }, onSuccess, onError);
+              function onSuccess(data, headers) {
+                  vm.links = ParseLinks.parse(headers('link'));
+                  vm.totalItems = headers('X-Total-Count');
+                  vm.queryCount = vm.totalItems;
+                  vm.questions = data;
+                  vm.selectedQuestion = data[0];
+                  vm.page = pagingParams.page;
+                  
+                  // Load record audio
+                  initAudio();
 
-            // Init mocktest
-            // initMockTest();
+//                  vm.initCountQuestion();
 
-            vm.initCountQuestion();
-
-            // Next question
-            nextQuestion();
+                  // Next question
+                  nextQuestion();
+              }
+              function onError(error) {
+                  console.log(error.data.message);
+              }
         })();
 
         function answer() {
@@ -103,24 +123,25 @@
             if (vm.selectedQuestion.type != 'TIME_BREAK') {
                 // Upload if questionGroup == SPEAKING
                 if (vm.questionGroup == 'SPEAKING') {
-                	var questionId = vm.selectedQuestion.id;
+//                	var questionId = vm.selectedQuestion.id;
                 	stopRecording();
-                	$timeout(function(){
-                		vm.uploadRecording(questionId);
-                	}, 2000 );
+//                	$timeout(function(){
+//                		vm.uploadRecording(questionId);
+//                	}, 2000 );
                 } else {
-                    console.log(vm.selectedQuestion);
-                    // Get answer
-                    vm.getUserAnswer();
-                    console.log(vm.answers);
-
-                    // Save answer
-                    vm.saveAnswer();
+//                    console.log(vm.selectedQuestion);
+//                    // Get answer
+//                    vm.getUserAnswer();
+//                    console.log(vm.answers);
+//
+//                    // Save answer
+//                    vm.saveAnswer();
                 }
             }
 
             // Next question
-            nextQuestion();
+//            nextQuestion();
+            vm.timeup();
         }
 
         function setCountdownTimer() {
@@ -130,38 +151,10 @@
                 $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                 return;
             }
-
-            if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A' || vm.exam.examTypeDTO.type == 'MOCK_TEST_B' || vm.exam.examTypeDTO.type == 'MOCK_TEST_FULL') {
-                if (vm.questionGroup == 'LISTENING') {
-                    if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT') {
-                        vm.countdown = 10 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                    } else {
-                        if (vm.listeningTimerRunningFlag == false) {
-                            vm.countdown = 16 * 2 * 60 + 2 * 60;
-                            $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
-                            vm.listeningTimerRunningFlag = true;
-                        }
-                    }
-                } else if (vm.questionGroup == 'WRITING') {
-                    if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT') {
-                        vm.countdown = 10 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                    } else if (vm.selectedQuestion.type == 'WRITING_ESSAY') {
-                        vm.countdown = 20 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
-                    }
-                } else if (vm.questionGroup == 'READING') {
-                    if (vm.readingTimerRunningFlag == false) {
-                        vm.countdown = 40 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                        vm.readingTimerRunningFlag = true;
-                    }
-                }
-            }
         }
 
         function nextQuestion() {
+        	vm.isShowAnswer = false;
             vm.Text = "";
             $('#areaTextWriting').val("");
             $('#areaTextWriting').html('');
@@ -255,5 +248,44 @@
                 }
         	});
         }
+        
+        function sort() {
+            var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+            if (vm.predicate !== 'id') {
+                result.push('id');
+            }
+            return result;
+        }
+        
+        function searchAllTransition () {
+              Question.queryByType({
+                  page: vm.page - 1,
+                  size: vm.itemsPerPage,
+                  sort: sort(),
+                  type: vm.questionType
+              }, onSuccess, onError);
+              function onSuccess(data, headers) {
+                  vm.links = ParseLinks.parse(headers('link'));
+                  vm.totalItems = headers('X-Total-Count');
+                  vm.queryCount = vm.totalItems;
+                  vm.questions = data;
+                  vm.selectedQuestion = data[0];
+                  
+                  // Load record audio
+                  initAudio();
+
+                  // Next question
+                  nextQuestion();
+              }
+              function onError(error) {
+                  console.log(error.data.message);
+              }
+        }
+        
+        function transition() {
+        	console.log('transition query, skill:' + vm.selectedSkill);
+        	searchAllTransition();
+        }
     }
 })();
+

@@ -2,10 +2,8 @@ package com.vmcomms.ptemagic.service.dto;
 
 
 import java.io.Serializable;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 
 /**
@@ -38,10 +36,60 @@ public class QuestionDTO implements Serializable {
     private String expectAnswer;
 
     private Boolean active;
+    
+    private String answerF;
+    
+    private String answerG;
+    
+    private String answerH;
+    
+    private String answerI;
+    
+    private String answerJ;
 
     private Long examId;
 
-    public Long getId() {
+    public String getAnswerF() {
+		return answerF;
+	}
+
+	public void setAnswerF(String answerF) {
+		this.answerF = answerF;
+	}
+
+	public String getAnswerG() {
+		return answerG;
+	}
+
+	public void setAnswerG(String answerG) {
+		this.answerG = answerG;
+	}
+
+	public String getAnswerH() {
+		return answerH;
+	}
+
+	public void setAnswerH(String answerH) {
+		this.answerH = answerH;
+	}
+
+	public String getAnswerI() {
+		return answerI;
+	}
+
+	public void setAnswerI(String answerI) {
+		this.answerI = answerI;
+	}
+
+	public String getAnswerJ() {
+		return answerJ;
+	}
+
+	public void setAnswerJ(String answerJ) {
+		this.answerJ = answerJ;
+	}
+
+	public Long getId() {
         return id;
     }
 

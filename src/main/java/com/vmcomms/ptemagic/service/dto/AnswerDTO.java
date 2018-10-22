@@ -8,11 +8,16 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.validation.constraints.NotNull;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.Objects;
 
 /**
  * A DTO for the Answer entity.
  */
+@Getter
+@Setter
 public class AnswerDTO implements Serializable {
 
     private Long id;

@@ -2,6 +2,7 @@
     "pteMagicApp": {
         "TestType" : {
         	"description" : {
+        		"QUESTION_BANK": "Question bank",
         		"MOCK_TEST_A": "Mock test - Part A",
 	            "MOCK_TEST_B": "Mock test - Part B",
 	            "MOCK_TEST_FULL": "Mock test - full",

@@ -1,0 +1,110 @@
+<div ng-cloak >
+    <div class="pte-body-content"></div>
+
+    <div class="container margin-bottom90">
+        <!-- LISTENING -->
+        <div class="col-md-12">
+            <div class="padding-top-bottom35">
+                <span class="pte-link-page"><i class="fas fa-circle"></i><span>Practice test</span></span>
+                <span  class="pte-link-page-stay"><i class="fas fa-circle"></i><span>Question bank</span></span>
+            </div>
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm">
+            <div class="pte-freeSample-block" id="listening" ng-click="vm.showExamList('LISTENING')">
+                <div>
+                    <div class="pte-freeSample-block-sum-questions-bank">
+                        <div class="">
+		                    <div class="icon-headset fs35 pull-left question-bank-icon"></div>
+		                    <div class="pte-freeSample-block-text pull-left">
+		                        <p class="pte-freeSample-block-text-header">PTE LISTENING</p>
+		                    </div>
+		                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- READING -->
+        <div class="col-sm-3 hidden-xs hidden-sm">
+            <div class="pte-freeSample-block" id="reading" ng-click="vm.showExamList('READING')">
+                <div>
+                    <div class="pte-freeSample-block-sum-questions-bank">
+                        <div class="">
+		                    <div class="icon-open-book fs35 pull-left question-bank-icon"></div>
+		                    <div class="pte-freeSample-block-text pull-left">
+		                        <p class="pte-freeSample-block-text-header">PTE READING</p>
+		                    </div>
+		                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm">
+            <div class="pte-freeSample-block " id="speaking" ng-click="vm.showExamList('SPEAKING')">
+                <div>
+                    <div class="pte-freeSample-block-sum-questions-bank">
+                        <div class="">
+		                    <div class="icon-icon fs35 pull-left question-bank-icon"></div>
+		                    <div class="pte-freeSample-block-text pull-left">
+		                        <p class="pte-freeSample-block-text-header">PTE SPEAKING</p>
+		                    </div>
+		                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 hidden-xs hidden-sm">
+            <div class="pte-freeSample-block " id="writing" ng-click="vm.showExamList('WRITING')">
+                <div>
+                    <div class="pte-freeSample-block-sum-questions-bank">
+                        <div class="">
+		                    <div class="icon-checkbox-pen-outline2 fs35 pull-left question-bank-icon"></div>
+		                    <div class="pte-freeSample-block-text pull-left">
+		                        <p class="pte-freeSample-block-text-header">PTE WRITING</p>
+		                    </div>
+		                </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg pte-free-sample-mobile-icon" id="listeningMobile" ng-click="vm.showExamList('LISTENING')">
+            <div class="pte-free-sample-mobile" >
+                <span class="icon-headset"></span>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg pte-free-sample-mobile-icon" id="readingMobile" ng-click="vm.showExamList('READING')">
+            <div class="pte-free-sample-mobile" >
+                <span class="icon-open-book"></span>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg pte-free-sample-mobile-icon" id="speakingMobile" ng-click="vm.showExamList('SPEAKING')">
+            <div class="pte-free-sample-mobile">
+                <span class="icon-icon"></span>
+            </div>
+        </div>
+        <div class="col-sm-3 col-xs-3 hidden-md hidden-lg pte-free-sample-mobile-icon" id="writingMobile" ng-click="vm.showExamList('WRITING')">
+            <div class="pte-free-sample-mobile">
+                <span class="icon-checkbox-pen-outline2"></span>
+            </div>
+        </div>
+
+        <!-- Show list exam -->
+        <div class="col-md-12 pte-free-listquestion-mobile" ng-show="vm.examShowFlag">
+            <div class="col-md-12 pte-pre-sample-listQuestion">
+                <div class="col-md-4 margin-top30" ng-repeat="exam in vm.selectedExams">
+                    <div class="pte-free-sample-item">
+                        <div >
+                            <ul class="pte-free-sample-item-text">
+                                <li title="{{exam.name}}">
+                                	<a ng-click="vm.startTest(exam)">
+                                    	{{exam.name | lmto : 25}}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

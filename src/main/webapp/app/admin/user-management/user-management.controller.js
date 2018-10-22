@@ -37,7 +37,7 @@
 
     	// Init controller
   		(function initController() {
-  			//          vm.loadAll();
+  			vm.loadAll();
   	        setupUserTableGrid([]);
   		})();
   		

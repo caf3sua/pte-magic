@@ -21,10 +21,10 @@
         }]);
 
     PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'
-    	, 'Answer', 'ngAudio', '$interval', 'Upload'];
+    	, 'Answer', 'ngAudio', '$interval', 'Upload', '$ngConfirm'];
 
     function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS
-    		, Answer, ngAudio, $interval, Upload){
+    		, Answer, ngAudio, $interval, Upload, $ngConfirm){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
 		var encoderWorker = new Worker('content/audio_recorder/mp3Worker.js');
@@ -71,7 +71,10 @@
         vm.WordsLength=0;
         vm.Text = "";
         vm.audio;
-
+        vm.isShowAnswer = false;
+        vm.timeup = timeup;
+        vm.formatExpectAnswer = formatExpectAnswer;
+        
         var extensionLists = {}; //Create an object for all extension lists
     	extensionLists.audio = ['mp3', 'mpeg','wav','mp4', 'webm'];  
     	extensionLists.image = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
@@ -105,7 +108,9 @@
         vm.UpdateLengths = UpdateLengths;
         vm.playAudio = playAudio;
         vm.enableNextButton = enableNextButton;
-
+        vm.showAnswer = showAnswer;
+        vm.nextPage = nextPage;
+        
         vm.audioProgressing = 0;
         $scope.$watch('vm.audioProgressing', function () {
         	if (vm.audioProgressing == 100) {
@@ -139,6 +144,60 @@
                 });
             }
         });
+        
+        function formatExpectAnswer(selQuestion) {
+        	let html = '';
+        	if (selQuestion == null || selQuestion == undefined) {
+        		return '';
+        	}
+        	
+        	// LISTENING_MCQ_L_SINGLE_ANSWER, LISTENING_MCQ_L_MULTIPLE_ANSWER
+        	if (selQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER' || selQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
+        		|| selQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY' || selQuestion.type == 'LISTENING_SELECT_MISSING_WORD'
+    			|| selQuestion.type == 'READING_FIB_R' || selQuestion.type == 'READING_RE_ORDER_PARAGRAPH'
+				|| selQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER' || selQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER'
+				) {
+        		let answers = selQuestion.expectAnswer.split(', ');
+        		angular.forEach(answers, function (item) {
+        			let tmp = selQuestion["answer" + item];
+        			html = html + '<div>' + item + ' - ' + tmp + '</div>';
+        		});
+        	} else {
+        		// LISTENING_SUMMARIZE_SPOKEN_TEXT, LISTENING_FIB_L, 
+        		html = selQuestion.expectAnswer;
+        	}
+        	
+        	return html;
+        }
+        
+        function timeup() {
+        	$ngConfirm({
+                title: 'Time\'s up',
+                icon: 'fas fa-exclamation-triangle',
+                theme: 'modern',
+                type: 'red',
+                content: '<div class="text-center">Time\'s up! Check answer or next question.</div>',
+                animation: 'scale',
+                closeAnimation: 'scale',
+                buttons: {
+                    ok: {
+                    	text: 'Đóng',
+                        btnClass: "btn-blue"
+//                        action: function(scope, button){
+//                        	$state.go('app.cart');
+//	                    }
+                    }
+                },
+            });
+        }
+        
+        function nextPage() {
+        	$('#next-page-answer').click();
+        }
+        
+        function showAnswer() {
+        	vm.isShowAnswer = !vm.isShowAnswer;
+        }
         
         // Disable button and anable
     	function enableNextButton() {
@@ -655,6 +714,22 @@
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerC, key: "C"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerD, key: "D"});
                 $scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerE, key: "E"});
+                // more answer
+                if (selQuestion.answerF != "" && selQuestion.answerF != null) {
+  					$scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerF, key: "F"});
+  				}
+                if (selQuestion.answerG != "" && selQuestion.answerG != null) {
+  					$scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerG, key: "G"});
+  				}
+                if (selQuestion.answerH != "" && selQuestion.answerH != null) {
+  					$scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerH, key: "H"});
+  				}
+                if (selQuestion.answerI != "" && selQuestion.answerI != null) {
+  					$scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerI, key: "I"});
+  				}
+                if (selQuestion.answerJ != "" && selQuestion.answerJ != null) {
+  					$scope.models.fillInTheBlanklLists.questionPanel.push({label: selQuestion.answerJ, key: "J"});
+  				}
 
                 vm.readingFIBRCount = 0;
                 var dragInput = $("#dragInput")[0];
@@ -687,6 +762,27 @@
   					var txt = buildSelectElement(selQuestion.answerE);
   					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
   				}
+  				// more answer
+  				if (selQuestion.answerF != "" && selQuestion.answerF != null) {
+  					var txt = buildSelectElement(selQuestion.answerF);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerG != "" && selQuestion.answerG != null) {
+  					var txt = buildSelectElement(selQuestion.answerG);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerH != "" && selQuestion.answerH != null) {
+  					var txt = buildSelectElement(selQuestion.answerH);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerI != "" && selQuestion.answerI != null) {
+  					var txt = buildSelectElement(selQuestion.answerI);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
+  				if (selQuestion.answerJ != "" && selQuestion.answerJ != null) {
+  					var txt = buildSelectElement(selQuestion.answerJ);
+  					selQuestion.text = selQuestion.text.replace(/@Blank@/, txt);
+  				}
   			}
 
   			// Update re-order
@@ -709,6 +805,22 @@
   				}
   				if (selQuestion.answerE != "" && selQuestion.answerE != null) {
   					$scope.models.lists.Source.push({label: selQuestion.answerE, key: "E"});
+  				}
+  				// more question
+  				if (selQuestion.answerF != "" && selQuestion.answerF != null) {
+  					$scope.models.lists.Source.push({label: selQuestion.answerF, key: "F"});
+  				}
+  				if (selQuestion.answerG != "" && selQuestion.answerG != null) {
+  					$scope.models.lists.Source.push({label: selQuestion.answerG, key: "G"});
+  				}
+  				if (selQuestion.answerH != "" && selQuestion.answerH != null) {
+  					$scope.models.lists.Source.push({label: selQuestion.answerH, key: "H"});
+  				}
+  				if (selQuestion.answerI != "" && selQuestion.answerI != null) {
+  					$scope.models.lists.Source.push({label: selQuestion.answerI, key: "I"});
+  				}
+  				if (selQuestion.answerJ != "" && selQuestion.answerJ != null) {
+  					$scope.models.lists.Source.push({label: selQuestion.answerJ, key: "J"});
   				}
   			}
   			if (selQuestion.type == 'SPEAKING_REPEAT_SENTENCE' || selQuestion.type == 'SPEAKING_RETELL_LECTURE' || selQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {

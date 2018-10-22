@@ -45,6 +45,8 @@
                         vm.errorUserExists = 'ERROR';
                     } else if (response.status === 400 && angular.fromJson(response.data).type === errorConstants.EMAIL_ALREADY_USED_TYPE) {
                         vm.errorEmailExists = 'ERROR';
+                    } else if (response.status === 400 && angular.fromJson(response.data).type === errorConstants.PHONE_ALREADY_USED_TYPE) {
+                        vm.errorPhoneExists = 'ERROR';
                     } else {
                         vm.error = 'ERROR';
                     }

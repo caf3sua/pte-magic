@@ -43,6 +43,7 @@ import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
 import com.vmcomms.ptemagic.service.dto.UserDTO;
+import com.vmcomms.ptemagic.service.util.DateUtil;
 import com.vmcomms.ptemagic.web.rest.errors.InternalServerErrorException;
 
 
@@ -357,7 +358,8 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 		// Create a bucket
 		String bucketName = env.getProperty("google-cloud.storage.bucket-name-question");
 		if (StringUtils.equals("answer", type)) {
-			bucketName = env.getProperty("google-cloud.storage.bucket-name-answer");
+			String prefixBucketName = env.getProperty("google-cloud.storage.bucket-name-answer-prefix"); 
+			bucketName = prefixBucketName + "-" + DateUtil.currentMonth();
 		}
 
 		String filename = "";

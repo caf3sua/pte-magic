@@ -109,7 +109,7 @@ div.k-window-content.fix-footer .modal-footer {
 }
 
 .k-icon {
-	margin-top: 0px;
+	margin-top: 0px !important;
 }
 
 span.k-widget.k-tooltip-validation {
@@ -544,3 +544,16 @@ span.k-widget.k-tooltip-validation {
     height: 300px;
     left: 0px;
 } */
+
+.k-i-seek-w {
+    background-position: 0 -112px;
+}
+.k-i-arrow-w {
+    background-position: 0 -48px;
+}
+.k-i-arrow-e {
+    background-position: 2px -16px !important;
+}
+.k-i-seek-e {
+    background-position: 2px -80px;
+}

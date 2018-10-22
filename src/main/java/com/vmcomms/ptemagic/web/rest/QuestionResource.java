@@ -1,6 +1,7 @@
 package com.vmcomms.ptemagic.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
@@ -107,7 +108,14 @@ public class QuestionResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     
-    
+    @GetMapping("/questions-by-type")
+    @Timed
+    public ResponseEntity<List<QuestionDTO>> findAllByTypePageable(@ApiParam Pageable pageable, @RequestParam(value = "type", required = false) String type) {
+        log.debug("REST request to get a page of Questions by type : {}", type);
+        Page<QuestionDTO> page = questionService.findAllByTypePageable(QuestionType.valueOf(type), pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/questions");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
     
     /**
      * GET  /questions/:id : get the "id" question.

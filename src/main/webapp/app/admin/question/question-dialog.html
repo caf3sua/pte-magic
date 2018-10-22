@@ -135,19 +135,48 @@
 	            <input type="text" class="form-control" name="answerE" id="field_answerE" ng-model="vm.question.answerE" />
 	        </div>
 
+			<!-- More answer -->
+			<div class="form-group" ng-init="vm.itemDeviceCategory = false" >
+	            <span class="control-label txt-blue" data-toggle="collapse" href="#moreAnswerId" ng-click="vm.itemDeviceCategory = !vm.itemDeviceCategory">More answer</span>
+	    	</div>
+	        
+	        <div id="moreAnswerId" class="collapse">
+				<div class="form-group">
+		            <label class="control-label" data-translate="pteMagicApp.question.answerF" for="field_answerF">Answer F</label>
+		            <input type="text" class="form-control" name="answerF" id="field_answerF" ng-model="vm.question.answerF" />
+		        </div>
+		        <div class="form-group">
+		            <label class="control-label" data-translate="pteMagicApp.question.answerG" for="field_answerG">Answer G</label>
+		            <input type="text" class="form-control" name="answerG" id="field_answerG" ng-model="vm.question.answerG" />
+		        </div>
+		        <div class="form-group">
+		            <label class="control-label" data-translate="pteMagicApp.question.answerH" for="field_answerH">Answer H</label>
+		            <input type="text" class="form-control" name="answerH" id="field_answerH" ng-model="vm.question.answerH" />
+		        </div>
+		        <div class="form-group">
+		            <label class="control-label" data-translate="pteMagicApp.question.answerI" for="field_answerE">Answer I</label>
+		            <input type="text" class="form-control" name="answerI" id="field_answerI" ng-model="vm.question.answerI" />
+		        </div>
+		        <div class="form-group">
+		            <label class="control-label" data-translate="pteMagicApp.question.answerJ" for="field_answerE">Answer J</label>
+		            <input type="text" class="form-control" name="answerJ" id="field_answerJ" ng-model="vm.question.answerJ" />
+		        </div>
+	        </div>
         </div>
         <div class="form-group"
              ng-show="
-              vm.question.type != 'SPEAKING_REPEAT_SENTENCE' &&
               vm.question.type != 'SPEAKING_DESCRIBE_IMAGE' &&
-              vm.question.type != 'SPEAKING_RETELL_LECTURE'&&
               vm.question.type != 'SPEAKING_ANSWER_SHORT_QUESTION' &&
               vm.question.type != 'SPEAKING_READ_ALOUD' &&
               vm.question.type != 'WRITING_SUMMARIZE_WRITTEN_TEXT' &&
-              vm.question.type != 'WRITING_ESSAY'&&
-               vm.question.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT' &&
-              vm.question.type != 'LISTENING_DICTATION'"
+              vm.question.type != 'WRITING_ESSAY'"
         >
+        <!-- 11/10/2018 open answer for 
+        	vm.question.type != 'SPEAKING_REPEAT_SENTENCE' &&
+        	vm.question.type != 'SPEAKING_RETELL_LECTURE'&&
+        	vm.question.type != 'LISTENING_SUMMARIZE_SPOKEN_TEXT' &&
+        	vm.question.type != 'LISTENING_DICTATION'
+         -->
             <label class="control-label" data-translate="pteMagicApp.question.expectAnswer" for="field_expectAnswer">Expect answer</label>
             <input type="text" class="form-control" name="expectAnswer" id="field_expectAnswer" ng-model="vm.question.expectAnswer" />
         </div>

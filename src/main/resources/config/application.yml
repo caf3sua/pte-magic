@@ -24,6 +24,18 @@ management:
 spring:
     application:
         name: PteMagic
+    datasource:
+        type: com.zaxxer.hikari.HikariDataSource
+        url: jdbc:postgresql://35.192.132.22:5432/pte_magic
+        username: ptemagic
+        password: 12345678
+        hikari:
+              idleTimeout: 60000
+              minimumIdle: 2
+              maximumPoolSize: 20
+              connectionTimeout: 30000
+              poolName: MyPoolName
+              connectionTestQuery: SELECT 1
     profiles:
         # The commented value for `active` can be replaced with valid Spring profiles to load.
         # Otherwise, it will be filled in by maven when building the WAR file
@@ -53,10 +65,10 @@ spring:
 google-cloud:
     storage:
         credential-file: pte-magic-api.json
-        project-id: namnh-200002
-        bucket-name-question: pte-magic-2018
-        bucket-name-answer: pte-magic-2018-answer                       
-        bucket-name-answer-prefix: pte-magic-answer
+        project-id: pte-magic
+        bucket-name-question: pte-magic-question-2018
+        #bucket-name-answer: pte-magic-2018-answer                       
+        bucket-name-answer-prefix: pte-answer
 security:
     basic:
         enabled: false

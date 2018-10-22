@@ -66,37 +66,77 @@
         <div class="pte-test-content-question" ng-bind-html="vm.trustAsHtml(vm.selectedQuestion.description)"></div>
 
         <div class="padding-left30">
-
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">
+                <pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="A" />
                 <input type="checkbox" name="answerA" id="answerA" value="true" >
                 <label for="answerA" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerA}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerB">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="B" />
                 <input type="checkbox" name="answerB" id="answerB" value="true">
                 <label for="answerB" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerB}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerC">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="C" />
                 <input type="checkbox" name="answerC" id="answerC" value="true">
                 <label for="answerC" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerC}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerD">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="D" />
                 <input type="checkbox" name="answerD" id="answerD" value="true">
                 <label for="answerD" class="line-height-30 pte-checkBox-multiple">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerD}}</p>
                 </label>
             </div>
 			<div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerE">
+					<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="E" />
                    <input type="checkbox" name="answerE" id="answerE" value="true">
                    <label for="answerE" class="line-height-30 pte-checkBox-multiple">
                        <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerE}}</p>
                    </label>
-           </div>
+            </div>
+            <!-- more answer -->
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerF">
+            		<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="F" />
+                   <input type="checkbox" name="answerF" id="answerF" value="true">
+                   <label for="answerF" class="line-height-30 pte-checkBox-multiple">
+                       <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerF}}</p>
+                   </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerG">
+            		<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="G" />
+                   <input type="checkbox" name="answerG" id="answerG" value="true">
+                   <label for="answerG" class="line-height-30 pte-checkBox-multiple">
+                       <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerG}}</p>
+                   </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerH">
+            		<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="H" />
+                   <input type="checkbox" name="answerH" id="answerH" value="true">
+                   <label for="answerH" class="line-height-30 pte-checkBox-multiple">
+                       <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerH}}</p>
+                   </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerI">
+            		<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="I" />
+                   <input type="checkbox" name="answerI" id="answerI" value="true">
+                   <label for="answerI" class="line-height-30 pte-checkBox-multiple">
+                       <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerI}}</p>
+                   </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerJ">
+            		<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="J" />
+                   <input type="checkbox" name="answerJ" id="answerJ" value="true">
+                   <label for="answerJ" class="line-height-30 pte-checkBox-multiple">
+                       <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerJ}}</p>
+                   </label>
+            </div>
        </div>
 
 
@@ -125,33 +165,74 @@
         <div class="padding-left30">
 
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerA">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="A" />
                 <input type="radio" name="answer" id="answerA1" value="true" >
                 <label for="answerA1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerA}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerB">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="B" />
                 <input type="radio" name="answer" id="answerB1" value="true">
                 <label for="answerB1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerB}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerC">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="C" />
                 <input type="radio" name="answer" id="answerC1" value="true">
                 <label for="answerC1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer">{{vm.selectedQuestion.answerC}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerD">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="D" />
                 <input type="radio" name="answer" id="answerD1" value="true">
                 <label for="answerD1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerD}}</p>
                 </label>
             </div>
             <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerE">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="E" />
                 <input type="radio" name="answer" id="answerE1" value="true">
                 <label for="answerE1" class="line-height-30">
                     <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerE}}</p>
+                </label>
+            </div>
+            <!-- more answer -->
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerF">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="F" />
+                <input type="radio" name="answer" id="answerF1" value="true">
+                <label for="answerF1" class="line-height-30">
+                    <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerF}}</p>
+                </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerG">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="G" />
+                <input type="radio" name="answer" id="answerG1" value="true">
+                <label for="answerG1" class="line-height-30">
+                    <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerG}}</p>
+                </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerH">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="H" />
+                <input type="radio" name="answer" id="answerH1" value="true">
+                <label for="answerH1" class="line-height-30">
+                    <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerH}}</p>
+                </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerI">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="I" />
+                <input type="radio" name="answer" id="answerI1" value="true">
+                <label for="answerI1" class="line-height-30">
+                    <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerI}}</p>
+                </label>
+            </div>
+            <div class="checkbox checkbox-success" ng-show="vm.selectedQuestion.answerJ">
+            	<pte-answer-checkbox is-show-answer="vm.isShowAnswer" expect-answer="vm.selectedQuestion.expectAnswer" id-answer="J" />
+                <input type="radio" name="answer" id="answerJ1" value="true">
+                <label for="answerJ1" class="line-height-30">
+                    <p class="margin-left30 pte-text-answer ">{{vm.selectedQuestion.answerJ}}</p>
                 </label>
             </div>
         </div>

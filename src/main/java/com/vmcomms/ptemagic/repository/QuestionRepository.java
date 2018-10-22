@@ -23,5 +23,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 	
 	Page<Question> findByTypeIn(List<QuestionType> types, Pageable pageable);
 	
+	Page<Question> findByType(QuestionType type, Pageable pageable);
+	
 	List<Question> findByIdIn(List<Long> ids);
 }

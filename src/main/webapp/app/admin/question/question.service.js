@@ -12,6 +12,7 @@
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true},
             'queryBySkill': { url: 'api/questions-by-skill', method: 'GET', isArray: true},
+            'queryByType': { url: 'api/questions-by-type', method: 'GET', isArray: true},
             'get': {
                 method: 'GET',
                 transformResponse: function (data) {

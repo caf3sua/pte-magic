@@ -1,0 +1,115 @@
+<!--[if lt IE 9]>
+<![endif]-->
+<div class="pte-scroll-popup" >
+    <!-- Angular views -->
+    <div class="pte-test-type-question" ng-show="!vm.isFinish">
+        <div class="container">
+            <ul class="margin-0 pte-display-inline-block">
+                <li>
+                    <span data-translate="pteMagicApp.TestType.description.QUESTION_BANK" ng-cloak>Sample question - reading</span>
+                </li>
+            </ul>
+            <div class="pull-right">
+                <div class="pte-test-type-question-three-background ">
+	            <span>
+	                 <i class="far fa-clock pte-test-type-question-three-icon"></i>
+	                <span class="pte-test-type-question-three-timeName">TIME REMANING</span>
+	                <span class="pte-test-type-question-three-time"><!-- autostart="false" --><timer countdown="vm.countdown" interval="1000" finish-callback="vm.answer()">00:{{mminutes}}:{{sseconds}}</timer></span>
+	            </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="pte-test-type-question-two" ng-show="!vm.isFinish">
+        <div class="container">
+            <div class="col-md-12">
+                <p class="pte-test-type-question-two-title" data-translate="pteMagicApp.QuestionType.title.{{vm.selectedQuestion.type}}">MULTIPLE CHOICE, CHOOSE SINGLE ANSWER</p>
+            </div>
+        </div>
+    </div>
+    <div ng-show="!vm.isFinish" class="">
+
+	    <div class="container margin-top30 position-relative">
+	        <div class="col-md-12 padding0">
+
+	        	<!-- WRITING -->
+	        	<div ng-if="vm.questionGroup == 'WRITING'" ng-include="'app/partial/partial.question-writing.html'"></div>
+
+   		        <!-- READING -->
+	        	<div ng-if="vm.questionGroup == 'READING'" ng-include="'app/partial/partial.question-reading.html'"></div>
+
+	        	<!-- SPEAKING -->
+	        	<div ng-if="vm.questionGroup == 'SPEAKING'" ng-include="'app/partial/partial.question-speaking.html'"></div>
+
+	        	<!-- LISTENING -->
+	        	<div ng-if="vm.questionGroup == 'LISTENING'" ng-include="'app/partial/partial.question-listening.html'"></div>
+	        </div>
+
+	    </div>
+    </div>
+    
+    <!-- Answer -->
+    <div class="container margin-top30 position-relative" ng-show="vm.isShowAnswer">
+    	<div class="col-md-12 padding0 bg-answer">
+    		<div class="pte-test-type-question-two bg-answer" aria-hidden="false">
+		        <div class="container">
+		            <div class="col-md-12">
+		                <p class="pte-test-type-question-two-title ng-scope">Answer</p>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="container">
+	            <div class="col-md-12">
+	            	<p ng-bind-html="vm.formatExpectAnswer(vm.selectedQuestion)"></p>
+	            </div>
+	        </div>
+    	</div>
+    </div>
+    
+    <div class="container margin-top30 position-relative">
+    	<div class="col-md-6 padding0">
+	    	<div class="text-left">
+		        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+		        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+		    </div>
+    	</div>
+    	<div class="col-md-6 padding0">
+    		<div class="text-left">
+    			<button class="pte-test-answer m-t-30" ng-class="{'btn-disabled': vm.btnDisabled}"
+    				data-toggle="collapse" ng-click="vm.showAnswer()" 
+    				ng-show="vm.btnEnable" ng-disabled="vm.btnDisabled">Answer</button>
+    		</div>
+    	</div>
+    </div>
+    
+    <!-- Common hidden field -->
+    <div ng-show="false">
+    	<div class="col-md-4">
+			<canvas id="wavedisplay"></canvas>
+		</div>
+		<div class="col-md-2">
+			<div id="controls">
+				<a id="save" href="blob:http://localhost:8080/4c60ff1d-2bbf-421a-964b-d88cdd0a153a" download="myRecording00.wav" ng-show="false">
+				<img src="content/audio_recorder/save.svg"></a>
+			</div>
+		</div>
+    </div>
+    <audio id="player1" preload >
+        <source id="mp3_src1" src="../content/audio/beep-01a.mp3" type="audio/mp3"  />
+        Your browser dose not Support the audio Tag
+   	</audio>
+    <div ng-show="vm.isFinish" style="margin-top: 100px;">
+        <p class="pte-text-finish">Completed ! Check mail to see the result!</p>
+    	<div class="text-center">
+           <button class="pte-test-answer" ng-click="vm.closeExam()">Finish</button>
+       </div>
+    </div>
+
+</div>
+
+<noscript>
+    <h1>You must enable javascript to view this page.</h1>
+</noscript>
+<div ng-show="!vm.isFinish && vm.selectedQuestion.type != 'TIME_BREAK'" class="container text-right pte-button-next-postion">
+    <button class="pte-test-answer" ng-class="{'btn-disabled': vm.btnDisabled}" onclick="$('#next-page-answer').click();" ng-show="vm.btnEnable" ng-disabled="vm.btnDisabled">{{vm.btnTxt}}</button>
+</div>

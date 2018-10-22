@@ -58,10 +58,65 @@ public class Question implements Serializable {
     @Column(name = "active")
     private Boolean active;
 
+    @Column(name = "answer_f")
+    private String answerF;
+    
+    @Column(name = "answer_g")
+    private String answerG;
+    
+    @Column(name = "answer_h")
+    private String answerH;
+    
+    @Column(name = "answer_i")
+    private String answerI;
+    
+    @Column(name = "answer_j")
+    private String answerJ;
+    
     @ManyToOne
     private Exam exam;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    public String getAnswerF() {
+		return answerF;
+	}
+
+	public void setAnswerF(String answerF) {
+		this.answerF = answerF;
+	}
+
+	public String getAnswerG() {
+		return answerG;
+	}
+
+	public void setAnswerG(String answerG) {
+		this.answerG = answerG;
+	}
+
+	public String getAnswerH() {
+		return answerH;
+	}
+
+	public void setAnswerH(String answerH) {
+		this.answerH = answerH;
+	}
+
+	public String getAnswerI() {
+		return answerI;
+	}
+
+	public void setAnswerI(String answerI) {
+		this.answerI = answerI;
+	}
+
+	public String getAnswerJ() {
+		return answerJ;
+	}
+
+	public void setAnswerJ(String answerJ) {
+		this.answerJ = answerJ;
+	}
+
+	// jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
     }

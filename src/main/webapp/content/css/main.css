@@ -2579,3 +2579,54 @@ canvas {
     color: red;
     font-weight: bold;
 }
+
+.fs35 {
+	font-size: 35px;
+}
+
+.pte-freeSample-block-sum-questions-bank{
+    color: #f9db01;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    font-weight: bold;
+    font-style: normal;
+    font-size: 15px;
+    /* margin: 0 auto; */
+    padding: 10px 0;
+}
+.active>div>.pte-freeSample-block-sum-questions-bank{
+    padding: 20px 0;
+    animation: zoomin 10s ease-in infinite;
+    transition: all .5s ease-in-out;
+}
+
+.question-bank-icon {
+    width: 70px;
+    text-align: center;
+}
+
+.txt-blue {
+	color: blue;
+}
+
+.bg-answer {
+	background: #6affbb !important;
+}
+
+.show-answer {
+    position: absolute;
+    font-weight: 400;
+    left: -25px;
+}
+
+.color-answer-correct {
+	color: #00a65a;
+}
+
+.color-answer-wrong {
+	color: red;
+}
+
+.m-t-30 {
+	margin-top: 30px !important;
+}

@@ -19,18 +19,18 @@ spring:
             enabled: false
         livereload:
             enabled: false
-    datasource:
-        type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://35.184.54.244:5432/pte_magic
-        username: ptemagic
-        password: 12345678
-        hikari:
-              idleTimeout: 60000
-              minimumIdle: 2
-              maximumPoolSize: 20
-              connectionTimeout: 30000
-              poolName: MyPoolName
-              connectionTestQuery: SELECT 1
+#    datasource:
+#        type: com.zaxxer.hikari.HikariDataSource
+#        url: jdbc:postgresql://35.184.54.244:5432/pte_magic
+#        username: ptemagic
+#        password: 12345678
+#        hikari:
+#              idleTimeout: 60000
+#              minimumIdle: 2
+#              maximumPoolSize: 20
+#              connectionTimeout: 30000
+#              poolName: MyPoolName
+#              connectionTestQuery: SELECT 1
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL

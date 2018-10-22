@@ -35,10 +35,13 @@
                     vm.success = 'OK';
                 }).catch(function (response) {
                     vm.success = null;
+                    debugger
                     if (response.status === 400 && angular.fromJson(response.data).type === errorConstants.LOGIN_ALREADY_USED_TYPE) {
                         vm.errorUserExists = 'ERROR';
                     } else if (response.status === 400 && angular.fromJson(response.data).type === errorConstants.EMAIL_ALREADY_USED_TYPE) {
                         vm.errorEmailExists = 'ERROR';
+                    } else if (response.status === 400 && angular.fromJson(response.data).type === errorConstants.PHONE_ALREADY_USED_TYPE) {
+                        vm.errorPhoneExists = 'ERROR';
                     } else {
                         vm.error = 'ERROR';
                     }

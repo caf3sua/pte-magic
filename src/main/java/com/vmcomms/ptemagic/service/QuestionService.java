@@ -40,6 +40,8 @@ public interface QuestionService {
     
     Page<QuestionDTO> findAllBySkillPageable(SkillType skill, Pageable pageable);
     
+    Page<QuestionDTO> findAllByTypePageable(QuestionType type, Pageable pageable);
+    
     List<QuestionDTO> findAllByType(QuestionType type);
     
     /**
