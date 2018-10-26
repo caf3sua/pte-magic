@@ -123,44 +123,6 @@
             nextQuestion();
         }
 
-        function setCountdownTimer() {
-        	console.log('setCountdownTimer');
-            if (vm.selectedQuestion.type == 'TIME_BREAK') {
-                vm.countdown = PTE_SETTINGS.COUNT_DOWN_TIME_BREAK;
-                $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                return;
-            }
-
-            if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A' || vm.exam.examTypeDTO.type == 'MOCK_TEST_B' || vm.exam.examTypeDTO.type == 'MOCK_TEST_FULL') {
-                if (vm.questionGroup == 'LISTENING') {
-                    if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT') {
-                        vm.countdown = 10 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                    } else {
-                        if (vm.listeningTimerRunningFlag == false) {
-                            vm.countdown = 16 * 2 * 60 + 2 * 60;
-                            $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
-                            vm.listeningTimerRunningFlag = true;
-                        }
-                    }
-                } else if (vm.questionGroup == 'WRITING') {
-                    if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT') {
-                        vm.countdown = 10 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                    } else if (vm.selectedQuestion.type == 'WRITING_ESSAY') {
-                        vm.countdown = 20 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
-                    }
-                } else if (vm.questionGroup == 'READING') {
-                    if (vm.readingTimerRunningFlag == false) {
-                        vm.countdown = 40 * 60;
-                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                        vm.readingTimerRunningFlag = true;
-                    }
-                }
-            }
-        }
-
         function nextQuestion() {
             vm.Text = "";
             $('#areaTextWriting').val("");
@@ -225,7 +187,7 @@
                     vm.updateQuestionInfo(vm.selectedQuestion);
                     vm.questionGroup = getQuestionGroup(vm.selectedQuestion.type);
 
-                    setCountdownTimer();
+                    vm.setCountdownTimer();
 
                     // Load record audio
                     initAudio();
@@ -239,7 +201,8 @@
                     	if(vm.intervalAudio) {
                     		$interval.cancel(vm.intervalAudio);
                         }
-                        vm.countAudio = 3;
+                        //vm.countAudio = 3;
+                    	vm.calCountdownAudio();
                         vm.intervalAudio = $interval(function() {
                         	console.log("vm.countAudio: " + vm.countAudio);
                         	if (vm.countAudio > 0) {

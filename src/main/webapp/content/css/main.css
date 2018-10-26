@@ -568,8 +568,8 @@ ui bootstrap tweaks
     font-style: normal;
     text-transform: uppercase;
     position: relative;
-    top: 45px;
-    right: 30px;
+    top: 35px;
+    right: 15px;
 }
 .pte-block-content{
     position: absolute;
@@ -2610,7 +2610,7 @@ canvas {
 }
 
 .bg-answer {
-	background: #6affbb !important;
+	background: #f9db01 !important;
 }
 
 .show-answer {
@@ -2630,3 +2630,52 @@ canvas {
 .m-t-30 {
 	margin-top: 30px !important;
 }
+
+.m-t-35 {
+	margin-top: 35px !important;
+}
+
+.m-t-15 {
+	margin-top: 15px !important;
+}
+/* button.btn-blue {
+    background-color: #3498db;
+    color: #FFF;
+    text-shadow: none;
+    -webkit-transition: background .2s;
+    transition: background .2s;
+}
+
+button.btn-green {
+    background-color: #00a65a;
+    color: #FFF;
+    text-shadow: none;
+    -webkit-transition: background .2s;
+    transition: background .2s;
+} */
+
+button.btn-go-page {
+    font-size: 13px !important;
+    line-height: 1.0 !important;
+}
+
+button.btn-pte-question-bank {
+    font-size: 13px !important;
+    padding: 8px 15px !important;
+}
+
+button.btn-pte-question-bank-goto {
+	font-size: 13px !important;
+    padding: 5px 15px !important;
+    line-height: 1.0 !important;
+    margin-top: 0px !important;
+}
+
+.w-50 {
+	width: 50px;
+}
+
+.m-t-20-p {
+	margin-top: -20px;
+}
+

@@ -7,15 +7,16 @@
 
     QuestionBankExamController.$inject = ['$controller', '$scope', '$window', '$stateParams', 'Principal', 'LoginService', '$state'
         , '$rootScope', '$timeout', 'ExamType', 'Exam', 'Answer', 'Upload', '$sce', '$interval', 'PTE_SETTINGS', 'Question'
-        , 'pagingParams', 'ParseLinks', 'paginationConstants'];
+        , 'pagingParams', 'ParseLinks', 'paginationConstants', '$ngConfirm'];
 
     function QuestionBankExamController ($controller, $scope, $window, $stateParams, Principal, LoginService, $state
         , $rootScope, $timeout, ExamType, Exam, Answer, Upload, $sce, $interval, PTE_SETTINGS, Question
-        , pagingParams, ParseLinks, paginationConstants) {
+        , pagingParams, ParseLinks, paginationConstants, $ngConfirm) {
 
         var vm = this;
 
         // Function
+        vm.page = pagingParams.page - 1;
         vm.questionType = $stateParams.type;
         vm.answer = answer;
         vm.trustAsHtml = $sce.trustAsHtml;
@@ -23,7 +24,9 @@
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
         vm.transition = transition;
-
+        vm.goPage = goPage;
+        vm.tryAgain = tryAgain;
+        
         // Variable, flag
         vm.examTypeId;
 //        vm.exam = entity;
@@ -46,6 +49,12 @@
         vm.callBackAnswer = callBackAnswer;
         
         vm.btnTxt = 'Next';
+        vm.showAnswer = showAnswer;
+        
+        function showAnswer() {
+        	vm.isShowAnswer = !vm.isShowAnswer;
+        	vm.answer();
+        }
         
         function callBackAnswer() {
         	console.log('WARNING: call back finish');
@@ -87,9 +96,12 @@
             $timeout(function (){
                 angular.element(document.getElementById("content")).removeClass("background-color-222d32");
             });
+            
+            // Question bank
+            vm.examType = 'QUESTION_BANK';
 
             Question.queryByType({
-                  page: pagingParams.page - 1,
+                  page: vm.page,
                   size: vm.itemsPerPage,
                   sort: sort(),
                   type: vm.questionType
@@ -100,7 +112,7 @@
                   vm.queryCount = vm.totalItems;
                   vm.questions = data;
                   vm.selectedQuestion = data[0];
-                  vm.page = pagingParams.page;
+                  vm.page = vm.page + 1;
                   
                   // Load record audio
                   initAudio();
@@ -118,21 +130,38 @@
         function answer() {
         	console.log('Answer: ' + vm.selectedQuestion.id);
 
+//        	debugger
             initAnswer();
-
+            if (vm.audio) {
+            	vm.audio.pause();
+    			vm.audio.progress = 0;
+            }
+//            vm.resetProgressStatus();
+            if(vm.intervalAudio) {
+        		$interval.cancel(vm.intervalAudio);
+            }
+        	if (vm.intervalProgress) {
+        		$interval.cancel(vm.intervalProgress);
+        	}
+        	if (vm.intervalCounter) {
+        		$interval.cancel(vm.intervalCounter);
+        	}
+        	if (vm.intervalToRecording) {
+        		$interval.cancel(vm.intervalToRecording);
+        	}
+            
             if (vm.selectedQuestion.type != 'TIME_BREAK') {
                 // Upload if questionGroup == SPEAKING
                 if (vm.questionGroup == 'SPEAKING') {
-//                	var questionId = vm.selectedQuestion.id;
+                	var questionId = vm.selectedQuestion.id;
                 	stopRecording();
-//                	$timeout(function(){
-//                		vm.uploadRecording(questionId);
-//                	}, 2000 );
+                	$timeout(function(){
+                		vm.uploadRecording(questionId);
+                	}, 2000 );
                 } else {
-//                    console.log(vm.selectedQuestion);
-//                    // Get answer
-//                    vm.getUserAnswer();
-//                    console.log(vm.answers);
+                    // Get answer
+//                	vm.resetUserAnswer();
+                    console.log(vm.answers);
 //
 //                    // Save answer
 //                    vm.saveAnswer();
@@ -144,20 +173,10 @@
             vm.timeup();
         }
 
-        function setCountdownTimer() {
-        	console.log('setCountdownTimer');
-            if (vm.selectedQuestion.type == 'TIME_BREAK') {
-                vm.countdown = PTE_SETTINGS.COUNT_DOWN_TIME_BREAK;
-                $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                return;
-            }
-        }
-
         function nextQuestion() {
+        	vm.uploadRecordingLink = null;
         	vm.isShowAnswer = false;
             vm.Text = "";
-            $('#areaTextWriting').val("");
-            $('#areaTextWriting').html('');
             vm.WordsLength = 0;
             vm.selectedQuestion = vm.questions.shift();
             vm.audioProgressing = 0;
@@ -201,6 +220,7 @@
                         return;
                     }
                 } else {
+                	$scope.$broadcast('timer-start');
                     // update button lable
                     if (vm.selectedQuestion.type == 'TIME_BREAK') {
                         vm.btnTxt = 'Skip Timebreak';
@@ -218,7 +238,7 @@
                     vm.updateQuestionInfo(vm.selectedQuestion);
                     vm.questionGroup = getQuestionGroup(vm.selectedQuestion.type);
 
-                    setCountdownTimer();
+                    vm.setCountdownTimer();
 
                     // Load record audio
                     initAudio();
@@ -232,7 +252,9 @@
                     	if(vm.intervalAudio) {
                     		$interval.cancel(vm.intervalAudio);
                         }
-                        vm.countAudio = 3;
+                        //vm.countAudio = 3;
+                    	vm.calCountdownAudio();
+                    	
                         vm.intervalAudio = $interval(function() {
                         	console.log("vm.countAudio: " + vm.countAudio);
                         	if (vm.countAudio > 0) {
@@ -255,6 +277,31 @@
                 result.push('id');
             }
             return result;
+        }
+        
+        function tryAgain() {
+        	searchAllTransition();
+        }
+        
+        function goPage() {
+        	let page = $('#number').val();
+        	
+        	// Check
+        	if (page < 0 || page > vm.totalItems) {
+        		$ngConfirm({
+            	    title: 'Number invalid!',
+            	    content: 'Number item went wrong, this may be serious',
+            	    type: 'red',
+            	    typeAnimated: true,
+            	    buttons: {
+            	        close: function () {
+            	        }
+            	    }
+            	});
+        	} else {
+        		vm.page = page;
+            	searchAllTransition();
+        	}
         }
         
         function searchAllTransition () {
@@ -284,8 +331,14 @@
         
         function transition() {
         	console.log('transition query, skill:' + vm.selectedSkill);
+        	vm.answer();
         	searchAllTransition();
         }
+        
+        $rootScope.$on('$stateChangeStart',function() {
+        	vm.resetProgressStatus();
+        	console.log('state change');
+        });
     }
 })();
 

@@ -19,7 +19,7 @@
     <div class="position-relative ">
         <textarea  ng-model="vm.Text" spellcheck="false" ng-change="vm.UpdateLengths()" id="areaTextWriting" class="pte-input-writing" rows="10" placeholder="Writing at here"></textarea>
         <span class="pte-word-count" ng-model="vm.WordsLength">
-           Word count ({{vm.WordsLength}})
+           Word count {{vm.WordsLength}}/{{vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' ? '75' : '300'}}
         </span>
     </div>
 </div>

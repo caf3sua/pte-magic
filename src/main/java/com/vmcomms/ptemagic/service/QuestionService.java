@@ -2,6 +2,7 @@ package com.vmcomms.ptemagic.service;
 
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
+import com.vmcomms.ptemagic.dto.QuestionBankInfoDTO;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamTypeDTO;
 import com.vmcomms.ptemagic.service.dto.QuestionDTO;
@@ -62,4 +63,6 @@ public interface QuestionService {
     void delete(Long id);
     
     List<QuestionDTO> buildMockTestQuestionExam(ExamTypeDTO examTypeDTO, ExamDTO examDTO);
+    
+    QuestionBankInfoDTO getQuestionCountInfo();
 }

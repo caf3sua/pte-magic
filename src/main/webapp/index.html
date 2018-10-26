@@ -37,7 +37,7 @@
 </head>
 <!--oncontextmenu="return false" onselectstart='return false;'-->
 <body class="hold-transition skin-blue sidebar-mini"  id="body" ng-app="pteMagicApp" ng-strict-di >
-    <div>
+    <div ng-cut="$event.preventDefault()" ng-copy="$event.preventDefault()" ng-paste="$event.preventDefault()" disable-right-click>
         <!--[if lt IE 9]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -51,7 +51,7 @@
 
         <div class="footer" ng-cloak >
             <div class="container">
-            <span class="pte-footer-com">© 2017 Trung tâm luyện thi PTE MAGIC |  All rights reserved.</span>
+            <span class="pte-footer-com">© 2017 Training center PTE MAGIC |  All rights reserved.</span>
                 <div class="pte-connect">
                     <span class="pte-footer-com">Connect with Us:</span>
                     <i class="pte-icon-footer pte-color-fff fab fa-facebook-f"></i>
@@ -233,8 +233,8 @@
 	<script src="app/base.controller.js"></script>
 	<script src="app/freeSample/freeSample.controller.js"></script>
     <script src="app/freeSample/freeSample.state.js"></script>
-    <script src="app/memberQuestion/memberQuestion.controller.js"></script>
-    <script src="app/memberQuestion/memberQuestion.state.js"></script>
+    <script src="app/skillTest/skillTest.controller.js"></script>
+    <script src="app/skillTest/skillTest.state.js"></script>
     <script src="app/questionBank/question-bank-main.controller.js"></script>
     <script src="app/questionBank/question-bank.state.js"></script>
     <script src="app/mockTest/mockTest.controller.js"></script>

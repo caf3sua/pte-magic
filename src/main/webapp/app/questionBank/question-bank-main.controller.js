@@ -5,9 +5,11 @@
         .module('pteMagicApp')
         .controller('QuestionBankMainController', QuestionBankMainController);
 
-    QuestionBankMainController.$inject = ['$scope', '$window', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType'];
+    QuestionBankMainController.$inject = ['$scope', '$window', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout'
+                                          , 'ExamType', 'Question'];
 
-    function QuestionBankMainController ($scope, $window, Principal, LoginService, $state, $rootScope, $timeout, ExamType) {
+    function QuestionBankMainController ($scope, $window, Principal, LoginService, $state, $rootScope, $timeout
+    		, ExamType, Question) {
     	var vm = this;
         vm.showExamList = showExamList;
         vm.startTest = startTest;
@@ -69,34 +71,45 @@
 
         // Init controller
   		(function initController() {
-  			vm.speakingExams = [
-  			                    {id: 0, type: "SPEAKING_READ_ALOUD", name : "Read aloud [RA]"}
-  			                    , {id: 1, type: "SPEAKING_REPEAT_SENTENCE", name : "Repeat scentence [RS]"}
-	  			                , {id: 2, type: "SPEAKING_DESCRIBE_IMAGE", name : "Describe image [DI]"}
-	  			                , {id: 3, type: "SPEAKING_RETELL_LECTURE", name : "Re-tell lecture [RL]"}
-	  			                , {id: 4, type: "SPEAKING_ANSWER_SHORT_QUESTION", name : "Answer short question [ASQ]"}
-            ];
-  			vm.writingExams = [
-								{id: 5, type: "WRITING_SUMMARIZE_WRITTEN_TEXT", name : "Summarize witten text [SWT]"}
-								  , {id: 6, type: "WRITING_ESSAY", name : "Write essay [WE]"}
-  			];
-  			vm.readingExams = [
-								{id: 7, type: "READING_FIB_R_W", name : "R&W: Fill in the blanks [RWFIB]"}
-								  , {id: 8, type: "READING_FIB_R", name : "R: Fill in the blanks [RFIB]"}
-								  , {id: 9, type: "READING_RE_ORDER_PARAGRAPH", name : "Re-order paragraphs"}
-								  , {id: 10, type: "READING_MCQ_R_SINGLE_ANSWER", name : "MC, choose single answer"}
-								  , {id: 11, type: "READING_MCQ_R_MULTIPLE_ANSWER", name : "MC, choose multiple answers"}
-  			];
-  			vm.listeningExams = [
-  	                             {id: 12, type: "LISTENING_SUMMARIZE_SPOKEN_TEXT", name : "Summarize spoken text"}
-								  , {id: 13, type: "LISTENING_FIB_L", name : "Fill in the blanks [LFIB]"}
-								  , {id: 14, type: "LISTENING_MCQ_L_SINGLE_ANSWER", name : "MC, choose single answer"}
-								  , {id: 15, type: "LISTENING_MCQ_L_MULTIPLE_ANSWER", name : "MC, choose multiple answers"}
-								  , {id: 16, type: "LISTENING_HIGHLIGHT_CORRECT_SUMMARY", name : "Highlight correct summary"}
-								  , {id: 17, type: "LISTENING_SELECT_MISSING_WORD", name : "Select missing words"}
-								  , {id: 18, type: "LISTENING_HIGHLIGHT_INCORRECT_WORD", name : "Highlight incorect words"}
-								  , {id: 19, type: "LISTENING_DICTATION", name : "Write from dictation [WFD]"}
-                             ];
+  			Question.queryByQuestionCountInfo({}, onSuccess, onError);
+            function onSuccess(data, headers) {
+            	vm.totalExamQuestionListening = data.totalQuestionListening;
+            	vm.totalExamQuestionReading = data.totalQuestionReading;
+            	vm.totalExamQuestionSpeaking = data.totalQuestionSpeaking;
+            	vm.totalExamQuestionWriting = data.totalQuestionWriting;
+            	
+            	vm.speakingExams = [
+      			                    data.speakingRA
+      			                    , data.speakingRS
+      			                    , data.speakingDI
+      			                    , data.speakingRL
+      			                    , data.speakingASQ
+                ];
+      			vm.writingExams = [
+									data.writingSWT
+									, data.writingE
+      			];
+      			vm.readingExams = [
+									data.readingFRW
+									, data.readingFR
+									, data.readingROP
+									, data.readingMRSA
+									, data.readingMRMA
+      			];
+      			vm.listeningExams = [
+									data.listeningSST
+									, data.listeningFL
+									, data.listeningMLSA
+									, data.listeningMLMA
+									, data.listeningHCS
+									, data.listeningSMW
+									, data.listeningHIW
+									, data.listeningD
+                                 ];
+            }
+            function onError(error) {
+                console.log(error);
+            }
   		})();
     }
 })();

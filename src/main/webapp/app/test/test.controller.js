@@ -196,7 +196,7 @@
                     vm.updateQuestionInfo(vm.selectedQuestion);
                     vm.questionGroup = getQuestionGroup(vm.selectedQuestion.type);
 
-                    setCountdownTimer();
+                    vm.setCountdownTimer();
 
                     // Load record audio
                     initAudio();
@@ -210,7 +210,8 @@
                     	if(vm.intervalAudio) {
                     		$interval.cancel(vm.intervalAudio);
                         }
-                        vm.countAudio = 3;
+                        //vm.countAudio = 3;
+                    	vm.calCountdownAudio();
                         vm.intervalAudio = $interval(function() {
                         	console.log("vm.countAudio: " + vm.countAudio);
                         	if (vm.countAudio > 0) {
@@ -226,15 +227,5 @@
                 }
         	});
   		}
-
-  		function setCountdownTimer() {
-        	console.log('setCountdownTimer');
-            if (vm.selectedQuestion.type == 'TIME_BREAK') {
-                vm.countdown = PTE_SETTINGS.COUNT_DOWN_TIME_BREAK;
-                $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                return;
-            }
-        }
-  		
     }
 })();

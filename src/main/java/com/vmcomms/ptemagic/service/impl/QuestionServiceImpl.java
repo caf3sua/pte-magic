@@ -8,6 +8,7 @@ import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
 import com.vmcomms.ptemagic.domain.enumeration.TestType;
 import com.vmcomms.ptemagic.dto.ConfigMockExamDTO;
+import com.vmcomms.ptemagic.dto.QuestionBankInfoDTO;
 import com.vmcomms.ptemagic.repository.QuestionRepository;
 import com.vmcomms.ptemagic.service.dto.ExamDTO;
 import com.vmcomms.ptemagic.service.dto.ExamQuestionDTO;
@@ -203,27 +204,14 @@ public class QuestionServiceImpl implements QuestionService{
 		return questions;
 	}
 	
-//	@Cacheable
-//	public List<QuestionDTO> buildMockTestExamQuestionByGroup(long examTypeId, String questionGroup) {
-//		// Get from config_mock_exam by question_group (exam_type_id, question_group)
-//    	List<ConfigMockExamDTO> data = configMockExamService.getMockExamByExamTypeAndGroup(examTypeId, questionGroup);
-//    	
-//    	// Find questionDTO
-//    	List<Long> ids = new ArrayList<>();
-//    	for (ConfigMockExamDTO configMockExamDTO : data) {
-//    		if (configMockExamDTO.getQuestionId() != null && configMockExamDTO.getQuestionId() > 0) {
-//    			ids.add(configMockExamDTO.getQuestionId());
-//    		}
-//		}
-//    	
-//    	List<QuestionDTO> listQuestionDTO = this.findByIdIn(ids);
-//		
-//		return listQuestionDTO;
-//    }
-	
 	private void addTimeBreak(List<QuestionDTO> questions, QuestionType type) {
     	QuestionDTO timeBreak = new QuestionDTO();
     	timeBreak.setType(type);
     	questions.add(timeBreak);
     }
+
+	@Override
+	public QuestionBankInfoDTO getQuestionCountInfo() {
+		return questionRepository.countQuestionByType();
+	}
 }

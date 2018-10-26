@@ -3,11 +3,11 @@
 
     angular
         .module('pteMagicApp')
-        .controller('MemberQuestionController', MemberQuestionController);
+        .controller('SkillTestController', SkillTestController);
 
-    MemberQuestionController.$inject = ['$scope', '$window', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType'];
+    SkillTestController.$inject = ['$scope', '$window', 'Principal', 'LoginService', '$state', '$rootScope', '$timeout', 'ExamType'];
 
-    function MemberQuestionController ($scope, $window, Principal, LoginService, $state, $rootScope, $timeout, ExamType) {
+    function SkillTestController ($scope, $window, Principal, LoginService, $state, $rootScope, $timeout, ExamType) {
     	var vm = this;
         vm.showExamList = showExamList;
         vm.startTest = startTest;

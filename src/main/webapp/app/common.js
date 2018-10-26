@@ -10,7 +10,7 @@ function hightlight(activeSpan) {
     if(!$(activeSpan).hasClass('hightlight')){
     	$(activeSpan).css('color','#000');
         $(activeSpan).css('background','#f9db01');
-        $(activeSpan).css('padding','2px 5px');
+        $(activeSpan).css('padding','2px 0px');
         $(activeSpan).css('border-radius','4px');
     	$(activeSpan).addClass("hightlight");
     }else{

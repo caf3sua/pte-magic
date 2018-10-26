@@ -16,7 +16,7 @@ import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface QuestionRepository extends JpaRepository<Question, Long>, QuestionRepositoryExtend {
 	List<Question> findByTypeIn(List<QuestionType> types);
 	
 	List<Question> findAllByType(QuestionType type);

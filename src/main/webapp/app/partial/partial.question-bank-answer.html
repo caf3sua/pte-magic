@@ -1,0 +1,94 @@
+<!-- Answer -->
+    <div class="container margin-top30 position-relative" ng-show="vm.isShowAnswer">
+    	<div class="col-md-12 padding0 bg-answer">
+    		<!-- Audio media -->
+    		<div ng-show="vm.selectedQuestion.audioLink && vm.selectedQuestion.type != 'SPEAKING_DESCRIBE_IMAGE'">
+    			<div class="pte-test-type-question-two bg-answer" aria-hidden="false">
+			        <div class="container">
+			            <div class="col-md-12">
+			                <p class="pte-test-type-question-two-title ng-scope">Audio media</p>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="container">
+	            	<div class="col-md-12">
+		            	<div class="container-audio pte-width-audio-speaking">
+	                         <audio id="player-audio-media" controls preload controlsList="nodownload"
+	                         		ng-src="{{vm.selectedQuestion.audioLink | trusted}}">
+	                             Your browser dose not Support the audio Tag
+	                         </audio>
+	                     </div>
+		            </div>
+		        </div>
+    		</div>
+	        
+    		<!-- Answer -->
+    		<div class="pte-test-type-question-two bg-answer" aria-hidden="false">
+		        <div class="container">
+		            <div class="col-md-12">
+		                <p class="pte-test-type-question-two-title ng-scope">Answer</p>
+		            </div>
+		        </div>
+		    </div>
+		    <div class="container">
+	            <div class="col-md-12">
+	            	<p ng-bind-html="vm.formatExpectAnswer(vm.selectedQuestion)"></p>
+	            </div>
+	        </div>
+	        
+	        <!-- My record -->
+	        <div ng-show="vm.uploadRecordingLink">
+		        <div class="pte-test-type-question-two bg-answer" aria-hidden="false">
+			        <div class="container">
+			            <div class="col-md-12">
+			                <p class="pte-test-type-question-two-title ng-scope">My record</p>
+			            </div>
+			        </div>
+			    </div>
+			    <div class="container">
+		            <div class="col-md-12">
+		            	<div class="container-audio pte-width-audio-speaking">
+	                         <input type="hidden" value="{{vm.uploadRecordingLink}}">
+	                         <audio id="player-audio-my-record" controls preload ng-src="{{vm.uploadRecordingLink | trusted}}">
+	                             Your browser dose not Support the audio Tag
+	                         </audio>
+	                     </div>
+		            </div>
+		        </div>
+	        </div>
+    	</div>
+    </div>
+    
+    <div class="container margin-top30 position-relative">
+    	<div class="col-md-6 padding0">
+	    	<div class="text-left">
+		        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+		        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+		    </div>
+		    <div class="text-left m-t-20-p">
+		        <input id="number" type="number" value="{{vm.page}}" class="w-50">
+		        <button type="button" class="pte-test-answer btn-pte-question-bank-goto" ng-class="{'btn-disabled': vm.btnDisabled}" 
+		        		ng-click="vm.goPage()"
+    					ng-show="vm.btnEnable" ng-disabled="vm.btnDisabled">
+    					<span class="ng-confirm-btn-text">Go</span>
+   				</button>
+		    </div>
+    	</div>
+    	<div class="col-md-6 padding0">
+    		<div class="text-left">
+    			<div class="ng-confirm-buttons m-t-15">
+    				<button type="button" class="pte-test-answer btn-pte-question-bank" ng-class="{'btn-disabled': vm.btnDisabled}"
+    					ng-click="vm.tryAgain()" 
+    					ng-show="vm.isShowAnswer" ng-disabled="vm.btnDisabled">
+    					<span class="ng-confirm-btn-text">Try again</span>
+    				</button>
+    				<button type="button" class="pte-test-answer btn-pte-question-bank" ng-class="{'btn-disabled': vm.btnDisabled}" 
+    					ng-click="vm.showAnswer()"
+    					ng-show="!vm.isShowAnswer"  
+    					ng-disabled="vm.btnDisabled">
+    					<span class="ng-confirm-btn-text">Answer</span>
+    				</button>
+				</div>
+    		</div>
+    	</div>
+    </div>

@@ -3,13 +3,12 @@
 
     angular
         .module('pteMagicApp')
-        .directive('pteAnswerCheckbox', pteAnswerCheckbox);
+        .directive('pteAnswerCheckbox', pteAnswerCheckbox)
+    	.directive('disableRightClick', disableRightClick);
     
     function pteAnswerCheckbox () {
         var directive = {
             restrict: 'E',
-//            require:  '^form',
-//            replace: true,
             scope: {
             	idAnswer : '@',
             	expectAnswer : '=',
@@ -38,4 +37,16 @@
         return directive;
     }
 
+    function disableRightClick () {
+        var directive = {
+            restrict: 'A',
+            link: function(scope, elem, attr) {
+            	elem.bind('contextmenu', function(e){
+                    e.preventDefault();
+                  })
+            }
+        };
+
+        return directive;
+    }
 })();

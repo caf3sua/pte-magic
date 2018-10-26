@@ -3,6 +3,7 @@ package com.vmcomms.ptemagic.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.vmcomms.ptemagic.domain.enumeration.QuestionType;
 import com.vmcomms.ptemagic.domain.enumeration.SkillType;
+import com.vmcomms.ptemagic.dto.QuestionBankInfoDTO;
 import com.vmcomms.ptemagic.service.QuestionService;
 import com.vmcomms.ptemagic.web.rest.errors.BadRequestAlertException;
 import com.vmcomms.ptemagic.web.rest.util.HeaderUtil;
@@ -99,6 +100,14 @@ public class QuestionResource {
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 
+    @GetMapping("/questions-count-info")
+    @Timed
+    public ResponseEntity<QuestionBankInfoDTO> getQuestionCountInfo() {
+        log.debug("REST request to get getQuestionCountInfo");
+        QuestionBankInfoDTO data = questionService.getQuestionCountInfo();
+        return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+    
     @GetMapping("/questions-by-skill")
     @Timed
     public ResponseEntity<List<QuestionDTO>> findAllBySkillPageable(@ApiParam Pageable pageable, @RequestParam(value = "skill", required = false) String skill) {

@@ -75,12 +75,18 @@
         vm.timeup = timeup;
         vm.formatExpectAnswer = formatExpectAnswer;
         
+        vm.uploadRecordingLink;
+        vm.examType;
+        vm.setCountdownTimer = setCountdownTimer;
+        
         var extensionLists = {}; //Create an object for all extension lists
     	extensionLists.audio = ['mp3', 'mpeg','wav','mp4', 'webm'];  
     	extensionLists.image = ['jpg', 'gif', 'bmp', 'png', 'jpeg'];
 
     	vm.btnEnable = true;
     	vm.btnDisabled = true;
+    	
+    	vm.calCountdownAudio = calCountdownAudio;
     	
     	// One validation function for all file types    
     	function isValidFileType(fName, fType) {
@@ -108,8 +114,8 @@
         vm.UpdateLengths = UpdateLengths;
         vm.playAudio = playAudio;
         vm.enableNextButton = enableNextButton;
-        vm.showAnswer = showAnswer;
         vm.nextPage = nextPage;
+        vm.resetUserAnswer = resetUserAnswer;
         
         vm.audioProgressing = 0;
         $scope.$watch('vm.audioProgressing', function () {
@@ -171,32 +177,26 @@
         }
         
         function timeup() {
-        	$ngConfirm({
-                title: 'Time\'s up',
-                icon: 'fas fa-exclamation-triangle',
-                theme: 'modern',
-                type: 'red',
-                content: '<div class="text-center">Time\'s up! Check answer or next question.</div>',
-                animation: 'scale',
-                closeAnimation: 'scale',
-                buttons: {
-                    ok: {
-                    	text: 'Đóng',
-                        btnClass: "btn-blue"
-//                        action: function(scope, button){
-//                        	$state.go('app.cart');
-//	                    }
-                    }
-                },
-            });
+//        	$scope.$broadcast('timer-stop');
+//        	$ngConfirm({
+//                title: 'Time\'s up',
+//                icon: 'fas fa-exclamation-triangle',
+//                theme: 'modern',
+//                type: 'red',
+//                content: '<div class="text-center">Time\'s up! Check answer or next question.</div>',
+//                animation: 'scale',
+//                closeAnimation: 'scale',
+//                buttons: {
+//                    ok: {
+//                    	text: 'Đóng',
+//                        btnClass: "btn-blue"
+//                    }
+//                },
+//            });
         }
         
         function nextPage() {
         	$('#next-page-answer').click();
-        }
-        
-        function showAnswer() {
-        	vm.isShowAnswer = !vm.isShowAnswer;
         }
         
         // Disable button and anable
@@ -232,13 +232,26 @@
         });
 
         function resetProgressStatus() {
+        	vm.resetUserAnswer();
+        	
     		vm.showProgressBar = false;
     		vm.countdownPercent = 0;
     		vm.timeProgress = 0;
 
     		if (vm.audio) {
-    			vm.audio.destroy();
+//    			vm.audio.destroy();
     			vm.audio.progress = 0;
+    			vm.audio.pause();
+    		}
+    		
+    		// question bank
+    		if ($("#player-audio-my-record").length > 0) {
+    			$("#player-audio-my-record")[0].pause();
+        		$("#player-audio-my-record")[0].src = "";
+    		}
+    		if ($("#player-audio-media").length > 0) {
+    			$("#player-audio-media")[0].pause();
+        		$("#player-audio-media")[0].src = "";
     		}
     	}
 
@@ -338,15 +351,20 @@
         function saveAnswerSpeaking(selectedQuestionId, audioLink) {
         	console.log('saveAnswerSpeaking, selectedQuestionId:' + selectedQuestionId + ", audioLink:" + audioLink);
             var answer = {};
-            answer.examId = vm.exam.examDTO.id;
+            
+            if (vm.examType == 'QUESTION_BANK') {
+            	answer.examId = -1;
+            } else {
+            	answer.status = 'MARKING';
+            	answer.examId = vm.exam.examDTO.id;
+            }
             answer.questionId = selectedQuestionId;
             answer.audioLink = audioLink;
-            answer.status = 'MARKING';
-            // answer.description;
 
             Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
 
             function onSaveAnswerSuccess(result) {
+            	vm.uploadRecordingLink = result.audioLink;
             	console.log('saveAnswerSpeaking sucess');
             }
 
@@ -625,6 +643,29 @@
 	        }
     	}
 
+		function calCountdownAudio() {
+			switch(vm.selectedQuestion.type) {
+			    case "LISTENING_SUMMARIZE_SPOKEN_TEXT":
+			    	vm.countAudio = 10;
+			        break;
+			    case "LISTENING_FIB_L":
+			    case "LISTENING_MCQ_L_MULTIPLE_ANSWER":
+			    case "LISTENING_MCQ_L_SINGLE_ANSWER":
+			    	vm.countAudio = 7;
+			        break;
+			    case "LISTENING_HIGHLIGHT_CORRECT_SUMMARY":
+			    	vm.countAudio = 10;
+			        break;
+			    case "LISTENING_SELECT_MISSING_WORD":
+			    case "LISTENING_HIGHLIGHT_INCORRECT_WORD":
+			    case "LISTENING_DICTATION":
+			    	vm.countAudio = 5;
+			        break;
+			    default:
+			    	vm.countAudio = 3;
+			}
+		}
+		
 		function countdownToRecording() {
 			console.log('countdownToRecording!, type:' + vm.selectedQuestion.type);
 			
@@ -831,6 +872,34 @@
             }
   		}
 
+		function resetUserAnswer() {
+  			if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' || vm.selectedQuestion.type == 'WRITING_ESSAY') {
+  				// Reset
+                $('#areaTextWriting').html('');
+  			} else if (vm.selectedQuestion.type == 'LISTENING_FIB_L') {
+
+  			} else if (vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH') {
+
+  			} else if (vm.selectedQuestion.type == 'READING_FIB_R_W') {
+
+  			} else if (vm.selectedQuestion.type == 'READING_FIB_R') {
+  				
+  			} else if (vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
+
+  			} else if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT' || vm.selectedQuestion.type == 'LISTENING_DICTATION') { // 06/09/2018
+
+  				// Reset
+  				$('#areaTextWriting').val("");
+                $('#areaTextWriting').html('');
+  			} else {
+  				angular.forEach(vm.listItemAnswer, function(value, key){
+  	  				$("#answer" + value).prop( "checked", false );
+  	            });
+  				// Remove
+  				$('input[type="radio"]').prop('checked', false);
+  			}
+		}
+		
 		function getUserAnswer() {
   			vm.answers = [];
 
@@ -978,11 +1047,60 @@
             console.log('done encoding, size=', buffer.length);
             var blob = new Blob(buffer, {type: 'audio/mp3'});
             
-            var filename = "recording_" + vm.exam.examDTO.id + "_" + selectedQuestionId + ".mp3";
+            // var filename = "recording_" + vm.exam.examDTO.id + "_" + selectedQuestionId + ".mp3";
+            var filename = "recording_" + new Date().getTime() + "_" + selectedQuestionId + ".mp3";
             vm.fileUpload = new File([blob], filename);
 
             // save answer
             vm.saveAnswerSpeaking(selectedQuestionId, filename);
+        }
+        
+        function setCountdownTimer() {
+        	console.log('setCountdownTimer');
+            if (vm.selectedQuestion.type == 'TIME_BREAK') {
+                vm.countdown = PTE_SETTINGS.COUNT_DOWN_TIME_BREAK;
+                $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                return;
+            }
+            
+            if (vm.examType == 'QUESTION_BANK') {
+//            	if (vm.questionGroup == 'LISTENING') {
+//                } else if (vm.questionGroup == 'WRITING') {
+//                } else if (vm.questionGroup == 'READING') {
+//                } else if (vm.questionGroup == 'SPEAKING') {
+                	vm.countdown = 2 * 60;
+                    $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+//                }
+            } else {
+            	if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A' || vm.exam.examTypeDTO.type == 'MOCK_TEST_B' || vm.exam.examTypeDTO.type == 'MOCK_TEST_FULL') {
+                    if (vm.questionGroup == 'LISTENING') {
+                        if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT') {
+                            vm.countdown = 10 * 60;
+                            $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                        } else {
+                            if (vm.listeningTimerRunningFlag == false) {
+                                vm.countdown = 16 * 2 * 60 + 2 * 60;
+                                $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
+                                vm.listeningTimerRunningFlag = true;
+                            }
+                        }
+                    } else if (vm.questionGroup == 'WRITING') {
+                        if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT') {
+                            vm.countdown = 10 * 60;
+                            $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                        } else if (vm.selectedQuestion.type == 'WRITING_ESSAY') {
+                            vm.countdown = 20 * 60;
+                            $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
+                        }
+                    } else if (vm.questionGroup == 'READING') {
+                        if (vm.readingTimerRunningFlag == false) {
+                            vm.countdown = 40 * 60;
+                            $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                            vm.readingTimerRunningFlag = true;
+                        }
+                    }
+                }
+            }
         }
         
         // http://jsrun.it/Mr.X/fWph
