@@ -109,7 +109,7 @@
                         </div>
                         <div class="pte-free-sample-item-footer">
                             <p class="pte-free-sample-item-footer-text">Total {{exam.total | number}} questions</p>
-                            <button class="pte-free-sample-item-footer-btn" ng-click="vm.startTest(exam.id)">Test</button>
+                            <button class="pte-free-sample-item-footer-btn" ui-sref="question-bank({type:exam.type})">Test</button>
                         </div>
                     </div>
                 </div>

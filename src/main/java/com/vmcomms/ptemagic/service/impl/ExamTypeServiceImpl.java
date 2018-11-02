@@ -161,7 +161,7 @@ public class ExamTypeServiceImpl implements ExamTypeService{
 	}
 
 	@Override
-	@Cacheable
+//	@Cacheable
 	public List<ExamTypeDTO> getAllExamTypesByType(String type, Long userId) {
 		log.debug("Request to getAllExamTypesByType : {}, userId: {}", type, userId);
         List<ExamTypeDTO> data = this.findAllByType(type);

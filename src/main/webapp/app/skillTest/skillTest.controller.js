@@ -67,8 +67,8 @@
         }
 
         function startTest(examId) {
-        	var url = '/#/test?type=' + examId;
-        	$window.open(url,"_blank", "toolbar=no,scrollbars=no, resizable=no, width=1200, height=700");
+        	//var url = '/#/test?type=' + examId;
+        	//$window.open(url,"_blank", "toolbar=no,scrollbars=no, resizable=no, width=1200, height=700");
         }
 
 //        $scope.$watch('vm.exams', function(newVal, oldVal){

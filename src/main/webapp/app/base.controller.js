@@ -20,10 +20,10 @@
             }
         }]);
 
-    PteMagicBaseController.$inject = ['vm', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'
+    PteMagicBaseController.$inject = ['vm', '$rootScope', '$scope', '$window', '$compile', '$timeout', 'PTE_SETTINGS'
     	, 'Answer', 'ngAudio', '$interval', 'Upload', '$ngConfirm'];
 
-    function PteMagicBaseController(vm, $scope, $window, $compile, $timeout, PTE_SETTINGS
+    function PteMagicBaseController(vm, $rootScope, $scope, $window, $compile, $timeout, PTE_SETTINGS
     		, Answer, ngAudio, $interval, Upload, $ngConfirm){
 		vm.message = { name: 'default entry from PteMagicBaseController' };
 
@@ -522,9 +522,9 @@
     				vm.totalQuestion = vm.exam.numberQuestionSpeaking;
     			}
 
-    			vm.countdown = 40 * 60;
-				$scope.$broadcast('timer-stop');
-				$scope.$broadcast('timer-start');
+//    			vm.countdown = 40 * 60;
+//				$scope.$broadcast('timer-stop');
+//				$scope.$broadcast('timer-start');
     		} else if (vm.currentSKill == 'SPEAKING') {
     			// Part A + Full
     			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_A') {
@@ -549,9 +549,9 @@
     			}
     		} else if (vm.currentSKill == 'READING') {
     			// Part B + Full
-    			vm.countdown = 40 * 60;
-				$scope.$broadcast('timer-stop');
-				$scope.$broadcast('timer-start');
+//    			vm.countdown = 40 * 60;
+//				$scope.$broadcast('timer-stop');
+//				$scope.$broadcast('timer-start');
 
     			if (vm.exam.examTypeDTO.type == 'MOCK_TEST_B') {
     				vm.currentSKill = 'LISTENING'; // writing
@@ -873,6 +873,10 @@
   		}
 
 		function resetUserAnswer() {
+			if (vm.selectedQuestion == null || vm.selectedQuestion == undefined) {
+				return;
+			}
+			
   			if (vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT' || vm.selectedQuestion.type == 'WRITING_ESSAY') {
   				// Reset
                 $('#areaTextWriting').html('');
@@ -948,10 +952,16 @@
                 $('#areaTextWriting').html('');
   			} else {
   				angular.forEach(vm.listItemAnswer, function(value, key){
-  	  				if ($('#answer' + value).is(":checked")) {
+  					let prefix = value;
+  					if (vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER'
+  						|| vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
+  						|| vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD') {
+  						prefix = prefix + "1";
+  					}
+  	  				if ($('#answer' + prefix).is(":checked")) {
   	  	  				vm.answers.push(value);
   	  	  			}
-  	  				$("#answer" + value).prop( "checked", false );
+  	  				$("#answer" + prefix).prop( "checked", false );
   	            });
   				// Remove
   				$('input[type="radio"]').prop('checked', false);
@@ -1094,15 +1104,29 @@
                         }
                     } else if (vm.questionGroup == 'READING') {
                         if (vm.readingTimerRunningFlag == false) {
-                            vm.countdown = 40 * 60;
+                            vm.countdown = 30 * 60;
                             $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                             vm.readingTimerRunningFlag = true;
                         }
                     }
+                } else {
+                	// Skill test
+                	if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
+                		|| vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT') {
+                		vm.countdown = 10 * 60;
+                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                	} else {
+                		vm.countdown = 2 * 60;
+                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                	}
                 }
             }
         }
         
+        $rootScope.$on('$stateChangeStart',function() {
+        	vm.resetProgressStatus();
+        	console.log('state change');
+        });
         // http://jsrun.it/Mr.X/fWph
     }
 })();

@@ -33,6 +33,15 @@
         vm.checkAudioSeconds = true;
         vm.checkStatusPlay = false;
     	vm.countdownSpeaking = 5;
+    	vm.gotoBack = gotoBack;
+    	
+    	function gotoBack() {
+    		if (vm.exam.examTypeDTO.type.indexOf("MEMBER_QUESTION_") != -1) {
+    			$state.go("skill-test");
+    		} else {
+    			$state.go("freeSample");
+    		}
+    	}
 
     	function stopRecording() {
     		console.log('stopRecording');
@@ -52,8 +61,8 @@
             }
             
             // Stop timer
-            $scope.$broadcast('timer-stop');
-  			$scope.$broadcast('timer-reset');
+//            $scope.$broadcast('timer-stop');
+//  			$scope.$broadcast('timer-reset');
 
   			vm.txtInfoCountdown = "Begining in ";
   	    	vm.isRecording = false;

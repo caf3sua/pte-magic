@@ -6,7 +6,9 @@
         <div class="container">
             <ul class="margin-0 pte-display-inline-block">
                 <li>
-                    <span data-translate="pteMagicApp.TestType.description.{{vm.exam.examTypeDTO.type}}" ng-cloak>Sample question - reading</span>
+                	<a ng-click="vm.gotoBack()" class="color-label">
+                    	<span data-translate="pteMagicApp.TestType.description.{{vm.exam.examTypeDTO.type}}" ng-cloak>Sample question - reading</span>
+                    </a>
                 </li>
             </ul>
             <div class="pull-right">
@@ -72,9 +74,9 @@
 
     </div>
     <div ng-show="vm.isFinish" style="margin-top: 100px;">
-        <p class="pte-text-finish">Completed ! Check mail to see the result!</p>
+        <!-- <p class="pte-text-finish">Completed ! Check mail to see the result!</p> -->
     	<div class="text-center">
-           <button class="pte-test-answer" ng-click="vm.closeExam()">Finish</button>
+           <button class="pte-test-answer" ng-click="vm.gotoBack()">Finish</button>
        </div>
     </div>
 </div>

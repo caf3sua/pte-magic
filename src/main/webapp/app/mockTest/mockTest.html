@@ -69,7 +69,8 @@
                         <div class="pte-mock-test-item-footer">
                             <p class="pte-mock-test-item-footer-text">Open Date: Mar 6, 2018 </p>
                             <button class="pte-mock-test-item-footer-btn"
-                            	ng-click="vm.startTest(exam)" ng-show="exam.remainTest != 0">Start</button>
+                            	ui-sref="fulltest({type:exam.id})"
+                            	ng-show="exam.remainTest != 0">Start</button>
                            	<button class="pte-mock-test-item-footer-btn btn-disabled" disabled="disabled" ng-show="exam.remainTest == 0">Start</button>
                             	
                         </div>

@@ -50,6 +50,12 @@
         
         vm.btnTxt = 'Next';
         vm.showAnswer = showAnswer;
+        vm.gotoBack = gotoBack;
+        
+        function gotoBack() {
+        	$state.go("questionBank");
+        }
+        
         
         function showAnswer() {
         	vm.isShowAnswer = !vm.isShowAnswer;
@@ -284,10 +290,10 @@
         }
         
         function goPage() {
-        	let page = $('#number').val();
+        	let page = parseInt($('#number').val());
         	
         	// Check
-        	if (page < 0 || page > vm.totalItems) {
+        	if (page < 0 || page > parseInt(vm.totalItems)) {
         		$ngConfirm({
             	    title: 'Number invalid!',
             	    content: 'Number item went wrong, this may be serious',
@@ -334,11 +340,6 @@
         	vm.answer();
         	searchAllTransition();
         }
-        
-        $rootScope.$on('$stateChangeStart',function() {
-        	vm.resetProgressStatus();
-        	console.log('state change');
-        });
     }
 })();
 

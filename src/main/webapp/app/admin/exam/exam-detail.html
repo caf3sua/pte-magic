@@ -57,6 +57,13 @@
 								<div style="text-align: justify;">
 	                    			{{answerQuestion.question.text}}
 	                    		</div>
+	                    		
+	                    		<div ng-show="answerQuestion.question.expectAnswer">
+		                    		<p>EXPECT ANSWER/AUDIO SCRIPT</p>
+									<div style="text-align: justify;">
+		                    			{{answerQuestion.question.expectAnswer}}
+		                    		</div>
+	                    		</div>
                     		</div>
                     		<div ng-show="answerQuestion.question.type == 'READING_FIB_R_W' || answerQuestion.question.type == 'READING_FIB_R'">
 	                    		<div style="text-align: justify;" 

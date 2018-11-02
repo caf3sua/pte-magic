@@ -39,6 +39,11 @@
         vm.callBackAnswer = callBackAnswer;
         
         vm.btnTxt = 'Next';
+        vm.gotoBack = gotoBack;
+        
+        function gotoBack() {
+        	$state.go('mockTest');
+        }
         
         function callBackAnswer() {
         	console.log('WARNING: call back finish');
