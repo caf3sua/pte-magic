@@ -37,6 +37,8 @@
 
 		vm.listeningTimerRunningFlag = false;
         vm.readingTimerRunningFlag = false;
+        vm.speakingTimerRunningFlag = false;
+        vm.writingTimerRunningFlag = false;
 
         vm.txtStatusAudio = 'Playing';
 		// inteval
@@ -1089,7 +1091,7 @@
                             $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                         } else {
                             if (vm.listeningTimerRunningFlag == false) {
-                                vm.countdown = 16 * 2 * 60 + 2 * 60;
+                                vm.countdown = 22 * 60;
                                 $scope.$broadcast('timer-set-countdown-seconds', vm.countdown );
                                 vm.listeningTimerRunningFlag = true;
                             }
@@ -1108,12 +1110,41 @@
                             $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                             vm.readingTimerRunningFlag = true;
                         }
-                    }
+	            	} else if (vm.questionGroup == 'SPEAKING') {
+	                    if (vm.speakingTimerRunningFlag == false) {
+	                        vm.countdown = 35 * 60;
+	                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+	                        vm.speakingTimerRunningFlag = true;
+	                    }
+	                }
                 } else {
                 	// Skill test
                 	if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
                 		|| vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT') {
                 		vm.countdown = 10 * 60;
+                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                	} else if (vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'
+                		|| vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'
+            			|| vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'
+        				|| vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'
+    					|| vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
+                		vm.countdown = -1;
+                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                	} else if (vm.selectedQuestion.type == 'READING_FIB_R_W'
+                		|| vm.selectedQuestion.type == 'READING_FIB_R'
+            			|| vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH'
+        				|| vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER'
+    					|| vm.selectedQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER') {
+                		vm.countdown = 2 * 60;
+                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                	} else if (vm.selectedQuestion.type == 'LISTENING_FIB_L'
+                		|| vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER'
+            			|| vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
+        				|| vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
+    					|| vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD'
+						|| vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD'
+						|| vm.selectedQuestion.type == 'LISTENING_DICTATION') {
+                		vm.countdown = 90; // 1ph30s
                         $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                 	} else {
                 		vm.countdown = 2 * 60;

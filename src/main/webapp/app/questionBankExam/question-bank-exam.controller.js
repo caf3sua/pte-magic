@@ -60,6 +60,11 @@
         function showAnswer() {
         	vm.isShowAnswer = !vm.isShowAnswer;
         	vm.answer();
+        	
+        	if (vm.selectedQuestion.audioLink && vm.selectedQuestion.type != 'SPEAKING_DESCRIBE_IMAGE') {
+        		$("#player-audio-media")[0].src = vm.selectedQuestion.audioLink;
+        		$("#player-audio-media")[0].load();
+        	}
         }
         
         function callBackAnswer() {
