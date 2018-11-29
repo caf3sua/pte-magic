@@ -358,20 +358,20 @@ public class ExamResource {
     	questions.addAll(questionDTOs);
     }
     
-    @PostMapping("/exams/resume")
-    @Timed
-    public ResponseEntity<ExamInfoDTO> resumeExam(@RequestBody ExamVM examVM) throws URISyntaxException {
-        log.debug("REST request to start Exam : {}", examVM);
-        
-        
-        ExamInfoDTO examInfoDTO = new ExamInfoDTO();
-//        examInfoDTO.setExamDTO(examDTO);
-//        examInfoDTO.setQuestions(question);
-        
-        return ResponseEntity.created(new URI("/api/exams/" + examVM.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, examVM.getId().toString()))
-            .body(examInfoDTO);
-    }
+//    @PostMapping("/exams/resume")
+//    @Timed
+//    public ResponseEntity<ExamInfoDTO> resumeExam(@RequestBody ExamVM examVM) throws URISyntaxException {
+//        log.debug("REST request to start Exam : {}", examVM);
+//        
+//        
+//        ExamInfoDTO examInfoDTO = new ExamInfoDTO();
+////        examInfoDTO.setExamDTO(examDTO);
+////        examInfoDTO.setQuestions(question);
+//        
+//        return ResponseEntity.created(new URI("/api/exams/" + examVM.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, examVM.getId().toString()))
+//            .body(examInfoDTO);
+//    }
     
     @PostMapping("/exams/cancel")
     @Timed

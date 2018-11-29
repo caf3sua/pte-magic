@@ -61,7 +61,21 @@ spring:
       multipart:
        max-file-size: 10MB
        max-request-size: 10MB
-
+    mail:
+        host: smtp.gmail.com
+        port: 587
+        username: ptemagic@gmail.com
+        password: tranhoang11
+        properties:
+            mail:
+                smtp:
+                    starttls:
+                        enable: true
+                        required: true
+                    auth: true
+                    connectiontimeout: 5000
+                    timeout: 5000
+                    writetimeout: 5000
 google-cloud:
     storage:
         credential-file: pte-magic-api.json

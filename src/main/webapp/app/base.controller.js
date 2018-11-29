@@ -393,7 +393,17 @@
   		    }
 
   		    answer.answer = vm.answers.join(',');
-  		    if (vm.questionGroup == 'WRITING' || vm.questionGroup == 'SPEAKING') {
+  		
+  		    // Auto score
+  		    if (vm.questionGroup == 'READING' 
+  		    	|| vm.selectedQuestion.type == 'LISTENING_FIB_L'
+	    		|| vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER'
+    			|| vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
+				|| vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_CORRECT_SUMMARY'
+				|| vm.selectedQuestion.type == 'LISTENING_SELECT_MISSING_WORD'
+				|| vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD') {
+  		    	answer.status = '';
+		    } else {
 		    	answer.status = 'MARKING';
 		    }
   		    // answer.audioLink;
@@ -1145,6 +1155,9 @@
 						|| vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD'
 						|| vm.selectedQuestion.type == 'LISTENING_DICTATION') {
                 		vm.countdown = 90; // 1ph30s
+                        $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                	} else if (vm.selectedQuestion.type == 'WRITING_ESSAY') {
+                		vm.countdown = 20 * 60; // 1ph30s
                         $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
                 	} else {
                 		vm.countdown = 2 * 60;

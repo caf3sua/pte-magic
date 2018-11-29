@@ -87,67 +87,67 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 	@Override
 	public void markScore(Long examId) {
 		// User info
-        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
-                .map(UserDTO::new)
-                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+//        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
+//                .map(UserDTO::new)
+//                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
         
 		// Update Exam -> ProgressType.DONE
 		ExamDTO examDTO = examService.findOne(examId);
 		
 		// Check finish
-		if (isFinishExam(examDTO)) {
-			ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
-			
-			// Mock test part B
-			if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
-				scoreMockTest(examId);
-			} else {
-				// Get list exam question
-				List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(examId);
-
-		        // Calculate score
-				int totalScore = examQuestions.size();
-				int score = 0;
-				// Compare
-				for (ExamQuestionDTO examQuestionDTO : examQuestions) {
-					// Get question to compare
-					QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
-					// Get answer
-					AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(examId, examQuestionDTO.getQuestionId());
-					if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
-						score++;
-					}
-				}
-
-				log.debug("score of user : {}/{}", score, totalScore);
-				
-				ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
-				scoreInfo.setUser(userDTO);
-				scoreInfo.setScore(score);
-				scoreInfo.setExamTitle(examTypeDTO.getName());
-				scoreInfo.setTotalQuestion(totalScore);
-				
-		        // Send mail
-				mailService.sendScoreEmail(scoreInfo);
-				
-				// Update -> DONE
-				examDTO.setResult(ProgressType.DONE);
-				examService.save(examDTO);
-			}
-		} else {
+//		if (isFinishExam(examDTO)) {
+//			ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
+//			
+//			// Mock test part B
+//			if (examTypeDTO.getType().equals(TestType.MOCK_TEST_B)) {
+//				scoreMockTest(examId);
+//			} else {
+//				// Get list exam question
+//				List<ExamQuestionDTO> examQuestions = examQuestionService.findAllByExamId(examId);
+//
+//		        // Calculate score
+//				int totalScore = examQuestions.size();
+//				int score = 0;
+//				// Compare
+//				for (ExamQuestionDTO examQuestionDTO : examQuestions) {
+//					// Get question to compare
+//					QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
+//					// Get answer
+//					AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(examId, examQuestionDTO.getQuestionId());
+//					if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
+//						score++;
+//					}
+//				}
+//
+//				log.debug("score of user : {}/{}", score, totalScore);
+//				
+//				ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
+//				scoreInfo.setUser(userDTO);
+//				scoreInfo.setScore(score);
+//				scoreInfo.setExamTitle(examTypeDTO.getName());
+//				scoreInfo.setTotalQuestion(totalScore);
+//				
+//		        // Send mail
+//				mailService.sendScoreEmail(scoreInfo);
+//				
+//				// Update -> DONE
+//				examDTO.setResult(ProgressType.DONE);
+//				examService.save(examDTO);
+//			}
+//		} else {
 			examDTO.setResult(ProgressType.MARKING);
 			examService.save(examDTO);
-		}
+//		}
 	}
 	
 	private void scoreMockTest(Long examId) {
-		// User info
-        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
-                .map(UserDTO::new)
-                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
-        
 		// Update Exam -> ProgressType.DONE
 		ExamDTO examDTO = examService.findOne(examId);
+				
+		// User info
+				UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities(examDTO.getUserId()))
+		                .map(UserDTO::new)
+		                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
 				
 		// Score
 		ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
@@ -304,7 +304,9 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 			QuestionDTO questionDTO = questionService.findOne(examQuestionDTO.getQuestionId());
 			// Get answer
 			AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(examId, examQuestionDTO.getQuestionId());
-			if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
+			if (StringUtils.equals(answerDTO.getStatus(), "MARKING") && StringUtils.equals(answerDTO.getScore(), "OK") ) {
+				score++;
+			} else if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
 				score++;
 			}
 		}
@@ -385,18 +387,15 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 
 	@Override
 	public void finishExamByMarking(Long examId) {
-		// User info
-        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities())
-                .map(UserDTO::new)
-                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
-
 		// Update Exam -> ProgressType.DONE
 		ExamDTO examDTO = examService.findOne(examId);
 		
         ExamTypeDTO examTypeDTO = examTypeService.findOne(examDTO.getExamTypeId());
         
 		// Mock test part B
-		if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A) || examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
+		if (examTypeDTO.getType().equals(TestType.MOCK_TEST_A) 
+				|| examTypeDTO.getType().equals(TestType.MOCK_TEST_B)
+				|| examTypeDTO.getType().equals(TestType.MOCK_TEST_FULL)) {
 			scoreMockTest(examId);
 		} else {
 			// Get list exam question
@@ -413,7 +412,7 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 				AnswerDTO answerDTO = answerService.findOneByExamIdAndQuestionId(examId, examQuestionDTO.getQuestionId());
 				
 				// Calculate
-				if (StringUtils.equals(answerDTO.getStatus(), "MARKING") && StringUtils.equals(answerDTO.getScore(), "OK") ) {
+				if (StringUtils.equals(answerDTO.getStatus(), "DONE") && StringUtils.equals(answerDTO.getScore(), "OK") ) {
 					score++;
 				} else if (StringUtils.equals(questionDTO.getExpectAnswer(), answerDTO.getAnswer())) {
 					score++;
@@ -422,6 +421,10 @@ public class MarkScoreServiceImpl implements MarkScoreService {
 
 			log.debug("score of user : {}/{}", score, totalScore);
 			
+	        UserDTO userDTO = Optional.ofNullable(userService.getUserWithAuthorities(examDTO.getUserId()))
+	                .map(UserDTO::new)
+	                .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+	        
 			ScoreInfoDTO scoreInfo = new ScoreInfoDTO();
 			scoreInfo.setUser(userDTO);
 			scoreInfo.setScore(score);
