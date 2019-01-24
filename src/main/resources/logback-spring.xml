@@ -54,6 +54,10 @@
     <logger name="liquibase" level="WARN"/>
     <logger name="LiquibaseSchemaResolver" level="INFO"/>
     <logger name="sun.rmi.transport" level="WARN"/>
+    
+    <logger name="com.google.api.client.http" level="OFF"/>
+    <logger name="sun.net.www.protocol.http" level="OFF"/>
+    <logger name="com.hazelcast" level="WARN"/>
 
     <!-- https://logback.qos.ch/manual/configuration.html#shutdownHook and https://jira.qos.ch/browse/LOGBACK-1090 -->
     <shutdownHook class="ch.qos.logback.core.hook.DelayingShutdownHook"/>

@@ -183,7 +183,15 @@
 //            nextQuestion();
             vm.timeup();
         }
-
+        
+        $scope.$watch('vm.uploadRecordingLink', function () {
+  			console.log('vm.uploadRecordingLink change');
+  			if ($("#player-audio-my-record").length > 0 && vm.uploadRecordingLink != null) {
+        		$("#player-audio-my-record")[0].src = vm.uploadRecordingLink;
+        		$("#player-audio-my-record")[0].load();
+    		}
+  		});
+        
         function nextQuestion() {
         	vm.uploadRecordingLink = null;
         	vm.isShowAnswer = false;

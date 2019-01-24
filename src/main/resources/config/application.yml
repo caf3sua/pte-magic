@@ -23,7 +23,7 @@ management:
             enabled: false # When using the MailService, configure an SMTP server and set this to true
 spring:
     application:
-        name: PteMagic
+        name: IotPortal
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:postgresql://35.192.132.22:5432/pte_magic

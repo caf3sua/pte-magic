@@ -1,8 +1,5 @@
 package com.vmcomms.ptemagic.repository;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -10,14 +7,10 @@ import javax.persistence.Query;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vmcomms.ptemagic.dto.QueryExamDTO;
-import com.vmcomms.ptemagic.service.dto.UserDTO;
-
 
 /**
  * Spring Data JPA repository for the BrandkeyProduct entity.
  */
-@SuppressWarnings("unused")
 public class UserRepositoryImpl implements UserRepositoryExtend {
 
 	@PersistenceContext
@@ -27,8 +20,6 @@ public class UserRepositoryImpl implements UserRepositoryExtend {
 	@Transactional
 	@Modifying
 	public void deletePteUser(Long userId) {
-		List<QueryExamDTO> result = new ArrayList<>();
-		
 		String expressionDeleteAuthoriy = "delete from jhi_user_authority " + 
 				"where user_id = :pUserId";
 		

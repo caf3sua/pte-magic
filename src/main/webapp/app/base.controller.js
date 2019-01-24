@@ -142,10 +142,14 @@
                 file.upload.then(function (response) {
                     $timeout(function () {
                         file.result = response.data;
+                        vm.uploadRecordingLink = file.result.filename;
+                        toastr.success('File upload success');
                     });
                 }, function (response) {
-                    if (response.status > 0)
-                        $scope.errorMsg = response.status + ': ' + response.data;
+                    if (response.status > 0) {
+                    	$scope.errorMsg = response.status + ': ' + response.data;
+                    	toastr.error('File upload error');
+                    }
                 }, function (evt) {
                     file.progress = Math.min(100, parseInt(100.0 *
                         evt.loaded / evt.total));
@@ -366,7 +370,8 @@
             Answer.save(answer, onSaveAnswerSuccess, onSaveAnswerError);
 
             function onSaveAnswerSuccess(result) {
-            	vm.uploadRecordingLink = result.audioLink;
+            	// namnh fix 02/1/2019
+            	// vm.uploadRecordingLink = result.audioLink;
             	console.log('saveAnswerSpeaking sucess');
             }
 
@@ -1138,18 +1143,27 @@
                 	if (vm.selectedQuestion.type == 'LISTENING_SUMMARIZE_SPOKEN_TEXT'
                 		|| vm.selectedQuestion.type == 'WRITING_SUMMARIZE_WRITTEN_TEXT') {
                 		vm.countdown = 10 * 60;
+                    	// Count down
+                    	$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                    	$scope.$broadcast('timer-start');
                 	} else if (vm.selectedQuestion.type == 'SPEAKING_READ_ALOUD'
                 		|| vm.selectedQuestion.type == 'SPEAKING_REPEAT_SENTENCE'
             			|| vm.selectedQuestion.type == 'SPEAKING_DESCRIBE_IMAGE'
         				|| vm.selectedQuestion.type == 'SPEAKING_RETELL_LECTURE'
     					|| vm.selectedQuestion.type == 'SPEAKING_ANSWER_SHORT_QUESTION') {
                 		vm.countdown = -1;
+                    	// Count down
+                    	// $scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                    	$scope.$broadcast('timer-stop');
                 	} else if (vm.selectedQuestion.type == 'READING_FIB_R_W'
                 		|| vm.selectedQuestion.type == 'READING_FIB_R'
             			|| vm.selectedQuestion.type == 'READING_RE_ORDER_PARAGRAPH'
         				|| vm.selectedQuestion.type == 'READING_MCQ_R_SINGLE_ANSWER'
     					|| vm.selectedQuestion.type == 'READING_MCQ_R_MULTIPLE_ANSWER') {
                 		vm.countdown = 2 * 60;
+                    	// Count down
+                    	$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                    	$scope.$broadcast('timer-start');
                 	} else if (vm.selectedQuestion.type == 'LISTENING_FIB_L'
                 		|| vm.selectedQuestion.type == 'LISTENING_MCQ_L_SINGLE_ANSWER'
             			|| vm.selectedQuestion.type == 'LISTENING_MCQ_L_MULTIPLE_ANSWER'
@@ -1158,15 +1172,19 @@
 						|| vm.selectedQuestion.type == 'LISTENING_HIGHLIGHT_INCORRECT_WORD'
 						|| vm.selectedQuestion.type == 'LISTENING_DICTATION') {
                 		vm.countdown = 90; // 1ph30s
+                    	// Count down
+                    	$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                    	$scope.$broadcast('timer-start');
                 	} else if (vm.selectedQuestion.type == 'WRITING_ESSAY') {
                 		vm.countdown = 20 * 60; // 1ph30s
+                    	// Count down
+                    	$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                    	$scope.$broadcast('timer-start');
                 	} else {
-                		vm.countdown = 2 * 60;
+                		vm.countdown = 2 * 60;                	// Count down
+                    	$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
+                    	$scope.$broadcast('timer-start');
                 	}
-                	
-                	// Count down
-                	$scope.$broadcast('timer-set-countdown-seconds', vm.countdown);
-                	$scope.$broadcast('timer-start');
                 }
             }
         }
